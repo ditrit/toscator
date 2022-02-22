@@ -1,7 +1,7 @@
-import { parse as parse_tosca } from '../../schemas/tosca.js'
+import { parse as parse_tosca } from '../schemas/tosca.js'
 import listener from "../listener/listener.js"
-import { ToscaServiceTemplate } from '../../tosca/model/service_template.js'
-import { LidyError } from '../../parser/errors.js'
+import { ToscaServiceTemplate } from '../model/service_template.js'
+import { LidyError } from '../parser/errors.js'
 import fs from "fs"
 import path from 'path'
 import request from 'sync-request'

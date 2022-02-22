@@ -1,3 +1,3 @@
-import { parse } from './tosca/parser/parse.js'
+import { parse } from './parser/parse.js'
 
 export default parse;

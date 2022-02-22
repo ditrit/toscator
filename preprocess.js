@@ -1,4 +1,4 @@
-import { parse, preprocess } from '../parser/node_parse.js'
+import { preprocess } from 'lidy-js'
 
 preprocess("./schemas/tosca.yaml")
 
