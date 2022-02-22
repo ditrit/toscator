@@ -1,0 +1,31 @@
+{
+  "type": "module",
+  "name": "toscator",
+  "version": "0.0.1",
+  "description": "tosca compiler (part of leto project)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node jasmmine.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ditrit/toscator.git"
+  },
+  "keywords": [
+    "tosca",
+    "compiler",
+    "lidy",
+    "javascript",
+    "parser",
+    "yaml"
+  ],
+  "author": "DitRit",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/ditrit/toscator/issues"
+  },
+  "homepage": "https://github.com/ditrit/toscator#readme"
+}
