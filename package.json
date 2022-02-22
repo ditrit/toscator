@@ -10,6 +10,9 @@
   "scripts": {
     "test": "node jasmmine.js"
   },
+  "dependencies": {
+    "lidy-js": "git+https://github.com/ditrit/lidy-js.git#main"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ditrit/toscator.git"
