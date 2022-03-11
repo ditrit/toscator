@@ -10,9 +10,20 @@ export default function parse_file(file, namespace_uri, namespace_prefix, parent
     let src_data, res
     if (typeof (file) == 'string') {
         if (file.slice(0, 4) == 'http') {
-            src_data = request('GET', file).getBody().toString()
+            try {
+                src_data = request('GET', file).getBody().toString()
+            } catch (error) {
+                prog.errors.push(new LidyError("File error", 0, `Can not read file ${file}`))
+                return null
+            }
         } else {
-            src_data = fs.readFileSync(file, 'utf8')
+            try {
+                src_data = fs.readFileSync(file, 'utf8')                
+            } catch (error) {
+                prog.errors.push(new LidyError("File error", 0, `Can not read file ${file}`))
+                return null
+            }
+
         }
 
         let current_path = path.dirname(file)
