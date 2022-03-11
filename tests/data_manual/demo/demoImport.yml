@@ -1,0 +1,22 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: Template for imports demo. 
+
+metadata:
+  creation_date: 2022-03-09
+  status: developmental
+  template_version: 1.0.0
+  template_author: Jean-Luc Duvivier
+  template_name: Import demo template
+
+##### TOSCA NODE_TYPES #####
+node_types:
+  DBMS: 
+    derived_from: Software
+
+  Mysql: 
+    derived_from: DBMS
+
+  Postgresql: 
+    derived_from: DBMS
+

@@ -1,0 +1,80 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+############################
+##### TOSCA NODE_TYPES #####
+############################
+node_types:
+  
+  Compute: 
+    derived_from: tosca.nodes.Root
+    description: tagada
+    version: "1.0"
+    metadata:
+      liunx: love
+
+
+####################################
+##### TOSCA RELATIONSHIP_TYPES #####
+####################################
+relationship_types:
+
+  mycompany.mytypes.myCustomClientServerType:
+    derived_from: tosca.relationships.HostedOn
+    description: tagada
+    version: "1.0"
+    metadata:
+      liunx: love
+
+
+############################
+##### TOSCA DATA_TYPES #####
+############################
+data_types:
+
+  NetworkInfo:
+    derived_from: tosca.Data.Root
+    description: tagada
+    version: "1.0"
+    metadata:
+      liunx: love
+
+
+##################################
+##### TOSCA CAPABILITY_TYPES #####
+##################################
+capability_types: 
+
+  tosca.capabilities.Compute:
+    derived_from: tosca.capabilities.Container
+    description: tagada
+    version: "1.0"
+    metadata:
+      liunx: love
+
+################################
+##### TOSCA ARTIFACT_TYPES #####
+################################
+artifact_types:
+
+  jar: 
+    description: Java Archive artifact type
+    derived_from: tosca.artifact.Root
+    version: "1.0"
+    metadata:
+      liunx: love
+
+
+#############################
+##### TOSCA GROUP_TYPES #####
+#############################
+group_types: 
+
+#################################
+##### TOSCA INTERFACE_TYPES #####
+#################################
+
+##############################
+##### TOSCA POLICY_TYPES #####
+##############################
+
+
