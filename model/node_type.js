@@ -1,4 +1,4 @@
-import { ToscaNode, ToscaType } from './prog.js'
+import { ToscaType } from "./tosca_type.js"
 
 export class ToscaNodeType extends ToscaType {
     constructor(input, source) {

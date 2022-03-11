@@ -1,5 +1,3 @@
-import { ToscaType } from './prog.js'
-
 export class ToscaServiceTemplate {
     constructor() {
         this.tosca_definitions_version = ""

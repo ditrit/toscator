@@ -1,4 +1,4 @@
-import { ToscaNode } from './prog.js'
+import { ToscaNode } from './tosca_node.js'
 import path from 'path'
 
 

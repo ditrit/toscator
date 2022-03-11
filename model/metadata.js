@@ -1,4 +1,4 @@
-import { ToscaNode } from './prog.js'
+import { ToscaNode } from './tosca_node.js';
 import { ToscaVersion } from './version.js'
 
 export class ToscaMetadata extends ToscaNode {

@@ -1,5 +1,4 @@
-// import prog from "../listener/prog"
-import { ToscaNode } from './prog.js'
+import { ToscaNode } from "./tosca_node.js"
 
 export class ToscaRepository extends ToscaNode {
     constructor(input, source) {
