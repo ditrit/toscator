@@ -92,3 +92,5 @@ typings/
 
 # Dependency directories
 docref/
+package-lock.json
+.vscode/launch.json
