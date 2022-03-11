@@ -1,9 +1,10 @@
+import { ToscaProperty } from "./property.js"
 import { ToscaType } from "./tosca_type.js"
 
 export class ToscaNodeType extends ToscaType {
     constructor(input, source) {
         super(input, source)
-        // this.classname = 'node_type'
+        this.properties = input.properties
     }
 
     static _classname = 'node_type'
@@ -20,6 +21,9 @@ export class ToscaNodeType extends ToscaType {
             
             source.ctx.typeError(source.current, 'Incorrect definition for NodeType')
             return false
+        }
+        if (input.properties instanceof ToscaProperty) {
+            
         }
         return true
     }

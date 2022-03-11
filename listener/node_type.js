@@ -8,12 +8,21 @@ export default {
     },
 
     exit_node_type(parsed_rule) {
+        let properties = new Map();
+        if (parsed_rule.value.properties) {
+            for (const key in parsed_rule.value.properties.value) {
+                properties[key] = parsed_rule.value.properties.value[key].tosca
+            }    
+        }
+        
+
         newToscaNodeType({
             derived_from: parsed_rule.value.derived_from?.value,
             version: parsed_rule.value.version?.tosca,
             description: parsed_rule.value.description?.value,
             metadata: parsed_rule.value.metadata?.tosca,
-        }, 
+            properties: properties,
+        },
             parsed_rule)
     }
 }
