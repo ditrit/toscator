@@ -1,14 +1,14 @@
 import { ToscaType } from "./tosca_type.js"
 
-export class ToscaRelationshipType extends ToscaType {
+export class ToscaInterfaceType extends ToscaType {
     constructor(input, source) {
         super(input, source)
     }
 
-    static _classname = 'relationship_type'
+    static _classname = 'interface_type'
     
     getClassname() {
-        return ToscaRelationshipType._classname
+        return ToscaInterfaceType._classname
     }
 
     toString() {
@@ -17,17 +17,17 @@ export class ToscaRelationshipType extends ToscaType {
     static isValid(input, source) {
         if(!ToscaType.isValid(input, source)) {
             
-            source.ctx.typeError(source.current, 'Incorrect definition for RelationshipType')
+            source.ctx.typeError(source.current, 'Incorrect definition for InterfaceType')
             return false
         }
         return true
     }
 }
 
-export function newToscaRelationshipType(input, source) {
+export function newToscaInterfaceType(input, source) {
     let res
-    if (ToscaRelationshipType.isValid(input, source)) {
-        res = new ToscaRelationshipType(input, source)
+    if (ToscaInterfaceType.isValid(input, source)) {
+        res = new ToscaInterfaceType(input, source)
     } else {
         res = {}
     }

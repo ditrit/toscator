@@ -1,14 +1,14 @@
 import { ToscaType } from "./tosca_type.js"
 
-export class ToscaRelationshipType extends ToscaType {
+export class ToscaArtifactType extends ToscaType {
     constructor(input, source) {
         super(input, source)
     }
 
-    static _classname = 'relationship_type'
+    static _classname = 'artifact_type'
     
     getClassname() {
-        return ToscaRelationshipType._classname
+        return ToscaArtifactType._classname
     }
 
     toString() {
@@ -17,17 +17,17 @@ export class ToscaRelationshipType extends ToscaType {
     static isValid(input, source) {
         if(!ToscaType.isValid(input, source)) {
             
-            source.ctx.typeError(source.current, 'Incorrect definition for RelationshipType')
+            source.ctx.typeError(source.current, 'Incorrect definition for ArtifactType')
             return false
         }
         return true
     }
 }
 
-export function newToscaRelationshipType(input, source) {
+export function newToscaArtifactType(input, source) {
     let res
-    if (ToscaRelationshipType.isValid(input, source)) {
-        res = new ToscaRelationshipType(input, source)
+    if (ToscaArtifactType.isValid(input, source)) {
+        res = new ToscaArtifactType(input, source)
     } else {
         res = {}
     }
