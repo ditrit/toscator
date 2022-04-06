@@ -1,56 +1,70 @@
-import { parse as parse_tosca } from '../schemas/tosca.js'
+import {
+    parse as parse_tosca
+} from '../schemas/tosca.js'
 import listener from "../listener/listener.js"
-import { ToscaServiceTemplate } from '../model/service_template.js'
-import { LidyError } from 'lidy-js'
+import {
+    ToscaServiceTemplate
+} from '../model/service_template.js'
+import {
+    LidyError
+} from 'lidy-js'
 import fs from "fs"
-import path from 'path'
+import path_mod from 'path'
 import request from 'sync-request'
 
-export default function parse_file(file, namespace_uri, namespace_prefix, parent_service_template, prog) {
+
+export default function parse_file(file_import, parent_service_template, prog) {
     let src_data, res
-    if (typeof (file) == 'string') {
-        if (file.slice(0, 4) == 'http') {
+    let path = file_import.path
+    let namespace_uri = file_import.namespace_uri
+    let namespace_prefix = file_import.namespace_prefix
+    if (typeof(path) == 'string') {
+        if (path.slice(0, 4) == 'http') {
             try {
-                src_data = request('GET', file).getBody().toString()
+                src_data = request('GET', path).getBody().toString()
             } catch (error) {
-                prog.errors.push(new LidyError("File error", 0, `Can not read file ${file}`))
+                prog.errors.push(new LidyError("File error", 0, `Can not read file ${path}`))
                 return null
             }
         } else {
             try {
-                src_data = fs.readFileSync(file, 'utf8')                
+                src_data = fs.readFileSync(path, 'utf8')
             } catch (error) {
-                prog.errors.push(new LidyError("File error", 0, `Can not read file ${file}`))
+                prog.errors.push(new LidyError("File error", 0, `Can not read file ${path}`))
                 return null
             }
-
         }
 
-        let current_path = path.dirname(file)
-
-
         let current_service_template = new ToscaServiceTemplate()
-        current_service_template.origin_file = file
+        current_service_template.origin_file = file_import.file // TODO Vérifier à quoi ça sert
         current_service_template.ns_uri = (namespace_uri) ? namespace_uri : ""
         current_service_template.ns_prefix = (namespace_prefix) ? namespace_prefix : ""
 
         prog.current_parent_service_template = parent_service_template
         prog.current_service_template = current_service_template
-        res = parse_tosca({ src_data, listener, prog, file })
-        prog.service_templates.push(current_service_template)
+        prog.current_path = path_mod.dirname(path)
 
-        prog.alreadyImported.push(file)
+        res = parse_tosca({
+            src_data,
+            listener,
+            prog,
+            path
+        })
+        prog.service_templates.push(current_service_template)
+        prog.alreadyImported.push(file_import)
+
 
         if (res.errors.length != 0) {
             res.errors.forEach(e => {
                 let err = e
-                err.originFile = file
+                err.originFile = file_import.file // TODO Vérifier à quoi ça sert
                 prog.errors.push(err)
             })
         } else {
             current_service_template.imports.forEach(fi => {
-                let absPath = getAbsolutePath(current_path, fi, prog)
-                parse_file(absPath, fi.namespace_uri, fi.namespace_prefix, current_service_template, prog)
+                if (!prog.alreadyImported.reduce((x, y) => x || fi.equals(y), false)) {
+                    parse_file(fi, current_service_template, prog)
+                }
             });
 
         }
@@ -58,23 +72,5 @@ export default function parse_file(file, namespace_uri, namespace_prefix, parent
         prog.errors.push(new LidyError('IMPORT_ERROR error', 0, `Can not read file ${src.file}`))
         console.log(prog.errors.map(x => x.message));
     }
-    return res
-}
-
-function getAbsolutePath(current_path, current_import, prog) {
-    let res
-    // repository management
-    if (current_import.repository && current_import.repository != "") {
-        res = `${prog.repositories[current_import.repository].getFullUrl()}:`
-    } else {
-        // current_file is URL or already absolute path
-        res = (!current_import.path.match(/^[a-zA-Z]*:\/\//) || !current_import.path[0] == '/') ?
-            current_path + '/' + current_import.path :
-            current_import.path
-    }
-    if (!res.match(/^[a-zA-Z]*:\/\//)) { // res not url
-        res = path.resolve(res)
-    }
-    current_import.fullPath = res
     return res
 }
