@@ -1,9 +1,17 @@
-import { ToscaMetadata } from "./metadata.js"
-import { DefType } from "./def_type.js"
+import {
+    ToscaMetadata
+} from "./metadata.js"
+import {
+    DefType
+} from "./def_type.js"
+import {
+    ToscaNodeType
+} from "./node_type.js"
 
-export class Charac extends DefType {
+export class Charac extends ToscaNodeType {
     constructor(input, source) {
         super(input, source)
+        this.type = input.type
         this.default = input.default
         this.status = input.status
         this.metadata = input.metadata
