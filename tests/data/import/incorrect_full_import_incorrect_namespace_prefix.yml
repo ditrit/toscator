@@ -1,0 +1,6 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+imports:
+  - file: ./import_child_test.yml
+    namespace_prefix: {ns: test}
+    namespace_uri: nsuri_test

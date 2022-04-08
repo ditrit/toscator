@@ -13,7 +13,9 @@ import {
 export function parse(src) {
     let prog = new ToscaProg()
     let init_import = new ToscaImport({
-        file: src
+        file: src,
+        namespace_prefix: "",
+        namespace_uri: ""
     }, {
         ctx: new Ctx()
     })
