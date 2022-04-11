@@ -1,5 +1,4 @@
 import { newToscaProperty } from "../model/property.js";
-import { newDefType } from "../model/def_type.js";
 import deal_deftype from "../listener/def_type.js";
 
 export default {

@@ -1,4 +1,3 @@
-import { newToscaProperty } from "../model/property.js";
 import { newDefType } from "../model/def_type.js";
 
 export default function deal_deftype(parsed_rule) {
