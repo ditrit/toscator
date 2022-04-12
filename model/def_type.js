@@ -14,7 +14,7 @@ export class DefType extends ToscaNode {
       if (!input.type || !input.type instanceof String) {
          return false;
       }
-      if (input.type in ["map", "list"]) {
+      if (["map", "list"].includes(input.type)) {
          if (!input.entry_schema) {
             return false;
          }

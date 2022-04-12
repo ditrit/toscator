@@ -12,14 +12,14 @@ export default {
       let deftype = deal_deftype(parsed_rule);
 
       let version = parsed_rule.value.version
-         ? parsed_rule.value.version.tosca
+         ? parsed_rule.value.version.value
          : null;
 
       let required = parsed_rule.value.required
          ? parsed_rule.value.required.value
          : null;
       let default_var = parsed_rule.value.default
-         ? parsed_rule.value.default.tosca
+         ? parsed_rule.value.default.value
          : null; // TO DO En fonction du type
       let status = parsed_rule.value.status
          ? parsed_rule.value.status.value
