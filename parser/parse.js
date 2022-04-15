@@ -15,10 +15,13 @@ export function parse(src) {
     let init_import = new ToscaImport({
         file: src,
         namespace_prefix: "",
-        namespace_uri: ""
+        namespace_uri: "",
+        last_path: ".",
+        last_repo: "",
     }, {
         ctx: new Ctx()
     })
+
     parse_file(init_import, null, prog)
     set_shortnames(prog)
     return prog
