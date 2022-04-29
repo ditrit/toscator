@@ -9,12 +9,16 @@ function exit_imports(parsed_rule) {
         let repository = (val.value.repository) ? val.value.repository.value : ""
         let namespace_prefix = (val.value.namespace_prefix) ? val.value.namespace_prefix.value : ""
         let namespace_uri = (val.value.namespace_uri) ? val.value.namespace_uri.value : ""
+        let last_path = parsed_rule.ctx.prog.last_path;
+        let last_repo = parsed_rule.ctx.prog.last_repo;
 
         newImport = newToscaImport({
                 file,
                 repository,
                 namespace_prefix,
-                namespace_uri
+                namespace_uri,
+                last_path,
+                last_repo
             },
             val)
         parsed_rule.ctx.prog.current_service_template.imports.push(newImport)
