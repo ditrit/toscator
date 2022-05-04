@@ -32,9 +32,9 @@ export class ToscaTime extends ToscaScalar {
    }
 }
 
-function convertValue(frequency) {
+function convertValue(time) {
    let value,
-      unit = frequency.split(" ");
+      unit = time.split(" ");
 
    if (unit.includes("d")) {
       return value * 24 * 3600;

@@ -1,6 +1,6 @@
 import { ToscaScalar } from "./tosca_scalar";
 
-export class ToscaBitrate extends ToscaScalar {
+export class ToscaSize extends ToscaScalar {
    constructor(input) {
       this.real_value = input.value;
       super({
@@ -32,15 +32,12 @@ export class ToscaBitrate extends ToscaScalar {
    }
 }
 
-function convertValue(bitrate) {
+function convertValue(size) {
    let value,
-      unit = bitrate.split(" ");
-   if (!(unit.includes("bps") || unit.includes("Bps"))) {
-      console.log("Bitrate does not contain bps"); //TO DO error bitrate
+      unit = size.split(" ");
+   if (unit.includes("B")) {
+      console.log("Size does not contain B"); //TO DO error size
       return false;
-   }
-   if (unit.includes("Bps")) {
-      value = value * 8;
    }
 
    if (unit.includes("Ki")) {
