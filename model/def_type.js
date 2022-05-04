@@ -1,9 +1,8 @@
 import { ToscaNode } from "./tosca_node.js";
-export class DefType extends ToscaNode {
+export class DefType {
    constructor(input, source) {
-      super(source);
+      // super(source);
       this.type = input.type;
-      //   this.isListOrMap = input.isListOrMap;
       this.description = input.description;
       this.entrySchema = input.entrySchema;
       this.constraints = input.constraints;
@@ -31,6 +30,7 @@ export class DefType extends ToscaNode {
 }
 
 export function newDefType(input, source) {
+   console.log("test", input.type);
    if (DefType.isValid(input)) {
       return new DefType(input, source);
    }

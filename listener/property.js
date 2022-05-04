@@ -11,13 +11,10 @@ export default {
    exit_property(parsed_rule) {
       let deftype = deal_deftype(parsed_rule);
 
-      let version = parsed_rule.value.version
-         ? parsed_rule.value.version.value
-         : null;
+      // let version = parsed_rule.value.version
+      //    ? parsed_rule.value.version.value
+      //    : null;
 
-      let required = parsed_rule.value.required
-         ? parsed_rule.value.required.value
-         : null;
       let default_var = parsed_rule.value.default
          ? parsed_rule.value.default.value
          : null; // TO DO En fonction du type
@@ -31,8 +28,8 @@ export default {
       newToscaProperty(
          {
             type: deftype,
-            version: version,
-            required: required,
+            // version: version,
+            // required: required,
             default: default_var,
             status: status,
             metadata: metadata,

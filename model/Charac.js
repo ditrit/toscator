@@ -1,10 +1,10 @@
 import { ToscaMetadata } from "./metadata.js";
 import { DefType } from "./def_type.js";
-import { ToscaNodeType } from "./node_type.js";
+import { ToscaNode } from "./tosca_node.js";
 
-export class Charac extends DefType {
+export class Charac extends ToscaNode {
    constructor(input, source) {
-      super(input, source);
+      super(source);
       this.type = input.type;
       this.default = input.default;
       this.status = input.status;
