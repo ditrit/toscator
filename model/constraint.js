@@ -4,6 +4,19 @@
 import { ToscaNode } from "./tosca_node.js";
 import { ToscaType } from "./tosca_type.js";
 
+let value = [
+   "boolean",
+   "int",
+   "float",
+   "version",
+   "range",
+   "frequency",
+   "bitrate",
+   "time",
+   "size",
+   "timestamp",
+   "string",
+];
 export class ToscaConstraints extends ToscaNode {
    constructor(input, source) {
       super(source);
@@ -42,56 +55,6 @@ export class ToscaConstraint extends ToscaNode {
    toString() {
       return super.toString();
    }
-
-   static isValid(input) {
-      let scalar = [
-         "int",
-         "float",
-         "frequency",
-         "bitrate",
-         "time",
-         "size",
-         "timestamp",
-      ];
-
-      switch (input.operator) {
-         case "equal":
-            return scalar.includes(input.type);
-         case "greater_than":
-            return scalar.includes(input.type);
-         case "greater_or_equal":
-            return scalar.includes(input.type);
-         case "less_than":
-            return scalar.includes(input.type);
-         case "less_or_equal":
-            return scalar.includes(input.type);
-         case "in_range":
-            return input.type == "list" && input.value.length == 2;
-         case "valid_values":
-            return input.type == "list";
-         case "length":
-            return scalar.includes(input.type);
-         case "min_length":
-            return scalar.includes(input.type);
-         case "max_length":
-            return scalar.includes(input.type);
-         case "pattern":
-            return input.type == "regex";
-         case "schema":
-            return input.type == "string";
-      }
-      console.log("TO DO error constraint error");
-      return false; // TODO
-   }
-}
-
-export function newToscaConstraint(input, source) {
-   if (ToscaConstraint.isValid(input)) {
-      return new ToscaConstraint(input, source);
-   }
-   console.log("TO DO error constraint error");
-
-   return false;
 }
 
 function checkValue(constraint, value) {
@@ -123,4 +86,228 @@ function checkValue(constraint, value) {
    }
    console.log("TO DO error constraint checking value");
    return false; // TODO
+}
+
+export class ToscaConstraintEquals extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "equal" && value.includes(input.type);
+   }
+}
+
+export class ToscaConstraintGreaterThan extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "greater_than" && value.includes(input.type);
+   }
+}
+
+export class ToscaConstraintGreaterOrEqual extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "greater_or_equal" && value.includes(input.type);
+   }
+}
+
+export class ToscaConstraintLessThan extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "less_than" && value.includes(input.type);
+   }
+}
+
+export class ToscaConstraintLessOrEqual extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "less_or_equal" && value.includes(input.type);
+   }
+}
+export class ToscaConstraintInRange extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return (
+         input.operator == "in_range" &&
+         input.type == "list" &&
+         input.value.length == 2
+      );
+   }
+}
+export class ToscaConstraintValidValues extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "valid_values" && input.type == "list";
+   }
+}
+
+export class ToscaConstraintLength extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "length" && input.type == "int";
+   }
+}
+export class ToscaConstraintMaxLength extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "max_length" && input.type == "int";
+   }
+}
+export class ToscaConstraintMinLength extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "min_length" && input.type == "int";
+   }
+}
+
+export class ToscaConstraintPattern extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "pattern" && input.type == "regex";
+   }
+}
+export class ToscaConstraintSchema extends ToscaConstraint {
+   constructor(input, source) {
+      super(input, source);
+   }
+   static isValid(input) {
+      return input.operator == "schema" && input.type == "string";
+   }
+}
+
+export function newToscaConstraintEqual(input, source) {
+   if (ToscaConstraintEquals.isValid(input)) {
+      return new ToscaConstraintEquals(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintGreaterThan(input, source) {
+   if (ToscaConstraintGreaterThan.isValid(input)) {
+      return new ToscaConstraintGreaterThan(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintGreaterOrEqual(input, source) {
+   if (ToscaConstraintGreaterOrEqual.isValid(input)) {
+      return new ToscaConstraintGreaterOrEqual(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintLessThan(input, source) {
+   if (ToscaConstraintLessThan.isValid(input)) {
+      return new ToscaConstraintLessThan(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintLessOrEqual(input, source) {
+   if (ToscaConstraintLessOrEqual.isValid(input)) {
+      return new ToscaConstraintLessOrEqual(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintInRange(input, source) {
+   if (ToscaConstraintInRange.isValid(input)) {
+      return new ToscaConstraintInRange(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintValidValues(input, source) {
+   if (ToscaConstraintValidValues.isValid(input)) {
+      return new ToscaConstraintValidValues(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintValidValues(input, source) {
+   if (ToscaConstraintValidValues.isValid(input)) {
+      return new ToscaConstraintValidValues(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintLength(input, source) {
+   if (ToscaConstraintLength.isValid(input)) {
+      return new ToscaConstraintLength(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintMinLength(input, source) {
+   if (ToscaConstraintMinLength.isValid(input)) {
+      return new ToscaConstraintMinLength(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintMaxLength(input, source) {
+   if (ToscaConstraintMaxLength.isValid(input)) {
+      return new ToscaConstraintMaxLength(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintPattern(input, source) {
+   if (ToscaConstraintPattern.isValid(input)) {
+      return new ToscaConstraintPattern(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
+}
+
+export function newToscaConstraintSchema(input, source) {
+   if (ToscaConstraintSchema.isValid(input)) {
+      return new ToscaConstraintSchema(input, source);
+   }
+   console.log("TO DO error constraint error");
+
+   return false;
 }

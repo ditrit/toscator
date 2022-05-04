@@ -1,6 +1,6 @@
 import { ToscaValue } from "./tosca_value";
 
-export class ToscaScalar extends ToscaValue {
+export class ToscaString extends ToscaValue {
    constructor(input, source) {
       super(source);
       this.type = input.type;

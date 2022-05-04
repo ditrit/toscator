@@ -2,10 +2,10 @@ import { ToscaScalar } from "./tosca_scalar";
 
 export class ToscaFrequency extends ToscaScalar {
    constructor(input) {
-      this.real_value = input.value;
+      this.value = input.value;
       super({
          type: input.type,
-         value: convertValue(input.value),
+         normalized_value: convertValue(input.value), // unit of comparaison kHz
       });
    }
 
@@ -40,13 +40,13 @@ function convertValue(frequency) {
       return false;
    }
    if (unit.includes("k")) {
-      return value * 1000;
+      return value;
    }
    if (unit.includes("M")) {
-      return value * 1000000;
+      return value * 1000;
    }
    if (unit.includes("G")) {
-      return value * 1000000000;
+      return value * 1000000;
    }
-   return value;
+   return value / 1000;
 }

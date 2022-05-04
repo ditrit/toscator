@@ -2,10 +2,10 @@ import { ToscaScalar } from "./tosca_scalar";
 
 export class ToscaSize extends ToscaScalar {
    constructor(input) {
-      this.real_value = input.value;
+      this.value = input.value;
       super({
          type: input.type,
-         value: convertValue(input.value),
+         normalized_value: convertValue(input.value), // unit of comparaison MB
       });
    }
 
@@ -41,20 +41,21 @@ function convertValue(size) {
    }
 
    if (unit.includes("Ki")) {
-      return value * 1024;
+      return (value * 1024) / 1000000;
    } else if (unit.includes("K")) {
-      return value * 1000;
+      return value / 1000;
    } else if (unit.includes("Mi")) {
-      return value * 1048576;
+      return value * 1.048576;
    } else if (unit.includes("M")) {
-      return value * 1000000;
+      return value;
    } else if (unit.includes("Gi")) {
-      return value * 1073741824;
+      return value * 1073.741824;
    } else if (unit.includes("G")) {
-      return value * 1000000000;
+      return value * 1000;
    } else if (unit.includes("Ti")) {
-      return value * 1099511627776;
+      return value * 1099511.627776;
    } else if (unit.includes("T")) {
-      return value * 1000000000000;
+      return value * 1000000;
    }
+   return value / 1000000;
 }
