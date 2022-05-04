@@ -1,4 +1,7 @@
 import { ToscaValue } from "./tosca_value";
+import Ajv from "ajv";
+import Regex from "regex";
+var ajv = new Ajv();
 
 export class ToscaString extends ToscaValue {
    constructor(input, source) {
@@ -26,5 +29,13 @@ export class ToscaString extends ToscaValue {
    }
    valid_values(value) {
       return value.includes(this.value);
+   }
+   schema(value) {
+      const validate = ajv.compile(this.value);
+      return validate(value);
+   }
+   pattern(value) {
+      let regex = new Regex(this.value);
+      return regex.test(value);
    }
 }

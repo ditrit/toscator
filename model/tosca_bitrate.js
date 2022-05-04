@@ -5,7 +5,7 @@ export class ToscaBitrate extends ToscaScalar {
       this.value = input.value;
       super({
          type: input.type,
-         normalized_value: convertValue(input.value),
+         normalized_value: convertValue(input.value), // unit of comparaison Mbps
       });
    }
 
