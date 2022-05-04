@@ -79,4 +79,21 @@ describe("Tosca compiler ->", function() {
                 expect(parse(loop_import_file).service_templates.length).toEqual(2)
             });
     })
+
+
+
+    var correct_import_url = "data/import/url/correct_simple_import.yml"
+    var correct_interlock_import_url = "data/import/url/correct_interlock_import.yml"
+    describe("Imports urls : ", function() {
+
+        it("Correct import simple url",
+            function() {
+                expect(parse(correct_import_url).service_templates.length).toEqual(2)
+            })
+
+        it("Correct interlock url import",
+            function() {
+                expect(parse(correct_interlock_import_url).service_templates.length).toEqual(3)
+            })
+    })
 })
