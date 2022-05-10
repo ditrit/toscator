@@ -18,6 +18,9 @@ export class ToscaProperty extends Charac {
 
    static isValid(input, source) {
       let res = true;
+      if (!super.isValid(input)) {
+         res = false;
+      }
       if (input.required && !input.required instanceof Boolean) {
          res = false;
       }

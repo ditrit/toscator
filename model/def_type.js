@@ -30,7 +30,6 @@ export class DefType {
 }
 
 export function newDefType(input, source) {
-   console.log("test", input.type);
    if (DefType.isValid(input)) {
       return new DefType(input, source);
    }

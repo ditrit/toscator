@@ -21,12 +21,13 @@ export class Charac extends ToscaNode {
 
    static isValid(input) {
       let res = true;
-      if (!super.isValid(input)) {
+      // if (!super.isValid(input)) {
+      //    res = false;
+      // }
+      if (input.default && !this.verification(input, input.default)) {
+         console.log("default does not verify constraints"); // TO DO Add lidy error
          res = false;
       }
-      // if (input.default && !input.default instanceof ToscaValue) { // TODO
-      //     res=false
-      // }
       if (input.status && !input.status instanceof String) {
          res = false;
       } else if (!input.status in this.statusValues) {
@@ -38,6 +39,18 @@ export class Charac extends ToscaNode {
       if (input.name && !input.name instanceof String) {
          res = false;
       }
+
+      return res;
+   }
+
+   static verification(input, value) {
+      let res = true;
+      let constraints = input.type.constraints;
+      constraints.forEach((ele) => {
+         if (!ele.tosca.verification(value)) {
+            res = false;
+         }
+      });
       return res;
    }
 }
