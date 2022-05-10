@@ -9,6 +9,8 @@ import {
    newToscaConstraintPattern,
    newToscaConstraintSchema,
    newToscaConstraintValidValues,
+   newToscaConstraintLessOrEqual,
+   newToscaConstraintGreaterOrEqual,
 } from "../model/constraint.js";
 
 export default {
@@ -35,40 +37,58 @@ export default {
       switch (operator) {
          case "equal":
             newToscaConstraintEqual({ operator, type, value }, parsed_rule);
+            break;
          case "greater_than":
             newToscaConstraintGreaterThan(
                { operator, type, value },
                parsed_rule
             );
+            break;
+
          case "greater_or_equal":
             newToscaConstraintGreaterOrEqual(
                { operator, type, value },
                parsed_rule
             );
+            break;
+
          case "less_than":
             newToscaConstraintLessThan({ operator, type, value }, parsed_rule);
+            break;
+
          case "less_or_equal":
             newToscaConstraintLessOrEqual(
                { operator, type, value },
                parsed_rule
             );
+            break;
+
          case "in_range":
             newToscaConstraintInRange({ operator, type, value }, parsed_rule);
+            break;
+
          case "valid_values":
             newToscaConstraintValidValues(
                { operator, type, value },
                parsed_rule
             );
+            break;
+
          case "length":
             newToscaConstraintLength({ operator, type, value }, parsed_rule);
+            break;
          case "min_length":
             newToscaConstraintMinLength({ operator, type, value }, parsed_rule);
+            break;
          case "max_length":
             newToscaConstraintMaxLength({ operator, type, value }, parsed_rule);
+            break;
          case "pattern":
             newToscaConstraintPattern({ operator, type, value }, parsed_rule);
+            break;
          case "schema":
             newToscaConstraintSchema({ operator, type, value }, parsed_rule);
+            break;
       }
    },
 };
