@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node";
+import { ToscaNode } from "./tosca_node.js";
 
 export class ToscaValue extends ToscaNode {
    constructor(input, source) {

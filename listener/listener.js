@@ -8,7 +8,10 @@ import version from "./version.js";
 import servicetemplate from "./service_template.js";
 import property from "./property.js";
 import constraint from "./constraint.js";
-
+import bitrate from "./bitrate.js";
+import size from "./size";
+import time from "./time";
+import frequency from "./frequency.js";
 export default {
    ...prog,
    ...imports,
@@ -20,4 +23,8 @@ export default {
    ...servicetemplate,
    ...property,
    ...constraint,
+   ...bitrate,
+   ...size,
+   ...time,
+   ...frequency,
 };

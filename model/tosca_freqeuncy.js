@@ -1,4 +1,4 @@
-import { ToscaScalar } from "./tosca_scalar";
+import { ToscaScalar } from "./tosca_scalar.js";
 
 export class ToscaFrequency extends ToscaScalar {
    constructor(input) {
@@ -8,15 +8,21 @@ export class ToscaFrequency extends ToscaScalar {
          normalized_value: convertValue(input.value), // unit of comparaison kHz
       });
    }
+   static isValid(input) {
+      let unit = input.value.split(" ")[1];
+
+      if (!unit.includes("Hz")) {
+         console.log("frequency does not contain Hz"); //TO DO error frequency
+         return false;
+      }
+      return true;
+   }
 }
 
 function convertValue(frequency) {
-   let value,
-      unit = frequency.split(" ");
-   if (!unit.includes("Hz")) {
-      console.log("frequency does not contain Hz"); //TO DO error frequency
-      return false;
-   }
+   let value = frequency.split(" ")[0];
+   let unit = frequency.split(" ")[1];
+
    if (unit.includes("k")) {
       return value;
    }
@@ -27,4 +33,11 @@ function convertValue(frequency) {
       return value * 1000000;
    }
    return value / 1000;
+}
+
+export function newtoscaFrequency(input, source) {
+   if (ToscaFrequency.isValid(input)) {
+      return new ToscaFrequency(input, source);
+   }
+   return {};
 }

@@ -1,4 +1,4 @@
-import { ToscaScalar } from "./tosca_scalar";
+import { ToscaScalar } from "./tosca_scalar.js";
 
 export class ToscaTime extends ToscaScalar {
    constructor(input) {
@@ -8,11 +8,19 @@ export class ToscaTime extends ToscaScalar {
          value: convertValue(input.value),
       });
    }
+   static units = ["d", "h", "s", "m", "ms", "us", "ns"];
+   static isValid(input) {
+      let unit = input.value.split(" ")[1];
+      if (!this.units.includes(unit)) {
+         return false;
+      }
+      return true;
+   }
 }
 
 function convertValue(time) {
-   let value,
-      unit = time.split(" ");
+   let value = time.split(" ")[0];
+   let unit = time.split(" ")[1];
 
    if (unit.includes("d")) {
       return value * 24 * 3600;
@@ -34,4 +42,11 @@ function convertValue(time) {
       return value * 60;
    }
    return value;
+}
+
+export function newToscaTime(input, source) {
+   if (ToscaTime.isValid(input)) {
+      return new ToscaTime(input, source);
+   }
+   return {};
 }
