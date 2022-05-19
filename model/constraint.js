@@ -1,5 +1,3 @@
-// TODO
-// It is a skeleton to be fill
 import Ajv from "ajv";
 import Regex from "regex";
 var ajv = new Ajv();

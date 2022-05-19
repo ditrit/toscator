@@ -12,9 +12,11 @@ export class ToscaSize extends ToscaScalar {
    }
 
    static isvalid(input) {
-      let unit = input.value.split(" ")[0];
-      if (unit.includes("B")) {
-         console.log("Size does not contain B"); //TO DO error size
+      let regex =
+         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
+
+      if (!regex.test(input.value)) {
+         console.log("Size does not have the good format"); //TO DO error size
          return false;
       }
       return true;

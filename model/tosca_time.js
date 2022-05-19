@@ -10,10 +10,11 @@ export class ToscaTime extends ToscaScalar {
          source
       );
    }
-   static units = ["d", "h", "s", "m", "ms", "us", "ns"];
    static isValid(input) {
-      let unit = input.value.split(" ")[1];
-      if (!this.units.includes(unit)) {
+      let regex =
+         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
+
+      if (!regex.test(input.value)) {
          return false;
       }
       return true;
