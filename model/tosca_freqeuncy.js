@@ -1,38 +1,38 @@
 import { ToscaScalar } from "./tosca_scalar.js";
 
 export class ToscaFrequency extends ToscaScalar {
-   constructor(input) {
-      this.value = input.value;
-      super({
-         type: input.type,
-         normalized_value: convertValue(input.value), // unit of comparaison kHz
-      });
+   constructor(input, source) {
+      super(
+         {
+            type: input.type,
+            value: input.value, // unit of comparaison kHz
+         },
+         source
+      );
    }
    static isValid(input) {
-      let unit = input.value.split(" ")[1];
-
-      if (!unit.includes("Hz")) {
-         console.log("frequency does not contain Hz"); //TO DO error frequency
+      let regex =
+         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
+      if (!regex.test(input.value)) {
+         console.log("frequency does not have the good format"); //TO DO error frequency
          return false;
       }
       return true;
    }
-}
+   setNormalizedValue() {
+      let value = this.value
+         .trim()
+         .match(/([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))? /i)[0];
+      let unit = this.value.trim().match(/[a-zA-Z]+/i)[0];
 
-function convertValue(frequency) {
-   let value = frequency.split(" ")[0];
-   let unit = frequency.split(" ")[1];
-
-   if (unit.includes("k")) {
-      return value;
+      this.normalized_value =
+         {
+            Hz: 0.001,
+            kHz: 1,
+            MHz: 1000,
+            GHz: 1000000,
+         }[unit] * Number(value);
    }
-   if (unit.includes("M")) {
-      return value * 1000;
-   }
-   if (unit.includes("G")) {
-      return value * 1000000;
-   }
-   return value / 1000;
 }
 
 export function newtoscaFrequency(input, source) {

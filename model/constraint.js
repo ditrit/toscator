@@ -4,6 +4,7 @@ import Ajv from "ajv";
 import Regex from "regex";
 var ajv = new Ajv();
 import { ToscaNode } from "./tosca_node.js";
+import { ToscaScalar } from "./tosca_scalar.js";
 
 let value = [
    "boolean",
@@ -18,6 +19,7 @@ let value = [
    "timestamp",
    "string",
 ];
+
 export class ToscaConstraints extends ToscaNode {
    constructor(input, source) {
       super(source);
@@ -58,37 +60,6 @@ export class ToscaConstraint extends ToscaNode {
    }
 }
 
-function checkValue(constraint, value) {
-   switch (constraint.operator) {
-      case "equal":
-         return constraint.value == value;
-      case "greater_than":
-         return constraint.value < value;
-      case "greater_or_equal":
-         return constraint.value <= value;
-      case "less_than":
-         return constraint.value > value;
-      case "less_or_equal":
-         return constraint.value >= value;
-      case "in_range":
-         return value >= constraint.value[0] && value <= constraint.value[1];
-      case "valid_values":
-         return constraint.value.includes(value);
-      case "length":
-         return value.length == constraint.value;
-      case "min_length":
-         return value.length >= constraint.value;
-      case "max_length":
-         return value.length <= constraint.value;
-      case "pattern":
-         return input.type == "regex"; // TO DO
-      case "schema":
-         return input.type == "string"; // TO DO
-   }
-   console.log("TO DO error constraint checking value");
-   return false; // TODO
-}
-
 export class ToscaConstraintEquals extends ToscaConstraint {
    constructor(input, source) {
       super(input, source);
@@ -97,8 +68,11 @@ export class ToscaConstraintEquals extends ToscaConstraint {
       return input.operator == "equal" && value.includes(input.type);
    }
 
-   verification(value) {
-      return this.value == value;
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value == value;
+      }
+      return this.value.equals(value);
    }
 }
 
@@ -109,8 +83,13 @@ export class ToscaConstraintGreaterThan extends ToscaConstraint {
    static isValid(input) {
       return input.operator == "greater_than" && value.includes(input.type);
    }
-   verification(value) {
-      return this.value < value;
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value < value;
+      }
+      if (value instanceof ToscaScalar) {
+         return this.value.greter_than(value);
+      }
    }
 }
 
@@ -121,8 +100,14 @@ export class ToscaConstraintGreaterOrEqual extends ToscaConstraint {
    static isValid(input) {
       return input.operator == "greater_or_equal" && value.includes(input.type);
    }
-   verification(value) {
-      return this.value <= value;
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value <= value;
+      }
+      if (value instanceof ToscaScalar) {
+         return this.value.greater_than_or_equal(value);
+      }
+      return false;
    }
 }
 
@@ -134,8 +119,11 @@ export class ToscaConstraintLessThan extends ToscaConstraint {
       return input.operator == "less_than" && value.includes(input.type);
    }
 
-   verification(value) {
-      return this.value > value;
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value > value;
+      }
+      return this.value.less_than(value);
    }
 }
 
@@ -147,8 +135,11 @@ export class ToscaConstraintLessOrEqual extends ToscaConstraint {
       return input.operator == "less_or_equal" && value.includes(input.type);
    }
 
-   verification(value) {
-      return this.value > value;
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value >= value;
+      }
+      return this.value.less_than_or_equal(value);
    }
 }
 export class ToscaConstraintInRange extends ToscaConstraint {
@@ -162,8 +153,11 @@ export class ToscaConstraintInRange extends ToscaConstraint {
          input.value.length == 2
       );
    }
-   verification(value) {
-      return this.value[1] >= value && this.value[0] <= value;
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value[1] >= value && this.value[0] <= value;
+      }
+      return this.value.in_range(value);
    }
 }
 export class ToscaConstraintValidValues extends ToscaConstraint {
@@ -174,8 +168,11 @@ export class ToscaConstraintValidValues extends ToscaConstraint {
       return input.operator == "valid_values" && input.type == "list";
    }
 
-   verification(value) {
-      return this.value.includes(value);
+   eval(value) {
+      if (typeof value == "string" || typeof value == "number") {
+         return this.value.includes(value);
+      }
+      return this.value.valid_values(value);
    }
 }
 
@@ -186,7 +183,7 @@ export class ToscaConstraintLength extends ToscaConstraint {
    static isValid(input) {
       return input.operator == "length" && input.type == "int";
    }
-   verification(value) {
+   eval(value) {
       return (value.length = this.length);
    }
 }
@@ -198,7 +195,7 @@ export class ToscaConstraintMaxLength extends ToscaConstraint {
       return input.operator == "max_length" && input.type == "int";
    }
 
-   verification(value) {
+   eval(value) {
       return value.length <= this.length;
    }
 }
@@ -210,7 +207,7 @@ export class ToscaConstraintMinLength extends ToscaConstraint {
       return input.operator == "min_length" && input.type == "int";
    }
 
-   verification(value) {
+   eval(value) {
       return value.length >= this.length;
    }
 }
@@ -222,7 +219,7 @@ export class ToscaConstraintPattern extends ToscaConstraint {
    static isValid(input) {
       return input.operator == "pattern" && input.type == "regex";
    }
-   verification(value) {
+   eval(value) {
       const regex = new Regex(this.value);
       return regex.test(value);
    }
@@ -234,7 +231,7 @@ export class ToscaConstraintSchema extends ToscaConstraint {
    static isValid(input) {
       return input.operator == "schema" && input.type == "string";
    }
-   verification(value) {
+   eval(value) {
       const validate = ajv.compile(this.value);
       return validate(value);
    }
@@ -246,7 +243,7 @@ export function newToscaConstraintEqual(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintGreaterThan(input, source) {
@@ -255,7 +252,7 @@ export function newToscaConstraintGreaterThan(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintGreaterOrEqual(input, source) {
@@ -264,7 +261,7 @@ export function newToscaConstraintGreaterOrEqual(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintLessThan(input, source) {
@@ -273,7 +270,7 @@ export function newToscaConstraintLessThan(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintLessOrEqual(input, source) {
@@ -282,7 +279,7 @@ export function newToscaConstraintLessOrEqual(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintInRange(input, source) {
@@ -291,7 +288,7 @@ export function newToscaConstraintInRange(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintValidValues(input, source) {
@@ -300,7 +297,7 @@ export function newToscaConstraintValidValues(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintLength(input, source) {
@@ -309,7 +306,7 @@ export function newToscaConstraintLength(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintMinLength(input, source) {
@@ -318,7 +315,7 @@ export function newToscaConstraintMinLength(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintMaxLength(input, source) {
@@ -327,7 +324,7 @@ export function newToscaConstraintMaxLength(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintPattern(input, source) {
@@ -336,7 +333,7 @@ export function newToscaConstraintPattern(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }
 
 export function newToscaConstraintSchema(input, source) {
@@ -345,5 +342,5 @@ export function newToscaConstraintSchema(input, source) {
    }
    console.log("TO DO error constraint error");
 
-   return false;
+   return {};
 }

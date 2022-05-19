@@ -18,7 +18,7 @@ export class ToscaProperty extends Charac {
 
    static isValid(input, source) {
       let res = true;
-      if (!super.isValid(input)) {
+      if (!super.isValid(input, source)) {
          res = false;
       }
       if (input.required && !input.required instanceof Boolean) {
@@ -37,5 +37,6 @@ export function newToscaProperty(input, source) {
    ToscaProperty.isValid(input, source)
       ? (res = new ToscaProperty(input, source))
       : (res = {});
+   // console.log("resultat", res);
    return res;
 }

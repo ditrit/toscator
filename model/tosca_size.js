@@ -2,11 +2,10 @@ import { ToscaScalar } from "./tosca_scalar.js";
 
 export class ToscaSize extends ToscaScalar {
    constructor(input, source) {
-      this.value = input.value;
       super(
          {
             type: input.type,
-            normalized_value: convertValue(input.value), // unit of comparaison MB
+            value: input.value, // unit of comparaison MB
          },
          source
       );
@@ -20,30 +19,24 @@ export class ToscaSize extends ToscaScalar {
       }
       return true;
    }
-}
-
-function convertValue(size) {
-   let value = size.split(" ")[0];
-   let unit = size.split(" ")[1];
-
-   if (unit.includes("Ki")) {
-      return (value * 1024) / 1000000;
-   } else if (unit.includes("K")) {
-      return value / 1000;
-   } else if (unit.includes("Mi")) {
-      return value * 1.048576;
-   } else if (unit.includes("M")) {
-      return value;
-   } else if (unit.includes("Gi")) {
-      return value * 1073.741824;
-   } else if (unit.includes("G")) {
-      return value * 1000;
-   } else if (unit.includes("Ti")) {
-      return value * 1099511.627776;
-   } else if (unit.includes("T")) {
-      return value * 1000000;
+   consetNormalizedValuevertValue() {
+      let value = this.value
+         .trim()
+         .match(/([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))? /i)[0];
+      let unit = this.value.trim().match(/[a-zA-Z]+/i)[0];
+      this.normalized_value =
+         {
+            B: 0.000001,
+            kB: 0.001,
+            KiB: 0.001024,
+            MB: 1,
+            MiB: 1.048576,
+            GB: 1000,
+            GiB: 1073.741824,
+            TB: 1000000,
+            TiB: 1099511.627776,
+         }[unit] * value;
    }
-   return value / 1000000;
 }
 
 export function newToscaSize(input, source) {

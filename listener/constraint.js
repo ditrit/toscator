@@ -31,9 +31,12 @@ export default {
                value.push(parsed_rule.value[key].value[node].value);
             }
          } else {
-            value = parsed_rule.value[key].value;
+            value = parsed_rule.value[key].tosca
+               ? parsed_rule.value[key].tosca
+               : parsed_rule.value[key].value;
          }
       }
+
       switch (operator) {
          case "equal":
             newToscaConstraintEqual({ operator, type, value }, parsed_rule);

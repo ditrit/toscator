@@ -1,12 +1,14 @@
 import { ToscaScalar } from "./tosca_scalar.js";
 
 export class ToscaTime extends ToscaScalar {
-   constructor(input) {
-      this.real_value = input.value;
-      super({
-         type: input.type,
-         value: convertValue(input.value),
-      });
+   constructor(input, source) {
+      super(
+         {
+            type: input.type,
+            value: input.value,
+         },
+         source
+      );
    }
    static units = ["d", "h", "s", "m", "ms", "us", "ns"];
    static isValid(input) {
@@ -16,32 +18,23 @@ export class ToscaTime extends ToscaScalar {
       }
       return true;
    }
-}
+   setNormalizedValue() {
+      let value = this.value
+         .trim()
+         .match(/([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))? /i)[0];
+      let unit = this.value.trim().match(/[a-zA-Z]+/i)[0];
 
-function convertValue(time) {
-   let value = time.split(" ")[0];
-   let unit = time.split(" ")[1];
-
-   if (unit.includes("d")) {
-      return value * 24 * 3600;
+      this.normalized_value =
+         {
+            d: 86400,
+            h: 3600,
+            m: 60,
+            s: 1,
+            ms: 0.001,
+            ns: 0.000001,
+            us: 0.000000001,
+         }[unit] * value;
    }
-   if (unit.includes("h")) {
-      return value * 3600;
-   }
-
-   if (unit.includes("ms")) {
-      return value / 1000;
-   }
-   if (unit.includes("us")) {
-      return value / 1000000;
-   }
-   if (unit.includes("ns")) {
-      return value / 1000000000;
-   }
-   if (unit.includes("m")) {
-      return value * 60;
-   }
-   return value;
 }
 
 export function newToscaTime(input, source) {

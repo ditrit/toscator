@@ -4,7 +4,7 @@ import deal_deftype from "../listener/def_type.js";
 export default {
    exit_properties(parsed_rule) {
       for (const key in parsed_rule.value) {
-         parsed_rule.value[key].tosca.setName(key);
+         parsed_rule.value[key].tosca?.setName(key);
       }
    },
 
@@ -16,7 +16,9 @@ export default {
       //    : null;
 
       let default_var = parsed_rule.value.default
-         ? parsed_rule.value.default.value
+         ? parsed_rule.value.default.tosca
+            ? parsed_rule.value.default.tosca
+            : parsed_rule.value.default.value
          : null; // TO DO En fonction du type
       let status = parsed_rule.value.status
          ? parsed_rule.value.status.value

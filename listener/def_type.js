@@ -6,7 +6,7 @@ export default function deal_deftype(parsed_rule) {
       ? parsed_rule.value.description.value
       : null;
    let constraints = parsed_rule.value.constraints
-      ? parsed_rule.value.constraints.value // TO DO traiter les constraints
+      ? parsed_rule.value.constraints.tosca
       : null;
    if (!parsed_rule.value.entry_schema) {
       return newDefType(

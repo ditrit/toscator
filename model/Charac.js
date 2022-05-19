@@ -1,6 +1,6 @@
 import { ToscaMetadata } from "./metadata.js";
-import { DefType } from "./def_type.js";
 import { ToscaNode } from "./tosca_node.js";
+import { LidyError } from "lidy-js";
 
 export class Charac extends ToscaNode {
    constructor(input, source) {
@@ -19,13 +19,17 @@ export class Charac extends ToscaNode {
       "optional",
    ];
 
-   static isValid(input) {
+   static isValid(input, source) {
       let res = true;
       // if (!super.isValid(input)) {
       //    res = false;
       // }
-      if (input.default && !this.verification(input, input.default)) {
-         console.log("default does not verify constraints"); // TO DO Add lidy error
+      if (input.default && !this.check(input, input.default)) {
+         source.ctx.objectError(
+            `Default value ${input.default} does not verify constraints `
+         );
+
+         console.log("Default does not verify constraints"); // TO DO Add lidy error
          res = false;
       }
       if (input.status && !input.status instanceof String) {
@@ -43,11 +47,12 @@ export class Charac extends ToscaNode {
       return res;
    }
 
-   static verification(input, value) {
+   static check(input, value) {
       let res = true;
       let constraints = input.type.constraints;
+      // TO DO reduce, every: constraints.every((constraint)=> constraint.tosca.check(value))
       constraints.forEach((ele) => {
-         if (!ele.tosca.verification(value)) {
+         if (!ele.eval(value)) {
             res = false;
          }
       });
