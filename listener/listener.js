@@ -12,6 +12,7 @@ import bitrate from "./bitrate.js";
 import size from "./size.js";
 import time from "./time.js";
 import frequency from "./frequency.js";
+import attribute from "./attribute.js";
 export default {
    ...prog,
    ...imports,
@@ -27,4 +28,5 @@ export default {
    ...size,
    ...time,
    ...frequency,
+   ...attribute,
 };

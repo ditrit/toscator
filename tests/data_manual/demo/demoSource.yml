@@ -5,46 +5,63 @@ description: Template for demo.
 namespace: http://orness.com/development
 
 metadata:
-  creation_date: 2022-03-09
-  status: developmental
-  template_version: 1.0.0
-  template_author: Jean-Luc Duvivier
-  template_name: Demo template
+   creation_date: 2022-03-09
+   status: developmental
+   template_version: 1.0.0
+   template_author: Jean-Luc Duvivier
+   template_name: Demo template
 
 imports:
-  - file: ./demoImport.yml
-    namespace_prefix: DBMS
+   - file: ./demoImport.yml
+     namespace_prefix: DBMS
 
 ##### TOSCA NODE_TYPES #####
 node_types:
-  Compute:
-    derived_from: tosca.nodes.Root
-    description: Compute unit
-    version: "1.0"
-    metadata:
-      Virtual: "false"
-    
+   Compute:
+      derived_from: tosca.nodes.Root
+      description: Compute unit
+      version: "1.0"
+      metadata:
+         Virtual: "false"
 
-  Software:
-    derived_from: tosca.nodes.Root
-    properties:
-      num_cpus:
-        type: integer
-        description: Number of CPUs requested for a software node instance.
-        default: 1
-        required: true
-        constraints:
-          - valid_values: [ 1, 2, 4, 8 ]
+   Software:
+      derived_from: tosca.nodes.Root
+      properties:
+         num_cpus:
+            type: integer
+            description: Number of CPUs requested for a software node instance.
+            default: 2
+            required: true
+            constraints:
+               - less_than: 10
+               - valid_values: [1, 2, 4, 8]
 
-  VM:
-    derived_from: Compute
-    metadata:
-      Virtual: "true"
-  
-  Docker:
-    derived_from: Compute
-    metadata:
-      Virtual: "true"
+         # toto:
+         #    type: bitrate
+         #    default: 5 Bps
+         #    constraints:
+         #       - valid_values: [2 bps, 40 bps]
+         # titi:
+         #    type: string
+         #    default: "2 GHz"
+         #    constraints:
+         #       - greater_or_equal: 2000   MHz
+         # tata:
+         #    type: string
+         #    default: test
+         #    required: false
+         #    constraints:
+         #       - length: 4
+   VM:
+      derived_from: Compute
+      metadata:
+         Virtual: "true"
+      attributes:
+         my_app_port:
+            type: integer
+            description: application port number
 
-
-
+   Docker:
+      derived_from: Compute
+      metadata:
+         Virtual: "true"

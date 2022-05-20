@@ -1,15 +1,14 @@
 import { Charac } from "./Charac.js";
 
-export class ToscaProperty extends Charac {
+export class ToscaAttribute extends Charac {
    constructor(input, source) {
       super(input, source);
-      this.required = input.required;
    }
 
-   static _classname = "property";
+   static _classname = "attribute";
 
    getClassname() {
-      return ToscaProperty._classname;
+      return ToscaAttribute._classname;
    }
 
    toString() {
@@ -21,9 +20,7 @@ export class ToscaProperty extends Charac {
       if (!super.isValid(input, source)) {
          res = false;
       }
-      if (input.required && !input.required instanceof Boolean) {
-         res = false;
-      }
+
       return res;
    }
 
@@ -32,10 +29,10 @@ export class ToscaProperty extends Charac {
    }
 }
 
-export function newToscaProperty(input, source) {
+export function newToscaAttribute(input, source) {
    let res;
-   ToscaProperty.isValid(input, source)
-      ? (res = new ToscaProperty(input, source))
+   ToscaAttribute.isValid(input, source)
+      ? (res = new ToscaAttribute(input, source))
       : (res = {});
    return res;
 }

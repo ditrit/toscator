@@ -34,6 +34,7 @@ export function newDefType(input, source) {
       return new DefType(input, source);
    }
    // TO DO error
-   console.log("TO DO : Type not valid error", input);
+   source.ctx.grammarError(`Type not valid.`);
+
    return false;
 }
