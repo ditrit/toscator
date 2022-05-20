@@ -11,12 +11,12 @@ export class ToscaSize extends ToscaScalar {
       );
    }
 
-   static isvalid(input) {
+   static isvalid(input, source) {
       let regex =
          /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
 
-      if (!regex.test(input.value)) {
-         console.log("Size does not have the good format"); //TO DO error size
+      if (!regex.test(input.value.trim())) {
+         source.ctx.grammarError(`Type size could not be created.`);
          return false;
       }
       return true;
@@ -42,7 +42,7 @@ export class ToscaSize extends ToscaScalar {
 }
 
 export function newToscaSize(input, source) {
-   if (ToscaSize.isvalid(input)) {
+   if (ToscaSize.isvalid(input, source)) {
       return new ToscaSize(input, source);
    }
    return {};

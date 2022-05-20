@@ -182,7 +182,7 @@ export class ToscaConstraintLength extends ToscaConstraint {
       return input.operator == "length" && input.type == "int";
    }
    eval(value) {
-      return (value.length = this.length);
+      return value.toString().length == this.value;
    }
 }
 export class ToscaConstraintMaxLength extends ToscaConstraint {
@@ -194,7 +194,7 @@ export class ToscaConstraintMaxLength extends ToscaConstraint {
    }
 
    eval(value) {
-      return value.length <= this.length;
+      return value.toString().length <= this.value;
    }
 }
 export class ToscaConstraintMinLength extends ToscaConstraint {
@@ -206,7 +206,7 @@ export class ToscaConstraintMinLength extends ToscaConstraint {
    }
 
    eval(value) {
-      return value.length >= this.length;
+      return value.toString().length >= this.value;
    }
 }
 
@@ -239,8 +239,9 @@ export function newToscaConstraintEqual(input, source) {
    if (ToscaConstraintEquals.isValid(input)) {
       return new ToscaConstraintEquals(input, source);
    }
-   console.log("TO DO error constraint error");
-
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as equal constraint.`
+   );
    return {};
 }
 
@@ -248,8 +249,10 @@ export function newToscaConstraintGreaterThan(input, source) {
    if (ToscaConstraintGreaterThan.isValid(input)) {
       return new ToscaConstraintGreaterThan(input, source);
    }
-   console.log("TO DO error constraint error");
 
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as greater_than constraint.`
+   );
    return {};
 }
 
@@ -257,7 +260,9 @@ export function newToscaConstraintGreaterOrEqual(input, source) {
    if (ToscaConstraintGreaterOrEqual.isValid(input)) {
       return new ToscaConstraintGreaterOrEqual(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as greater_or_equal constraint.`
+   );
 
    return {};
 }
@@ -266,7 +271,9 @@ export function newToscaConstraintLessThan(input, source) {
    if (ToscaConstraintLessThan.isValid(input)) {
       return new ToscaConstraintLessThan(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as less_than constraint.`
+   );
 
    return {};
 }
@@ -275,7 +282,10 @@ export function newToscaConstraintLessOrEqual(input, source) {
    if (ToscaConstraintLessOrEqual.isValid(input)) {
       return new ToscaConstraintLessOrEqual(input, source);
    }
-   console.log("TO DO error constraint error");
+
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as less_or_equal constraint.`
+   );
 
    return {};
 }
@@ -284,8 +294,9 @@ export function newToscaConstraintInRange(input, source) {
    if (ToscaConstraintInRange.isValid(input)) {
       return new ToscaConstraintInRange(input, source);
    }
-   console.log("TO DO error constraint error");
-
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as In Range constraint.`
+   );
    return {};
 }
 
@@ -293,7 +304,9 @@ export function newToscaConstraintValidValues(input, source) {
    if (ToscaConstraintValidValues.isValid(input)) {
       return new ToscaConstraintValidValues(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as Valid Values constraint.`
+   );
 
    return {};
 }
@@ -302,7 +315,9 @@ export function newToscaConstraintLength(input, source) {
    if (ToscaConstraintLength.isValid(input)) {
       return new ToscaConstraintLength(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as Length constraint.`
+   );
 
    return {};
 }
@@ -311,7 +326,9 @@ export function newToscaConstraintMinLength(input, source) {
    if (ToscaConstraintMinLength.isValid(input)) {
       return new ToscaConstraintMinLength(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as Min Length constraint.`
+   );
 
    return {};
 }
@@ -320,7 +337,9 @@ export function newToscaConstraintMaxLength(input, source) {
    if (ToscaConstraintMaxLength.isValid(input)) {
       return new ToscaConstraintMaxLength(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as Max Length constraint.`
+   );
 
    return {};
 }
@@ -329,7 +348,9 @@ export function newToscaConstraintPattern(input, source) {
    if (ToscaConstraintPattern.isValid(input)) {
       return new ToscaConstraintPattern(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as Pattern constraint.`
+   );
 
    return {};
 }
@@ -338,7 +359,9 @@ export function newToscaConstraintSchema(input, source) {
    if (ToscaConstraintSchema.isValid(input)) {
       return new ToscaConstraintSchema(input, source);
    }
-   console.log("TO DO error constraint error");
+   source.ctx.grammarError(
+      `Constraint ${input} could not be created as Schema constraint.`
+   );
 
    return {};
 }

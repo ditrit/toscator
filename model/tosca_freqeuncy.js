@@ -10,11 +10,11 @@ export class ToscaFrequency extends ToscaScalar {
          source
       );
    }
-   static isValid(input) {
+   static isValid(input, source) {
       let regex =
-         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
-      if (!regex.test(input.value)) {
-         console.log("frequency does not have the good format"); //TO DO error frequency
+         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]Hz/i;
+      if (!regex.test(input.value.trim())) {
+         source.ctx.grammarError(`Type frequency could not be created.`);
          return false;
       }
       return true;
@@ -36,7 +36,7 @@ export class ToscaFrequency extends ToscaScalar {
 }
 
 export function newtoscaFrequency(input, source) {
-   if (ToscaFrequency.isValid(input)) {
+   if (ToscaFrequency.isValid(input, source)) {
       return new ToscaFrequency(input, source);
    }
    return {};

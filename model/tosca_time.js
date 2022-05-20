@@ -10,11 +10,13 @@ export class ToscaTime extends ToscaScalar {
          source
       );
    }
-   static isValid(input) {
+   static isValid(input, source) {
       let regex =
          /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
 
-      if (!regex.test(input.value)) {
+      if (!regex.test(input.value.trim())) {
+         source.ctx.grammarError(`Type time could not be created.`);
+
          return false;
       }
       return true;
@@ -39,7 +41,7 @@ export class ToscaTime extends ToscaScalar {
 }
 
 export function newToscaTime(input, source) {
-   if (ToscaTime.isValid(input)) {
+   if (ToscaTime.isValid(input, source)) {
       return new ToscaTime(input, source);
    }
    return {};

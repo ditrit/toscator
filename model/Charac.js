@@ -25,11 +25,10 @@ export class Charac extends ToscaNode {
       //    res = false;
       // }
       if (input.default && !this.check(input, input.default)) {
-         source.ctx.objectError(
+         source.ctx.grammarError(
             `Default value ${input.default} does not verify constraints `
          );
 
-         console.log("Default does not verify constraints"); // TO DO Add lidy error
          res = false;
       }
       if (input.status && !input.status instanceof String) {
