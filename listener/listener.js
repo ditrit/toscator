@@ -13,6 +13,8 @@ import size from "./size.js";
 import time from "./time.js";
 import frequency from "./frequency.js";
 import attribute from "./attribute.js";
+import capability from "./capability.js";
+import capability_type from "./capability_type.js";
 export default {
    ...prog,
    ...imports,
@@ -29,4 +31,6 @@ export default {
    ...time,
    ...frequency,
    ...attribute,
+   ...capability,
+   ...capability_type,
 };
