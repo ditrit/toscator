@@ -5,7 +5,7 @@ export class ToscaCapabilityType extends ToscaType {
       super(input, source);
       this.attributes = input.attributes;
       this.properties = input.properties;
-      this.valid_source_types = input.valid_source_types;
+      //   this.valid_source_types = input.valid_source_types; // requires a secondary verification
    }
 
    static _classname = "capability_type";
@@ -18,7 +18,7 @@ export class ToscaCapabilityType extends ToscaType {
       return super.toString();
    }
    static isValid(input, source) {
-      if (!ToscaType.isValid(input, source)) {
+      if (!super.isValid(input, source)) {
          source.ctx.typeError(
             source.current,
             "Incorrect definition for CapabilityType"
