@@ -1,35 +1,40 @@
-import { ToscaType } from "./tosca_type.js"
+import { DefType } from "./def_type.js";
+import { ToscaType } from "./tosca_type.js";
 
 export class ToscaDataType extends ToscaType {
-    constructor(input, source) {
-        super(input, source)
-    }
+   constructor(input, source) {
+      super(input, source);
+      this.properties = input.properties;
+      this.key_schema = input.key_schema;
+   }
 
-    static _classname = 'data_type'
-    
-    getClassname() {
-        return ToscaDataType._classname
-    }
+   static _classname = "data_type";
 
-    toString() {
-        return super.toString()
-    }
-    static isValid(input, source) {
-        if(!ToscaType.isValid(input, source)) {
-            
-            source.ctx.typeError(source.current, 'Incorrect definition for DataType')
-            return false
-        }
-        return true
-    }
+   getClassname() {
+      return ToscaDataType._classname;
+   }
+
+   toString() {
+      return super.toString();
+   }
+   static isValid(input, source) {
+      if (!super.isValid(input, source)) {
+         source.ctx.typeError(
+            source.current,
+            "Incorrect definition for DataType"
+         );
+         return false;
+      }
+      return true;
+   }
 }
 
 export function newToscaDataType(input, source) {
-    let res
-    if (ToscaDataType.isValid(input, source)) {
-        res = new ToscaDataType(input, source)
-    } else {
-        res = {}
-    }
-    return res
+   let res;
+   if (ToscaDataType.isValid(input, source)) {
+      res = new ToscaDataType(input, source);
+   } else {
+      res = {};
+   }
+   return res;
 }

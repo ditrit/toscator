@@ -6,6 +6,8 @@ export class ToscaNodeType extends ToscaType {
       super(input, source);
       this.properties = input.properties;
       this.attributes = input.attributes;
+      this.capabilities = input.capabilities;
+      this.requirements = input.requirements;
    }
 
    static _classname = "node_type";

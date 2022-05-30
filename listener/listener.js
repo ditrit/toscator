@@ -15,6 +15,8 @@ import frequency from "./frequency.js";
 import attribute from "./attribute.js";
 import capability from "./capability.js";
 import capability_type from "./capability_type.js";
+import data_type from "./data_type.js";
+import requirement from "./requirement.js";
 export default {
    ...prog,
    ...imports,
@@ -31,6 +33,8 @@ export default {
    ...time,
    ...frequency,
    ...attribute,
-   ...capability,
    ...capability_type,
+   ...capability,
+   ...requirement,
+   ...data_type,
 };

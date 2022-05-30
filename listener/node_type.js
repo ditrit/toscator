@@ -10,6 +10,7 @@ export default {
    exit_node_type(parsed_rule) {
       let properties = new Map();
       let attributes = new Map();
+      let capabilities = new Map();
       if (parsed_rule.value.properties) {
          for (const key in parsed_rule.value.properties.value) {
             properties[key] = parsed_rule.value.properties.value[key].tosca;
@@ -18,6 +19,11 @@ export default {
       if (parsed_rule.value.attributes) {
          for (const key in parsed_rule.value.attributes.value) {
             attributes[key] = parsed_rule.value.attributes.value[key].tosca;
+         }
+      }
+      if (parsed_rule.value.capabilities) {
+         for (const key in parsed_rule.value.capabilities.value) {
+            capabilities[key] = parsed_rule.value.capabilities.value[key].tosca;
          }
       }
 
@@ -29,6 +35,8 @@ export default {
             metadata: parsed_rule.value.metadata?.tosca,
             properties: properties,
             attributes: attributes,
+            capabilities: capabilities,
+            requirements: parsed_rule.value.requirements?.tosca,
          },
          parsed_rule
       );

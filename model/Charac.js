@@ -24,7 +24,11 @@ export class Charac extends ToscaNode {
       // if (!super.isValid(input)) {
       //    res = false;
       // }
-      if (input.default && !this.check(input, input.default)) {
+      if (
+         input.default &&
+         input.constraints &&
+         !this.check(input, input.default)
+      ) {
          source.ctx.grammarError(
             `Default value ${input.default} does not verify constraints `
          );

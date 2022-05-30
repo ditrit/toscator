@@ -1,4 +1,3 @@
-import { ToscaNode } from "./tosca_node.js";
 export class DefType {
    constructor(input, source) {
       // super(source);
