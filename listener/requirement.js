@@ -1,11 +1,19 @@
 import { newToscaRequirement } from "../model/requirement.js";
-import { newToscaCapabilityType } from "../model/capability_type.js";
-import capability from "./capability.js";
 
 export default {
    exit_requirement_defs(parsed_rule) {
       let requirements = [];
-      parsed_rule.value.map((ele) => requirements.push(ele.tosca));
+      // parsed_rule.value.map((ele) => requirements.push(ele.tosca));
+      for (const key in parsed_rule.value) {
+         // parsed_rule.value[key].tosca.setName(
+         //    parsed_rule.value[key].tosca.name
+         // );
+         const requirement_name = parsed_rule.value[key].tosca.name;
+         delete parsed_rule.value[key].tosca.name;
+         requirements.push({
+            [requirement_name]: parsed_rule.value[key].tosca,
+         });
+      }
       requirements.source = parsed_rule;
       parsed_rule.tosca = requirements;
    },
@@ -14,7 +22,7 @@ export default {
       for (const key in parsed_rule.value) {
          if (typeof parsed_rule.value[key].value === "string") {
             newToscaRequirement(
-               { capability: parsed_rule.value[key].value },
+               { capability: parsed_rule.value[key].value, name: key },
                parsed_rule
             );
          } else {
@@ -26,6 +34,7 @@ export default {
                   relationship:
                      parsed_rule.value[key].value.relationship?.value,
                   occurences: parsed_rule.value[key].value.occurences?.value,
+                  name: key,
                },
                parsed_rule
             );

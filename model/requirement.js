@@ -1,5 +1,4 @@
 import capability from "../listener/capability.js";
-import { ToscaProperty } from "./property.js";
 import { ToscaNode } from "./tosca_node.js";
 // import { ToscaType } from "./tosca_type.js";
 
@@ -11,6 +10,7 @@ export class ToscaRequirement extends ToscaNode {
       this.node = input.node;
       this.occurences = input.occurences;
       this.relationship = input.relationship;
+      this.name = input.name;
    }
    static _classname = "requirement";
 
