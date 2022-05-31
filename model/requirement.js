@@ -22,19 +22,16 @@ export class ToscaRequirement extends ToscaNode {
       return super.toString();
    }
    static isValid(input, source) {
-      if (capability instanceof String) {
-         source.ctx.typeError(
-            source.current,
-            "Incorrect definition for requirement"
-         );
-         return false;
-      }
+      // if (capability instanceof String) {
+      //    source.ctx.typeError(
+      //       source.current,
+      //       "Incorrect definition for requirement"
+      //    );
+      //    return false;
+      // }
       //   if (input.properties instanceof ToscaProperty) {
       //   }
       return true;
-   }
-   setName(name) {
-      this.name = name;
    }
 }
 

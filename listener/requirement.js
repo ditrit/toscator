@@ -3,11 +3,7 @@ import { newToscaRequirement } from "../model/requirement.js";
 export default {
    exit_requirement_defs(parsed_rule) {
       let requirements = [];
-      // parsed_rule.value.map((ele) => requirements.push(ele.tosca));
       for (const key in parsed_rule.value) {
-         // parsed_rule.value[key].tosca.setName(
-         //    parsed_rule.value[key].tosca.name
-         // );
          const requirement_name = parsed_rule.value[key].tosca.name;
          delete parsed_rule.value[key].tosca.name;
          requirements.push({
