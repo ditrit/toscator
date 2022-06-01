@@ -31,6 +31,20 @@ node_types:
             constraints:
                - less_than: 10
                - valid_values: [1, 2, 4, 8]
+      capabilities:
+         some_capability:
+            type: mytypes.mycapabilities.MyFeature
+            properties:
+               limit:
+                  type: integer
+                  default: 100
+      requirements:
+         - some_database:
+              capability: EndPoint.Database
+              node: Database
+              relationship: ConnectsTo
+         - test: MyFeature
+
 capability_types:
    MyFeature:
       derived_from: tosca.capabilities.Root
@@ -40,3 +54,14 @@ capability_types:
             type: string
          my_feature_value:
             type: integer
+data_types:
+   MyTest:
+      derived_from: tosca.data.Root
+      description: custom phone number type that extends the basic phonenumber type
+      properties:
+         phone_description:
+            type: string
+            constraints:
+               - max_length: 128
+      constraints:
+         - greater_than: 10

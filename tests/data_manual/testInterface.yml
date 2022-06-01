@@ -1,0 +1,69 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: Template for demo.
+
+namespace: http://orness.com/development
+
+metadata:
+   creation_date: 2022-03-09
+   status: developmental
+   template_version: 1.0.0
+   template_author: Jean-Luc Duvivier
+   template_name: Demo template
+
+##### TOSCA NODE_TYPES #####
+node_types:
+   Compute:
+      derived_from: tosca.nodes.Root
+      description: Compute unit
+      version: "1.0"
+      metadata:
+         Virtual: "false"
+
+   Software:
+      derived_from: tosca.nodes.Root
+      # properties:
+      #    num_cpus:
+      #       type: integer
+      #       description: Number of CPUs requested for a software node instance.
+      #       default: 2
+      #       required: true
+      #       constraints:
+      #          - less_than: 10
+      #          - valid_values: [1, 2, 4, 8]
+      #    titi:
+      #       type: string
+      #       default: "2 GHz"
+      #       constraints:
+      #          - greater_or_equal: 2000   MHz
+      #    tata:
+      #       type: string
+      #       default: test
+      #       required: false
+      #       constraints:
+      #          - length: 4
+   VM:
+      derived_from: Compute
+      metadata:
+         Virtual: "true"
+      attributes:
+         my_app_port:
+            type: integer
+            description: application port number
+
+   Docker:
+      derived_from: Compute
+      metadata:
+         Virtual: "true"
+interface_types:
+   mycompany.mytypes.myinterfaces.MyConfigure:
+      derived_from: tosca.interfaces.relationship.Root
+      description: My custom configure Interface Type
+      inputs:
+         mode:
+            type: string
+
+      pre_configure_service:
+         description: pre-configure operation for my service
+      post_configure_service:
+         description: post-configure operation for my service

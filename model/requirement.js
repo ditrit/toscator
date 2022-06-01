@@ -1,6 +1,4 @@
-import capability from "../listener/capability.js";
 import { ToscaNode } from "./tosca_node.js";
-// import { ToscaType } from "./tosca_type.js";
 
 export class ToscaRequirement extends ToscaNode {
    constructor(input, source) {
@@ -22,13 +20,13 @@ export class ToscaRequirement extends ToscaNode {
       return super.toString();
    }
    static isValid(input, source) {
-      // if (capability instanceof String) {
-      //    source.ctx.typeError(
-      //       source.current,
-      //       "Incorrect definition for requirement"
-      //    );
-      //    return false;
-      // }
+      if (!typeof input.capability === "string") {
+         source.ctx.typeError(
+            source.current,
+            "Incorrect definition for requirement"
+         );
+         return false;
+      }
       //   if (input.properties instanceof ToscaProperty) {
       //   }
       return true;

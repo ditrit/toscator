@@ -41,17 +41,17 @@ node_types:
          #    default: 5 Bps
          #    constraints:
          #       - valid_values: [2 bps, 40 bps]
-         # titi:
-         #    type: string
-         #    default: "2 GHz"
-         #    constraints:
-         #       - greater_or_equal: 2000   MHz
-         # tata:
-         #    type: string
-         #    default: test
-         #    required: false
-         #    constraints:
-         #       - length: 4
+         titi:
+            type: string
+            default: "2 GHz"
+            constraints:
+               - greater_or_equal: 2000   MHz
+         tata:
+            type: string
+            default: test
+            required: false
+            constraints:
+               - length: 4
    VM:
       derived_from: Compute
       metadata:
