@@ -4,6 +4,7 @@ export class ToscaInterfaceType extends ToscaType {
    constructor(input, source) {
       super(input, source);
       this.inputs = input.inputs;
+      this.operations = input.operations;
    }
 
    static _classname = "interface_type";

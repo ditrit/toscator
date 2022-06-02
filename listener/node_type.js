@@ -11,20 +11,20 @@ export default {
       let properties = new Map();
       let attributes = new Map();
       let capabilities = new Map();
-      if (parsed_rule.value.properties) {
-         for (const key in parsed_rule.value.properties.value) {
-            properties[key] = parsed_rule.value.properties.value[key].tosca;
-         }
+      let artifacts = new Map();
+      for (const key in parsed_rule.value.properties?.value) {
+         properties[key] = parsed_rule.value.properties.value[key].tosca;
       }
-      if (parsed_rule.value.attributes) {
-         for (const key in parsed_rule.value.attributes.value) {
-            attributes[key] = parsed_rule.value.attributes.value[key].tosca;
-         }
+
+      for (const key in parsed_rule.value.attributes?.value) {
+         attributes[key] = parsed_rule.value.attributes.value[key].tosca;
       }
-      if (parsed_rule.value.capabilities) {
-         for (const key in parsed_rule.value.capabilities.value) {
-            capabilities[key] = parsed_rule.value.capabilities.value[key].tosca;
-         }
+
+      for (const key in parsed_rule.value.capabilities?.value) {
+         capabilities[key] = parsed_rule.value.capabilities.value[key].tosca;
+      }
+      for (const key in parsed_rule.value.artifacts?.value) {
+         artifacts[key] = parsed_rule.value.artifacts.value[key].tosca;
       }
 
       newToscaNodeType(
@@ -37,6 +37,7 @@ export default {
             attributes: attributes,
             capabilities: capabilities,
             requirements: parsed_rule.value.requirements?.tosca,
+            artifacts: artifacts,
          },
          parsed_rule
       );

@@ -31,17 +31,23 @@ node_types:
             constraints:
                - less_than: 10
                - valid_values: [1, 2, 4, 8]
-         titi:
-            type: string
-            default: "2 GHz"
-            constraints:
-               - greater_or_equal: 2000   MHz
-         tata:
-            type: string
-            default: test
-            required: false
-            constraints:
-               - length: 4
+      artifacts:
+         my_file_artifact: ../my_apps_files/operation_artifact.txt
+
+         sw_image:
+            description: Image for virtual machine
+            type: tosca.artifacts.Deployment.Image.VM
+            file: http://10.10.86.141/images/Juniper_vSRX_15.1x49_D80_preconfigured.qcow2
+            checksum: ba411cafee2f0f702572369da0b765e2
+            version: "3.2"
+            checksum_algorithm: MD5
+            # properties:
+            #    name: vSRX
+            #    container_format: BARE
+            #    disk_format: QCOW2
+            #    min_disk: 1 GB
+            #    size: 649 MB
+
    VM:
       derived_from: Compute
       metadata:
@@ -55,17 +61,18 @@ node_types:
       derived_from: Compute
       metadata:
          Virtual: "true"
-interface_types:
-   mycompany.mytypes.myinterfaces.MyConfigure:
-      derived_from: tosca.interfaces.relationship.Root
-      description: My custom configure Interface Type
-      inputs:
-         mode:
+artifact_types:
+   my_artifact_type:
+      description: Java Archive artifact type
+      derived_from: tosca.artifact.Root
+      mime_type: application/java-archive
+      # file_ext: [jar]
+      properties:
+         id:
+            description: Identifier of the jar
             type: string
-      notifications:
-
-      # operations:
-      #    pre_configure_service:
-      #       description: pre-configure operation for my service
-      #    post_configure_service:
-      #       description: post-configure operation for my service
+            required: true
+         creator:
+            description: Vendor of the java implementation on which the jar is based
+            type: string
+            required: false

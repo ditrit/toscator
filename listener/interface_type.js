@@ -12,9 +12,14 @@ export default {
    },
 
    exit_interface_type(parsed_rule) {
+      const primaryKeys = ["derived_from", "description", "inputs", "metadata"];
       let inputs = {};
-      // let operations = {};
-      // for (const key in parsed_rule.value){}
+      let operations = {};
+      for (const key in parsed_rule.value) {
+         if (!primaryKeys.includes(key)) {
+            operations[key] = parsed_rule.value[key].tosca;
+         }
+      }
       for (const key in parsed_rule.value.inputs.value) {
          inputs[key] = parsed_rule.value.inputs.value[key].tosca;
          // inputs.push(parsed_rule.value.inputs.value[key].tosca);
@@ -26,6 +31,7 @@ export default {
             description: parsed_rule.value.description?.value,
             metadata: parsed_rule.value.metadata?.tosca,
             inputs: inputs,
+            operations: operations,
          },
          parsed_rule
       );
