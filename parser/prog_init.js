@@ -41,7 +41,9 @@ export default function parse_file(file_import, parent_service_template, prog) {
 
       prog.current_parent_service_template = parent_service_template;
       prog.current_service_template = current_service_template;
-      prog.current_path = path_mod.dirname(path);
+
+      let last_path = prog.last_path;
+      let last_repo = prog.last_repo;
 
       res = parse_tosca({
          src_data,
@@ -63,13 +65,15 @@ export default function parse_file(file_import, parent_service_template, prog) {
             if (
                !prog.alreadyImported.reduce((x, y) => x || fi.equals(y), false)
             ) {
+               fi.last_path = last_path;
+               fi.last_repo = last_repo;
                parse_file(fi, current_service_template, prog);
             }
          });
       }
    } else {
       prog.errors.push(
-         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${src.file}`)
+         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${path}`)
       );
       console.log(prog.errors.map((x) => x.message));
    }

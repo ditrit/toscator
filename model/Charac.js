@@ -1,6 +1,5 @@
 import { ToscaMetadata } from "./metadata.js";
 import { ToscaNode } from "./tosca_node.js";
-import { LidyError } from "lidy-js";
 
 export class Charac extends ToscaNode {
    constructor(input, source) {

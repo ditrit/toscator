@@ -1,11 +1,17 @@
 import { ToscaNode } from "./tosca_node.js";
 import path from "path";
+import {
+   joinAndResolvePahtOrUrl as joinAndResolve,
+   is_url,
+   getDomain,
+} from "./utils.js";
 
 export class ToscaImport extends ToscaNode {
    constructor(input, source) {
       super(source);
       this.file = input.file;
-      this.currentPath = input.currentPath ? input.currentPath : ".";
+      this.last_path = input.last_path;
+      this.last_repo = input.last_repo;
       this.repository = input.repository;
       this.namespace_prefix = input.namespace_prefix;
       this.namespace_uri = input.namespace_uri;
@@ -33,32 +39,38 @@ export class ToscaImport extends ToscaNode {
    }
 
    setAbsolutePath() {
-      // ##### TODO: MANAGE REPOSITORIES #####
-      this.path = "";
-      if (
-         this.repository &&
-         this.repository != "" &&
-         this.isRelative(this.file)
-      ) {
-         this.path = `${this.source.ctx.prog.repositories[
-            this.repository
-         ].getFullUrl()}/${this.file}`;
-      } else {
-         this.path = this.isRelative(this.file)
-            ? path.join(this.currentPath, this.file)
-            : this.file;
+      if (this.repository) {
+         this.last_repo = this.repository.url;
+         this.last_path = this.repository.url;
       }
-      if (!this.path.match(/^[a-zA-Z]*:\/\//)) {
-         this.path = path.resolve(this.path);
+
+      if (is_url(this.file)) {
+         if (this.last_repo) {
+            this.last_repo = "";
+         }
+         this.last_path = path.dirname(this.file);
+         this.path = this.file;
       } else {
-         this.path = path.resolve("/" + this.path).substring(1);
+         if (this.isRelative(this.file)) {
+            this.path = joinAndResolve(this.last_path, this.file);
+         } else {
+            if (this.last_repo) {
+               this.path = joinAndResolve(this.last_repo, this.file);
+            } else if (is_url(this.last_path)) {
+               joinAndResolve(getDomain(this.last_path), thisfile);
+            } else {
+               this.last_path = path.dirname(file);
+               this.path = file;
+            }
+         }
       }
-      this.currentPath = path.dirname(this.path);
-      this.source.ctx.prog.currentPath = this.currentPath;
+
+      this.source.ctx.prog.last_path = this.last_path;
+      this.source.ctx.prog.last_repo = this.last_repo;
    }
 
-   isRelative(path) {
-      return !path.match(/^[a-zA-Z]*:\/\//) || !path[0] == "/";
+   isRelative(path_arg) {
+      return !is_url(path_arg) || !path.isAbsolute(path_arg);
    }
 
    equals(other) {
