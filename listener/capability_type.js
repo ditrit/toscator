@@ -14,17 +14,15 @@ export default {
    exit_capability_type(parsed_rule) {
       let properties = new Map();
       let attributes = new Map();
-      if (parsed_rule.value.properties) {
-         for (const key in parsed_rule.value.properties.value) {
-            properties[key] = parsed_rule.value.properties.value[key].tosca;
-         }
+
+      for (const key in parsed_rule.value.properties?.value) {
+         properties[key] = parsed_rule.value.properties.value[key].tosca;
       }
 
-      if (parsed_rule.value.attributes) {
-         for (const key in parsed_rule.value.attributes.value) {
-            attributes[key] = parsed_rule.value.attributes.value[key].tosca;
-         }
+      for (const key in parsed_rule.value.attributes?.value) {
+         attributes[key] = parsed_rule.value.attributes.value[key].tosca;
       }
+
       newToscaCapabilityType(
          {
             derived_from: parsed_rule.value.derived_from?.value,
