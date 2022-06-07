@@ -18,9 +18,6 @@ export class DefType {
          }
       }
 
-      // if (input.constraints && !input.constraints instanceof ToscaDescription) { // TODO
-      //     res = false
-      // }
       return true;
    }
    toString() {

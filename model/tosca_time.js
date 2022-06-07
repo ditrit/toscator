@@ -11,6 +11,7 @@ export class ToscaTime extends ToscaScalar {
       );
    }
    static isValid(input, source) {
+      //TODO: add regex for time
       let regex =
          /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
 

@@ -21,6 +21,7 @@ export class ToscaArtifact extends ToscaNode {
       return super.toString();
    }
    static isValid(input, source) {
+      // TODO: add file path validation
       if (typeof input.file != "string") {
          source.ctx.typeError(
             source.current,

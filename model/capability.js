@@ -21,15 +21,8 @@ export class ToscaCapability extends ToscaCapabilityType {
       return super.toString();
    }
    static isValid(input, source) {
-      //   if (!super.isValid(input, source)) {
-      //      source.ctx.typeError(
-      //         source.current,
-      //         "Incorrect definition for NodeType"
-      //      );
-      //      return false;
-      //   }
-      if (input.properties instanceof ToscaProperty) {
-      }
+      // TODO: add verification on type with list of already defined types
+
       return true;
    }
    setName(name) {

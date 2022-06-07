@@ -20,13 +20,7 @@ export class OperationDef extends ToscaNode {
       this.name = name;
    }
    static isValid(input, source) {
-      // if (!super.isValid(input, source)) {
-      //      source.ctx.typeError(
-      //         source.current,
-      //         "Incorrect definition for OperationDef"
-      //      );
-      //      return false;
-      // }
+      //TODO: Check if the implementation is valid
       return true;
    }
 }

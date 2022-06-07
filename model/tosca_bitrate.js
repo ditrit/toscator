@@ -12,8 +12,7 @@ export class ToscaBitrate extends ToscaScalar {
    }
    static isValid(input, source) {
       let regex =
-         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
-
+         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+ (B|b)ps/i;
       if (!regex.test(input.value.trim())) {
          source.ctx.grammarError(`Type bitrate could not be created.`);
 

@@ -13,8 +13,7 @@ export class ToscaSize extends ToscaScalar {
 
    static isvalid(input, source) {
       let regex =
-         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
-
+         / ([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z][a-zA-Z]B/i;
       if (!regex.test(input.value.trim())) {
          source.ctx.grammarError(`Type size could not be created.`);
          return false;

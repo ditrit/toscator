@@ -25,6 +25,8 @@ export class ToscaArtifactType extends ToscaType {
          );
          return false;
       }
+
+      //TODO: Add valid extensions to check file_ext
       if (!input.file_ext.every((ele) => typeof ele === "string")) {
          return false;
       }
