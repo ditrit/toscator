@@ -25,7 +25,7 @@ export default {
    // This function is called to extract the value of a parsed rule
    formatParsedRule(parsed_rule) {
       let properties = new Map();
-      for (const key in parsed_rule.value.properties.value) {
+      for (const key in parsed_rule.value.properties?.value) {
          properties[key] = parsed_rule.value.properties.value[key].tosca;
       }
       const fileExt = parsed_rule.value.file_ext?.value.map((ele) => ele.tosca);
@@ -46,10 +46,12 @@ export default {
       //TODO: Add valid extensions to check file_ext
 
       if (!parsed_rule.value.derived_from?.value) {
-         parsed_rule.ctx.grammarWarning(
+         parsed_rule.ctx?.grammarWarning(
             parsed_rule.current,
             "Missing derived_from field in artifact_type"
          );
+         return false;
       }
+      return true;
    },
 };
