@@ -1,5 +1,5 @@
 import { newToscaAttribute } from "../model/attribute.js";
-import deal_deftype from "../listener/def_type.js";
+import deal_deftype from "./def_type.js";
 
 export default {
    exit_attributes(parsed_rule) {
