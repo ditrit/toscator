@@ -1,4 +1,4 @@
-import { newDefType } from "../model/def_type.js";
+import { newDefType } from "../model/def_type.js.js";
 
 export default function deal_deftype(parsed_rule) {
    let type = parsed_rule.value.type ? parsed_rule.value.type.value : null;
