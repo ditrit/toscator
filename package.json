@@ -8,12 +8,28 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node jasmmine.js"
+    "test:unit": " jest --ci",
+    "test:unit:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
   },
   "dependencies": {
     "ajv": "^8.11.0",
     "lidy-js": "git+https://github.com/ditrit/lidy-js.git#main",
     "regex": "^0.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-jest": "^28.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^26.4.3",
+    "jest-cli": "^26.4.3"
   },
   "repository": {
     "type": "git",

@@ -1,7 +1,4 @@
 import { newToscaCapability } from "../model/capability.js";
-import { newToscaCapabilityType } from "../model/capability_type.js";
-// import exit_capability_type from "./capability_type.js";
-// import deal_deftype from "./def_type.js";
 
 export default {
    exit_capability_defs(parsed_rule) {

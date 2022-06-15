@@ -19,7 +19,7 @@ import data_type from "./data_type.js";
 import requirement from "./requirement.js";
 import operation_def from "./operation_def.js";
 import interface_type from "./interface_type.js";
-import artifact_type from "./artifact_type.js";
+import artifact_type from "./ArtifactTypeListener.js";
 import artifact from "./artifact.js";
 import implementation from "./implementation.js";
 import group_type from "./group_type.js";
