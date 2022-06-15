@@ -12,7 +12,6 @@ export default {
    },
 
    // This function is called when the parser encounters a rule
-
    exit_artifact_type(parsed_rule) {
       this.checkParsedRule(parsed_rule);
       const toscaArtifactType = new ToscaArtifactType(
