@@ -14,31 +14,6 @@ let parsedRule = {
          value: "application/java-archive",
          type: "string",
       },
-      // properties: {
-      //    value: {
-      //       creator: {
-      //          tosca: {
-      //             name: "creator",
-      //             type: {
-      //                constraints: null,
-      //                description:
-      //                   "Vendor of the java implementation on which the jar is based",
-      //                type: "string",
-      //             },
-      //          },
-      //       },
-      //       id: {
-      //          tosca: {
-      //             name: "id",
-      //             type: {
-      //                constraints: null,
-      //                description: "Unique identifier of the artifact",
-      //                type: "string",
-      //             },
-      //          },
-      //       },
-      //    },
-      // },
    },
 };
 const empty_properties = new Map();

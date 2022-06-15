@@ -62,7 +62,6 @@ export class ToscaType extends ToscaNode {
    }
    static isValid(input, source) {
       if (typeof input.derived_from != "string") {
-         // TODO
          return false;
       }
       return true;
