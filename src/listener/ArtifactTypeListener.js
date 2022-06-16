@@ -13,16 +13,16 @@ export default {
 
    // This function is called when the parser encounters a rule
    exit_artifact_type(parsed_rule) {
-      this.checkParsedRule(parsed_rule);
+      this.checkArtifactType(parsed_rule);
       const toscaArtifactType = new ToscaArtifactType(
-         this.formatParsedRule(parsed_rule),
+         this.formatArtifactType(parsed_rule),
          parsed_rule
       );
       parsed_rule.tosca = toscaArtifactType;
    },
 
    // This function is called to extract the value of a parsed rule
-   formatParsedRule(parsed_rule) {
+   formatArtifactType(parsed_rule) {
       let properties = new Map();
       for (const key in parsed_rule.value.properties?.value) {
          properties[key] = parsed_rule.value.properties.value[key].tosca;
@@ -41,7 +41,7 @@ export default {
    },
 
    // This function is called to check if the parsed rule is correct
-   checkParsedRule(parsed_rule) {
+   checkArtifactType(parsed_rule) {
       //TODO: Add valid extensions to check file_ext
 
       if (!parsed_rule.value.derived_from?.value) {

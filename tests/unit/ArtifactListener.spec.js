@@ -57,27 +57,27 @@ let expandedArtifact = {
 
 describe("Test ArtifactListener", () => {
    test("Compact Artifact", () => {
-      expect(ArtifactListener.formatParsedRule(compactArtifactDef)).toEqual(
+      expect(ArtifactListener.formatArtifact(compactArtifactDef)).toEqual(
          compactArtifact
       );
    });
    test("Expanded Artifact", () => {
-      expect(ArtifactListener.formatParsedRule(expandedArtifactDef)).toEqual(
+      expect(ArtifactListener.formatArtifact(expandedArtifactDef)).toEqual(
          expandedArtifact
       );
    });
    test("CheckParsedRule expanded", () => {
-      expect(ArtifactListener.checkParsedRule(expandedArtifactDef)).toBe(true);
+      expect(ArtifactListener.checkArtifact(expandedArtifactDef)).toBe(true);
    });
    test("false checkParsedRule expanded", () => {
       expandedArtifactDef.value.file.value = undefined;
-      expect(ArtifactListener.checkParsedRule(expandedArtifactDef)).toBe(false);
+      expect(ArtifactListener.checkArtifact(expandedArtifactDef)).toBe(false);
    });
    test(" checkParsedRule compact", () => {
-      expect(ArtifactListener.checkParsedRule(compactArtifactDef)).toBe(true);
+      expect(ArtifactListener.checkArtifact(compactArtifactDef)).toBe(true);
    });
    test("false checkParsedRule compact", () => {
       compactArtifactDef.value = undefined;
-      expect(ArtifactListener.checkParsedRule(compactArtifactDef)).toBe(false);
+      expect(ArtifactListener.checkArtifact(compactArtifactDef)).toBe(false);
    });
 });

@@ -28,13 +28,15 @@ let output = {
 };
 describe("Test ArtifactTypeListener", () => {
    test("formatParsedRule", () => {
-      expect(ArtifactTypeListener.formatParsedRule(parsedRule)).toEqual(output);
+      expect(ArtifactTypeListener.formatArtifactType(parsedRule)).toEqual(
+         output
+      );
    });
    test("CheckParsedRule", () => {
-      expect(ArtifactTypeListener.checkParsedRule(parsedRule)).toBe(true);
+      expect(ArtifactTypeListener.checkArtifactType(parsedRule)).toBe(true);
    });
    test("false checkParsedRule", () => {
       parsedRule.value.derived_from.value = undefined;
-      expect(ArtifactTypeListener.checkParsedRule(parsedRule)).toBe(false);
+      expect(ArtifactTypeListener.checkArtifactType(parsedRule)).toBe(false);
    });
 });

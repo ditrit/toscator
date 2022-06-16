@@ -7,15 +7,15 @@ export default {
       }
    },
    exit_artifact_def(parsed_rule) {
-      this.CheckParsedRule(parsed_rule);
+      this.checkArtifact(parsed_rule);
       const toscaArtifact = new ToscaArtifact(
-         this.formatParsedRule(parsed_rule),
+         this.formatArtifact(parsed_rule),
          parsed_rule
       );
       parsed_rule.tosca = toscaArtifact;
    },
 
-   formatParsedRule(parsed_rule) {
+   formatArtifact(parsed_rule) {
       if (typeof parsed_rule.value === "string") {
          return { file: parsed_rule.value };
       }
@@ -36,13 +36,13 @@ export default {
       };
    },
 
-   checkParsedRule(parsed_rule) {
+   checkArtifact(parsed_rule) {
       // TODO: add file path validation
 
       if (
          !(
             typeof parsed_rule.value === "string" ||
-            typeof parsed_rule.value?.file.value === "string"
+            typeof parsed_rule.value?.file?.value === "string"
          )
       ) {
          parsed_rule.ctx?.typeError(
