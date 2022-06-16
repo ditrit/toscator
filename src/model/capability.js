@@ -1,6 +1,6 @@
 import { ToscaProperty } from "./property.js";
 
-import { ToscaCapabilityType } from "./capability_type.js";
+import { ToscaCapabilityType } from "./ToscaCapabilityType.js";
 
 export class ToscaCapability extends ToscaCapabilityType {
    constructor(input, source) {
