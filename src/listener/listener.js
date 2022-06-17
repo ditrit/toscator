@@ -13,7 +13,7 @@ import size from "./size.js";
 import time from "./time.js";
 import frequency from "./frequency.js";
 import attribute from "./attribute.js";
-import capability from "./capability.js";
+import capability from "./CapabilityListener.js";
 import capability_type from "./CapabilityTypeListener.js";
 import data_type from "./data_type.js";
 import requirement from "./requirement.js";
