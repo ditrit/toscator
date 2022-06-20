@@ -23,6 +23,8 @@ import artifact_type from "./ArtifactTypeListener.js";
 import artifact from "./ArtifactListener.js";
 import implementation from "./implementation.js";
 import group_type from "./group_type.js";
+import group from "./GroupListener.js";
+
 export default {
    ...prog,
    ...imports,
@@ -49,4 +51,5 @@ export default {
    ...artifact,
    ...implementation,
    ...group_type,
+   ...group,
 };
