@@ -36,3 +36,13 @@ group_types:
       derived_from: tosca.policies.Root
       description: My company’s group type for placing nodes of type Compute
       members: [tosca.nodes.Compute]
+
+topology_template:
+   groups:
+      my_app_placement_group:
+         type: tosca.groups.Root
+         description: My application’s logical component grouping for placement
+         members: [my_web_server, my_sql_database]
+      server_group_1:
+         type: tosca.groups.Root
+         members: [server2, server3]
