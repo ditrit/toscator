@@ -23,6 +23,8 @@ import artifact_type from "./ArtifactTypeListener.js";
 import artifact from "./ArtifactListener.js";
 import implementation from "./implementation.js";
 import group_type from "./group_type.js";
+import ParameterAssignmentListener from "./ParameterAssignmentListener.js";
+import PropertyAssignmentListener from "./PropertyAssignmentListener.js";
 export default {
    ...prog,
    ...imports,
@@ -49,4 +51,6 @@ export default {
    ...artifact,
    ...implementation,
    ...group_type,
+   ...ParameterAssignmentListener,
+   ...PropertyAssignmentListener,
 };
