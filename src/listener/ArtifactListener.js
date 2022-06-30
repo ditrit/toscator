@@ -21,7 +21,7 @@ export default {
       }
       let properties = new Map();
       for (const key in parsed_rule.value.properties?.value) {
-         properties[key] = parsed_rule.value.properties.value[key].tosca;
+         properties[key] = parsed_rule.value.properties.value[key].tosca.value;
       }
       return {
          file: parsed_rule.value.file?.value,
