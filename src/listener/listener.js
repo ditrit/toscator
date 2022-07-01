@@ -25,6 +25,7 @@ import implementation from "./implementation.js";
 import group_type from "./group_type.js";
 import ParameterAssignmentListener from "./ParameterAssignmentListener.js";
 import PropertyAssignmentListener from "./PropertyAssignmentListener.js";
+import InterfaceAssignmentListener from "./InterfaceAssignmentListener.js";
 export default {
    ...prog,
    ...imports,
@@ -53,4 +54,5 @@ export default {
    ...group_type,
    ...ParameterAssignmentListener,
    ...PropertyAssignmentListener,
+   ...InterfaceAssignmentListener,
 };
