@@ -41,12 +41,13 @@ node_types:
             checksum: ba411cafee2f0f702572369da0b765e2
             version: "3.2"
             checksum_algorithm: MD5
-            # properties:
-            #    name: vSRX
-            #    container_format: BARE
-            #    disk_format: QCOW2
-            #    min_disk: 1 GB
-            #    size: 649 MB
+            properties:
+               name: vSRX
+               container_format: BARE
+               disk_format: QCOW2
+               min_disk: 1 GB
+               Maxsize: 649 MB
+               num_cpus: { get_property: num_cpus }
 
    VM:
       derived_from: Compute

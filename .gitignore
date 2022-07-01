@@ -94,3 +94,7 @@ typings/
 docref/
 package-lock.json
 .vscode/launch.json
+
+# Tests report files
+reports/
+test-report.xml

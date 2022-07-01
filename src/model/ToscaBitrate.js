@@ -10,16 +10,7 @@ export class ToscaBitrate extends ToscaScalar {
          source
       );
    }
-   static isValid(input, source) {
-      let regex =
-         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+ (B|b)ps/i;
-      if (!regex.test(input.value.trim())) {
-         source.ctx.grammarError(`Type bitrate could not be created.`);
 
-         return false;
-      }
-      return true;
-   }
    setNormalizedValue() {
       let value = this.value
          .trim()
@@ -47,11 +38,4 @@ export class ToscaBitrate extends ToscaScalar {
             TiBps: 8796093.022208,
          }[unit] * value;
    }
-}
-
-export function newToscaBitrate(input, source) {
-   if (ToscaBitrate.isValid(input, source)) {
-      return new ToscaBitrate(input, source);
-   }
-   return {};
 }

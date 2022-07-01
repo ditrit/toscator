@@ -1,0 +1,26 @@
+{
+    "ParsedRule":{"value": {
+       "derived_from": {
+          "value": "tosca.artifact.Root",
+          "type": "string"
+       },
+       "description": {
+          "value": "Java Archive artifact type",
+          "type": "string"
+       },
+       "mime_type": {
+          "value": "application/java-archive",
+          "type": "string"
+       }
+      
+    }},
+    "ParsedArtifact":{
+        "derived_from": "tosca.artifact.Root",
+        "version": null,
+        "description": "Java Archive artifact type",
+        "metadata": null,
+        "file_ext": null,
+        "mime_type": "application/java-archive",
+        "properties": {}
+    }
+ }

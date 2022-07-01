@@ -8,21 +8,24 @@ import version from "./version.js";
 import servicetemplate from "./service_template.js";
 import property from "./property.js";
 import constraint from "./constraint.js";
-import bitrate from "./bitrate.js";
+import bitrate from "./BitrateListener.js";
 import size from "./size.js";
 import time from "./time.js";
 import frequency from "./frequency.js";
 import attribute from "./attribute.js";
-import capability from "./capability.js";
-import capability_type from "./capability_type.js";
+import capability from "./CapabilityListener.js";
+import capability_type from "./CapabilityTypeListener.js";
 import data_type from "./data_type.js";
 import requirement from "./requirement.js";
 import operation_def from "./operation_def.js";
 import interface_type from "./interface_type.js";
-import artifact_type from "./artifact_type.js";
-import artifact from "./artifact.js";
+import artifact_type from "./ArtifactTypeListener.js";
+import artifact from "./ArtifactListener.js";
 import implementation from "./implementation.js";
 import group_type from "./group_type.js";
+import ParameterAssignmentListener from "./ParameterAssignmentListener.js";
+import PropertyAssignmentListener from "./PropertyAssignmentListener.js";
+import InterfaceAssignmentListener from "./InterfaceAssignmentListener.js";
 export default {
    ...prog,
    ...imports,
@@ -49,4 +52,7 @@ export default {
    ...artifact,
    ...implementation,
    ...group_type,
+   ...ParameterAssignmentListener,
+   ...PropertyAssignmentListener,
+   ...InterfaceAssignmentListener,
 };

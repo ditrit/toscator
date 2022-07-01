@@ -1,6 +1,6 @@
-import { parse } from "./parser/parse.js";
+import { parse } from "./src/parser/parse.js";
 
-let res = parse("./tests/data_manual/testProperty.yml");
+let res = parse("./tests/data_manual/testArtifact.yml");
 
 if (res.errors.length != 0) {
    console.log("TOSCA ERROR : ");
