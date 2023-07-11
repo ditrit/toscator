@@ -1,0 +1,23 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  policies:
+    - my_anti_collocation_policy:
+        type: my.policies.anticolocateion
+
+    - my_compute_placement_policy:
+        type: tosca.policies.placement
+        description: Apply my placement policy to my application’s servers
+        targets: [ my_server_1, my_server_2 ]
+        properties:
+          num_cpus: 3
+          memory: 
+            description: wow
+            value: 10 GB
+        triggers: 
+          - trigger_def_name:
+              event: event_name
+              action: 
+                - delegate: deploy
+        metadata:
+          meta: data

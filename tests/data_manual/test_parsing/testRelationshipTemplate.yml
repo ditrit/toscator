@@ -1,0 +1,64 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  relationship_templates: 
+
+    my_connectsto_relationship:
+      type: tosca.relationships.ConnectsTo
+      interfaces:
+        Configure:
+          inputs:
+            speed: { get_attribute: [ SOURCE, connect_speed ] }
+          operations:
+            pre_configure_source:
+              implementation:
+                  primary: scripts/pre_configure_source.sh
+                  dependencies:
+                    - scripts/setup.sh
+                    - binaries/library.rpm
+                    - scripts/register.py
+                  operation_host: host
+                  timeout: 3
+            post_configure_source: 
+              implementation: scripts/pre_configure_source.sh
+            mid_configure_source: qskdjq/qsdqsdq/lol.troll
+          notifications:
+            pre_configure_service:
+                description: pre-configure operation for my service
+                implementation:
+                  primary: scripts/pre_configure_source.sh
+                  dependencies:
+                      - scripts/setup.sh
+                      - binaries/library.rpm
+                      - scripts/register.py
+                outputs:
+                  output_1: 
+                    mapping: [out1]
+                  output_2: 
+                    mapping: [out2]
+            post_configure_service:
+                implementation: scripts/pre_configure_source.sh
+
+    storage_attachesto_1:
+      type: MyAttachesTo
+      properties:
+        location: /my_data_location
+      interfaces:
+        some_interface_name:
+          operations:
+            some_operation_name_1: my_script_1.sh
+            some_operation_name_2: my_script_2.sh
+            some_operation_name_3: my_script_3.sh
+      metadata:
+        creation_date: 2022-03-09
+        status: developmental
+        template_version: 1.0.0
+        template_author: Jean-Luc Duvivier
+        template_name: Demo template
+
+    storage_attachesto_2:
+      description: Copy the contents of the “storage_attachesto_1” template into this new one
+      copy: storage_attachesto_1
+      # Then change just the value of the location property
+      properties:
+        location: /some_other_data_location

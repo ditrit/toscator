@@ -1,0 +1,20 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  node_templates:
+    wordpress:
+      type: tosca.nodes.WebApplication.WordPress
+      interfaces:
+        standard:
+          operations:
+            create: wordpress_install.sh
+            configure:
+              implementation: wordpress_configure.sh           
+              inputs:
+                wp_db_port: { get_property: [ SELF, database_endpoint, port ] }
+          inputs:
+            num_cpus: 1
+            disk_size: 10 GB
+            mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
+              description: "host memory"
+              value: 4096 MB

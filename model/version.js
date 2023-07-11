@@ -10,7 +10,7 @@ export class ToscaVersion extends ToscaNode {
     }
     static isValid(input, source) {
         if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Incorrect input for version')
+            //source.ctx.grammarError('Incorrect input for version')
             return false
         } else {
             return true

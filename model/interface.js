@@ -3,6 +3,7 @@ import { ToscaNode } from "./tosca_node.js";
 export class ToscaInterface extends ToscaNode {
    constructor(input, source) {
       super(source);
+      this.type = input.type;
       this.inputs = input.inputs;
       this.operations = input.operations;
       this.notifications = input.notifications;

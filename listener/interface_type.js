@@ -1,7 +1,9 @@
 import { newToscaInterfaceType } from "../model/interface_type.js";
+import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
    exit_interface_types(parsed_rule) {
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule interface_types:+++++++++++++++++++++++++++++++++");
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca.setId(
             key,
@@ -12,18 +14,10 @@ export default {
    },
 
    exit_interface_type(parsed_rule) {
-      const primaryKeys = ["derived_from", "description", "inputs", "metadata"];
-      let inputs = {};
-      let operations = {};
-      for (const key in parsed_rule.value) {
-         if (!primaryKeys.includes(key)) {
-            operations[key] = parsed_rule.value[key].tosca;
-         }
-      }
-      for (const key in parsed_rule.value.inputs.value) {
-         inputs[key] = parsed_rule.value.inputs.value[key].tosca;
-         // inputs.push(parsed_rule.value.inputs.value[key].tosca);
-      }
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule interface_type:+++++++++++++++++++++++++++++++++");
+      const inputs = listener_helpers.propertyMapofHelper("inputs", parsed_rule);
+      const operations = listener_helpers.propertyMapofHelper("operations", parsed_rule);
+      const notifications = listener_helpers.propertyMapofHelper("notifications", parsed_rule);
       newToscaInterfaceType(
          {
             derived_from: parsed_rule.value.derived_from?.value,
@@ -32,6 +26,7 @@ export default {
             metadata: parsed_rule.value.metadata?.tosca,
             inputs: inputs,
             operations: operations,
+            notifications: notifications
          },
          parsed_rule
       );

@@ -1,0 +1,29 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+capability_types:
+  simple_contact_info:
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+    metadata:
+      creation_date: 2022-03-09
+      status: developmental
+      template_version: 1.0.0
+      template_author: Jean-Luc Duvivier
+      template_name: Demo template
+    version: "1.0"
+    description: yolo
+    valid_source_types: [what is that ?, I don't know]
+  
+  full_contact_info:
+    derived_from: simple_contact_info
+    properties:
+      address:
+        type: string
+  
+  
+    

@@ -1,0 +1,22 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+
+  policy_type_name_1:
+    triggers:
+
+      - trigger_def_name_2:
+          event: event_name_2
+          action: 
+            - delegate: sleep
+          condition: {my_attribute2: [{equal: 2}]}
+
+      - trigger_def_name:
+          event: event_name_1
+          action: 
+            - delegate: deploy
+          condition: 
+            constraint: {my_attribute: [{equal: 1}]}
+            period: 5 d
+            evaluations: 18
+            method: methodology

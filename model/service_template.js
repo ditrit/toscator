@@ -14,6 +14,7 @@ export class ToscaServiceTemplate {
         this.group_types = {}
         this.interface_types = {}
         this.policy_types = {}
+        this.topology_template
         // topologies à voir
 
         this.errors = []

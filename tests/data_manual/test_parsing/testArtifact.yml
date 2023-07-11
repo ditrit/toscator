@@ -1,0 +1,94 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: Template for demo.
+
+namespace: http://orness.com/development
+
+metadata:
+   creation_date: 2022-03-09
+   status: developmental
+   template_version: 1.0.0
+   template_author: Jean-Luc Duvivier
+   template_name: Demo template
+
+##### TOSCA NODE_TYPES #####
+node_types:
+   Compute:
+      derived_from: tosca.nodes.Root
+      description: Compute unit
+      version: "1.0"
+      metadata:
+         Virtual: "false"
+
+   Software:
+      derived_from: tosca.nodes.Root
+      properties:
+         num_cpus:
+            type: integer
+            description: Number of CPUs requested for a software node instance.
+            default: 2
+            status: supported
+            required: true
+            entry_schema: Firewall
+            key_schema: 
+               description: listen port entry (simple integer type)
+               type: integer
+               constraints:
+                  - max_length: 128
+            constraints:
+               - less_than: 10
+               - valid_values: [1, 2, 4, 8]
+            metadata:
+               template_version: 1.0.0
+               template_author: Jean-Luc Duvivier
+               template_name: Demo template
+               creation_date: 2022-03-09
+               status: developmental
+
+      artifacts:
+         my_file_artifact: ../my_apps_files/operation_artifact.txt
+
+         sw_image:
+            description: Image for virtual machine
+            type: tosca.artifacts.Deployment.Image.VM
+            file: http://10.10.86.141/images/Juniper_vSRX_15.1x49_D80_preconfigured.qcow2
+            checksum: ba411cafee2f0f702572369da0b765e2
+            version: "3.2"
+            checksum_algorithm: MD5
+            properties:
+               name: vSRX
+               container_format: BARE
+               disk_format: QCOW2
+               min_disk: 1 GB
+               size: 649 MB
+            repository: docker_hub
+            deploy_path: ../my_apps_files/operation_artifact.txt # I just tested a string but it is not a deploy_path
+
+   VM:
+      derived_from: Compute
+      metadata:
+         Virtual: "true"
+      attributes:
+         my_app_port:
+            type: integer
+            description: application port number
+
+   Docker:
+      derived_from: Compute
+      metadata:
+         Virtual: "true"
+artifact_types:
+   my_artifact_type:
+      description: Java Archive artifact type
+      derived_from: tosca.artifact.Root
+      mime_type: application/java-archive
+      file_ext: [jar, bla]
+      properties:
+         id:
+            description: Identifier of the jar
+            type: string
+            required: true
+         creator:
+            description: Vendor of the java implementation on which the jar is based
+            type: string
+            required: false

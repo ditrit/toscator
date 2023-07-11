@@ -1,0 +1,51 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: Template for deploying a single server with predefined properties.
+
+topology_template:
+  node_templates:
+    db_server:
+      type: tosca.nodes.Compute
+      requirements:
+      
+        - host: my_server
+
+        - client: 
+            node: client_computer
+            relationship: simple_relation
+            capability: be annoying
+            occurrences: [2, UNBOUNDED]
+            node_filter: 
+              capabilities:
+                # Constraints for selecting “host” (Container Capability)
+                - host:
+                    properties:
+                      - num_cpus: { in_range: [ 1, 4 ] }
+                      - mem_size: { greater_or_equal: 2 GB }
+              properties:
+                - num_cpus: { in_range: [ 1, 4 ] }
+                - mem_size: { greater_or_equal: 2 GB }
+
+        - fbi: 
+            relationship:
+              type: surveillance
+              properties: 
+                num_cpus: 1
+                disk_size: 10 GB
+                mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
+                  description: "host memory"
+                  value: 4096 MB
+              interfaces: 
+                standard:
+                  operations:
+                    create: wordpress_install.sh
+                    configure:
+                      implementation: wordpress_configure.sh           
+                      inputs:
+                        wp_db_port: { get_property: [ SELF, database_endpoint, port ] }
+                  inputs:
+                    num_cpus: 1
+                    disk_size: 10 GB
+                    mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
+                      description: "host memory"
+                      value: 4096 MB

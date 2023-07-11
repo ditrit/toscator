@@ -9,6 +9,8 @@ export class ToscaNodeType extends ToscaType {
       this.capabilities = input.capabilities;
       this.requirements = input.requirements;
       this.artifacts = input.artifacts;
+      this.interfaces = input.interfaces;
+      //this.wofkflows = input.wofkflows;
    }
 
    static _classname = "node_type";

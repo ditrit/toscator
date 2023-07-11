@@ -15,14 +15,21 @@ import {
 
 export default {
    exit_constraints(parsed_rule) {
-      let constraints = [];
-      parsed_rule.value.map((ele) => constraints.push(ele.tosca));
-      constraints.source = parsed_rule;
-      parsed_rule.tosca = constraints;
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule constraints:+++++++++++++++++++++++++++++++++");
+      //console.log(parsed_rule);
+      if (parsed_rule) {
+         let constraints = [];
+         parsed_rule.value.map((ele) => constraints.push(ele.tosca));
+         constraints.source = parsed_rule;
+         parsed_rule.tosca = constraints;
+      }
    },
+
    exit_constraint(parsed_rule) {
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule constraint:+++++++++++++++++++++++++++++++++");
+      //console.log(parsed_rule);
       let operator, type, value;
-      for (const key in parsed_rule.value) {
+      for (const key in parsed_rule?.value) {
          operator = key;
          type = parsed_rule.value[key].type;
          if (type == "list") {

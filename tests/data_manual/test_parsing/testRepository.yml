@@ -1,0 +1,23 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+repositories:
+  my_project_artifact_repo:
+    description: development repository for TAR archives and Bash scripts
+    url: http://mycompany.com/repository/myproject/
+    credential:
+      protocol: http
+      token_type: basic_auth
+      token: pwd
+  docker_hub: https://registry.hub.docker.com/
+  my_code_repo:
+    description: My project’s code repository in GitHub
+    url: https://github.com/my-project/
+    credential:
+      user: username
+      token: password
+      keys:
+        bla: abl
+        blabla: ablabl
+  my_incredible_code_repo:
+    description: My project’s code repository in GitHub
+    url: https://github.com/my-project/

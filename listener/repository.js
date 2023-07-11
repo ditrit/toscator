@@ -1,28 +1,35 @@
 import { newToscaRepository } from "../model/repository.js"
+import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 function exit_repositories(parsed_rule) {
-    for (const key in parsed_rule.value) {
-        let val = parsed_rule.value[key]
-        let repository
-        let name = key
-        let url = (val.type == 'string') ? val.value : val.value.url.value
-        let description = (val.value.description) ? val.value.description.value : ""
-        let token = (val.value.token) ? val.value.token.value : ""
-        let prototol = (val.value.prototol) ? val.value.prototol.value : ""
-        let token_type = (val.value.token_type) ? val.value.token_type.value : ""
-        let user = (val.value.user) ? val.value.user.value : ""
+    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule repositories:+++++++++++++++++++++++++++++++++");
+    listener_helpers.defMapofHelperSetname(parsed_rule);
+}
 
-        repository = newToscaRepository(
-            {name, 
-            url, 
-            description, 
-            token, 
-            prototol, 
-            token_type, 
-            user}, 
-            val)
-        parsed_rule.ctx.prog.current_service_template.repositories[key] = repository
+function exit_repository(parsed_rule) {
+    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule repository:+++++++++++++++++++++++++++++++++");
+    if (typeof parsed_rule.value === "string") {
+        newToscaRepository({url: parsed_rule.value}, parsed_rule);
+    } else if (parsed_rule.value.credential) {
+        const keys = new Map();
+        for (const key in parsed_rule.value.credential.value.keys?.value) {
+            keys.set(key, parsed_rule.value.credential.value.keys.value[key].value);
+        }
+        newToscaRepository({
+            url: parsed_rule.value.url?.value,
+            description: parsed_rule.value.description?.value,
+            token: parsed_rule.value.credential.value.token?.value,
+            protocol: parsed_rule.value.credential.value.protocol?.value,
+            token_type: parsed_rule.value.credential.value.token_type?.value,
+            user: parsed_rule.value.credential.value.user?.value,
+            keys: keys
+        }, parsed_rule);
+    } else {
+        newToscaRepository({
+            url: parsed_rule.value.url?.value,
+            description: parsed_rule.value.url?.value
+        }, parsed_rule);
     }
 }
 
-export default { exit_repositories }
+export default { exit_repositories, exit_repository }

@@ -1,11 +1,12 @@
 import { ToscaNode } from "./tosca_node.js";
 
-export class OperationDef extends ToscaNode {
+export class ToscaOperationDef extends ToscaNode {
    constructor(input, source) {
       super(source);
       this.description = input.description;
       this.inputs = input.inputs;
-      this.implementation = input.implementation;
+      this.implementation = input.implementation; //is either a name or the entire definition
+      this.outputs = input.outputs;
    }
 
    getClassname() {
@@ -25,10 +26,10 @@ export class OperationDef extends ToscaNode {
    }
 }
 
-export function newOperationDef(input, source) {
+export function newToscaOperationDef(input, source) {
    let res;
-   if (OperationDef.isValid(input, source)) {
-      res = new OperationDef(input, source);
+   if (ToscaOperationDef.isValid(input, source)) {
+      res = new ToscaOperationDef(input, source);
    } else {
       res = {};
    }

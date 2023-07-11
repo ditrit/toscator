@@ -2,8 +2,10 @@ import {
     parse
 } from "../parser/parse.js";
 
-let res = parse("./data/import/loop_import_test.yml")
+// modification du path qui était incorrect : manque du tests
+let res = parse("./tests/data/import/loop_import_test.yml")
 
+console.log('//////////////////////////////// parse ////////////////////////////////');
 if (res.errors.length != 0) {
     console.log("TOSCA ERROR : ");
     res.errors.forEach(e => console.log(e))

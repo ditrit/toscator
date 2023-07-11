@@ -5,7 +5,7 @@ export default {
       newToscaSize(
          {
             type: "size",
-            value: parsed_rule.value,
+            value: parsed_rule?.value,
          },
          parsed_rule
       );

@@ -1,4 +1,4 @@
-import { parse as parse_tosca } from "../schemas/tosca.js";
+import { parse as parse_tosca } from "../schemas/tosca_1_3.js";
 import listener from "../listener/listener.js";
 import { ToscaServiceTemplate } from "../model/service_template.js";
 import { LidyError } from "lidy-js";
@@ -44,7 +44,6 @@ export default function parse_file(file_import, parent_service_template, prog) {
 
       let last_path = prog.last_path;
       let last_repo = prog.last_repo;
-
       res = parse_tosca({
          src_data,
          listener,
@@ -61,7 +60,7 @@ export default function parse_file(file_import, parent_service_template, prog) {
             prog.errors.push(err);
          });
       } else {
-         current_service_template.imports.forEach((fi) => {
+         current_service_template.imports?.forEach((fi) => {
             if (
                !prog.alreadyImported.reduce((x, y) => x || fi.equals(y), false)
             ) {
