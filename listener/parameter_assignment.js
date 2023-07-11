@@ -5,7 +5,6 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 export default {
     exit_parameter_assignment(parsed_rule) {
         console.log("\n+++++++++++++++++++++++++++++++++parsed_rule parameter_assignment:+++++++++++++++++++++++++++++++++");
-        console.log(parsed_rule.type);
         if (parsed_rule.type === "map") { 
             newToscaParameterAssignment({
                 description: parsed_rule.value.description?.value,

@@ -54,5 +54,4 @@ function propertyListofHelperNoname(property_name, parsed_rule) {
     if ( parsed_rule?.value[property_name] ) {
         return parsed_rule.value[property_name].value.map((v) => (v.tosca) ? v.tosca : v.value);
     }
-    return null;
 }

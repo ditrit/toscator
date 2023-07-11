@@ -8,14 +8,11 @@ export default {
 
     exit_property_mapping(parsed_rule) {
         console.log("\n+++++++++++++++++++++++++++++++++parsed_rule property_mapping:+++++++++++++++++++++++++++++++++")
-        console.log(parsed_rule.value)
         if (parsed_rule.value instanceof Array) {
-            console.log('Array')
             newToscaPropertyMapping({
                 mapping: listener_helpers.defListofHelper(false, parsed_rule)
                 }, parsed_rule);
-        } else if (parsed_rule.value instanceof Map) { //can we use parsed_rule.value.type to do the test...?
-            console.log('Map')
+        } else if (parsed_rule.value instanceof Object) { 
             newToscaPropertyMapping({
                 mapping: listener_helpers.propertyListofHelper("mapping", false, parsed_rule),
                 value: parsed_rule.value.value?.value
@@ -23,6 +20,5 @@ export default {
         } else {
             newToscaPropertyMapping({value: parsed_rule.value}, parsed_rule);
         }
-        //console.log(parsed_rule.tosca)
     }
 }

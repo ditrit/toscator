@@ -7,15 +7,16 @@ export default {
     },
 
     exit_capability_mapping(parsed_rule) {
-        if (typeof parsed_rule.value === "array") {
-            let mapping = listener_helpers.defListofHelper(false, parsed_rule);
+        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule capability_mapping:+++++++++++++++++++++++++++++++++")
+        if (parsed_rule.value instanceof Array) {
+            const mapping = listener_helpers.defListofHelper(false, parsed_rule);
             newToscaCapabilityMapping({
                 mapping: mapping,
             }, parsed_rule);
         } else {
-            let mapping = listener_helpers.propertyListofHelper("mapping", false, parsed_rule);
-            let properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
-            let attributes = listener_helpers.propertyMapofHelper("attributes", parsed_rule);
+            const mapping = listener_helpers.propertyListofHelper("mapping", false, parsed_rule);
+            const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
+            const attributes = listener_helpers.propertyMapofHelper("attributes", parsed_rule);
 
             newToscaCapabilityMapping({
                 mapping: mapping,
@@ -23,6 +24,5 @@ export default {
                 attributes: attributes
             }, parsed_rule);
         }
-
     }
 }

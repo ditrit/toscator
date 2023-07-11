@@ -4,7 +4,7 @@ export class ToscaRequirementMapping extends ToscaNode {
     constructor(input, source) {
         super(source);
         this.mapping = input.mapping;
-        this.properties = input.mapping;
+        this.properties = input.properties;
         this.attributes = input.attributes;
     }
 
@@ -14,6 +14,10 @@ export class ToscaRequirementMapping extends ToscaNode {
 
     static isValid(input, source) {
         return true;
+    }
+
+    setName(name) {
+        this.name = name;
     }
 }
 

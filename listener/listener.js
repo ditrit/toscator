@@ -62,6 +62,7 @@ import trigger_def from "./trigger_def.js";
 import workflow_activity_call_operation from "./workflow_activity_call_operation.js";
 import workflow_activity from "./workflow_activity.js";
 import property_mapping from "./property_mapping.js";
+import interface_mapping from "./interface_mapping.js";
 export default {
    ...prog,
    ...imports,
@@ -90,7 +91,7 @@ export default {
    ...notification_implementation,
    ...group_type,
    ...parameter_assignment,
-   //...capability_mapping,
+   ...capability_mapping,
    ...schema_def,
    ...group_def,
    //...imperative_workflow_step,
@@ -98,7 +99,7 @@ export default {
    ...node_template,
    ...policy_def,
    ...relationship_template,
-   //...requirement_mapping,
+   ...requirement_mapping,
    ...substitution_mappings,
    ...target_filter,
    ...workflow_activity_inline,
@@ -126,5 +127,6 @@ export default {
    ...trigger_def,
    ...workflow_activity_call_operation,
    ...workflow_activity,
-   ...property_mapping
+   ...property_mapping,
+   ...interface_mapping
 };

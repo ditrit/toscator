@@ -15,6 +15,10 @@ export class ToscaCapabilityMapping extends ToscaNode{
     static isValid(input, source) {
         return true;
     }
+
+    setName(name) {
+        this.name = name;
+    }
 }
 
 export function newToscaCapabilityMapping(input, source) {

@@ -26,9 +26,5 @@ function defListofHelperName(parsed_rule) {
 }
 
 function defListofHelperNoname(parsed_rule) {
-    let listof = [];
-    parsed_rule.value.forEach(element => {
-        listof.push(element);
-    });
-    return listof;
+    return parsed_rule.value.map((e) => (e.tosca) ? e.tosca : e.value);
 }

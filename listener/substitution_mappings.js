@@ -11,7 +11,7 @@ export default {
 
         newToscaSubstitutionMapping({
             node_type: parsed_rule.value.node_type?.value,
-            substitution_filter: parsed_rule.value.substitution_filter?.value,
+            substitution_filter: parsed_rule.value.substitution_filter?.tosca,
             properties: properties,
             capabilities: capabilities,
             requirements: requirements,
@@ -19,5 +19,6 @@ export default {
             interfaces: interfaces
 
         }, parsed_rule);
+        console.log(parsed_rule.tosca)
     }
 }
