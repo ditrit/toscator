@@ -5,7 +5,7 @@ export class ToscaCapabilityType extends ToscaType {
       super(input, source);
       this.attributes = input.attributes;
       this.properties = input.properties;
-      //   this.valid_source_types = input.valid_source_types; // requires a secondary verification
+      this.valid_source_types = input.valid_source_types; // requires a secondary verification
    }
 
    static _classname = "capability_type";

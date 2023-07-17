@@ -55,6 +55,7 @@ node_types:
       derived_from: Compute
       metadata:
          Virtual: "true"
+
 interface_types:
    mycompany.mytypes.myinterfaces.MyConfigure:
       derived_from: tosca.interfaces.relationship.Root
@@ -62,15 +63,16 @@ interface_types:
       inputs:
          mode:
             type: string
-      # notifications:
-
-      pre_configure_service:
-        description: pre-configure operation for my service
-        implementation:
-          primary: scripts/pre_configure_source.sh
-          dependencies:
-            - scripts/setup.sh
-            - binaries/library.rpm
-            - scripts/register.py
-      post_configure_service:
-        description: post-configure operation for my service
+      notifications:
+         pre_configure_service:
+            description: pre-configure operation for my service
+            implementation:
+               primary: scripts/pre_configure_source.sh
+               dependencies:
+                  - scripts/setup.sh
+                  - binaries/library.rpm
+                  - scripts/register.py
+            #outputs:
+         post_configure_service:
+            implementation: scripts/pre_configure_source.sh
+      #operations:

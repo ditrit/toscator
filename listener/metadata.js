@@ -2,6 +2,7 @@ import { newToscaMetadata, newMetadataLeaf } from "../model/metadata.js";
 
 export default {
     exit_metadata(parsed_rule) {
+        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule metadata:+++++++++++++++++++++++++++++++++");
         let leafs = []
         
         for (const key in parsed_rule.value) {

@@ -12,15 +12,23 @@ export class ToscaSize extends ToscaScalar {
    }
 
    static isvalid(input, source) {
+      /* creates a bug if source = null (which can happen in a _oneof for example)
+         and is useless since lidy already does the regex check
+      
       let regex =
          / ([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z][a-zA-Z]B/i;
       if (!regex.test(input.value.trim())) {
          source.ctx.grammarError(`Type size could not be created.`);
          return false;
       }
-      return true;
+      return true;*/
+
+      if (source) {
+         return true;
+      } 
+      return false;
    }
-   consetNormalizedValuevertValue() {
+   setNormalizedValue() {
       let value = this.value
          .trim()
          .match(/([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))? /i)[0];

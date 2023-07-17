@@ -3,6 +3,8 @@ import {
 } from '../model/imports.js'
 
 function exit_imports(parsed_rule) {
+    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule imports:+++++++++++++++++++++++++++++++++");
+    //console.log(parsed_rule);
     parsed_rule.value.forEach(val => {
         let newImport;
         let file = (val.type == 'string') ? val.value : val.value.file.value

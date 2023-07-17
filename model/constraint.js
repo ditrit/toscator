@@ -17,8 +17,8 @@ let value = [
    "timestamp",
    "string",
 ];
-
-export class ToscaConstraints extends ToscaNode {
+// What is the use of this class...?
+export class ToscaConstraints extends ToscaNode { 
    constructor(input, source) {
       super(source);
       this.value = input.value;

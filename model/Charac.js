@@ -4,10 +4,12 @@ import { ToscaNode } from "./tosca_node.js";
 export class Charac extends ToscaNode {
    constructor(input, source) {
       super(source);
+      this.description = input.description;
       this.type = input.type;
       this.default = input.default;
       this.status = input.status;
-      this.metadata = input.metadata;
+      this.entry_schema = input.entry_schema;
+      this.key_schema = input.key_schema;
       this.name = input.name;
    }
    static statusValues = [
@@ -15,7 +17,7 @@ export class Charac extends ToscaNode {
       "unsupported",
       "experimental",
       "deprecated",
-      "optional",
+      //"optional",
    ];
 
    static isValid(input, source) {
@@ -53,13 +55,17 @@ export class Charac extends ToscaNode {
       let res = true;
       let constraints = input.type.constraints;
       // TO DO reduce, every: constraints.every((constraint)=> constraint.tosca.check(value))
-      constraints.forEach((ele) => {
+      constraints?.forEach((ele) => {
          if (!ele.eval(value)) {
             res = false;
          }
       });
       return res;
    }
+
+   setName(name) {
+      this.name = name;
+  }
 }
 
 export function newCharac(input, source) {

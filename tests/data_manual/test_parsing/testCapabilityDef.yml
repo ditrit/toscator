@@ -1,0 +1,17 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  Compute:
+    description: Compute unit
+    capabilities:
+      capability_def_name_1: capability_def_1
+      capability_def_name_2:
+        type: capability_type
+        description: description
+        properties:
+          ppty_1: 
+            type: ppty_type
+          ppty_2: 
+            type: ppty_type
+        valid_source_types: [bla, bla2]
+        occurrences: [2, 7]

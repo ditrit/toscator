@@ -5,7 +5,9 @@ export class ToscaDataType extends ToscaType {
    constructor(input, source) {
       super(input, source);
       this.properties = input.properties;
+      this.constraints = input.constraints;
       this.key_schema = input.key_schema;
+      this.entry_schema = input.entry_schema;
    }
 
    static _classname = "data_type";

@@ -11,14 +11,20 @@ export class ToscaBitrate extends ToscaScalar {
       );
    }
    static isValid(input, source) {
+      /* creates a bug when source == null which can happen (in a _oneOf for example) 
+      and is useless since lidy already does the regex check
+      
       let regex =
          /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+ (B|b)ps/i;
       if (!regex.test(input.value.trim())) {
          source.ctx.grammarError(`Type bitrate could not be created.`);
 
          return false;
+      }*/
+      if (source) {
+         return true;
       }
-      return true;
+      return false;
    }
    setNormalizedValue() {
       let value = this.value

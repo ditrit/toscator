@@ -1,0 +1,46 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  substitution_mappings:
+    node_type: node_type
+    requirements:
+      database_endpoint: [ database, database_endpoint ]
+      req_nam2:
+        mapping: [Ah, Oh]
+        properties:
+          ppty_assignment: value
+        attributes:
+          num_cpus: 1
+    properties: 
+      ppty1: ppty_value
+      ppty2: [input_name]
+    capabilities:
+      database_endpoint: [ database, database_endpoint ]
+    interfaces: 
+      interface1:
+        ope1: wf1
+      interface2:
+        ope2: wf2
+    attributes:
+      output_1: 
+        mapping: [out1]
+      output_2: 
+        mapping: [out2]
+    substitution_filter:
+      capabilities:
+        # Constraints for selecting “host” (Container Capability)
+        - host:
+            properties:
+              - num_cpus: { in_range: [ 1, 4 ] }
+              - mem_size: { greater_or_equal: 2 GB }
+        # Constraints for selecting “os” (OperatingSystem Capability)
+        - os:
+            properties:
+              - architecture: 
+                - greater_or_equal: 10 Kbps
+                - in_range: [ 1, 4 ]
+              - type: linux
+              - distribution: ubuntu
+      properties:
+        - num_cpus: { in_range: [ 1, 4 ] }
+        - mem_size: { greater_or_equal: 2 GB }

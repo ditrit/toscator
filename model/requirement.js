@@ -4,7 +4,6 @@ export class ToscaRequirement extends ToscaNode {
    constructor(input, source) {
       super(source);
       this.capability = input.capability;
-      this.description = input.description;
       this.node = input.node;
       this.occurences = input.occurences;
       this.relationship = input.relationship;

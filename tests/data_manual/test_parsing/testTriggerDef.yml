@@ -1,0 +1,22 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+policy_types:
+  mycompany.mytypes.myScalingPolicy:
+    derived_from: tosca.policies.Scaling
+
+  policy_type_name:
+    triggers:
+      - trigger_def_name:
+          event: event_name
+          action: 
+            - delegate: deploy
+          description: policy type description
+          schedule: 
+            start_time: 2016-04-15T00:00:00Z
+            end_time: 2016-04-08T21:59:43.10-06:00
+          target_filter:
+            node: compute
+            requirement: req_name
+            capability: cap_name
+          condition: {my_attribute: [{equal: 1}]}
+  

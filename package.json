@@ -13,7 +13,9 @@
   "dependencies": {
     "ajv": "^8.11.0",
     "lidy-js": "git+https://github.com/ditrit/lidy-js.git#main",
-    "regex": "^0.1.1"
+    "regex": "^0.1.1",
+    "sync-request": "^6.1.0",
+    "toscator": "github:ditrit/toscator#jest-tests"
   },
   "repository": {
     "type": "git",
@@ -32,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/ditrit/toscator/issues"
   },
-  "homepage": "https://github.com/ditrit/toscator#readme"
+  "homepage": "https://github.com/ditrit/toscator#readme",
+  "devDependencies": {
+    "jasmine": "^5.0.1"
+  }
 }

@@ -20,19 +20,21 @@ node_types:
       metadata:
          Virtual: "false"
 
-   Software:
-      derived_from: tosca.nodes.Root
-      properties:
-         num_cpus:
-            type: integer
-            description: Number of CPUs requested for a software node instance.
-            default: 2
-            required: true
-            constraints:
-               - less_than: 10
-               - valid_values: [1, 2, 4, 8]
 group_types:
    mycompany.mytypes.groups.placement:
       derived_from: tosca.policies.Root
       description: My company’s group type for placing nodes of type Compute
       members: [tosca.nodes.Compute]
+      attributes:
+         my_app_port:
+            type: integer
+            description: application port number
+      properties:
+         id:
+            description: Identifier of the jar
+            type: string
+            required: true
+         creator:
+            description: Vendor of the java implementation on which the jar is based
+            type: string
+            required: false

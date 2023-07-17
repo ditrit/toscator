@@ -1,33 +1,19 @@
 import { newToscaGroupType } from "../model/group_type.js";
+import listener_helpers from "./listener_helpers/listener_helpers.js"
 
 export default {
    exit_group_types(parsed_rule) {
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule group_types:+++++++++++++++++++++++++++++++++");
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca?.setId(key, parsed_rule, "group_types");
       }
    },
 
    exit_group_type(parsed_rule) {
-      let properties = new Map();
-      let capabilities = new Map();
-      let requirements = new Map();
-      let interfaces = new Map();
-      let members = [];
-      for (const key in parsed_rule.value.properties?.value) {
-         properties[key] = parsed_rule.value.properties.value[key].tosca;
-      }
-      for (const key in parsed_rule.value.capabilities?.value) {
-         capabilities[key] = parsed_rule.value.capabilities.value[key].tosca;
-      }
-      for (const key in parsed_rule.value.requirements?.value) {
-         requirements[key] = parsed_rule.value.requirements.value[key].tosca;
-      }
-      for (const key in parsed_rule.value.interfaces?.value) {
-         interfaces[key] = parsed_rule.value.interfaces.value[key].tosca;
-      }
-      for (const key in parsed_rule.value.members?.value) {
-         members.push(parsed_rule.value.members.value[key].value);
-      }
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule group_type:+++++++++++++++++++++++++++++++++");
+      const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
+      const attributes = listener_helpers.propertyMapofHelper("attributes", parsed_rule);
+      const members = listener_helpers.propertyListofHelper("members", false, parsed_rule);
 
       newToscaGroupType(
          {
@@ -36,12 +22,11 @@ export default {
             description: parsed_rule.value.description?.value,
             metadata: parsed_rule.value.metadata?.tosca,
             properties: properties,
-            capabilities: capabilities,
-            requirements: requirements,
-            interfaces: interfaces,
+            attributes: attributes,
             members: members,
          },
          parsed_rule
       );
+      console.log(parsed_rule.tosca)
    },
 };

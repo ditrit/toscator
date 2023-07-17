@@ -4,9 +4,7 @@ export class ToscaGroupType extends ToscaType {
    constructor(input, source) {
       super(input, source);
       this.properties = input.properties;
-      this.capabilities = input.capabilities;
-      this.requirements = input.requirements;
-      this.interfaces = input.interfaces;
+      this.attributes = input.attributes;
       this.members = input.members;
    }
 

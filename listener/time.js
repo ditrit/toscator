@@ -4,7 +4,7 @@ export default {
       newToscaTime(
          {
             type: "time",
-            value: parsed_rule.value,
+            value: parsed_rule?.value,
          },
          parsed_rule
       );

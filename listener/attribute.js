@@ -3,34 +3,23 @@ import deal_deftype from "../listener/def_type.js";
 
 export default {
    exit_attributes(parsed_rule) {
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule attributes:+++++++++++++++++++++++++++++++++");
+      //console.log(parsed_rule);
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca?.setName(key);
       }
    },
 
    exit_attribute(parsed_rule) {
-      let deftype = deal_deftype(parsed_rule);
-
-      // let version = parsed_rule.value.version
-      //    ? parsed_rule.value.version.value
-      //    : null;
-
-      let default_var = parsed_rule.value.default
-         ? parsed_rule.value.default.tosca
-            ? parsed_rule.value.default.tosca
-            : parsed_rule.value.default.value
-         : null; // TO DO En fonction du type
-      let status = parsed_rule.value.status
-         ? parsed_rule.value.status.value
-         : null;
-
+      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule attribute:+++++++++++++++++++++++++++++++++");
       newToscaAttribute(
          {
-            type: deftype,
-            // version: version,
-            // required: required,
-            default: default_var,
-            status: status,
+            type: parsed_rule.value.type?.value,
+            description: parsed_rule.value.description?.value,
+            default: (parsed_rule.value.default?.tosca) ? parsed_rule.value.default?.tosca : parsed_rule.value.default?.value,
+            status: parsed_rule.value.status?.value,
+            entry_schema: parsed_rule.value.entry_schema?.tosca,
+            key_schema: parsed_rule.value.key_schema?.tosca
          },
          parsed_rule
       );

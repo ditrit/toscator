@@ -23,10 +23,6 @@ export class ToscaAttribute extends Charac {
 
       return res;
    }
-
-   setName(name) {
-      this.name = name;
-   }
 }
 
 export function newToscaAttribute(input, source) {

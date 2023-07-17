@@ -3,14 +3,14 @@ import { ToscaNode } from "./tosca_node.js"
 export class ToscaRepository extends ToscaNode {
     constructor(input, source) {
         super(source)
-        this.name = input.name
-        this.url = input.url
-        this.description = input.description
+        this.url = input.url;
+        this.description = input.description;
         if(input.token) { // creation of credential object
-            this.token = input.token
-            this.prototol = input.prototol
-            this.token_type = input.token_type
-            this.user = input.user
+            this.token = input.token;
+            this.protocol = input.protocol;
+            this.token_type = (input.token_type) ? input.token_type : "password";
+            this.user = input.user;
+            this.keys = input.keys;
         }
     }
     toString() {
@@ -18,19 +18,10 @@ export class ToscaRepository extends ToscaNode {
         // return `test: ${this.url}`
     }
     static isValid(input, source) {
-        if(typeof(input.name) != 'string' ||
-           input.name == "" ||
-           typeof(input.url) != 'string' ||
-           typeof(input.description) != 'string' ||
-           typeof(input.token) != 'string' ||
-           typeof(input.prototol) != 'string' ||
-           typeof(input.token_type) != 'string' ||
-           typeof(input.user) != 'string') {
-
-            source.ctx.grammarError('Incorrect input for repository')
-            return false
+        if (input && source) {
+            return true;
         }
-        return true
+        return false;
     }
     getFullUrl() {
         let res
@@ -39,6 +30,10 @@ export class ToscaRepository extends ToscaNode {
         if(this.token) { res+= `${this.token}@`}
         res += url
         return res
+    }
+
+    setName(name) {
+        this.name = name;
     }
 }
 
