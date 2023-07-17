@@ -1,5 +1,5 @@
+import { ToscaServiceTemplate } from "./service_template.js"
 import { ToscaNode } from "./tosca_node.js"
-
 
 export class ToscaType extends ToscaNode {
     constructor(input, source) {
@@ -25,28 +25,11 @@ export class ToscaType extends ToscaNode {
         } else {
             current_st[category][namespace_name + "/" + name] = this
         }
-
+        
         // dans le parent_st
         // si namspace_uri alors namespace = namespace_uri
         // sinon namespace = namespace
-        let namespace = (current_st.ns_uri) ? current_st.ns_uri : namespace_name
-        if (parent_st) {
-            if (parent_st[category][namespace + "/" + name]) {
-                parsed_rule.ctx.grammarError('Type collision : ');
-                console.log("Erreur de collision de type");
-            } else {
-                parent_st[category][namespace + "/" + name] = this
-
-            }
-            if (current_st.ns_prefix) {
-                if (parent_st[category][current_st.ns_prefix + "." + name]) {
-                    parsed_rule.ctx.grammarError('Type collision : ')
-                    console.log("Erreur de collision de type");
-                } else {
-                    parent_st[category][current_st.ns_prefix + "." + name] = this
-                }
-            }
-        }
+        exportToParentTemplate(parent_st, current_st, parsed_rule, category, name);
     }
 
 
@@ -65,6 +48,36 @@ export class ToscaType extends ToscaNode {
         }
         return false;
     }
+}
+
+/**
+ * exportToParentTemplate exports the types present in the 
+ * current_service_template to the parent_service_template
+ * @param {ToscaServiceTemplate} pst = parent_service_template
+ * @param {ToscaServiceTemplate} cst = current_service_template
+ * @param {AST} parsed_rule 
+ * @param {string} ctg = "<class>_types"
+ * @param {string} name = "node_type_name"
+ */
+function exportToParentTemplate(pst, cst, parsed_rule, ctg, name) {
+    let namespace = (cst.ns_uri) ? cst.ns_uri : cst.namespace.value
+        if (pst) {
+            if (pst[ctg][namespace + "/" + name]) {
+                parsed_rule.ctx.grammarError('Type collision : ');
+                console.log("Erreur de collision de type");
+            } else {
+                pst[ctg][namespace + "/" + name] = this
+
+            }
+            if (cst.ns_prefix) {
+                if (pst[ctg][cst.ns_prefix + "." + name]) {
+                    parsed_rule.ctx.grammarError('Type collision : ')
+                    console.log("Erreur de collision de type");
+                } else {
+                    pst[ctg][cst.ns_prefix + "." + name] = this
+                }
+            }
+        }
 }
 
 export function newToscaType(input, source) {

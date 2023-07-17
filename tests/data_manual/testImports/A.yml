@@ -17,10 +17,10 @@ imports:
     namespace_prefix: Alias1
     namespace_uri: http://uri1
  
-  - file: ./B3.yml
-    namespace_uri: http://Uri2
+#  - file: ./B3.yml
+#    namespace_uri: http://Uri2
   
-  # - ./B3.yml
+#  - ./B3.yml
 
 ############################
 ##### TOSCA NODE_TYPES #####
@@ -35,10 +35,10 @@ node_types:
   #   derived_from: tosca.nodes.Root
   #   description: present 1 time
 
-  A.tosca.nodes.DBMS: 
-    derived_from: tosca.nodes.Root
-    description: present 2 time
+#  A.tosca.nodes.DBMS: 
+#    derived_from: tosca.nodes.Root
+#    description: present 2 time
 
-  A.Tosca.nodes.DBMS.Mysql: 
-    derived_from: tosca.nodes.Root
-    description: present 2 times
+#  A.Tosca.nodes.DBMS.Mysql: 
+#    derived_from: tosca.nodes.Root
+#    description: present 2 times

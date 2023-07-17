@@ -38,7 +38,7 @@ export default function parse_file(file_import, parent_service_template, prog) {
       current_service_template.ns_prefix = namespace_prefix
          ? namespace_prefix
          : "";
-
+      // this isn't enough for deep importations
       prog.current_parent_service_template = parent_service_template;
       prog.current_service_template = current_service_template;
 
@@ -61,9 +61,8 @@ export default function parse_file(file_import, parent_service_template, prog) {
          });
       } else {
          current_service_template.imports?.forEach((fi) => {
-            if (
-               !prog.alreadyImported.reduce((x, y) => x || fi.equals(y), false)
-            ) {
+            // if it hasn't already been imported, then parse it
+            if (!prog.alreadyImported.reduce((x, y) => x || fi.equals(y), false)) {
                fi.last_path = last_path;
                fi.last_repo = last_repo;
                parse_file(fi, current_service_template, prog);

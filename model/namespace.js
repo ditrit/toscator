@@ -13,6 +13,12 @@ export class ToscaNamespace extends ToscaNode {
             source.ctx.grammarError('Incorrect input for namespace')
             return false
         }
+
+        if (input.match('http://docs.oasis-open.org/tosca')) {
+            source.ctx.grammarError('Incorrect input for namespace:\nthis namespace is reserved for TOSCA approved work product');
+            return false;
+        }
+
         return true
     }
 }

@@ -27,5 +27,10 @@ import {parse} from "../parser/parse.js";
 //const res = parse('./tests/data_manual/test_parsing/testCapabilityMapping.yml');
 //const res = parse('./tests/data_manual/test_parsing/testRequirementMapping.yml');
 //const res = parse('./tests/data_manual/test_parsing/testInterfaceMapping.yml');
-const res = parse('./tests/data_manual/test_parsing/testSubstitutionMapping.yml');
+//const res = parse('./tests/data_manual/test_parsing/testSubstitutionMapping.yml');
+//const res = parse('./tests/data_manual/testImports/serviceTemplateA.yml');
 
+const res = parse('./tests/data_manual/testImports/A.yml');
+
+//console.log(res.errors)
+console.log(res.service_templates)

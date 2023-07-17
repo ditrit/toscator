@@ -125,7 +125,7 @@ value_expression.get_artifact:
 
 import:
    _oneOf:
-      - _listOf: string
+      - string
       - import.target
 
 import.target:
