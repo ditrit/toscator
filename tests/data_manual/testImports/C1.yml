@@ -13,8 +13,9 @@ metadata:
   template_name: My service template
 
 
-#imports: 
-#  - ./D1.yml
+imports: 
+  - ./D1.yml
+
 ############################
 ##### TOSCA NODE_TYPES #####
 ############################

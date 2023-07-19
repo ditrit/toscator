@@ -34,6 +34,28 @@ export class ToscaNodeType extends ToscaType {
       }
       return true;
    }
+   /**
+    * make a deep copy but only for the first layer... (how do I explain that ? XD)
+    * @returns {ToscaNodeType} a semi shallow copy...
+    */
+   copy() {
+      const copy = newToscaNodeType({
+         properties: this.properties,
+         attributes: this.attributes,
+         capabilities: this.capabilities,
+         requirements: this.requirements,
+         artifacts: this.artifacts,
+         interfaces: this.interfaces,
+         
+      }, this.source);
+      if (this.name) {
+         copy.name = this.name;
+      }
+      if (this.getNameCategory()) {
+         copy.setNameCategory(this.getNameCategory());
+      }
+      return copy
+   }
 }
 
 export function newToscaNodeType(input, source) {

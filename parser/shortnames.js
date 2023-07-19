@@ -3,13 +3,11 @@ export default function set_shortnames(prog) {
         let current_namespace = cst.namespace.value;
 
         // pour chaque categorie de type
-        ["node_types"].forEach(category => {
+        ["node_types"].forEach(category => { //add the other attributes of service_template to the liste
             // RefNomCourt={}
             let short_names = {}
             // Pour chaque Ref dans Refs :
-            for (const idx in cst[category]) {
-                if (idx.endsWith("pouet")) {
-                }
+            for (const idx in cst[category]) { // ctg = <>_types ==>  idx is a <>_type_name 
                 let idxParts = idx.substring(idx.lastIndexOf('/') + 1).split('.')
                 let idxNamespace = idx.substring(0, idx.lastIndexOf('/'))
                 // pour NomCourt depuis la fin jusqu'au debut de Ref per '.'
@@ -20,7 +18,7 @@ export default function set_shortnames(prog) {
                         // Calcul nombre de référence
                         let shortNameRefs = Object.keys(cst[category]).filter(ele => ele.endsWith(subIdx))
                         let nb = Object.keys(shortNameRefs).length
-                        // si une seule référence pour NomCourt
+                        // si une seule référence pour NomCourt              Allows to avoid name conflict
                         if (nb == 1) {
                             // alors ajouter NomCourt en RefsNomCourt
                             short_names[subIdx] = cst[category][idx]

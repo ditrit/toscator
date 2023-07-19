@@ -33,4 +33,5 @@ import {parse} from "../parser/parse.js";
 const res = parse('./tests/data_manual/testImports/A.yml');
 
 //console.log(res.errors)
-console.log(res.service_templates)
+//console.log(res.service_templates)
+//console.log(res)
