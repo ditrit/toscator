@@ -6,7 +6,7 @@ import fs from "fs";
 import path_mod from "path";
 import request from "sync-request";
 import { ToscaImport } from "../model/imports.js";
-import { localNames, exportToParent } from "./namespace.js";
+import { localNames, exportToParent, getRidOfNameCtg } from "./namespace.js";
 
 export default function parse_file(file_import, parent_service_template, prog) {
    let src_data, res;
@@ -101,6 +101,9 @@ export function parseWithImports(file_import, parent_service_template, prog) {
    if (parent_service_template) {
       exportToParent(file_import, parent_service_template, current_service_template);
       // TO DO: get rid of name_category attribute of ..._type ? (delete the value to save space)
+   } else {
+      // since we don't need the name_ctg anymore we return to the old (and correct) structure of ToscaServiceTemplate
+      getRidOfNameCtg(current_service_template);
    }
    console.log("////////////////////////////// cst: " + current_service_template.origin_file + " //////////////////////////////")
    console.log(current_service_template)

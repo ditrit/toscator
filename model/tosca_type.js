@@ -48,18 +48,6 @@ export class ToscaType extends ToscaNode {
         }
         return false;
     }
-
-    /**
-     * set the name_category to help exporting 
-     * @param {String} name_ctg = name_category expects a value in: [prefix, default_ns_uri, import_ns_uri, short_name, full_name]
-     */
-    setNameCategory(name_ctg) {
-        this.name_category = name_ctg;
-    }
-
-    getNameCategory() {
-        return this.name_category;
-    }
 }
 
 /**
