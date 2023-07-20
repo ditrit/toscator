@@ -10,8 +10,6 @@ export class ToscaType extends ToscaNode {
         this.description = input.description
     }
 
-
-
     setId(name, parsed_rule, category) {
         let current_st = parsed_rule.ctx.prog.current_service_template
         this.name = name
@@ -44,36 +42,6 @@ export class ToscaType extends ToscaNode {
         }
         return false;
     }
-}
-
-/**
- * exportToParentTemplate exports the types present in the 
- * current_service_template to the parent_service_template
- * @param {ToscaServiceTemplate} pst = parent_service_template
- * @param {ToscaServiceTemplate} cst = current_service_template
- * @param {AST} parsed_rule 
- * @param {string} ctg = "<class>_types"
- * @param {string} name = "node_type_name"
- */
-function exportToParentTemplate(pst, cst, parsed_rule, ctg, name) {
-    let namespace = (cst.ns_uri) ? cst.ns_uri : cst.namespace.value
-        if (pst) {
-            if (pst[ctg][namespace + "/" + name]) {
-                parsed_rule.ctx.grammarError('Type collision : ');
-                console.log("Erreur de collision de type");
-            } else {
-                pst[ctg][namespace + "/" + name] = this
-
-            }
-            if (cst.ns_prefix) {
-                if (pst[ctg][cst.ns_prefix + "." + name]) {
-                    parsed_rule.ctx.grammarError('Type collision : ')
-                    console.log("Erreur de collision de type");
-                } else {
-                    pst[ctg][cst.ns_prefix + "." + name] = this
-                }
-            }
-        }
 }
 
 export function newToscaType(input, source) {
