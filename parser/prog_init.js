@@ -56,7 +56,6 @@ export function parseWithImports(file_import, parent_service_template, prog, imp
  * @returns {ToscaServiceTemplate} parsed file
  */
 function simpleParse(listener, prog, file) {
-   // TO DO: get rid of prog
    let src_data;
    let f_path = file.path;
    let namespace_uri = file.namespace_uri;
@@ -67,7 +66,7 @@ function simpleParse(listener, prog, file) {
             src_data = request("GET", f_path).getBody().toString();
          } catch (error) {
             prog.errors.push(
-               new LidyError("File error", 0, `Can not read file ${_fpath}`)
+               new LidyError("File error", 0, `Can not read file ${f_path}`)
             );
             return null;
          }
@@ -99,7 +98,7 @@ function simpleParse(listener, prog, file) {
 
    } else {
       prog.errors.push(
-         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${fpath}`)
+         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${f_path}`)
       );
       console.log(prog.errors.map((x) => x.message));
    }
