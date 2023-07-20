@@ -3,10 +3,10 @@ import listener from "../listener/listener.js";
 import { ToscaServiceTemplate } from "../model/service_template.js";
 import { LidyError } from "lidy-js";
 import fs from "fs";
-import path_mod from "path";
 import request from "sync-request";
 import { ToscaImport } from "../model/imports.js";
 import { localNames, exportToParent, getRidOfNameCtg } from "./namespace.js";
+import path from "path";
 
 export default function parse_file(file_import, parent_service_template, prog) {
    let src_data, res;
@@ -82,31 +82,44 @@ export default function parse_file(file_import, parent_service_template, prog) {
 
 
 
-
-export function parseWithImports(file_import, parent_service_template, prog) {
+/**
+ * Parse the current_service_template
+ * Import the service templates to import
+ * Export the current_service_template to the parent if it exists
+ * @param {ToscaImport} file_import = file to import that will become the current_service_template
+ * @param {ToscaServiceTemplate} parent_service_template = service template importing the current_service_template
+ * @param {*} prog 
+ * @param {Array<String>} import_branch = list of the files imported in the current recursive branch
+ * @returns 
+ */
+export function parseWithImports(file_import, parent_service_template, prog, import_branch) {
    const current_service_template = simpleParse(listener, prog, file_import);
    // TO DO: const errors = prog.errors;
 
    localNames(current_service_template);
+
    const last_path = prog.last_path;
    const last_repo = prog.last_repo;
    current_service_template.imports?.forEach((file_imp) => {
-      // if it hasn't already been imported, then parse it
-      // TO DO: prevent importation cycling
-      file_imp.last_path = last_path;
-      file_imp.last_repo = last_repo;
-      parseWithImports(file_imp, current_service_template, prog); 
+      // if it hasn't already been imported in this import_branch, then parse it
+      if (!import_branch.includes(file_imp.path)) {
+         file_imp.last_path = last_path; // necessary ?
+         file_imp.last_repo = last_repo;
+         const new_import_branch = JSON.parse(JSON.stringify(import_branch));
+         new_import_branch.push(file_imp.path);
+         parseWithImports(file_imp, current_service_template, prog, new_import_branch); 
+      }
    });
 
    if (parent_service_template) {
       exportToParent(file_import, parent_service_template, current_service_template);
-      // TO DO: get rid of name_category attribute of ..._type ? (delete the value to save space)
    } else {
       // since we don't need the name_ctg anymore we return to the old (and correct) structure of ToscaServiceTemplate
       getRidOfNameCtg(current_service_template);
    }
    console.log("////////////////////////////// cst: " + current_service_template.origin_file + " //////////////////////////////")
-   console.log(current_service_template)
+   //console.log(current_service_template)
+   console.log(import_branch);
    return current_service_template;
 }
 
@@ -120,25 +133,25 @@ export function parseWithImports(file_import, parent_service_template, prog) {
 function simpleParse(listener, prog, file) {
    // TO DO: get rid of prog
    let src_data;
-   let path = file.path;
+   let fpath = file.path;
    let namespace_uri = file.namespace_uri;
    let namespace_prefix = file.namespace_prefix;
-   if (typeof path == "string") {
-      if (path.slice(0, 4) == "http") {
+   if (typeof fpath == "string") {
+      if (fpath.slice(0, 4) == "http") {
          try {
-            src_data = request("GET", path).getBody().toString();
+            src_data = request("GET", fpath).getBody().toString();
          } catch (error) {
             prog.errors.push(
-               new LidyError("File error", 0, `Can not read file ${path}`)
+               new LidyError("File error", 0, `Can not read file ${fpath}`)
             );
             return null;
          }
       } else {
          try {
-            src_data = fs.readFileSync(path, "utf8");
+            src_data = fs.readFileSync(fpath, "utf8");
          } catch (error) {
             prog.errors.push(
-               new LidyError("File error", 0, `Can not read file ${path}`)
+               new LidyError("File error", 0, `Can not read file ${fpath}`)
             );
             return null;
          }
@@ -157,13 +170,13 @@ function simpleParse(listener, prog, file) {
          src_data,
          listener,
          prog,
-         path,
+         fpath,
       });
       return current_service_template;
 
    } else {
       prog.errors.push(
-         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${path}`)
+         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${fpath}`)
       );
       console.log(prog.errors.map((x) => x.message));
    }

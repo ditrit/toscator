@@ -20,8 +20,5 @@ export function parse(src) {
         ctx: ctx
     })
 
-    //parse_file(init_import, null, prog)
-    //set_shortnames(prog)
-    return parseWithImports(init_import, null, prog);
-    //return prog
+    return parseWithImports(init_import, null, prog, [init_import.path]);
 }

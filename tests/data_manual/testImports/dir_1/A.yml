@@ -11,23 +11,23 @@ metadata:
   template_name: My service template
 
 imports:
-  - ./B1.yml
+  - "./B1.yml"
 
   - file: ./B2.yml
     namespace_prefix: Alias1
     namespace_uri: http://uri1
+
+  - ./sub_dir/B3.yml
  
 #  - file: ./B3.yml
 #    namespace_uri: http://Uri2
   
-#  - ./B3.yml
-
 ############################
 ##### TOSCA NODE_TYPES #####
 ############################
 node_types:
   
-  A.tosca.nodes.Compute: 
+  A.tosca.nodes.compute: 
     derived_from: tosca.nodes.Root
     description: present
 

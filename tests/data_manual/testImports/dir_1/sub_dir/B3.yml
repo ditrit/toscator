@@ -12,6 +12,9 @@ metadata:
   template_author: Jean-Luc Duvivier
   template_name: My service template
 
+imports:
+  - ./B2.yml
+
 ############################
 ##### TOSCA NODE_TYPES #####
 ############################

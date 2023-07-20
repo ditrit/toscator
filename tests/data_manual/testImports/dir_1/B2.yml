@@ -12,6 +12,7 @@ metadata:
 
 imports: 
   - C1.yml
+  - "./sub_dir/B3.yml"
 ############################
 ##### TOSCA NODE_TYPES #####
 ############################
