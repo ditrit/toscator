@@ -14,11 +14,11 @@ export class ToscaType extends ToscaNode {
 
     setId(name, parsed_rule, category) {
         let current_st = parsed_rule.ctx.prog.current_service_template
-        let parent_st = parsed_rule.ctx.prog.current_parent_service_template
         this.name = name
         let namespace_name = current_st.namespace.value
 
         // dans le current_st
+        // Note: this part is probably useless since there shoudln't be any collisions inside the same template thanks to lidy
         if (current_st[category][namespace_name + "/" + name]) {
             parsed_rule.ctx.grammarError('Type collision : ' + this.import_id)
             console.log("Erreur de collision de type");
@@ -26,10 +26,6 @@ export class ToscaType extends ToscaNode {
             current_st[category][namespace_name + "/" + name] = this
         }
         
-        // dans le parent_st
-        // si namspace_uri alors namespace = namespace_uri
-        // sinon namespace = namespace
-        exportToParentTemplate(parent_st, current_st, parsed_rule, category, name);
     }
 
 

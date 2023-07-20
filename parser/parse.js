@@ -1,7 +1,5 @@
 import { ToscaProg } from '../model/prog.js';
-import parse_file from './prog_init.js';
 import {parseWithImports} from './prog_init.js';
-import set_shortnames from './shortnames.js';
 import { ToscaImport } from '../model/imports.js';
 import { Ctx } from 'lidy-js/parser/lidyctx.js';
 import path from 'path';

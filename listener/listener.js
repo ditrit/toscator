@@ -41,7 +41,7 @@ import workflow_condition_operator from "./workflow_condition_operator.js";
 import workflow_precondition from "./workflow_precondition.js";
 import input_parameter from "./input_parameter.js";
 import output_parameter from "./output_parameter.js";
-import operation_def_template from "./operation_def_template.js";
+import operation_assignment from "./operation_assignment.js";
 import interface_def from "./interface_def.js";
 import interface_assignment from "./interface_assignment.js";
 import capability_assignment from "./capability_assignment.js";
@@ -106,8 +106,8 @@ export default {
    ...workflow_condition_operator,
    //...workflow_precondition,
    ...input_parameter,
-   //...output_parameter,
-   //...operation_def_template,
+   ...output_parameter,
+   ...operation_assignment,
    ...interface_def,
    ...interface_assignment,
    ...capability_assignment,

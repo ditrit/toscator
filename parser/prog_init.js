@@ -6,7 +6,6 @@ import fs from "fs";
 import request from "sync-request";
 import { ToscaImport } from "../model/imports.js";
 import { localNames, exportToParent, getRidOfNameCtg } from "./namespace.js";
-import path from "path";
 
 export default function parse_file(file_import, parent_service_template, prog) {
    let src_data, res;
@@ -94,7 +93,6 @@ export default function parse_file(file_import, parent_service_template, prog) {
  */
 export function parseWithImports(file_import, parent_service_template, prog, import_branch) {
    const current_service_template = simpleParse(listener, prog, file_import);
-   // TO DO: const errors = prog.errors;
 
    localNames(current_service_template);
 
@@ -133,25 +131,25 @@ export function parseWithImports(file_import, parent_service_template, prog, imp
 function simpleParse(listener, prog, file) {
    // TO DO: get rid of prog
    let src_data;
-   let fpath = file.path;
+   let f_path = file.path;
    let namespace_uri = file.namespace_uri;
    let namespace_prefix = file.namespace_prefix;
-   if (typeof fpath == "string") {
-      if (fpath.slice(0, 4) == "http") {
+   if (typeof f_path == "string") {
+      if (f_path.slice(0, 4) == "http") {
          try {
-            src_data = request("GET", fpath).getBody().toString();
+            src_data = request("GET", f_path).getBody().toString();
          } catch (error) {
             prog.errors.push(
-               new LidyError("File error", 0, `Can not read file ${fpath}`)
+               new LidyError("File error", 0, `Can not read file ${_fpath}`)
             );
             return null;
          }
       } else {
          try {
-            src_data = fs.readFileSync(fpath, "utf8");
+            src_data = fs.readFileSync(f_path, "utf8");
          } catch (error) {
             prog.errors.push(
-               new LidyError("File error", 0, `Can not read file ${fpath}`)
+               new LidyError("File error", 0, `Can not read file ${f_path}`)
             );
             return null;
          }
@@ -164,13 +162,11 @@ function simpleParse(listener, prog, file) {
          : "";
       prog.current_service_template = current_service_template;
 
-      // TO DO: not enough to prevent cycling I believe (not enough accurate)
-      prog.alreadyImported.push(file);
       parse_tosca({ 
          src_data,
          listener,
          prog,
-         fpath,
+         f_path,
       });
       return current_service_template;
 
