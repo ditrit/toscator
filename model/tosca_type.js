@@ -11,7 +11,7 @@ export class ToscaType extends ToscaNode {
     }
 
     setId(name, parsed_rule, category) {
-        let current_st = parsed_rule.ctx.prog.current_service_template
+        let current_st = parsed_rule.ctx.prog
         this.name = name
         let namespace_name = current_st.namespace.value
 

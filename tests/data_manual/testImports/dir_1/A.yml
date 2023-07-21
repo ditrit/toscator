@@ -19,6 +19,7 @@ imports:
 
   - ./sub_dir/B3.yml
  
+  - ../dir_2/B3.yml
 #  - file: ./B3.yml
 #    namespace_uri: http://Uri2
   

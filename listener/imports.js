@@ -11,11 +11,8 @@ function exit_imports(parsed_rule) {
 function  exit_import(parsed_rule) {
     console.log("\n+++++++++++++++++++++++++++++++++parsed_rule import:+++++++++++++++++++++++++++++++++");
     if (typeof parsed_rule.value === "string") {
-        console.log(parsed_rule.value)
         newToscaImport({
             file: parsed_rule.value,
-            last_path: parsed_rule.ctx.prog.last_path,
-            last_repo: parsed_rule.ctx.prog.last_repo,
         }, parsed_rule);
     } else {
         newToscaImport({
@@ -23,8 +20,6 @@ function  exit_import(parsed_rule) {
             repository: parsed_rule.value.repository?.value,
             namespace_prefix: parsed_rule.value.namespace_prefix?.value,
             namespace_uri: parsed_rule.value.namespace_uri?.value,
-            last_path: parsed_rule.ctx.prog.last_path,
-            last_repo: parsed_rule.ctx.prog.last_repo,
         }, parsed_rule);
     }
 }

@@ -1,6 +1,8 @@
 tosca_definitions_version: tosca_simple_yaml_1_3
 
-description: Template for testing imports. 
+description: Template for testing imports.
+
+namespace: https://namespace_xavier.orness.com
 
 metadata:
   creation_date: 2015-04-14
@@ -10,20 +12,15 @@ metadata:
   template_author: Jean-Luc Duvivier
   template_name: My service template
 
-imports:
-  - C1Copy.yml
+
+imports: 
+  - ../dir_2/B3.yml
 
 ############################
 ##### TOSCA NODE_TYPES #####
 ############################
 node_types:
-  
-  B1.network: 
-    derived_from: tosca.nodes.Root
-    description: present
 
-  B1.port: 
+  C1.container.lxc:
     derived_from: tosca.nodes.Root
-    description: present 1 time
-
- 
+    description: present 2 times

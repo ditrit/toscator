@@ -10,8 +10,6 @@ export class ToscaImport extends ToscaNode {
    constructor(input, source) {
       super(source);
       this.file = input.file;
-      this.last_path = input.last_path;
-      this.last_repo = input.last_repo;
       this.repository = input.repository;
       this.namespace_prefix = input.namespace_prefix;
       this.namespace_uri = input.namespace_uri;
@@ -27,41 +25,19 @@ export class ToscaImport extends ToscaNode {
    }
 
    setAbsolutePath() {
-      if (this.repository) { // ??? repository is supposed to be a string, it doesn't have the attribute url...?
-         this.last_repo = this.repository.url;
-         this.last_path = this.repository.url;
+      // ??? repository is supposed to be a string, it doesn't have the attribute url...? It has but only in a service_template...
+      // where it is a ToscaRepository
+      // TO DO: What am I supposed to do with it ???
+      if (this.repository) { 
+         //this.last_repo = this.repository.url;
+         //this.last_path = this.repository.url;
       }
 
       if (is_url(this.file)) {
-         if (this.last_repo) {
-            this.last_repo = "";
-         }
-         this.last_path = path.dirname(this.file);
-         this.path = this.file;
+         this.path = this.file; // the url is absolute since it starts with "<protocol>://..."
       } else {
-         if (this.isRelative(this.file)) {
-            console.log("relatif")
-            this.path = joinAndResolve(this.last_path, this.file);
-         } else {
-            if (this.last_repo) {
-               this.path = joinAndResolve(this.last_repo, this.file);
-            } else if (is_url(this.last_path)) {
-               joinAndResolve(getDomain(this.last_path), thisfile);
-            } else {
-               this.last_path = path.dirname(file);
-               this.path = file;
-            }
-         }
+         this.path = path.resolve(path.dirname(this.source.ctx.prog.origin_file), this.file);
       }
-
-      console.log("old_path")
-      console.log(this.path);
-      this.path = path.resolve(path.dirname(this.source.ctx.prog.current_service_template.origin_file), this.file)
-      console.log("new_path:");
-      console.log(this.path);
-
-      this.source.ctx.prog.last_path = this.last_path;
-      this.source.ctx.prog.last_repo = this.last_repo;
    }
 
    isRelative(path_arg) {

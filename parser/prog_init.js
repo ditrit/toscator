@@ -15,25 +15,21 @@ import path from "path";
  * Export the current_service_template to the parent if it exists
  * @param {ToscaImport} file_import = file to import that will become the current_service_template
  * @param {ToscaServiceTemplate} parent_service_template = service template importing the current_service_template
- * @param {*} prog 
+ * @param {*} errors
  * @param {Array<String>} import_branch = list of the files imported in the current recursive branch
  * @returns 
  */
-export function parseWithImports(file_import, parent_service_template, prog, import_branch) {
-   const current_service_template = simpleParse(listener, prog, file_import);
+export function parseWithImports(file_import, parent_service_template, errors, import_branch) {
+   const current_service_template = simpleParse(listener, errors, file_import);
 
    localNames(current_service_template);
 
-   const last_path = prog.last_path;
-   const last_repo = prog.last_repo;
    current_service_template.imports?.forEach((file_imp) => {
       // if it hasn't already been imported in this import_branch, then parse it
       if (!import_branch.includes(file_imp.path)) {
-         file_imp.last_path = last_path; // necessary ?
-         file_imp.last_repo = last_repo;
          const new_import_branch = JSON.parse(JSON.stringify(import_branch));
          new_import_branch.push(file_imp.path);
-         parseWithImports(file_imp, current_service_template, prog, new_import_branch); 
+         parseWithImports(file_imp, current_service_template, errors, new_import_branch); 
       }
    });
 
@@ -52,11 +48,11 @@ export function parseWithImports(file_import, parent_service_template, prog, imp
 /**
  * parse the file without doing anything about the namespaces and the importations
  * @param {Array<function>} listener list of listeners to parse the file
- * @param {*} prog 
+ * @param {*} errors 
  * @param {ToscaImport} file to parse 
  * @returns {ToscaServiceTemplate} parsed file
  */
-function simpleParse(listener, prog, file) {
+function simpleParse(listener, errors, file) {
    let src_data;
    let f_path = file.path;
    let namespace_uri = file.namespace_uri;
@@ -66,7 +62,7 @@ function simpleParse(listener, prog, file) {
          try {
             src_data = request("GET", f_path).getBody().toString();
          } catch (error) {
-            prog.errors.push(
+            errors.push(
                new LidyError("File error", 0, `Can not read file ${f_path}`)
             );
             return null;
@@ -75,7 +71,7 @@ function simpleParse(listener, prog, file) {
          try {
             src_data = fs.readFileSync(f_path, "utf8");
          } catch (error) {
-            prog.errors.push(
+            errors.push(
                new LidyError("File error", 0, `Can not read file ${f_path}`)
             );
             return null;
@@ -87,20 +83,19 @@ function simpleParse(listener, prog, file) {
       current_service_template.ns_prefix = namespace_prefix
          ? namespace_prefix
          : "";
-      prog.current_service_template = current_service_template;
 
       parse_tosca({ 
          src_data,
          listener,
-         prog,
+         prog: current_service_template,
          f_path,
       });
       return current_service_template;
 
    } else {
-      prog.errors.push(
+      errors.push(
          new LidyError("IMPORT_ERROR error", 0, `Can not read file ${f_path}`)
       );
-      console.log(prog.errors.map((x) => x.message));
+      console.log(errors.map((x) => x.message));
    }
 }

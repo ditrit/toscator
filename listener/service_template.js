@@ -2,8 +2,8 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
     exit_service_template(parsed_rule) {
-        let val = parsed_rule.value
-        let cst = parsed_rule.ctx.prog.current_service_template
+        let val = parsed_rule.value;
+        const cst = parsed_rule.ctx.prog;
 
         console.log("\n+++++++++++++++++++++++++++++++++parsed_rule service_template:+++++++++++++++++++++++++++++++++");
 
