@@ -6,6 +6,7 @@ import fs from "fs";
 import request from "sync-request";
 import { ToscaImport } from "../model/imports.js";
 import { localNames, exportToParent, getRidOfNameCtg } from "./namespace.js";
+import path from "path";
 
 
 /**
@@ -81,7 +82,7 @@ function simpleParse(listener, prog, file) {
          }
       }
       let current_service_template = new ToscaServiceTemplate();
-      current_service_template.origin_file = file.file; // TODO Vérifier à quoi ça sert
+      current_service_template.origin_file = file.path;
       current_service_template.ns_uri = namespace_uri ? namespace_uri : "";
       current_service_template.ns_prefix = namespace_prefix
          ? namespace_prefix
@@ -102,5 +103,4 @@ function simpleParse(listener, prog, file) {
       );
       console.log(prog.errors.map((x) => x.message));
    }
-   
 }

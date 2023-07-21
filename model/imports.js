@@ -1,7 +1,7 @@
 import { ToscaNode } from "./tosca_node.js";
 import path from "path";
 import {
-   joinAndResolvePahtOrUrl as joinAndResolve,
+   joinAndResolvePathOrUrl as joinAndResolve,
    is_url,
    getDomain,
 } from "./utils.js";
@@ -23,23 +23,11 @@ export class ToscaImport extends ToscaNode {
    }
 
    static isValid(input, source) {
-      if (typeof input.file != "string" || input.file == "") {
-         source.ctx.grammarError("Incorrect file input for import");
-         return false;
-      }
-      if (
-         typeof input.repository != "string" ||
-         typeof input.namespace_prefix != "string" ||
-         typeof input.namespace_uri != "string"
-      ) {
-         source.ctx.grammarError("Incorrect file input for import");
-         return false;
-      }
       return true;
    }
 
    setAbsolutePath() {
-      if (this.repository) {
+      if (this.repository) { // ??? repository is supposed to be a string, it doesn't have the attribute url...?
          this.last_repo = this.repository.url;
          this.last_path = this.repository.url;
       }
@@ -52,6 +40,7 @@ export class ToscaImport extends ToscaNode {
          this.path = this.file;
       } else {
          if (this.isRelative(this.file)) {
+            console.log("relatif")
             this.path = joinAndResolve(this.last_path, this.file);
          } else {
             if (this.last_repo) {
@@ -64,6 +53,12 @@ export class ToscaImport extends ToscaNode {
             }
          }
       }
+
+      console.log("old_path")
+      console.log(this.path);
+      this.path = path.resolve(path.dirname(this.source.ctx.prog.current_service_template.origin_file), this.file)
+      console.log("new_path:");
+      console.log(this.path);
 
       this.source.ctx.prog.last_path = this.last_path;
       this.source.ctx.prog.last_repo = this.last_repo;

@@ -23,7 +23,7 @@ export function is_url(arg) {
 }
 
 
-export function joinAndResolvePahtOrUrl(base, file) {
+export function joinAndResolvePathOrUrl(base, file) {
     if (is_url(base)) { // Is url
         return urlResolve(base + '/' + file)
     } else {

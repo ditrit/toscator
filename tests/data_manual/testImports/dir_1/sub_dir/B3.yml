@@ -13,7 +13,7 @@ metadata:
   template_name: My service template
 
 imports:
-  - ./B2.yml
+  - ../B2.yml
 
 ############################
 ##### TOSCA NODE_TYPES #####
