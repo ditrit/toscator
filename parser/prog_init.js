@@ -7,6 +7,7 @@ import request from "sync-request";
 import { ToscaImport } from "../model/imports.js";
 import { localNames, exportToParent, getRidOfNameCtg } from "./namespace.js";
 import path from "path";
+import { getAbsolutePath, getArtifact } from "./getArtifact.js";
 
 
 /**
@@ -20,16 +21,26 @@ import path from "path";
  * @returns 
  */
 export function parseWithImports(file_import, parent_service_template, errors, import_branch) {
-   const current_service_template = simpleParse(listener, errors, file_import);
+   // Note: can optimize here by giving last element of import_branch which is abs_path
+   // as an argument so that getartifact() doesn't have to find get it itself
+   const {src_data, abs_path} = getArtifact(
+      file_import.source.ctx.prog.origin_file,
+      file_import.file,
+      file_import.getRepository(),
+      errors
+   );
+   
+   const current_service_template = simpleParse(listener, file_import, src_data, abs_path);
 
    localNames(current_service_template);
 
    current_service_template.imports?.forEach((file_imp) => {
       // if it hasn't already been imported in this import_branch, then parse it
-      if (!import_branch.includes(file_imp.path)) {
+      const imp_abs_path = getAbsolutePath(file_imp.repository, file_imp.file, file_imp.source.ctx.prog.origin_file)
+      if (!import_branch.includes(imp_abs_path)) {
          const new_import_branch = JSON.parse(JSON.stringify(import_branch));
-         new_import_branch.push(file_imp.path);
-         parseWithImports(file_imp, current_service_template, errors, new_import_branch); 
+         new_import_branch.push(imp_abs_path);
+         parseWithImports(file_imp, current_service_template, errors, new_import_branch);
       }
    });
 
@@ -48,54 +59,34 @@ export function parseWithImports(file_import, parent_service_template, errors, i
 /**
  * parse the file without doing anything about the namespaces and the importations
  * @param {Array<function>} listener list of listeners to parse the file
- * @param {*} errors 
  * @param {ToscaImport} file to parse 
+ * @param {String} src_data = file to parse in string
+ * @param {String} abs_path = absolute path to the file
  * @returns {ToscaServiceTemplate} parsed file
  */
-function simpleParse(listener, errors, file) {
-   let src_data;
-   let f_path = file.path;
+function simpleParse(listener, file, src_data, abs_path) {
    let namespace_uri = file.namespace_uri;
    let namespace_prefix = file.namespace_prefix;
-   if (typeof f_path == "string") {
-      if (f_path.slice(0, 4) == "http") {
-         try {
-            src_data = request("GET", f_path).getBody().toString();
-         } catch (error) {
-            errors.push(
-               new LidyError("File error", 0, `Can not read file ${f_path}`)
-            );
-            return null;
-         }
-      } else {
-         try {
-            src_data = fs.readFileSync(f_path, "utf8");
-         } catch (error) {
-            errors.push(
-               new LidyError("File error", 0, `Can not read file ${f_path}`)
-            );
-            return null;
-         }
-      }
-      let current_service_template = new ToscaServiceTemplate();
-      current_service_template.origin_file = file.path;
-      current_service_template.ns_uri = namespace_uri ? namespace_uri : "";
-      current_service_template.ns_prefix = namespace_prefix
-         ? namespace_prefix
-         : "";
+   
+   let current_service_template = new ToscaServiceTemplate();
+   current_service_template.origin_file = abs_path;
+   current_service_template.ns_uri = namespace_uri ? namespace_uri : "";
+   current_service_template.ns_prefix = namespace_prefix
+      ? namespace_prefix
+      : "";
 
-      parse_tosca({ 
-         src_data,
-         listener,
-         prog: current_service_template,
-         f_path,
-      });
-      return current_service_template;
-
-   } else {
-      errors.push(
-         new LidyError("IMPORT_ERROR error", 0, `Can not read file ${f_path}`)
-      );
-      console.log(errors.map((x) => x.message));
-   }
+   parse_tosca({ 
+      src_data,
+      listener,
+      prog: current_service_template,
+      abs_path,
+   });
+   /*
+   // Note: I can do it here or just before importing in the for loop of the parseWithImport
+   for (const i in current_service_template.imports) {
+      current_service_template.imports[i].setAbsolutePath();
+      //current_service_template.imports[i].getImport();
+   }*/
+   return current_service_template;
 }
+

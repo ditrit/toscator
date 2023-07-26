@@ -13,7 +13,7 @@ export class ToscaImport extends ToscaNode {
       this.repository = input.repository;
       this.namespace_prefix = input.namespace_prefix;
       this.namespace_uri = input.namespace_uri;
-      this.setAbsolutePath();
+      //this.setAbsolutePath();
    }
 
    toString() {
@@ -25,16 +25,14 @@ export class ToscaImport extends ToscaNode {
    }
 
    setAbsolutePath() {
-      // ??? repository is supposed to be a string, it doesn't have the attribute url...? It has but only in a service_template...
-      // where it is a ToscaRepository
-      // TO DO: What am I supposed to do with it ???
+      /* TO DO: What am I supposed to do with it ???
+      */
       if (this.repository) { 
-         //this.last_repo = this.repository.url;
-         //this.last_path = this.repository.url;
+
       }
 
       if (is_url(this.file)) {
-         this.path = this.file; // the url is absolute since it starts with "<protocol>://..."
+         this.path = this.file;
       } else {
          this.path = path.resolve(path.dirname(this.source.ctx.prog.origin_file), this.file);
       }
@@ -42,6 +40,20 @@ export class ToscaImport extends ToscaNode {
 
    isRelative(path_arg) {
       return !is_url(path_arg) || !path.isAbsolute(path_arg);
+   }
+
+   /**
+    * @returns the repository associated to the name import.repository
+    */
+   getRepository() {
+      if (this.repository) {
+         const cst = this.source.ctx.prog;
+         cst.repositories?.forEach((repo, repo_name) => {
+            if (repo_name === this.repository) {
+               return repo;
+            }
+         });
+      }
    }
 
    equals(other) {

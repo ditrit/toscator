@@ -17,6 +17,10 @@ export function getDomain(arg_url) {
     return arg_url.substring(0, arg_url.indexOf('/', arg_url.indexOf("//") + 2))
 }
 
+export function getProtocol(arg_url) {
+    return arg_url.substring(0, arg_url.indexOf(":"));
+}
+
 export function is_url(arg) {
     let res = arg.match(/^[a-zA-Z]*:\/\//) != null
     return res

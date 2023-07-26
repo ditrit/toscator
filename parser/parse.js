@@ -10,12 +10,13 @@ export function parse(src) {
     const cst = new ToscaServiceTemplate();
     cst.origin_file = path.resolve(src)
     ctx.prog = cst;
-    let init_import = new ToscaImport({
+    const init_import = new ToscaImport({
         file: path.basename(src),
         namespace_prefix: "",
         namespace_uri: "",
     }, {
         ctx: ctx
     });
+    init_import.setAbsolutePath();
     return parseWithImports(init_import, null, errors, [init_import.path]);
 }
