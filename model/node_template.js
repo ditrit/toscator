@@ -34,6 +34,10 @@ export class ToscaNodeTemplate extends ToscaNode {
         }
 
     }
+
+    setName(name) {
+        this.name = name;
+    }
 }
 
 export function newToscaNodeTemplate(input, source) {

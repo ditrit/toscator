@@ -444,8 +444,9 @@ property_filter:
       string:
          _oneOf:
             - constraint
-            - _listOf:
-                 _oneOf: [constraint, value]
+            - constraints
+            - _listOf: value
+               #  _oneOf: [constraint, value]
               _min: 1
             - value
 
@@ -699,7 +700,7 @@ node_template:
    _mapFacultative:
       metadata: metadata
       description: description
-      directives: { _list: [string] }
+      directives: { _listOf: string }
       properties: property_assignments
       attributes: attribute_assignments
       capabilities: capability_assignments

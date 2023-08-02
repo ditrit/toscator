@@ -8,8 +8,8 @@ export default {
         let properties = listener_helpers.propertyListofHelper("properties", true, parsed_rule); 
         let capabilities = listener_helpers.propertyListofHelper("capabilities", true, parsed_rule);
         newToscaNodeFilter({
-            properties_filter: properties,
-            capabilities_filter: capabilities
+            properties: properties,
+            capabilities: capabilities
         }, parsed_rule)
     }
 }

@@ -4,7 +4,7 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 export default {
     exit_node_templates(parsed_rule) {
         console.log("\n+++++++++++++++++++++++++++++++++parsed_rule exit_node_templates:+++++++++++++++++++++++++++++++++");
-        parsed_rule.tosca = listener_helpers.defListofHelper(true, parsed_rule);
+        parsed_rule.tosca = listener_helpers.defMapofHelperSetname(parsed_rule);
     },
 
     exit_node_template(parsed_rule) {
@@ -28,7 +28,7 @@ export default {
             capabilities: capabilities,
             interfaces: interfaces,
             artifacts: artifacts,
-            node_filter: parsed_rule.value.node_filter?.value,
+            node_filter: parsed_rule.value.node_filter?.tosca,
             copy: parsed_rule.value.copy?.value
         }, parsed_rule)
     }
