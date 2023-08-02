@@ -22,10 +22,11 @@ export class ToscaScalar extends ToscaValue {
    less_than_or_equal(value) {
       return this.normalized_value >= value.normalized_value;
    }
+   // this one is reversed: value is the range of value that this has to be in
    in_range(value) {
       return (
-         this.normalized_value[1] >= value.normalized_value &&
-         this.normalized_value[0] <= value.normalized_value
+         value[1].normalized_value >= this.normalized_value &&
+         value[0].normalized_value <= this.normalized_value
       );
    }
    valid_values(value) {

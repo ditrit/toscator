@@ -33,18 +33,17 @@ export class ToscaSize extends ToscaScalar {
          .trim()
          .match(/([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))? /i)[0];
       let unit = this.value.trim().match(/[a-zA-Z]+/i)[0];
-      this.normalized_value =
-         {
-            B: 0.000001,
-            kB: 0.001,
-            KiB: 0.001024,
-            MB: 1,
-            MiB: 1.048576,
-            GB: 1000,
-            GiB: 1073.741824,
-            TB: 1000000,
-            TiB: 1099511.627776,
-         }[unit] * value;
+      this.normalized_value = {
+         B: 0.000001,
+         kB: 0.001,
+         KiB: 0.001024,
+         MB: 1,
+         MiB: 1.048576,
+         GB: 1000,
+         GiB: 1073.741824,
+         TB: 1000000,
+         TiB: 1099511.627776,
+      }[unit] * value;
    }
 }
 
