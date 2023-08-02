@@ -171,7 +171,7 @@ export class ToscaConstraintValidValues extends ToscaConstraint {
       if (typeof value == "string" || typeof value == "number") {
          return this.value.includes(value);
       }
-      return this.value.valid_values(value);
+      return value.valid_values(this.value);
    }
 }
 
