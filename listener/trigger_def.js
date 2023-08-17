@@ -5,7 +5,7 @@ export default {
 
     exit_trigger_defs(parsed_rule) {
         console.log("\n+++++++++++++++++++++++++++++++++parsed_rule trigger_defs:+++++++++++++++++++++++++++++++++");
-        parsed_rule.tosca = listener_helpers.defListofHelper(true, parsed_rule);
+        parsed_rule.tosca = listener_helpers.defMapofHelperSetname(parsed_rule);
     },
 
     exit_trigger_def(parsed_rule) {

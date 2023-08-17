@@ -19,6 +19,10 @@ export class ToscaTriggerDef extends ToscaNode {
     static isValid(input, source) {
         return true;
     } 
+
+    setName(name) {
+        this.name = name;
+    }
 }
 
 export function newToscaTriggerDef(input, source){
