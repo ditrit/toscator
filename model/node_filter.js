@@ -15,21 +15,26 @@ export class ToscaNodeFilter extends ToscaNode{
         return true;
     }
 
-    // abstract node ? Yeah if used in sub_mapping, but how can it check values then ?
-    // since an abstract node won't have any value
-    passFilter(abstract_node) {
+    passFilter(node) {
         let pass = true;
-        this.properties?.forEach(ppty => {
-            // pb if properties = undefined ?
-            if (!abstract_node.properties[ppty.name]
-                || !ppty.passFilter(abstract_node.properties[ppty.name])) {
+
+        this.properties?.forEach((double) => {
+            const ppty_name = Object.keys(double)[0];
+            const ppty = double[ppty_name];
+            if (
+                !node.properties?.get(ppty.name)
+                || !ppty.passFilter(node.properties.get(ppty.name))
+            ) {
                 pass = false;
             }
         });
-        this.capabilities?.forEach(capa => {
-            // pb if capabilities = undefined ?
-            if (!abstract_node.capabilities[capa.name]
-                || !capa.passFilter(abstract_node.capabilities[capa.name])) {
+        this.capabilities?.forEach((double) => {
+            const capa_name = Object.keys(double)[0];
+            const capa = double[capa_name];
+            if (
+                !node.capabilities?.get(capa.name)
+                || !capa.passFilter(node.capabilities.get(capa.name))
+            ) {
                 pass = false;
             }
         });

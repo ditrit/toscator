@@ -25,8 +25,6 @@ export class ToscaImport extends ToscaNode {
    }
 
    setAbsolutePath() {
-      /* TO DO: What am I supposed to do with it ???
-      */
       if (this.repository) { 
 
       }

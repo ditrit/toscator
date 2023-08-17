@@ -12,6 +12,9 @@ export class ToscaPropertyMapping extends ToscaNode{
     }
 
     static isValid(input, source) {
+        if (input.value && input.mapping) {
+            return false;
+        }
         return true;
     }
 

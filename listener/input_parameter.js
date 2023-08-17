@@ -21,6 +21,5 @@ export default {
             key_schema: parsed_rule.value.key_schema?.tosca,
             metadata: parsed_rule.value.metadata?.tosca
         }, parsed_rule);
-        console.log(parsed_rule.tosca)
     }
 }

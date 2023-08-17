@@ -9,5 +9,11 @@ function exit_attributes_mapping(parsed_rule) {
 
 function exit_attribute_mapping(parsed_rule) {
     console.log("\n+++++++++++++++++++++++++++++++++parsed_rule attribute_mapping:+++++++++++++++++++++++++++++++++")
-    newToscaAttributeMapping({mapping: listener_helpers.propertyListofHelper("mapping", false, parsed_rule)}, parsed_rule);
+    let mapping;
+    if (parsed_rule.value instanceof Array) {
+        mapping = listener_helpers.defListofHelper(false, parsed_rule);
+    } else {
+        mapping = listener_helpers.propertyListofHelper("mapping", false, parsed_rule);
+    }
+    newToscaAttributeMapping({mapping: mapping}, parsed_rule);
 }

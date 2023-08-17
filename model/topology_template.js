@@ -10,7 +10,7 @@ export class ToscaTopologyTemplate extends ToscaNode{
         this.relationship_templates = input.relationship_templates;
         this.groups = input.groups;
         this.policies = input.policies;
-        this.susbstitution_mappings = input.susbstitution_mappings;
+        this.substitution_mappings = input.substitution_mappings;
         //this.workflows = input.workflows;
     }
 

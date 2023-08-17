@@ -23,11 +23,13 @@ export function propertyMapofsHelper(property_names, parsed_rule) {
 */
 export function propertyMapofHelper(property_name, parsed_rule) {
     
-    let property = new Map();
+    const property = new Map();
     for (const key in parsed_rule?.value[property_name]?.value) {
         property.set(key, parsed_rule.value[property_name].value[key].tosca);
     }
-    return property;
+    if (property.size > 0) {
+        return property
+    }
 }
 
 

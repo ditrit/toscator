@@ -19,7 +19,7 @@ function exit_topology_template(parsed_rule) {
         relationship_templates: relationship_templates,
         groups: groups,
         policies: policies,
-        substitution_mappings: parsed_rule.value.substitution_mappings?.value,
+        substitution_mappings: parsed_rule.value.substitution_mappings?.tosca,
         //workflows: workflows
     }, parsed_rule);
 }

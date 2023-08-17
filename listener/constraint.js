@@ -33,7 +33,6 @@ export default {
          operator = key;
          type = parsed_rule.value[key].type;
          if (type == "list") {
-            console.log(parsed_rule.value[key].value)
             value = [];
             for (const node in parsed_rule.value[key].value) {
                value.push(parsed_rule.value[key].value[node].tosca
