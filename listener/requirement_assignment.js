@@ -12,7 +12,6 @@ function exit_requirement_assignment(parsed_rule) {
     console.log("\n+++++++++++++++++++++++++++++++++parsed_rule requirement_assignment:+++++++++++++++++++++++++++++++++");
     for (const requirement_name in parsed_rule?.value) {
         if (typeof parsed_rule.value[requirement_name].value === "string") {
-
             newToscaRequirementAssignment({node: parsed_rule.value[requirement_name].value}, parsed_rule);
         } else {
             newToscaRequirementAssignment({

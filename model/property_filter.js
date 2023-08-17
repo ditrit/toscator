@@ -33,6 +33,10 @@ export class ToscaPropertyFilter extends ToscaNode{
     static isValid(input, source) {
         return true;
     }
+
+    setName(name) {
+        this.name = name;
+    }
   
 }
 
