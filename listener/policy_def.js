@@ -7,7 +7,6 @@ export default {
     },
 
     exit_policy_def(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule policy_def:+++++++++++++++++++++++++++++++++")
         for (const policy_name in parsed_rule.value) {
             let properties = listener_helpers.propertyMapofHelper("properties", parsed_rule.value[policy_name]);
             let targets = listener_helpers.propertyListofHelper("targets", false, parsed_rule.value[policy_name]);

@@ -9,7 +9,6 @@ function exit_workflow_activities(parsed_rule) {
 }
 
 function exit_workflow_activity(parsed_rule) {
-    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule wf_activity:+++++++++++++++++++++++++++++++++")
     newToscaWorkflowActivity({
         delegate: parsed_rule.value.delegate?.tosca,
         set_state: parsed_rule.value.set_state?.value,

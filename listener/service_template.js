@@ -5,11 +5,8 @@ export default {
         let val = parsed_rule.value;
         const cst = parsed_rule.ctx.prog;
 
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule service_template:+++++++++++++++++++++++++++++++++");
-
         cst.tosca_definitions_version = val.tosca_definitions_version?.value;
         cst.description = val.description?.value;
-        // cst.namespace = val.namespace?.tosca // there already are ns_uri and ns_prefix... And was it skipped intentionnally ?
         cst.metadata = val.metadata?.tosca;
         cst.repositories = listener_helpers.propertyMapofHelper("repositories", parsed_rule);
         cst.imports = listener_helpers.propertyListofHelper("imports", false, parsed_rule);

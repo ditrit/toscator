@@ -3,8 +3,6 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
    exit_artifact_types(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule artifact_types:+++++++++++++++++++++++++++++++++");
-      //console.log(parsed_rule.tosca);
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca?.setId(
             key,
@@ -15,8 +13,6 @@ export default {
    },
 
    exit_artifact_type(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule artifact_type:+++++++++++++++++++++++++++++++++");
-      //console.log(parsed_rule);
       const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
       const file_ext = [];
       for (const key in parsed_rule.value.file_ext?.value) {

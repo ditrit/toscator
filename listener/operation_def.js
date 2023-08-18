@@ -7,7 +7,6 @@ export default {
     },
 
     exit_operation_def(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule operation_def:+++++++++++++++++++++++++++++++++");
         if (typeof parsed_rule.value === "string") {
             newToscaOperationDef({implementation: parsed_rule.value}, parsed_rule);
         } else {

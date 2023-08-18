@@ -14,9 +14,7 @@ export class ToscaCapabilityFilter extends ToscaNode{
      * @returns {boolean}
      */
     passFilter(capability) {
-        // type ? name ?
         let pass = true;
-        // pb: doesn't have the name of the 
         this.properties?.forEach((double) => {
             // pb if properties = undefined ?
             const ppty_name = Object.keys(double)[0];

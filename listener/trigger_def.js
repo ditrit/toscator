@@ -4,13 +4,10 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 export default {
 
     exit_trigger_defs(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule trigger_defs:+++++++++++++++++++++++++++++++++");
         parsed_rule.tosca = listener_helpers.defMapofHelperSetname(parsed_rule);
     },
 
     exit_trigger_def(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule trigger_def:+++++++++++++++++++++++++++++++++");
-        console.log(parsed_rule.value)
         const action = listener_helpers.propertyListofHelper("action", false, parsed_rule);
         newToscaTriggerDef({
             description: parsed_rule.value.description?.value,

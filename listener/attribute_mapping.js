@@ -8,7 +8,6 @@ function exit_attributes_mapping(parsed_rule) {
 }
 
 function exit_attribute_mapping(parsed_rule) {
-    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule attribute_mapping:+++++++++++++++++++++++++++++++++")
     let mapping;
     if (parsed_rule.value instanceof Array) {
         mapping = listener_helpers.defListofHelper(false, parsed_rule);

@@ -4,19 +4,15 @@ import { ToscaConstraint, newToscaConstraintEqual } from "../model/constraint.js
 
 export default {
     exit_properties_filter(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule properties_filter:+++++++++++++++++++++++++++++++++");
-        //console.log(parsed_rule.value[0].tosca);
         parsed_rule.tosca = listener_helpers.defListofHelper(true, parsed_rule);
     },
 
     exit_property_filter(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule property_filter:+++++++++++++++++++++++++++++++++");
         for (const property_name in parsed_rule?.value) {
             if (parsed_rule?.value[property_name].value instanceof Array) {
                 const values = [];
                 let constraints = [];
                 parsed_rule?.value[property_name].value.forEach(element => {
-                    //console.log(element)
                     if (element.tosca && element.tosca instanceof ToscaConstraint) {
                         constraints.push(element.tosca);
                     } else {

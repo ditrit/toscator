@@ -2,12 +2,10 @@ import { newToscaRepository } from "../model/repository.js"
 import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 function exit_repositories(parsed_rule) {
-    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule repositories:+++++++++++++++++++++++++++++++++");
     listener_helpers.defMapofHelperSetname(parsed_rule);
 }
 
 function exit_repository(parsed_rule) {
-    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule repository:+++++++++++++++++++++++++++++++++");
     if (typeof parsed_rule.value === "string") {
         newToscaRepository({url: parsed_rule.value}, parsed_rule);
     } else if (parsed_rule.value.credential) {

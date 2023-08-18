@@ -7,7 +7,6 @@ export default {
     },
 
     exit_property_mapping(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule property_mapping:+++++++++++++++++++++++++++++++++")
         if (parsed_rule.value instanceof Array) {
             newToscaPropertyMapping({
                 mapping: listener_helpers.defListofHelper(false, parsed_rule)
