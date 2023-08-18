@@ -6,9 +6,8 @@ import { ToscaServiceTemplate } from "../model/service_template.js";
  * @param {ToscaServiceTemplate} cst = current_service_template
  */
 export function localNames(cst) {
-    //console.log("//////////////////////////////////////////// START LOCAL NAMES ////////////////////////////////////////////");
     const current_namespace = cst.namespace.value;
-    const st_attributes = [ // we don't want to loop on all the attributes such as topology_template...?
+    const st_attributes = [ 
        "artifact_types",
        "data_types",
        "capability_types",
@@ -30,20 +29,16 @@ export function localNames(cst) {
 
             const name_parts = name.split(".");
             const short_name = name_parts[name_parts.length-1];
-            // TO DO: as it is, if 2 elements have the same short name, then only the 1st one will have a short_name copy
-            // while it should simply not create any short_names ? And I don't think it should raise an error
+            // Conflict name policy: if 2 elements have the same short name, then only the 1st one will have a short_name copy
             if (name !== short_name && !short_names.has(short_name)) {
                 short_names.set(short_name, {type: element, name_ctg: "short_name"});
             }
-            // no need for more checks since there can't be several times the same key in a map nor can there be a namespace in a name ?
             if (current_namespace) {
                 ns_names.set(current_namespace + "/" + name, {type: element, name_ctg: "default_ns_uri"});
             }
         })
         cst[attribute] = new Map([...full_names, ...short_names, ...ns_names]);
-        //console.log(cst[attribute])
     });
-    //console.log("///////////////////////////////////////////////////////////////////////////////////////////////////");
  }
  
  /**
@@ -55,7 +50,6 @@ export function localNames(cst) {
   * @param {ToscaServiceTemplate} cst = current_service_template
   */
 export function exportToParent(file_import, pst, cst) {
-    //console.log("//////////////////////////////////////////////// START EXPORT ///////////////////////////////////////////////////");
     const st_attributes = [
        "artifact_types",
        "data_types",
@@ -102,7 +96,6 @@ export function exportToParent(file_import, pst, cst) {
             }
         })
     });
-    //console.log("//////////////////////////////////////////////// END EXPORT ///////////////////////////////////////////////////");
 }
 
 /**

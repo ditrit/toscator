@@ -91,7 +91,6 @@ export function getAbsolutePath(repository, f_path, cst_path) {
             }
         }
     } else {
-        // can an url be given with like http://... ?
         if (path.isAbsolute(f_path) || is_url(f_path)) {
             return f_path;
         } else {
