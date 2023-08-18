@@ -3,27 +3,27 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 policy_types:
   policy_type_name:
     triggers:
-      - trigger_def_name:
-          event: event_name
-          action: 
-            - delegate: deploy
-            - delegate:
-                workflow: wf_name
-                inputs: 
-                  num_cpus: 1
-                  disk_size: 10 GB
-                  mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
-                    description: "host memory"
-                    value: 4096 MB
-            - set_state: initial
-            - inline: deploy
-            - call_operation: operation_name
-            - call_operation:
-                operation: operation_name
-                inputs:
-                  num_cpus: 1
-                  disk_size: 10 GB
-                  mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
-                    description: "host memory"
-                    value: 4096 MB
+      trigger_def_name:
+        event: event_name
+        action: 
+          - delegate: deploy
+          - delegate:
+              workflow: wf_name
+              inputs: 
+                num_cpus: 1
+                disk_size: 10 GB
+                mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
+                  description: "host memory"
+                  value: 4096 MB
+          - set_state: initial
+          - inline: deploy
+          - call_operation: operation_name
+          - call_operation:
+              operation: operation_name
+              inputs:
+                num_cpus: 1
+                disk_size: 10 GB
+                mem_size: # may not be conformed, but I just wanted to test a parameter_assignment with a description and a value
+                  description: "host memory"
+                  value: 4096 MB
   

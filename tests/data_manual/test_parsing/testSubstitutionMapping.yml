@@ -5,8 +5,9 @@ topology_template:
     node_type: node_type
     requirements:
       database_endpoint: [ database, database_endpoint ]
-      req_nam2:
+      req_name2:
         mapping: [Ah, Oh]
+      req_name3:
         properties:
           ppty_assignment: value
         attributes:
@@ -14,8 +15,21 @@ topology_template:
     properties: 
       ppty1: ppty_value
       ppty2: [input_name]
+      ppty3: 
+        mapping: [input_name2]
+      ppty4:
+        value: deprecated use 2
     capabilities:
-      database_endpoint: [ database, database_endpoint ]
+      capa1: [ node_temp_name1, node_temp_cap_name1 ]
+      capa2:
+        mapping: 
+          - node_temp_name2
+          - node_temp_cap_name2 
+      capa3:
+        properties:
+          ppty: ppty_value
+        attributes: 
+          att: att_value 
     interfaces: 
       interface1:
         ope1: wf1
@@ -24,8 +38,7 @@ topology_template:
     attributes:
       output_1: 
         mapping: [out1]
-      output_2: 
-        mapping: [out2]
+      output_2: [out2]
     substitution_filter:
       capabilities:
         # Constraints for selecting “host” (Container Capability)

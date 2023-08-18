@@ -25,5 +25,10 @@ topology_template:
                       - type: linux
                       - distribution: ubuntu
               properties:
-                - num_cpus: { in_range: [ 1, 4 ] }
+                - num_cpus: 
+                  - in_range: [ 1, 4 ]
+                  - equal: 2
                 - mem_size: { greater_or_equal: 2 GB }
+                - nonsense_juste_for_test:
+                  - 1
+                  - 2
