@@ -1,12 +1,8 @@
 import { parse as parse_tosca } from "../schemas/tosca_1_3.js";
 import listener from "../listener/listener.js";
 import { ToscaServiceTemplate } from "../model/service_template.js";
-import { LidyError } from "lidy-js";
-import fs from "fs";
-import request from "sync-request";
 import { ToscaImport } from "../model/imports.js";
 import { localNames, exportToParent, getRidOfNameCtg } from "./namespace.js";
-import path from "path";
 import { getAbsolutePath, getArtifact } from "./getArtifact.js";
 
 
@@ -18,11 +14,11 @@ import { getAbsolutePath, getArtifact } from "./getArtifact.js";
  * @param {ToscaServiceTemplate} parent_service_template = service template importing the current_service_template
  * @param {*} errors
  * @param {Array<String>} import_branch = list of the files imported in the current recursive branch
- * @returns 
+ * @returns {ToscaServiceTemplate} current_service_template parsed with the imports
  */
 export function parseWithImports(file_import, parent_service_template, errors, import_branch) {
    // Note: can optimize here by giving last element of import_branch which is abs_path
-   // as an argument so that getartifact() doesn't have to find get it itself
+   // as an argument so that getartifact() doesn't have to get it itself
    const {src_data, abs_path} = getArtifact(
       file_import.source.ctx.prog.origin_file,
       file_import.file,
@@ -50,9 +46,8 @@ export function parseWithImports(file_import, parent_service_template, errors, i
       // since we don't need the name_ctg anymore we return to the old (and correct) structure of ToscaServiceTemplate
       getRidOfNameCtg(current_service_template);
    }
-   console.log("////////////////////////////// cst: " + current_service_template.origin_file + " //////////////////////////////")
-   //console.log(current_service_template)
-   console.log(import_branch);
+   //console.log("////////////////////////////// cst: " + current_service_template.origin_file + " //////////////////////////////")
+   //console.log(import_branch);
    return current_service_template;
 }
 
@@ -81,12 +76,7 @@ function simpleParse(listener, file, src_data, abs_path) {
       prog: current_service_template,
       abs_path,
    });
-   /*
-   // Note: I can do it here or just before importing in the for loop of the parseWithImport
-   for (const i in current_service_template.imports) {
-      current_service_template.imports[i].setAbsolutePath();
-      //current_service_template.imports[i].getImport();
-   }*/
+
    return current_service_template;
 }
 

@@ -24,7 +24,7 @@ export function localNames(cst) {
         const short_names = new Map();
         const ns_names = new Map();
         
-        cst[attribute].forEach((element, name) => {
+        cst[attribute]?.forEach((element, name) => {
             // if there is no "." inside it's not a real full_name accordint to TOSCA, but it helps in the implementation to consider it as such
             full_names.set(name, {type: element, name_ctg: "full_name"})
 
