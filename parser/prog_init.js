@@ -46,8 +46,6 @@ export function parseWithImports(file_import, parent_service_template, errors, i
       // since we don't need the name_ctg anymore we return to the old (and correct) structure of ToscaServiceTemplate
       getRidOfNameCtg(current_service_template);
    }
-   //console.log("////////////////////////////// cst: " + current_service_template.origin_file + " //////////////////////////////")
-   //console.log(import_branch);
    return current_service_template;
 }
 

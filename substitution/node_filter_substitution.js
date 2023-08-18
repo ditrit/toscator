@@ -27,7 +27,6 @@ export function nodeFilterSubstitute(cst, node, list_st) {
         substitutes = substitutes.concat(st_substitute);
     });
 
-    console.log("substitutes.length: " + substitutes.length)
     const sub = substitutes[0];
 
     cst.topology_template.node_templates.set(node.name, sub.node);
