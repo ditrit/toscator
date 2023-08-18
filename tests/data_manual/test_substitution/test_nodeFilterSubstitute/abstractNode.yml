@@ -1,0 +1,24 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  node_templates:
+    mysql_compute:
+      type: Compute
+      directives: [ select ]
+      node_filter:
+        properties:
+          - user: { valid_values: ["admin", "my_db_user"]}
+          - password: secret
+          - name: my_db_name
+        capabilities:
+          # Constraints for selecting “host” (Container Capability)
+          - host:
+              properties:
+                - num_cpus: { in_range: [ 1, 4 ] }
+                - mem_size: { greater_or_equal: 2 GB }
+          # Constraints for selecting “os” (OperatingSystem Capability)
+          - os:
+              properties:
+                - architecture: { equal: x86_64 }
+                - type: linux
+                - distribution: rhel

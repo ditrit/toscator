@@ -1,0 +1,73 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  # capa_map, req_map, target_filter (policy_def ou type), req_ass
+  substitution_mappings:
+    node_type: node_type
+    capabilities: 
+      capability_mapping_name: [abs1, capa_required]
+    requirements:
+      requirement_mapping_name:
+        mapping: [abs1, req1]
+
+  node_templates:
+    abs1:
+      type: tosca.nodes.Database
+      directives:
+        - substitute
+      properties:
+        user: my_db_user
+        password: secret
+        name: my_db_name
+      capabilities:
+        capa_required:
+          properties:
+            limit: 100
+      requirements:
+        - req1: requirement
+        - req2:
+            capability: capa_name 
+      attributes:
+        attribute_name: attribute_value
+
+    node2:
+      type: node_type
+      requirements:
+        - req3: abs1
+        - req4: 
+            node: abs1
+            capability: capa_required
+
+  policies:
+    - policy:
+        type: policy_type
+        triggers:
+#          trigger1:
+#            event: attribute # to define
+#            target_filter:
+#              node: abs1
+#            action: 
+#              - delegate: delegate_wf_name
+          trigger2:
+            event: attribute # to define
+            target_filter:
+              node: abs1
+              requirement: req1
+            action: 
+              - delegate: delegate_wf_name
+          trigger3:
+            event: attribute # to define
+            target_filter:
+              node: abs1
+              capability: capa_required
+            action: 
+              - delegate: delegate_wf_name
+          trigger4:
+            event: attribute # to define
+            target_filter:
+              node: abs1
+              requirement: req2
+              capability: capa_name
+            action: 
+              - delegate: delegate_wf_name
+            

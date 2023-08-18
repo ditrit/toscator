@@ -1,0 +1,42 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+
+  inputs:
+    db_user:
+      type: string
+    db_password:
+      type: string
+    # other inputs omitted for brevity
+
+  substitution_mappings:
+    node_type: tosca.nodes.Database
+    capabilities:
+      capa_required: [ database, sub_capa_required ]
+    requirements: 
+      req1: [ database, host ]
+      req2: [ database, sub_req2]
+    attributes:
+      attribute_name: [output]
+
+  node_templates:
+    database:
+      type: tosca.nodes.Database
+      properties:
+        user: { get_input: db_user }
+        # other properties omitted for brevity
+      requirements:
+        - host: dbms
+        - sub_req2: 
+            node: node_name
+            capability: sub_capa_name
+      capabilities:
+        sub_capa_required:
+          properties: 
+            ppty_name: ppty_value
+    dbms:
+      type: tosca.nodes.DBMS
+      # details omitted for brevity
+    server:
+      type: tosca.nodes.Compute
+      # details omitted for brevity
