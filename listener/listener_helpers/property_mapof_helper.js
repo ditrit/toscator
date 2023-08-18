@@ -16,7 +16,6 @@ export function propertyMapofsHelper(property_names, parsed_rule) {
 }
 /** 
  * Builds the property of the object that is a _mapOf according to its definition
- * 
  * @param {string}  property_name: the name of the property that we want to build
  * @param {AST} parsed_rule
  * @return {Map} property: the property built
