@@ -125,7 +125,7 @@ value_expression.get_artifact:
 
 import:
    _oneOf:
-      - _listOf: string
+      - string
       - import.target
 
 import.target:
@@ -444,8 +444,9 @@ property_filter:
       string:
          _oneOf:
             - constraint
-            - _listOf:
-                 _oneOf: [constraint, value]
+            - constraints
+            - _listOf: value
+               #  _oneOf: [constraint, value]
               _min: 1
             - value
 
@@ -699,7 +700,7 @@ node_template:
    _mapFacultative:
       metadata: metadata
       description: description
-      directives: { _list: [string] }
+      directives: { _listOf: string }
       properties: property_assignments
       attributes: attribute_assignments
       capabilities: capability_assignments
@@ -770,20 +771,17 @@ target_filter:
       capability: string
 
 trigger_def:
-   _nb: 1
-   _mapOf: 
-      string:
-         _map:
-            event: string
-            action: workflow_activities
-         _mapFacultative:
-            description: description
-            schedule: time_interval
-            target_filter: target_filter
-            condition: condition
+   _map:
+      event: string
+      action: workflow_activities
+   _mapFacultative:
+      description: description
+      schedule: time_interval
+      target_filter: target_filter
+      condition: condition
 
 trigger_defs:
-   _listOf: trigger_def
+   _mapOf: {string: trigger_def}
    _min: 1
 
 time_interval:
@@ -849,8 +847,10 @@ attributes_mapping:
       string: attribute_mapping
 
 attribute_mapping:
-   _mapFacultative:
-      mapping: { _nb: 1, _listOf: string }
+   _oneOf:
+      - { _nb: 1, _listOf: string }
+      - _mapFacultative:
+            mapping: { _nb: 1, _listOf: string }
 
 capabilities_mapping:
    _mapOf:

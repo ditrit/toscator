@@ -15,8 +15,6 @@ import {
 
 export default {
    exit_constraints(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule constraints:+++++++++++++++++++++++++++++++++");
-      //console.log(parsed_rule);
       if (parsed_rule) {
          let constraints = [];
          parsed_rule.value.map((ele) => constraints.push(ele.tosca));
@@ -26,8 +24,6 @@ export default {
    },
 
    exit_constraint(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule constraint:+++++++++++++++++++++++++++++++++");
-      //console.log(parsed_rule);
       let operator, type, value;
       for (const key in parsed_rule?.value) {
          operator = key;
@@ -35,7 +31,9 @@ export default {
          if (type == "list") {
             value = [];
             for (const node in parsed_rule.value[key].value) {
-               value.push(parsed_rule.value[key].value[node].value);
+               value.push(parsed_rule.value[key].value[node].tosca
+                  ? parsed_rule.value[key].value[node].tosca
+                  : parsed_rule.value[key].value[node].value );
             }
          } else {
             value = parsed_rule.value[key].tosca

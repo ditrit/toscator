@@ -2,7 +2,6 @@ import { newToscaNotificationImplementation } from "../model/notification_implem
 
 export default {
     exit_notification_implementation(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule implementation:+++++++++++++++++++++++++++++++++");
         if (typeof parsed_rule.value === "string") {
             newToscaNotificationImplementation({ primary: parsed_rule.value }, parsed_rule);
         } else {

@@ -3,7 +3,6 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
     exit_workflow_activity_inline(parsed_rule) {
-        console.log("+++++++++++++++++++++++++++++++++parsed_rule wf_activity_inline:+++++++++++++++++++++++++++++++++")
         if (typeof parsed_rule.value === "string") {
             newToscaWorkflowActivityInline({workflow: parsed_rule.value}, parsed_rule);
         } else {

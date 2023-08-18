@@ -3,7 +3,6 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
    exit_interface_types(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule interface_types:+++++++++++++++++++++++++++++++++");
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca.setId(
             key,
@@ -14,7 +13,6 @@ export default {
    },
 
    exit_interface_type(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule interface_type:+++++++++++++++++++++++++++++++++");
       const inputs = listener_helpers.propertyMapofHelper("inputs", parsed_rule);
       const operations = listener_helpers.propertyMapofHelper("operations", parsed_rule);
       const notifications = listener_helpers.propertyMapofHelper("notifications", parsed_rule);

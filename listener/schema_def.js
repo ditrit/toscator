@@ -3,7 +3,6 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
     exit_schema_def(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule schema_def:+++++++++++++++++++++++++++++++++");
         if (typeof parsed_rule.value === "string") {
             newToscaSchemaDef({type: parsed_rule.value}, parsed_rule);
         } else {

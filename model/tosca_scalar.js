@@ -22,14 +22,21 @@ export class ToscaScalar extends ToscaValue {
    less_than_or_equal(value) {
       return this.normalized_value >= value.normalized_value;
    }
+   // this one is reversed: value is the range of valid values
    in_range(value) {
       return (
-         this.normalized_value[1] >= value.normalized_value &&
-         this.normalized_value[0] <= value.normalized_value
+         value[1].normalized_value >= this.normalized_value &&
+         value[0].normalized_value <= this.normalized_value
       );
    }
+   // this one is also reversed: value is the list of valid values
    valid_values(value) {
-      return this.normalized_value.includes(value.normalized_value);
+      for (const val of value) {
+         if (val.normalized_value === this.normalized_value) {
+            return true
+         }
+      }
+      return false;
    }
    setNormalizedValue() {
       console.log(

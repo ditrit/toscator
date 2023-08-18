@@ -3,14 +3,12 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
    exit_node_types(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule node_types:+++++++++++++++++++++++++++++++++");
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca.setId(key, parsed_rule, "node_types");
       }
    },
 
    exit_node_type(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule node_type:+++++++++++++++++++++++++++++++++");
       const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
       const attributes = listener_helpers.propertyMapofHelper("attributes", parsed_rule);
       const capabilities = listener_helpers.propertyMapofHelper("capabilities", parsed_rule);
@@ -33,6 +31,5 @@ export default {
          },
          parsed_rule
       );
-      //console.log(parsed_rule.tosca)
    },
 };

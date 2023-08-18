@@ -19,6 +19,7 @@ export class ToscaRequirementAssignment extends ToscaNode{
     }
 
     setName(name) {
+        console.log(name)
         this.name = name;
     }
 }

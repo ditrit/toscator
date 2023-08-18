@@ -7,7 +7,6 @@ export default {
     },
 
     exit_requirement_mapping(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule requirement_mapping:+++++++++++++++++++++++++++++++++")
         if (parsed_rule.value instanceof Array) {
             let mapping = listener_helpers.defListofHelper(false, parsed_rule);
             newToscaRequirementMapping({

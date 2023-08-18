@@ -13,6 +13,9 @@ export class ToscaCapabilityMapping extends ToscaNode{
     }
 
     static isValid(input, source) {
+        if (input.mapping && (input.properties || input.attributes)) {
+            return false;
+        }
         return true;
     }
 
@@ -28,5 +31,4 @@ export function newToscaCapabilityMapping(input, source) {
     } else {
         res = {};
     }
-    return res;
-}
+    return res;}

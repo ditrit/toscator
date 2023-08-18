@@ -1,31 +1,30 @@
-import {
-    ToscaProg
-} from '../model/prog.js';
-import parse_file from './prog_init.js';
-import set_shortnames from './shortnames.js';
-import {
-    ToscaImport
-} from '../model/imports.js';
-import {
-    Ctx
-} from 'lidy-js/parser/lidyctx.js';
+import {parseWithImports} from './prog_init.js';
+import { ToscaImport } from '../model/imports.js';
+import { Ctx } from 'lidy-js/parser/lidyctx.js';
 import path from 'path';
+import { ToscaServiceTemplate } from '../model/service_template.js';
 
+// src has to be the relative path from the working directory to the file to parse
+// it should also work with an absolute path
 export function parse(src) {
-    let prog = new ToscaProg()
-    let ctx = new Ctx()
-    ctx.prog = prog
-    let init_import = new ToscaImport({
+    // 1) importing the files and parsing them
+    const errors = [];
+    const ctx = new Ctx();
+    let cst = new ToscaServiceTemplate();
+    cst.origin_file = path.resolve(src);
+    ctx.prog = cst;
+    const init_import = new ToscaImport({
         file: path.basename(src),
         namespace_prefix: "",
         namespace_uri: "",
-        last_path: path.dirname(path.resolve(src)),
-        last_repo: "",
     }, {
         ctx: ctx
-    })
+    });
+    init_import.setAbsolutePath();
 
-    parse_file(init_import, null, prog)
-    set_shortnames(prog)
-    return prog
+    cst = parseWithImports(init_import, null, errors, [init_import.path]);
+    
+    // TO DO: 2) type resolution...
+    
+    return cst;
 }

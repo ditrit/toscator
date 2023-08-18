@@ -13,6 +13,9 @@ export class ToscaRequirementMapping extends ToscaNode {
     }
 
     static isValid(input, source) {
+        if (input.mapping && (input.properties || input.attributes)) {
+            return false;
+        }
         return true;
     }
 

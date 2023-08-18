@@ -4,13 +4,11 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
    exit_artifact_defs(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule artifact_defs:+++++++++++++++++++++++++++++++++");
       for (const key in parsed_rule.value) {
          parsed_rule.value[key].tosca.setName(key);
       }
    },
    exit_artifact_def(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule artifact_def:+++++++++++++++++++++++++++++++++");
       if (typeof parsed_rule.value === "string") {
          newToscaArtifact({ file: parsed_rule.value }, parsed_rule);
       } else {

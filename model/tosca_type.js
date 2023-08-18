@@ -1,5 +1,5 @@
+import { ToscaServiceTemplate } from "./service_template.js"
 import { ToscaNode } from "./tosca_node.js"
-
 
 export class ToscaType extends ToscaNode {
     constructor(input, source) {
@@ -10,43 +10,18 @@ export class ToscaType extends ToscaNode {
         this.description = input.description
     }
 
-
-
     setId(name, parsed_rule, category) {
-        let current_st = parsed_rule.ctx.prog.current_service_template
-        let parent_st = parsed_rule.ctx.prog.current_parent_service_template
+        let current_st = parsed_rule.ctx.prog
         this.name = name
         let namespace_name = current_st.namespace.value
 
-        // dans le current_st
+        // Note: this part is probably useless since there shoudln't be any collisions inside the same template thanks to lidy
         if (current_st[category][namespace_name + "/" + name]) {
             parsed_rule.ctx.grammarError('Type collision : ' + this.import_id)
             console.log("Erreur de collision de type");
         } else {
             current_st[category][namespace_name + "/" + name] = this
-        }
-
-        // dans le parent_st
-        // si namspace_uri alors namespace = namespace_uri
-        // sinon namespace = namespace
-        let namespace = (current_st.ns_uri) ? current_st.ns_uri : namespace_name
-        if (parent_st) {
-            if (parent_st[category][namespace + "/" + name]) {
-                parsed_rule.ctx.grammarError('Type collision : ');
-                console.log("Erreur de collision de type");
-            } else {
-                parent_st[category][namespace + "/" + name] = this
-
-            }
-            if (current_st.ns_prefix) {
-                if (parent_st[category][current_st.ns_prefix + "." + name]) {
-                    parsed_rule.ctx.grammarError('Type collision : ')
-                    console.log("Erreur de collision de type");
-                } else {
-                    parent_st[category][current_st.ns_prefix + "." + name] = this
-                }
-            }
-        }
+        }  
     }
 
 

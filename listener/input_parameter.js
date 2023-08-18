@@ -7,7 +7,6 @@ export default {
     },
 
     exit_input_parameter(parsed_rule) {
-        console.log("+++++++++++++++++++++++++++++++++parsed_rule input_parameter:+++++++++++++++++++++++++++++++++");
         const constraints = listener_helpers.propertyListofHelper("constraints", false, parsed_rule);
         newToscaParameter({
             type: parsed_rule.value.type?.value,
@@ -21,6 +20,5 @@ export default {
             key_schema: parsed_rule.value.key_schema?.tosca,
             metadata: parsed_rule.value.metadata?.tosca
         }, parsed_rule);
-        console.log(parsed_rule.tosca)
     }
 }

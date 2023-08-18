@@ -8,7 +8,6 @@ function exit_interfaces_mapping(parsed_rule) {
 }
 
 function exit_interface_mapping(parsed_rule) {
-    console.log("\n+++++++++++++++++++++++++++++++++parsed_rule interface_mapping:+++++++++++++++++++++++++++++++++")
     for (const operation in parsed_rule.value) {
         newToscaInterfaceMapping({
             operation: operation,

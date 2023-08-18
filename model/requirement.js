@@ -18,6 +18,10 @@ export class ToscaRequirement extends ToscaNode {
    toString() {
       return super.toString();
    }
+
+   setName(name) {
+      this.name = name;
+   }
    static isValid(input, source) {
       if (!typeof input.capability === "string") {
          source.ctx.typeError(

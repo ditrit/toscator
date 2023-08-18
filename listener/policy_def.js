@@ -7,11 +7,10 @@ export default {
     },
 
     exit_policy_def(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule policy_def:+++++++++++++++++++++++++++++++++")
         for (const policy_name in parsed_rule.value) {
             let properties = listener_helpers.propertyMapofHelper("properties", parsed_rule.value[policy_name]);
             let targets = listener_helpers.propertyListofHelper("targets", false, parsed_rule.value[policy_name]);
-            let triggers = listener_helpers.propertyListofHelper("triggers", false, parsed_rule.value[policy_name]);
+            let triggers = listener_helpers.propertyMapofHelper("triggers", parsed_rule.value[policy_name]);
 
             newToscaPolicyDef({
                 name: parsed_rule.value[policy_name].value.name?.value,

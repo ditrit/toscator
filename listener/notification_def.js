@@ -7,7 +7,6 @@ export default {
     },
 
     exit_notification_def(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule notification_def:+++++++++++++++++++++++++++++++++");
         const outputs = listener_helpers.propertyMapofHelper("outputs", parsed_rule);
         newToscaNotificationDef(
             {

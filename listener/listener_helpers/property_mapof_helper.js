@@ -16,18 +16,19 @@ export function propertyMapofsHelper(property_names, parsed_rule) {
 }
 /** 
  * Builds the property of the object that is a _mapOf according to its definition
- * 
  * @param {string}  property_name: the name of the property that we want to build
  * @param {AST} parsed_rule
  * @return {Map} property: the property built
 */
 export function propertyMapofHelper(property_name, parsed_rule) {
     
-    let property = new Map();
+    const property = new Map();
     for (const key in parsed_rule?.value[property_name]?.value) {
         property.set(key, parsed_rule.value[property_name].value[key].tosca);
     }
-    return property;
+    if (property.size > 0) {
+        return property
+    }
 }
 
 

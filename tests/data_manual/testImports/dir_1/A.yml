@@ -11,23 +11,24 @@ metadata:
   template_name: My service template
 
 imports:
-  - ./B1.yml
+  - "./B1.yml"
 
   - file: ./B2.yml
     namespace_prefix: Alias1
     namespace_uri: http://uri1
- 
-  - file: ./B3.yml
-    namespace_uri: http://Uri2
-  
-  # - ./B3.yml
 
+  - ./sub_dir/B3.yml
+ 
+  - ../dir_2/B3.yml
+#  - file: ./B3.yml
+#    namespace_uri: http://Uri2
+  
 ############################
 ##### TOSCA NODE_TYPES #####
 ############################
 node_types:
   
-  A.tosca.nodes.Compute: 
+  A.tosca.nodes.compute: 
     derived_from: tosca.nodes.Root
     description: present
 
@@ -35,10 +36,10 @@ node_types:
   #   derived_from: tosca.nodes.Root
   #   description: present 1 time
 
-  A.tosca.nodes.DBMS: 
-    derived_from: tosca.nodes.Root
-    description: present 2 time
+#  A.tosca.nodes.DBMS: 
+#    derived_from: tosca.nodes.Root
+#    description: present 2 time
 
-  A.Tosca.nodes.DBMS.Mysql: 
-    derived_from: tosca.nodes.Root
-    description: present 2 times
+#  A.Tosca.nodes.DBMS.Mysql: 
+#    derived_from: tosca.nodes.Root
+#    description: present 2 times

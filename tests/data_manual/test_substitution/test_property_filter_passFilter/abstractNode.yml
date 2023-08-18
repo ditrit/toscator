@@ -1,0 +1,22 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+topology_template:
+  node_templates:
+    mysql_compute:
+      type: Compute
+      directives: [ select ]
+      node_filter:
+        properties:
+        # I know this example doesn't make sense but what matters is to test constraints
+        # and see if the filter works correctly
+          - num_cpus: 
+            - in_range: [ 1, 4 ]
+          - mem_size: { greater_or_equal: 4 GB }
+          - ppty_equal: linux
+          - ppty_greater: {greater_than: 1}
+          - ppty_greater_or_equal: { greater_or_equal: 1}
+          - ppty_less: {less_than: 1}
+          - ppty_less_or_equal: {less_or_equal: 1}
+          - ppty_valid: {valid_values: [linux, windows]}
+          - ppty_in_range: {in_range: [5 GB, 6 GB]}
+          - ppty_valid_2: {valid_values: [5 GB, 6 GB]}

@@ -34,6 +34,16 @@ export class ToscaArtifact extends ToscaNode {
    setName(name) {
       this.name = name;
    }
+
+   static correctGrammar(service_template) {
+      const artifact_type = service_template.artifact_types[this.type];
+      //mime_type...?
+      if (artifact_type.file_ext.length !== 0) {
+         if (!this.file.match(artifact_type.file_ext)) {
+            return false;
+         }
+      }
+   }
 }
 
 export function newToscaArtifact(input, source) {

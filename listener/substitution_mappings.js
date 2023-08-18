@@ -19,6 +19,5 @@ export default {
             interfaces: interfaces
 
         }, parsed_rule);
-        console.log(parsed_rule.tosca)
     }
 }

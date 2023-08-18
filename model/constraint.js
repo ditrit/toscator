@@ -152,10 +152,11 @@ export class ToscaConstraintInRange extends ToscaConstraint {
       );
    }
    eval(value) {
+      // TO DO: "string" ??? can a stri0ng be in range of smth ???
       if (typeof value == "string" || typeof value == "number") {
          return this.value[1] >= value && this.value[0] <= value;
       }
-      return this.value.in_range(value);
+      return value.in_range(this.value);
    }
 }
 export class ToscaConstraintValidValues extends ToscaConstraint {
@@ -170,7 +171,7 @@ export class ToscaConstraintValidValues extends ToscaConstraint {
       if (typeof value == "string" || typeof value == "number") {
          return this.value.includes(value);
       }
-      return this.value.valid_values(value);
+      return value.valid_values(this.value);
    }
 }
 

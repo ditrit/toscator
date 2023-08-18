@@ -4,7 +4,6 @@ import listener_helpers from "./listener_helpers/listener_helpers.js";
 
 export default {
    exit_properties(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule properties:+++++++++++++++++++++++++++++++++");
       if (parsed_rule) {
          for (const key in parsed_rule.value) {
             parsed_rule.value[key].tosca?.setName(key);
@@ -13,7 +12,6 @@ export default {
    },
 
    exit_property(parsed_rule) {
-      console.log("\n+++++++++++++++++++++++++++++++++parsed_rule property:+++++++++++++++++++++++++++++++++");      
       const constraints = listener_helpers.propertyListofHelper("constraints", false, parsed_rule);
       if (parsed_rule) {
          newToscaProperty(

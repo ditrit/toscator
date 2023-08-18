@@ -25,6 +25,19 @@ export class ToscaNodeTemplate extends ToscaNode {
     static isValid(input, source) {
         return true;
     }
+
+    static correctGrammar(node_templates) {
+        if (this.copy) {
+            if (node_templates[this.copy] && node_templates[this.copy].copy) {
+                return false;
+            }
+        }
+
+    }
+
+    setName(name) {
+        this.name = name;
+    }
 }
 
 export function newToscaNodeTemplate(input, source) {

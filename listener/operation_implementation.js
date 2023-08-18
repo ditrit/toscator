@@ -3,8 +3,6 @@ import { parse } from "../schemas/tosca_1_3.js";
 
 export default {
     exit_operation_implementation(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule implementation:+++++++++++++++++++++++++++++++++");
-        //console.log(parsed_rule);
         if (typeof parsed_rule.value === "string") {
             newToscaOperationImplementation({ primary: parsed_rule.value }, parsed_rule);
         } else {

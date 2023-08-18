@@ -1,15 +1,29 @@
+import { ToscaParameter } from "./parameter.js";
+import { ToscaParameterAssignment } from "./parameter_assignment.js";
 import { ToscaNode } from "./tosca_node.js";
 
 export class ToscaPropertyFilter extends ToscaNode{
-    /* 
-    I'm not sure about the attributes since they aren't all featured in the documentation.
-    Therefore I don't really know what they are for (value...)
-    */
     constructor(input, source) {
         super(source);
         this.name = input.name;
         this.constraints = input.constraints;
-        this.values = input.values;
+    }
+
+    /**
+     * 
+     * @param {ToscaParameterAssignment} ppty = property_assignment to filter
+     * @returns {boolean}
+     */
+    passFilter(ppty) {
+        let pass = true;
+        if (ppty.value) {
+            this.constraints.forEach(constraint => {
+                if (!constraint.eval(ppty.value)) {
+                    pass = false;
+                }
+            });
+        }
+        return pass;
     }
 
     toString() {
@@ -18,6 +32,10 @@ export class ToscaPropertyFilter extends ToscaNode{
 
     static isValid(input, source) {
         return true;
+    }
+
+    setName(name) {
+        this.name = name;
     }
   
 }

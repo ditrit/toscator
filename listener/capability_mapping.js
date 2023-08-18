@@ -7,7 +7,6 @@ export default {
     },
 
     exit_capability_mapping(parsed_rule) {
-        console.log("\n+++++++++++++++++++++++++++++++++parsed_rule capability_mapping:+++++++++++++++++++++++++++++++++")
         if (parsed_rule.value instanceof Array) {
             const mapping = listener_helpers.defListofHelper(false, parsed_rule);
             newToscaCapabilityMapping({
