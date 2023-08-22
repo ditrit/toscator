@@ -25,7 +25,7 @@ export function parseWithImports(file_import, parent_service_template, errors, i
       file_import.getRepository(),
       errors
    );
-   
+
    const current_service_template = simpleParse(listener, file_import, src_data, abs_path);
 
    localNames(current_service_template);
@@ -52,7 +52,7 @@ export function parseWithImports(file_import, parent_service_template, errors, i
 /**
  * parse the file without doing anything about the namespaces and the importations
  * @param {Array<function>} listener list of listeners to parse the file
- * @param {ToscaImport} file to parse 
+ * @param {ToscaImport} file to parse
  * @param {String} src_data = file to parse in string
  * @param {String} abs_path = absolute path to the file
  * @returns {ToscaServiceTemplate} parsed file
@@ -60,7 +60,7 @@ export function parseWithImports(file_import, parent_service_template, errors, i
 function simpleParse(listener, file, src_data, abs_path) {
    let namespace_uri = file.namespace_uri;
    let namespace_prefix = file.namespace_prefix;
-   
+
    let current_service_template = new ToscaServiceTemplate();
    current_service_template.origin_file = abs_path;
    current_service_template.ns_uri = namespace_uri ? namespace_uri : "";
@@ -68,7 +68,7 @@ function simpleParse(listener, file, src_data, abs_path) {
       ? namespace_prefix
       : "";
 
-   parse_tosca({ 
+   parse_tosca({
       src_data,
       listener,
       prog: current_service_template,

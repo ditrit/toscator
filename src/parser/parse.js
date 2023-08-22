@@ -11,7 +11,7 @@ export function parse(src) {
     const errors = [];
     const ctx = new Ctx();
     let cst = new ToscaServiceTemplate();
-    cst.origin_file = path.resolve(src);
+    cst.origin_file = src;
     ctx.prog = cst;
     const init_import = new ToscaImport({
         file: path.basename(src),
@@ -23,8 +23,8 @@ export function parse(src) {
     init_import.setAbsolutePath();
 
     cst = parseWithImports(init_import, null, errors, [init_import.path]);
-    
+
     // TO DO: 2) type resolution...
-    
+
     return cst;
 }
