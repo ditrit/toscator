@@ -94,3 +94,9 @@ typings/
 docref/
 package-lock.json
 .vscode/launch.json
+
+# IDEs
+.idea/
+
+# misc
+reports/
