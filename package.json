@@ -35,7 +35,12 @@
   },
   "homepage": "https://github.com/ditrit/toscator#readme",
   "devDependencies": {
+    "@jest/globals": "^29.6.3",
     "eslint": "^8.47.0",
     "jest": "^29.6.3"
+  },
+  "engines": {
+    "node": ">= 18.17.1",
+    "npm": ">= 9.6.7"
   }
 }

@@ -1,0 +1,52 @@
+{
+
+  "root": true,
+
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+
+  "extends": [
+    "eslint:recommended"
+  ],
+
+  "plugins": [
+  ],
+
+  "globals": {
+    "ga": "readonly",
+    "cordova": "readonly",
+    "__statics": "readonly",
+    "__QUASAR_SSR__": "readonly",
+    "__QUASAR_SSR_SERVER__": "readonly",
+    "__QUASAR_SSR_CLIENT__": "readonly",
+    "__QUASAR_SSR_PWA__": "readonly",
+    "process": "readonly",
+    "Capacitor": "readonly",
+    "chrome": "readonly"
+  },
+
+  "rules": {
+    "indent": [1,4,{"SwitchCase": 1}],
+    "linebreak-style": ["error", "unix"],
+
+    "no-param-reassign": "off",
+    "no-void": "off",
+    "no-nested-ternary": "off",
+    "max-classes-per-file": "off",
+    "no-var": "error",
+    "semi": "error",
+    "prefer-const": "error",
+    "function-call-argument-newline": ["error","consistent"],
+    "prefer-promise-reject-errors": "off",
+    "quotes": ["error", "single"]
+  }
+}
