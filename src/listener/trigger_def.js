@@ -1,5 +1,5 @@
-import { newToscaTriggerDef } from "../model/trigger_def.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
+import { newToscaTriggerDef } from '../model/trigger_def.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
 export default {
 
@@ -8,7 +8,7 @@ export default {
     },
 
     exit_trigger_def(parsed_rule) {
-        const action = listener_helpers.propertyListofHelper("action", false, parsed_rule);
+        const action = listener_helpers.propertyListofHelper('action', false, parsed_rule);
         newToscaTriggerDef({
             description: parsed_rule.value.description?.value,
             event: parsed_rule.value.event?.value,
@@ -18,4 +18,4 @@ export default {
             action: action
         }, parsed_rule);
     },
-}
+};

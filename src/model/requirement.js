@@ -1,47 +1,47 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaRequirement extends ToscaNode {
-   constructor(input, source) {
-      super(source);
-      this.capability = input.capability;
-      this.node = input.node;
-      this.occurences = input.occurences;
-      this.relationship = input.relationship;
-      this.name = input.name;
-   }
-   static _classname = "requirement";
+    constructor(input, source) {
+        super(source);
+        this.capability = input.capability;
+        this.node = input.node;
+        this.occurences = input.occurences;
+        this.relationship = input.relationship;
+        this.name = input.name;
+    }
+    static _classname = 'requirement';
 
-   getClassname() {
-      return ToscaRequirement._classname;
-   }
+    getClassname() {
+        return ToscaRequirement._classname;
+    }
 
-   toString() {
-      return super.toString();
-   }
+    toString() {
+        return super.toString();
+    }
 
-   setName(name) {
-      this.name = name;
-   }
-   static isValid(input, source) {
-      if (!typeof input.capability === "string") {
-         source.ctx.typeError(
-            source.current,
-            "Incorrect definition for requirement"
-         );
-         return false;
-      }
-      //   if (input.properties instanceof ToscaProperty) {
-      //   }
-      return true;
-   }
+    setName(name) {
+        this.name = name;
+    }
+    static isValid(input, source) {
+        if (!typeof input.capability === 'string') {
+            source.ctx.typeError(
+                source.current,
+                'Incorrect definition for requirement'
+            );
+            return false;
+        }
+        //   if (input.properties instanceof ToscaProperty) {
+        //   }
+        return true;
+    }
 }
 
 export function newToscaRequirement(input, source) {
-   let res;
-   if (ToscaRequirement.isValid(input, source)) {
-      res = new ToscaRequirement(input, source);
-   } else {
-      res = {};
-   }
-   return res;
+    let res;
+    if (ToscaRequirement.isValid(input, source)) {
+        res = new ToscaRequirement(input, source);
+    } else {
+        res = {};
+    }
+    return res;
 }

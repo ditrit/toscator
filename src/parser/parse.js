@@ -15,8 +15,8 @@ export function parse(src) {
     ctx.prog = cst;
     const init_import = new ToscaImport({
         file: path.basename(src),
-        namespace_prefix: "",
-        namespace_uri: "",
+        namespace_prefix: '',
+        namespace_uri: '',
     }, {
         ctx: ctx
     });

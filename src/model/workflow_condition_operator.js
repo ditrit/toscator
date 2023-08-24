@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 
 let condition = ['or', 'and', 'nnot', 'assert'];
@@ -26,7 +26,7 @@ export class ToscaWorkflowConditionOperatorAnd extends ToscaWorkflowConditionOpe
         super(input, source);
     }
     static isValid(input) {
-        return input.operator == "and";
+        return input.operator == 'and';
     }
     eval() {
         if (this.assertions.length > 0) { //this should imply that conditions.length === 0
@@ -51,7 +51,7 @@ export class ToscaWorkflowConditionOperatorOr extends ToscaWorkflowConditionOper
         super(input, source);
     }
     static isValid(input) {
-        return input.operator == "or";
+        return input.operator == 'or';
     }
     eval() {
         if (this.assertions.length > 0) { //this should imply that conditions.length === 0
@@ -76,7 +76,7 @@ export class ToscaWorkflowConditionOperatorNot extends ToscaWorkflowConditionOpe
         super(input, source);
     }
     static isValid(input) {
-        return input.operator == "not";
+        return input.operator == 'not';
     }
     eval() {
         if (this.assertions.length > 0) { //this should imply that conditions.length === 0
@@ -101,7 +101,7 @@ export class ToscaWorkflowConditionOperatorAssert extends ToscaWorkflowCondition
         super(input, source);
     }
     static isValid(input) {
-        return input.operator == "assert";
+        return input.operator == 'assert';
     }
     eval() {
         if (this.assertions.length > 0) { //this should imply that conditions.length === 0
@@ -123,44 +123,44 @@ export class ToscaWorkflowConditionOperatorAssert extends ToscaWorkflowCondition
 
 export function newToscaWorkflowConditionOperatorAssert(input, source) {
     if (ToscaWorkflowConditionOperatorAssert.isValid(input)) {
-       return new ToscaWorkflowConditionOperatorAssert(input, source);
+        return new ToscaWorkflowConditionOperatorAssert(input, source);
     }
  
     source.ctx.grammarError(
-       `Workflow_condition_operation ${input} could not be created as assert operation.`
+        `Workflow_condition_operation ${input} could not be created as assert operation.`
     );
     return {};
 }
 
 export function newToscaWorkflowConditionOperatorNot(input, source) {
     if (ToscaWorkflowConditionOperatorNot.isValid(input)) {
-       return new ToscaWorkflowConditionOperatorNot(input, source);
+        return new ToscaWorkflowConditionOperatorNot(input, source);
     }
  
     source.ctx.grammarError(
-       `Workflow_condition_operation ${input} could not be created as not operation.`
+        `Workflow_condition_operation ${input} could not be created as not operation.`
     );
     return {};
 }
 
 export function newToscaWorkflowConditionOperatorAnd(input, source) {
     if (ToscaWorkflowConditionOperatorAnd.isValid(input)) {
-       return new ToscaWorkflowConditionOperatorAnd(input, source);
+        return new ToscaWorkflowConditionOperatorAnd(input, source);
     }
  
     source.ctx.grammarError(
-       `Workflow_condition_operation ${input} could not be created as and operation.`
+        `Workflow_condition_operation ${input} could not be created as and operation.`
     );
     return {};
 }
 
 export function newToscaWorkflowConditionOperatorOr(input, source) {
     if (ToscaWorkflowConditionOperatorOr.isValid(input)) {
-       return new ToscaWorkflowConditionOperatorOr(input, source);
+        return new ToscaWorkflowConditionOperatorOr(input, source);
     }
  
     source.ctx.grammarError(
-       `Workflow_condition_operation ${input} could not be created as or operation.`
+        `Workflow_condition_operation ${input} could not be created as or operation.`
     );
     return {};
 }

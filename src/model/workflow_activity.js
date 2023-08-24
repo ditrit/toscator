@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaWorkflowActivity extends ToscaNode {
     constructor(input, source) {

@@ -1,5 +1,5 @@
-import { newToscaParameter } from "../model/parameter.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
+import { newToscaParameter } from '../model/parameter.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
 export default {
     exit_input_parameters(parsed_rule) {
@@ -7,7 +7,7 @@ export default {
     },
 
     exit_input_parameter(parsed_rule) {
-        const constraints = listener_helpers.propertyListofHelper("constraints", false, parsed_rule);
+        const constraints = listener_helpers.propertyListofHelper('constraints', false, parsed_rule);
         newToscaParameter({
             type: parsed_rule.value.type?.value,
             description: parsed_rule.value.description?.value,
@@ -21,4 +21,4 @@ export default {
             metadata: parsed_rule.value.metadata?.tosca
         }, parsed_rule);
     }
-}
+};

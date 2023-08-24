@@ -1,4 +1,4 @@
-import { newToscaTargetFilter } from "../model/target_filter.js";
+import { newToscaTargetFilter } from '../model/target_filter.js';
 
 export default {
     exit_target_filter(parsed_rule) {
@@ -8,4 +8,4 @@ export default {
             capability: parsed_rule.value.capability?.value,
         }, parsed_rule);
     }
-}
+};

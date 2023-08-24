@@ -1,6 +1,6 @@
-import { newToscaPropertyFilter } from "../model/property_filter.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
-import { ToscaConstraint, newToscaConstraintEqual } from "../model/constraint.js";
+import { newToscaPropertyFilter } from '../model/property_filter.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
+import { ToscaConstraint, newToscaConstraintEqual } from '../model/constraint.js';
 
 export default {
     exit_properties_filter(parsed_rule) {
@@ -27,18 +27,18 @@ export default {
                      * that there should never be a list of values since you should just write it
                      * in a single line
                      */ 
-                    constraints = []
+                    constraints = [];
                     values.forEach(val => {
                         const type = val.type;
                         let value;
-                        if (type == "list") {
-                            value = val.value.map(v => v.tosca ? v.tosca : v.value)
+                        if (type == 'list') {
+                            value = val.value.map(v => v.tosca ? v.tosca : v.value);
                         } else {
-                            value = val.tosca ? val.tosca : val.value
+                            value = val.tosca ? val.tosca : val.value;
                         }
                         constraints.push(
                             newToscaConstraintEqual({
-                                operator: "equal",
+                                operator: 'equal',
                                 type: type,
                                 value: value
                             }, parsed_rule)
@@ -65,7 +65,7 @@ export default {
             } else { 
                 const type = parsed_rule.value[property_name].type;
                 let value;
-                if (type == "list") {
+                if (type == 'list') {
                     value = [];
                     for (const node in parsed_rule.value[property_name].value) {
                         value.push(parsed_rule.value[property_name].value[node].value);
@@ -78,7 +78,7 @@ export default {
 
                 const constraints = [
                     newToscaConstraintEqual({
-                        operator: "equal",
+                        operator: 'equal',
                         type: type,
                         value: value
                     }, parsed_rule)
@@ -91,4 +91,4 @@ export default {
             }
         }
     }
-}
+};

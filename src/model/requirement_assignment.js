@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaRequirementAssignment extends ToscaNode{
     constructor(input, source) {
@@ -19,7 +19,7 @@ export class ToscaRequirementAssignment extends ToscaNode{
     }
 
     setName(name) {
-        console.log(name)
+        console.log(name);
         this.name = name;
     }
 }

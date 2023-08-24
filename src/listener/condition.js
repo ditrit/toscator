@@ -1,4 +1,4 @@
-import { newToscaCondition } from "../model/condition.js";
+import { newToscaCondition } from '../model/condition.js';
 
 export default {
     exit_condition(parsed_rule) {
@@ -13,4 +13,4 @@ export default {
             }, parsed_rule);
         }
     }
-}
+};

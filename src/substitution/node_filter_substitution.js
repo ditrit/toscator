@@ -1,5 +1,5 @@
-import { ToscaNodeTemplate } from "../model/node_template.js";
-import { ToscaRequirementAssignment } from "../model/requirement_assignment.js";
+import { ToscaNodeTemplate } from '../model/node_template.js';
+import { ToscaRequirementAssignment } from '../model/requirement_assignment.js';
 
 /**
  * add the concrete node that fits the requirement to the topology template
@@ -23,7 +23,7 @@ export function nodeFilterSubstitute(cst, node, list_st) {
             if (node.node_filter.passFilter(n)) {
                 st_substitute.push({node: n, service_template: st});
             }
-        })
+        });
         substitutes = substitutes.concat(st_substitute);
     });
 

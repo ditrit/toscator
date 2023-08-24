@@ -1,34 +1,34 @@
-import { Charac } from "./Charac.js";
+import { Charac } from './Charac.js';
 
 export class ToscaAttribute extends Charac {
-   constructor(input, source) {
-      super(input, source);
-   }
+    constructor(input, source) {
+        super(input, source);
+    }
 
-   static _classname = "attribute";
+    static _classname = 'attribute';
 
-   getClassname() {
-      return ToscaAttribute._classname;
-   }
+    getClassname() {
+        return ToscaAttribute._classname;
+    }
 
-   toString() {
-      return super.toString();
-   }
+    toString() {
+        return super.toString();
+    }
 
-   static isValid(input, source) {
-      let res = true;
-      if (!super.isValid(input, source)) {
-         res = false;
-      }
+    static isValid(input, source) {
+        let res = true;
+        if (!super.isValid(input, source)) {
+            res = false;
+        }
 
-      return res;
-   }
+        return res;
+    }
 }
 
 export function newToscaAttribute(input, source) {
-   let res;
-   ToscaAttribute.isValid(input, source)
-      ? (res = new ToscaAttribute(input, source))
-      : (res = {});
-   return res;
+    let res;
+    ToscaAttribute.isValid(input, source)
+        ? (res = new ToscaAttribute(input, source))
+        : (res = {});
+    return res;
 }

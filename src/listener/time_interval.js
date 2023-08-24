@@ -1,4 +1,4 @@
-import { newToscaTimeInterval } from "../model/time_interval.js";
+import { newToscaTimeInterval } from '../model/time_interval.js';
 
 export default {
     exit_time_interval(parsed_rule) {
@@ -7,4 +7,4 @@ export default {
             end_time: parsed_rule.value.end_time?.value
         }, parsed_rule);
     }
-}
+};

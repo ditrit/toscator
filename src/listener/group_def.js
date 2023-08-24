@@ -1,5 +1,5 @@
-import { newToscaGroupDef } from "../model/group_def.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js"
+import { newToscaGroupDef } from '../model/group_def.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
 export default {
     exit_group_defs(parsed_rule) {
@@ -7,8 +7,8 @@ export default {
     },
 
     exit_group_def(parsed_rule) {
-        const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
-        const members = listener_helpers.propertyListofHelper("members", false, parsed_rule);
+        const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
+        const members = listener_helpers.propertyListofHelper('members', false, parsed_rule);
 
         newToscaGroupDef({
             type: parsed_rule.value.type?.value,
@@ -18,4 +18,4 @@ export default {
             metadata: parsed_rule.value.metadata?.tosca
         }, parsed_rule);
     }
-}
+};

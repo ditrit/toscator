@@ -1,5 +1,5 @@
-import { ToscaCapabilityAssignment } from "./capability_assignment.js";
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaCapabilityAssignment } from './capability_assignment.js';
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaCapabilityFilter extends ToscaNode{
     constructor(input, source) {

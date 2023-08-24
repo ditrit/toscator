@@ -14,7 +14,7 @@ export function defMapofHelperSetname(parsed_rule) {
  * @returns {Map} property
 */
 export function defPropertyMapofHelper(other_property_names, parsed_rule) {
-    let property = new Map();
+    const property = new Map();
     for (const key in parsed_rule.value) {
         if (!other_property_names.includes(key)) {
             property[key] = parsed_rule.value[key].tosca; //why do we pick tosca and not value ?

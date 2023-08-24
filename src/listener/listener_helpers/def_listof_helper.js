@@ -13,7 +13,7 @@ export function defListofHelper(name, parsed_rule) {
 }
 
 function defListofHelperName(parsed_rule) {
-    let listof = [];
+    const listof = [];
     for (const key in parsed_rule.value) {
         const element_name = Object.keys(parsed_rule?.value[key].value)[0];
         parsed_rule.value[key].tosca?.setName(element_name);

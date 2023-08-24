@@ -1,14 +1,14 @@
-import { newToscaImport } from '../model/imports.js'
+import { newToscaImport } from '../model/imports.js';
 import listener_helpers from './listener_helpers/listener_helpers.js';
 
-export default { exit_imports, exit_import }
+export default { exit_imports, exit_import };
 
 function exit_imports(parsed_rule) {
     parsed_rule.tosca = listener_helpers.defListofHelper(false, parsed_rule);
 }
 
 function  exit_import(parsed_rule) {
-    if (typeof parsed_rule.value === "string") {
+    if (typeof parsed_rule.value === 'string') {
         newToscaImport({
             file: parsed_rule.value,
         }, parsed_rule);

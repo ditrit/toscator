@@ -1,4 +1,4 @@
-import { ToscaInterfaceAssignment } from "./interface_assignment.js";
+import { ToscaInterfaceAssignment } from './interface_assignment.js';
 
 export class ToscaInterfaceDef extends ToscaInterfaceAssignment{
     constructor(input, source) {

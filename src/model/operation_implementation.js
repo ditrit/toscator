@@ -1,4 +1,4 @@
-import { ToscaNotificationImplementation } from "./notification_implementation.js";
+import { ToscaNotificationImplementation } from './notification_implementation.js';
 
 export class ToscaOperationImplementation extends ToscaNotificationImplementation {
     constructor(input, source) {
@@ -11,5 +11,5 @@ export class ToscaOperationImplementation extends ToscaNotificationImplementatio
 export function newToscaOperationImplementation(input, source) {
     if (ToscaOperationImplementation.isValid(input, source))
         return new ToscaOperationImplementation(input, source);
-    return {}
+    return {};
 }

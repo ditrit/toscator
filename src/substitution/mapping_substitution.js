@@ -1,7 +1,7 @@
-import { ToscaNodeTemplate } from "../model/node_template.js";
-import { ToscaRequirementAssignment } from "../model/requirement_assignment.js";
-import { ToscaServiceTemplate } from "../model/service_template.js";
-import { ToscaTopologyTemplate } from "../model/topology_template.js";
+import { ToscaNodeTemplate } from '../model/node_template.js';
+import { ToscaRequirementAssignment } from '../model/requirement_assignment.js';
+import { ToscaServiceTemplate } from '../model/service_template.js';
+import { ToscaTopologyTemplate } from '../model/topology_template.js';
 
 /**
  * Substitute the abstract node with a topology_template from one of the service_template in list_st
@@ -17,7 +17,7 @@ export function mappingSubstitution(cst, node, list_st) {
         addTopology(cst, topo_temp);
 
         // link the elements of the topology_template to the cst
-        linkTopology(cst, node, topo_temp)
+        linkTopology(cst, node, topo_temp);
 
         // delete the abstract_node
         cst.topology_template.node_templates.delete(node.name);
@@ -56,10 +56,10 @@ export function selectSubstituteServiceTemplate(node, list_st) {
  */
 export function addTopology(cst, topo_temp) {
     for (const key of Object.keys(topo_temp)) {
-        if (key !== "description" 
-        && key !== "substitution_mappings"
-        && key !== "source") {
-            if (key === "policies") {
+        if (key !== 'description' 
+        && key !== 'substitution_mappings'
+        && key !== 'source') {
+            if (key === 'policies') {
                 topo_temp[key]?.forEach(policy => {
                     let duplicate = false;
                     cst.topology_template[key].forEach(p => {
@@ -118,7 +118,7 @@ export function linkTopology(cst, abstract_node, topo_temp) {
                         const requirement = new ToscaRequirementAssignment({node: topo_temp_node_name}, req[cst_req_name].source);
                         const new_req_name = generateRequirementName(cst_node.requirements.concat(sub_requirements));
                         sub_requirements.push({[new_req_name]: requirement});
-                    })
+                    });
                 }
             }
         });

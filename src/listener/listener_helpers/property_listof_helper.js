@@ -7,7 +7,7 @@
  * @returns {Map<Array} properties
  */
 export function propertyListofsHelper(property_names, parsed_rule) {
-    let properties = new Map();
+    const properties = new Map();
     for (const property_name in property_names) {
         propertyListofHelper(property_name, parsed_rule);
     }
@@ -38,7 +38,7 @@ function propertyListofHelperName(property_name, parsed_rule) {
         });
     }
     if  (listof.length !== 0) {
-        return listof
+        return listof;
     }
 }
 

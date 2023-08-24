@@ -1,5 +1,5 @@
-import { newToscaCapabilityMapping } from "../model/capability_mapping.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
+import { newToscaCapabilityMapping } from '../model/capability_mapping.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
 export default {
     exit_capabilities_mapping(parsed_rule) {
@@ -13,9 +13,9 @@ export default {
                 mapping: mapping,
             }, parsed_rule);
         } else {
-            const mapping = listener_helpers.propertyListofHelper("mapping", false, parsed_rule);
-            const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
-            const attributes = listener_helpers.propertyMapofHelper("attributes", parsed_rule);
+            const mapping = listener_helpers.propertyListofHelper('mapping', false, parsed_rule);
+            const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
+            const attributes = listener_helpers.propertyMapofHelper('attributes', parsed_rule);
 
             newToscaCapabilityMapping({
                 mapping: mapping,
@@ -24,4 +24,4 @@ export default {
             }, parsed_rule);
         }
     }
-}
+};
