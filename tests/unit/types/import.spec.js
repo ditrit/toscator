@@ -1,7 +1,7 @@
 import {it, describe, expect} from '@jest/globals';
 
-import {parse} from 'src/parser/parse.js';
-import {ToscaImport} from 'src/model/imports.js';
+import {parse} from '#src/parser/parse.js';
+import {ToscaImport} from '#src/model/imports.js';
 
 // TODO: réparer ces tests
 describe('Tosca compiler ->', ()=>{

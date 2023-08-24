@@ -1,5 +1,5 @@
-import { parse } from '../../index.js';
-import { ToscaProg } from '../../model/prog.js';
+import { parse } from '#src/parser/parse.js';
+import { ToscaProg } from '#src/model/prog.js';
 
 const version_ok = 'data/minimal_file/version_ok.yml';
 const empty_file = 'data/minimal_file/empty_file.yml';

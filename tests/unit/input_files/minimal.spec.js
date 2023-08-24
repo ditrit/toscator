@@ -1,8 +1,8 @@
 
 import {it, describe, expect} from '@jest/globals';
 
-import { parse } from 'src/parser/parse.js';
-import { ToscaProg } from 'src/model/prog.js';
+import { parse } from '#src/parser/parse.js';
+import { ToscaProg } from '#src/model/prog.js';
 
 describe('Tosca compiler ->', ()=>{
 
@@ -51,7 +51,7 @@ describe('Tosca compiler ->', ()=>{
     // TODO : - Test URLs
     // - Handle different versions of Tosca
      */
- 
+
     });
 
 
