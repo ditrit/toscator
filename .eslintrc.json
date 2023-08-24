@@ -1,10 +1,9 @@
 {
-
   "root": true,
 
   "parserOptions": {
     "parser": "@babel/eslint-parser",
-    "ecmaVersion": 2022,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
 
@@ -15,38 +14,44 @@
   },
 
   "extends": [
-    "eslint:recommended"
+    "airbnb-base",
+    "plugin:jsdoc/recommended"
   ],
 
   "plugins": [
+
   ],
 
   "globals": {
-    "ga": "readonly",
-    "cordova": "readonly",
-    "__statics": "readonly",
-    "__QUASAR_SSR__": "readonly",
-    "__QUASAR_SSR_SERVER__": "readonly",
-    "__QUASAR_SSR_CLIENT__": "readonly",
-    "__QUASAR_SSR_PWA__": "readonly",
-    "process": "readonly",
-    "Capacitor": "readonly",
-    "chrome": "readonly"
   },
 
   "rules": {
-    "indent": [1,4,{"SwitchCase": 1}],
     "linebreak-style": ["error", "unix"],
 
     "no-param-reassign": "off",
     "no-void": "off",
     "no-nested-ternary": "off",
     "max-classes-per-file": "off",
-    "no-var": "error",
-    "semi": "error",
-    "prefer-const": "error",
-    "function-call-argument-newline": ["error","consistent"],
+
+    "import/first": "off",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/default": "error",
+    "import/export": "error",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+
     "prefer-promise-reject-errors": "off",
-    "quotes": ["error", "single"]
+
+    "no-restricted-imports": ["error", {
+      "patterns": [{
+        "group": ["\\.\\./*", "\\./*"],
+        "message": "Use '#src/' for base of import. Do not use './' or '../'."
+      }]
+    }],
+
+    "jsdoc/no-undefined-types": "off"
   }
 }
