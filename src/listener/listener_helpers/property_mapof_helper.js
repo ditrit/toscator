@@ -8,8 +8,8 @@
 */ 
 export function propertyMapofsHelper(property_names, parsed_rule) {
 
-    let properties = new Map();
-    for (let property_name in property_names) {
+    const properties = new Map();
+    for (const property_name in property_names) {
         properties[property_name] = propertyMapofHelper(property_name);
     }
     return properties;
@@ -27,7 +27,7 @@ export function propertyMapofHelper(property_name, parsed_rule) {
         property.set(key, parsed_rule.value[property_name].value[key].tosca);
     }
     if (property.size > 0) {
-        return property
+        return property;
     }
 }
 

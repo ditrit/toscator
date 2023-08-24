@@ -1,4 +1,4 @@
-import { ToscaRelationshipDef } from "./relationship_def.js";
+import { ToscaRelationshipDef } from './relationship_def.js';
 
 export class ToscaRelationshipAssignment extends ToscaRelationshipDef{
     constructor(input, source) {

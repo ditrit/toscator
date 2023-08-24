@@ -1,7 +1,7 @@
-import { newToscaWorkflowActivity } from "../model/workflow_activity.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
+import { newToscaWorkflowActivity } from '../model/workflow_activity.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
-export default {exit_workflow_activities, exit_workflow_activity}
+export default {exit_workflow_activities, exit_workflow_activity};
 
 function exit_workflow_activities(parsed_rule) {
     parsed_rule.tosca = listener_helpers.defListofHelper(false, parsed_rule);

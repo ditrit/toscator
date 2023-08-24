@@ -1,8 +1,8 @@
-import { ToscaRepository } from "../model/repository.js";
-import { getProtocol, is_url } from "../model/utils.js";
-import { LidyError } from "lidy-js";
-import path from "path";
-import fs from "fs";
+import { ToscaRepository } from '../model/repository.js';
+import { getProtocol, is_url } from '../model/utils.js';
+import { LidyError } from 'lidy-js';
+import path from 'path';
+import fs from 'fs';
 
 /**
  * TO DO: handle the different protocols.
@@ -25,18 +25,18 @@ export function getArtifact(cst_path, f_path, repository, errors) {
          * TO DO: add the handling of the other protocols
          */
         switch (getProtocol(abs_path)) {
-            case "http": // TO DO: getArtifactHttps hasn't been implemented
+            case 'http': // TO DO: getArtifactHttps hasn't been implemented
                 const src_data = getArtifactHttp(abs_path, repository, errors);
                 return  {
-                    "src_data": src_data,
-                    "abs_path": abs_path
+                    'src_data': src_data,
+                    'abs_path': abs_path
                 };
         }
     } else {
         const src_data = getArtifactLocalFile(abs_path, errors);
         return  {
-            "src_data": src_data,
-            "abs_path": abs_path
+            'src_data': src_data,
+            'abs_path': abs_path
         };
     }
 }
@@ -49,10 +49,10 @@ export function getArtifact(cst_path, f_path, repository, errors) {
  */
 function getArtifactLocalFile(abs_path, errors) {
     try {
-        return fs.readFileSync(abs_path, "utf8");
+        return fs.readFileSync(abs_path, 'utf8');
     } catch (error) {
         errors.push(
-            new LidyError("File error", 0, `Can not read file ${abs_path}`)
+            new LidyError('File error', 0, `Can not read file ${abs_path}`)
         );
     }
 }

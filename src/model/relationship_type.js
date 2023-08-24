@@ -1,8 +1,8 @@
-import { ToscaType } from "./tosca_type.js"
+import { ToscaType } from './tosca_type.js';
 
 export class ToscaRelationshipType extends ToscaType {
     constructor(input, source) {
-        super(input, source)
+        super(input, source);
         this.properties = input.properties;
         this.attributes = input.attributes;
         this.interfaces = input.interfaces;
@@ -10,31 +10,31 @@ export class ToscaRelationshipType extends ToscaType {
         // this.workflows = input.workflows;
     }
 
-    static _classname = 'relationship_type'
+    static _classname = 'relationship_type';
     
     getClassname() {
-        return ToscaRelationshipType._classname
+        return ToscaRelationshipType._classname;
     }
 
     toString() {
-        return super.toString()
+        return super.toString();
     }
     static isValid(input, source) {
         if(!ToscaType.isValid(input, source)) {
             
-            source.ctx.typeError(source.current, 'Incorrect definition for RelationshipType')
-            return false
+            source.ctx.typeError(source.current, 'Incorrect definition for RelationshipType');
+            return false;
         }
-        return true
+        return true;
     }
 }
 
 export function newToscaRelationshipType(input, source) {
-    let res
+    let res;
     if (ToscaRelationshipType.isValid(input, source)) {
-        res = new ToscaRelationshipType(input, source)
+        res = new ToscaRelationshipType(input, source);
     } else {
-        res = {}
+        res = {};
     }
-    return res
+    return res;
 }

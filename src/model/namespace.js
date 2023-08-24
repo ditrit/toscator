@@ -1,17 +1,17 @@
-import { ToscaNode } from "./tosca_node.js"
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaNamespace extends ToscaNode {
     constructor(input, source) {
-        super(source)
-        this.value = input
+        super(source);
+        this.value = input;
     }
     toString() {
-        return `${this.value}`
+        return `${this.value}`;
     }
     static isValid(input, source) {
-        if (typeof(input) != 'string' || input == "") {
-            source.ctx.grammarError('Incorrect input for namespace')
-            return false
+        if (typeof(input) != 'string' || input == '') {
+            source.ctx.grammarError('Incorrect input for namespace');
+            return false;
         }
 
         if (input.match('http://docs.oasis-open.org/tosca')) {
@@ -19,16 +19,16 @@ export class ToscaNamespace extends ToscaNode {
             return false;
         }
 
-        return true
+        return true;
     }
 }
 
 export function newToscaNamespace(input, source) {
-    let res
+    let res;
     if (ToscaNamespace.isValid(input, source)) {
-        res = new ToscaNamespace(input, source)
+        res = new ToscaNamespace(input, source);
     } else {
-        res = {}
+        res = {};
     }
-    return res
+    return res;
 }

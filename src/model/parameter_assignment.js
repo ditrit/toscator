@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaParameterAssignment extends ToscaNode {
     constructor(input, source) {
@@ -26,9 +26,9 @@ export class ToscaParameterAssignment extends ToscaNode {
 export function newToscaParameterAssignment(input, source) {
     let res;
     if (ToscaParameterAssignment.isValid(input, source)) {
-       res = new ToscaParameterAssignment(input, source);
+        res = new ToscaParameterAssignment(input, source);
     } else {
-       res = {};
+        res = {};
     }
     return res;
 }

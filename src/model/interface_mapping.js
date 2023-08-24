@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaInterfaceMapping extends ToscaNode {
     constructor(input, source) {
@@ -22,5 +22,5 @@ export class ToscaInterfaceMapping extends ToscaNode {
 export function newToscaInterfaceMapping(input, source) {
     if (ToscaInterfaceMapping.isValid(input, source))
         return new ToscaInterfaceMapping(input, source);
-    return {}
+    return {};
 }

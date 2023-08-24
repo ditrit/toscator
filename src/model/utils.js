@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path';
 export function urlResolve(arg_url) {
     // ##### COMMENTARY #####
     // let end_protocol = arg_url.lastIndexOf("//")
@@ -9,29 +9,29 @@ export function urlResolve(arg_url) {
     // let domain_url = arg_url.slice(0, end_domain)
     // let new_url = domain_url + new_path
 
-    let end_domain = arg_url.indexOf('/', arg_url.indexOf("//") + 2)
-    return arg_url.slice(0, end_domain) + path.resolve(arg_url.slice(end_domain))
+    const end_domain = arg_url.indexOf('/', arg_url.indexOf('//') + 2);
+    return arg_url.slice(0, end_domain) + path.resolve(arg_url.slice(end_domain));
 }
 
 export function getDomain(arg_url) {
-    return arg_url.substring(0, arg_url.indexOf('/', arg_url.indexOf("//") + 2))
+    return arg_url.substring(0, arg_url.indexOf('/', arg_url.indexOf('//') + 2));
 }
 
 export function getProtocol(arg_url) {
-    return arg_url.substring(0, arg_url.indexOf(":"));
+    return arg_url.substring(0, arg_url.indexOf(':'));
 }
 
 export function is_url(arg) {
-    let res = arg.match(/^[a-zA-Z]*:\/\//) != null
-    return res
+    const res = arg.match(/^[a-zA-Z]*:\/\//) != null;
+    return res;
 }
 
 
 export function joinAndResolvePathOrUrl(base, file) {
     if (is_url(base)) { // Is url
-        return urlResolve(base + '/' + file)
+        return urlResolve(base + '/' + file);
     } else {
-        return path.resolve(path.join(base, file))
+        return path.resolve(path.join(base, file));
     }
 }
 

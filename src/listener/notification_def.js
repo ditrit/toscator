@@ -1,5 +1,5 @@
-import { newToscaNotificationDef } from "../model/notification_def.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
+import { newToscaNotificationDef } from '../model/notification_def.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
 export default {
     exit_notification_defs(parsed_rule) {
@@ -7,7 +7,7 @@ export default {
     },
 
     exit_notification_def(parsed_rule) {
-        const outputs = listener_helpers.propertyMapofHelper("outputs", parsed_rule);
+        const outputs = listener_helpers.propertyMapofHelper('outputs', parsed_rule);
         newToscaNotificationDef(
             {
                 description: parsed_rule.value.description?.value,

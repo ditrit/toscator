@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaNodeFilter extends ToscaNode{
     constructor(input, source) {
@@ -47,7 +47,7 @@ export function newToscaNodeFilter(input, source) {
     if(ToscaNodeFilter.isValid(input, source)) {
         res = new ToscaNodeFilter(input, source);
     } else {
-        res = {}
+        res = {};
     }
     return res;
 }

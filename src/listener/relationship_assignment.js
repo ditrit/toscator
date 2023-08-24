@@ -1,13 +1,13 @@
-import { newToscaRelationshipAssignment } from "../model/relationship_assignment.js";
-import listener_helpers from "./listener_helpers/listener_helpers.js";
+import { newToscaRelationshipAssignment } from '../model/relationship_assignment.js';
+import listener_helpers from './listener_helpers/listener_helpers.js';
 
 export default {
     exit_relationship_assignment(parsed_rule) {
-        if (typeof parsed_rule.value === "string") {
+        if (typeof parsed_rule.value === 'string') {
             newToscaRelationshipAssignment({type: parsed_rule.value}, parsed_rule);
         } else {
-            const interfaces = listener_helpers.propertyMapofHelper("interfaces", parsed_rule);
-            const properties = listener_helpers.propertyMapofHelper("properties", parsed_rule);
+            const interfaces = listener_helpers.propertyMapofHelper('interfaces', parsed_rule);
+            const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
             newToscaRelationshipAssignment({
                 type: parsed_rule.value.type?.value,
                 interfaces: interfaces,
@@ -15,4 +15,4 @@ export default {
             }, parsed_rule);
         }
     }
-}
+};

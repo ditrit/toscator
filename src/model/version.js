@@ -1,29 +1,29 @@
-import { ToscaNode } from "./tosca_node.js"
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaVersion extends ToscaNode {
     constructor(value, source) {
-        super(source)
-        this.value = value
+        super(source);
+        this.value = value;
     }
     toString() {
-        return `Version : ${this.value}`
+        return `Version : ${this.value}`;
     }
     static isValid(input, source) {
-        if (typeof(input) != 'string' || input == "") {
+        if (typeof(input) != 'string' || input == '') {
             //source.ctx.grammarError('Incorrect input for version')
-            return false
+            return false;
         } else {
-            return true
+            return true;
         }
     }
 }
 
 export function newToscaVersion(input, source) {
-    let res
+    let res;
     if ( ToscaVersion.isValid(input, source)) {
-        res = new ToscaVersion(input, source)
+        res = new ToscaVersion(input, source);
     } else {
-        res = {}
+        res = {};
     }
-    return res
+    return res;
 }

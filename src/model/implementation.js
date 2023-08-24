@@ -1,4 +1,4 @@
-import { ToscaNode } from "./tosca_node.js";
+import { ToscaNode } from './tosca_node.js';
 
 export class ToscaImplementation extends ToscaNode {
     constructor(input, source) {
@@ -6,7 +6,7 @@ export class ToscaImplementation extends ToscaNode {
         this.primary = input.primary;
         this.dependencies = input.dependencies;
     }
-    static _classname = "implementation";
+    static _classname = 'implementation';
     getClassname() {
         return ToscaArtifact._classname;
     }
@@ -25,5 +25,5 @@ export class ToscaImplementation extends ToscaNode {
 export function newToscaImplentation(input, source) {
     if (ToscaImplementation.isValid(input, source))
         return new ToscaImplementation(input, source);
-    return {}
+    return {};
 }
