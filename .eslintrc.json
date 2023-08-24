@@ -53,6 +53,7 @@
     }],
 
     "jsdoc/no-undefined-types": "off",
-    "import/no-default-export": "error"
+    "import/no-default-export": "error",
+    "camelcase": "off"
   }
 }

@@ -64,7 +64,16 @@ import workflow_activity from './workflow_activity.js';
 import property_mapping from './property_mapping.js';
 import interface_mapping from './interface_mapping.js';
 
-export default {
+/**
+ * Listener.
+ * @typedef {{}} Listener
+ */
+
+/**
+ * Exported listener.
+  @type {Listener}
+ */
+export const listenerObject = {
   ...prog,
   ...imports,
   ...metadata,
