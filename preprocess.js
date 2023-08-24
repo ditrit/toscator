@@ -1,5 +1,5 @@
-import { preprocess } from 'lidy-js'
+import { preprocess } from 'lidy-js';
 
-preprocess("./schemas/tosca_1_3.yaml");
+preprocess('./schemas/tosca_1_3.yaml');
 
 
