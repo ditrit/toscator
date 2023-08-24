@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { parse } from './parser/parse.js';
+import { Parser } from './parser/parse.js';
 import { substitution } from './substitution/substitution.js';
+import { NodeJsFileManager } from '#src/parser/FileManager.js';
 
 /**
  * Parse the file, resolve types and substitute abstract nodes
@@ -11,7 +12,8 @@ import { substitution } from './substitution/substitution.js';
  */
 export function compile(src, patterns_dir) {
   // 1 : Parsing
-  const cst = parse(src);
+  const parser = new Parser(new NodeJsFileManager());
+  const cst = parser.parse(src);
 
   // 2 : Type resolution
   // TODO
@@ -33,7 +35,7 @@ export function compile(src, patterns_dir) {
     // can also only parse the node_templates using the keywords argument of parse() and then
     // fully parse if it is a substitute
     patterns.forEach((pattern) => {
-      list_cst.push(parse(path.join(patterns_dir, pattern)));
+      list_cst.push(parser.parse(path.join(patterns_dir, pattern)));
     });
   }
 

@@ -12,11 +12,12 @@ These instructions will get you a copy of the project up and running on your loc
 If you simply want to parse a Tosca file, then follow this instructions:
 * Write a javascript script to parse a file like in the example below which we will name parse_file.js
 
-```
-import {parse} from "../parser/parse.js";
+```js
+import {Parser} from "../parser/parse.js";
 
 // provide the relative path to the tosca file to parse
-const res = parse('./tests/data_manual/test_parsing/testInterfaceMapping.yml');
+const parser = new Parser(new NodeJsFileManager());
+const res = Parser.parse('./tests/data_manual/test_parsing/testInterfaceMapping.yml');
 console.log(res);
 ```
 
@@ -30,6 +31,7 @@ node parse_file.js
 
 If you want to substitute an abstract node with a topology_template, you can write the following script:
 
+(Outdated) // TODO: update
 ```
 import { mappingSubstitution } from "../../../../substitution/mapping_substitution.js";
 import { parse } from "../../../../parser/parse.js";
