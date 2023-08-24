@@ -6,8 +6,12 @@ import { ToscaServiceTemplate } from '../model/service_template.js';
 
 // src has to be the relative path from the working directory to the file to parse
 // it should also work with an absolute path
+/**
+ * Parse a TOSCA yaml file.
+ * @param {string} src - Path of the file to parse.
+ * @returns {ToscaServiceTemplate}
+ */
 export function parse(src) {
-    // 1) importing the files and parsing them
     const errors = [];
     const ctx = new Ctx();
     let cst = new ToscaServiceTemplate();
@@ -23,8 +27,6 @@ export function parse(src) {
     init_import.setAbsolutePath();
 
     cst = parseWithImports(init_import, null, errors, [init_import.path]);
-
-    // TO DO: 2) type resolution...
 
     return cst;
 }

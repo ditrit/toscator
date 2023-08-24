@@ -5,9 +5,9 @@ import path from 'path';
 import fs from 'fs';
 
 /**
- * TO DO: handle the different protocols.
- * TO DO: can we have a local repository...? If yes then modify the else {}
- * TO DO: I created this function for importation: we want the file in string, but is that
+ * TODO: handle the different protocols.
+ * TODO: can we have a local repository...? If yes then modify the else {}
+ * TODO: I created this function for importation: we want the file in string, but is that
  * the case for all artifacts ?
  * @param {String} cst_path = absolute path the current_service_template
  * @param {String} f_path = relative path from the current_service_template to the

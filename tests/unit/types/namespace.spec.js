@@ -15,7 +15,7 @@ describe('Tosca compiler ->', ()=>{
             expect(parse(correct_namespace).namespace).toBeInstanceOf(ToscaNamespace);
         });
 
-        /* TODO: fix
+        /*
         it('incorrect namespace type', ()=>{
             expect(parse(incorrect_namespace).errors.length).toBeGreaterThanOrEqual(1);
         });

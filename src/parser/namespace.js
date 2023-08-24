@@ -7,7 +7,7 @@ import { ToscaServiceTemplate } from '../model/service_template.js';
  */
 export function localNames(cst) {
     const current_namespace = cst.namespace.value;
-    const st_attributes = [ 
+    const st_attributes = [
         'artifact_types',
         'data_types',
         'capability_types',
@@ -18,11 +18,11 @@ export function localNames(cst) {
         'policy_types'
     ];
     st_attributes.forEach(attribute => {
-        
+
         const full_names = new Map();
         const short_names = new Map();
         const ns_names = new Map();
-        
+
         cst[attribute]?.forEach((element, name) => {
             // if there is no "." inside it's not a real full_name accordint to TOSCA, but it helps in the implementation to consider it as such
             full_names.set(name, {type: element, name_ctg: 'full_name'});
@@ -40,13 +40,13 @@ export function localNames(cst) {
         cst[attribute] = new Map([...full_names, ...short_names, ...ns_names]);
     });
 }
- 
+
 /**
   * export the objects from the current_service_template to the parent_service_template
   * should I raise errors when there is a name conflict or should I prioritize the order ?
   * only add the namespace_prefix, the namespace_uri and the pst's namespace to the full names
   * @param {ToscaImport} file_import is the ToscaImport instance used to import the current_service_template
-  * @param {ToscaServiceTemplate} pst = parent_service_template 
+  * @param {ToscaServiceTemplate} pst = parent_service_template
   * @param {ToscaServiceTemplate} cst = current_service_template
   */
 export function exportToParent(file_import, pst, cst) {
@@ -69,7 +69,7 @@ export function exportToParent(file_import, pst, cst) {
                     pst[attribute].set(name, element);
                 }
             }
-            // if there is no conflict then export as it is. Also export copy with import_ns_uri + full_name, 
+            // if there is no conflict then export as it is. Also export copy with import_ns_uri + full_name,
             // import_ns_prefix + full_name and pst_ns_uri + full_name as name (for the namespace, not the name attribute of the object) too
             if (element.name_ctg === 'full_name') {
                 if (!pst[attribute].has(name)) {
@@ -79,7 +79,7 @@ export function exportToParent(file_import, pst, cst) {
                     const ns_uri_name = file_import.namespace_uri + '/' + name;
                     if (!pst[attribute].has(ns_uri_name)) {
                         pst[attribute].set(ns_uri_name, {type: element.type, name_ctg: 'import_ns_uri'});
-                    } 
+                    }
                 }
                 if (file_import.namespace_prefix) {
                     const ns_prefix_name = file_import.namespace_prefix + '.' + name;
@@ -101,7 +101,7 @@ export function exportToParent(file_import, pst, cst) {
 /**
  * We added the token name_ctg to import but it modified the structure of the service template
  * We are now returning to the old structure since we don't need it anymore
- * @param {ToscaServiceTemplate} cst 
+ * @param {ToscaServiceTemplate} cst
  */
 export function getRidOfNameCtg(cst) {
     const st_attributes = [
