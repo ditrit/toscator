@@ -11,20 +11,16 @@ describe('Parsing', () => {
     const res = parser.parse('tests/data_manual/test_parsing/testInterfaceMapping.yml');
 
     const seen = new Set();
-    /**
-     *
-     * @param key
-     * @param value
-     */
-    function replacer(key, value) {
+
+    const replacer = (key, value) => {
       if (key === 'origin_file') return '__IGNORED__'; // ignore
 
       // ignore circular references
-      if (seen.has(value)) return;
+      if (seen.has(value)) return undefined;
       seen.add(value);
 
       return value;
-    }
+    };
     expect(JSON.parse(JSON.stringify(res, replacer))).toEqual(parserJson);
   });
 });

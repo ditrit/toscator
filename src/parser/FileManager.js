@@ -86,7 +86,7 @@ export class NodeJsFileManager extends AbstractFileManager {
   /**
    * Read the local file
    * @param {string} abs_path absolute path to the file to read
-   * @param {any[]} errors
+   * @param {any[]} errors - Errors.
    * @returns {string} the file as a string
    */
   getArtifactLocalFile(abs_path, errors) {
@@ -97,6 +97,7 @@ export class NodeJsFileManager extends AbstractFileManager {
         new LidyError('File error', 0, `Can not read file ${abs_path}`),
       );
     }
+    return undefined;
   }
 
   /**
@@ -113,12 +114,14 @@ export class NodeJsFileManager extends AbstractFileManager {
 
   /**
    *
-   * @param {ToscaRepository} repository
+   * @param {ToscaRepository?} repository - Repository.
    * @param {string} f_path file: relative path from the repository or the cst to the file
    * @param {string} cst_path absolute path to the current_service_template
    * @returns {string} the absolute path to the file
    */
   getAbsolutePath(repository, f_path, cst_path) {
+    // TODO: fix. repository.path does not exist.
+    /*
     if (repository) {
       if (path.isAbsolute(f_path) || is_url(f_path)) {
         return f_path;
@@ -126,12 +129,13 @@ export class NodeJsFileManager extends AbstractFileManager {
       if (path.isAbsolute(repository.path) || is_url(repository.path)) {
         return path.resolve(path.dirname(repository.path), f_path);
       }
+
       return path.resolve(
         path.dirname(cst_path),
         path.dirname(repository.path),
         f_path,
       );
-    }
+    } */
     if (path.isAbsolute(f_path) || is_url(f_path)) {
       return f_path;
     }

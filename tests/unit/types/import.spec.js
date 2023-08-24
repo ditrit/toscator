@@ -29,10 +29,13 @@ describe('Tosca compiler ->', () => {
         */
 
     // ######### TODO REPOSITORIES ##########
-    // it("correct full import",
-    // ()=>{
-    // expect(parse(correct_full_import).errors.length).toEqual(0)
-    // });
+    it(
+      'correct full import',
+      () => {
+        const parser = new Parser(new NodeJsFileManager());
+        expect(parser.parse(correct_full_import).errors.length).toEqual(0);
+      },
+    );
 
     /* it("incorrect full import - no file", ()=>{
             //expect(parse(incorect_full_import_no_file).errors[0].name).toEqual("File error");
@@ -59,11 +62,15 @@ describe('Tosca compiler ->', () => {
   const loop_import_file = 'tests/data/import/loop_import_test.yml';
 
   describe('Import files : ', () => {
+    it('Correct import simple file', () => {
+      const parser = new Parser(new NodeJsFileManager());
+      /* const result = */ parser.parse(correct_simple_import);
+      // console.log(result);
+      // TODO: there is always only one service template. So what was being tested here?
+      // expect(result.service_templates.length).toBeGreaterThanOrEqual(1);
+    });
 
-    /* it("Correct import simple file", ()=>{
-            expect(parse(correct_simple_import).service_templates.length).toBeGreaterThanOrEqual(1);
-        });
-
+    /*
         it("incorrect import simple file", ()=>{
             expect(parse(incorrect_simple_import).errors.length).toBeGreaterThanOrEqual(1);
         });
