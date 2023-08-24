@@ -3,7 +3,7 @@
 
   "parserOptions": {
     "parser": "@babel/eslint-parser",
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2022,
     "sourceType": "module"
   },
 
@@ -15,11 +15,11 @@
 
   "extends": [
     "airbnb-base",
-    "plugin:jsdoc/recommended"
+    "plugin:jsdoc/recommended-error"
   ],
 
   "plugins": [
-
+    "import"
   ],
 
   "globals": {
@@ -47,11 +47,12 @@
 
     "no-restricted-imports": ["error", {
       "patterns": [{
-        "group": ["\\.\\./*", "\\./*"],
-        "message": "Use '#src/' for base of import. Do not use './' or '../'."
+        "group": ["\\.\\./*"],
+        "message": "Use '#src/' for base of import. Do not use '../'."
       }]
     }],
 
-    "jsdoc/no-undefined-types": "off"
+    "jsdoc/no-undefined-types": "off",
+    "import/no-default-export": "error"
   }
 }
