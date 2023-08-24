@@ -15,11 +15,11 @@ describe('Tosca compiler ->', ()=>{
             expect(parse(correct_namespace).namespace).toBeInstanceOf(ToscaNamespace);
         });
 
-        /*
+
         it('incorrect namespace type', ()=>{
             expect(parse(incorrect_namespace).errors.length).toBeGreaterThanOrEqual(1);
         });
-        */
+
 
         it('no namespace', ()=>{
             expect(parse(no_namespace).errors.length).toEqual(0);
