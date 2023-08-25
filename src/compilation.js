@@ -7,10 +7,10 @@ import { NodeJsFileManager } from '#src/parser/FileManager.js';
 /**
  * Parse the file, resolve types and substitute abstract nodes
  * @param {string} src - Path to the file to compile.
- * @param {string} patterns_dir - Path to the directory containing patterns.
+ * @param {string} [patterns_dir] - Path to the directory containing patterns.
  * @returns {ToscaServiceTemplate} Compiled service template.
  */
-export function compile(src, patterns_dir) {
+export function compile(src, patterns_dir = undefined) {
   // 1 : Parsing
   const parser = new Parser(new NodeJsFileManager());
   const cst = parser.parse(src);

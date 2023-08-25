@@ -96,8 +96,8 @@ export class NodeJsFileManager extends AbstractFileManager {
       errors.push(
         new LidyError('File error', 0, `Can not read file ${abs_path}`),
       );
+      throw error;
     }
-    return undefined;
   }
 
   /**
