@@ -6,8 +6,9 @@ describe('Test function: compile', () => {
   const testedFiles = [
     'data_manual/ToscaExampleSimple.yml',
     'data_manual/ToscaExampleSimple2.yml',
+    'data_manual/ToscaNextcloud.yml',
     // 'data_manual/ToscaExample.yml', // TODO: crashes
-    // 'data_manual/ToscaNextcloud.yml', // TODO: crashes
+
   ];
 
   for (const file of testedFiles) {
