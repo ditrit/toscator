@@ -71,10 +71,13 @@ describe('Tosca compiler ->', () => {
     });
 
     /*
-        it("incorrect import simple file", ()=>{
-            expect(parse(incorrect_simple_import).errors.length).toBeGreaterThanOrEqual(1);
-        });
+    it('incorrect import simple file', () => {
+      const parser = new Parser(new NodeJsFileManager());
+      expect(parser.parse(incorrect_simple_import).errors.length).toBeGreaterThanOrEqual(1);
+    });
+    */
 
+    /*
         it("loop import file", ()=>{
             expect(parse(loop_import_file).service_templates.length).toEqual(2);
         }); */

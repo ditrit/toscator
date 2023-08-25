@@ -52,6 +52,10 @@ export class Parser {
    * @returns {ToscaServiceTemplate} parsed file
    */
   static simpleParse(listener, file, src_data, abs_path) {
+    if (!src_data) {
+      throw Error('empty src_data');
+    }
+
     const { namespace_uri } = file;
     const { namespace_prefix } = file;
 

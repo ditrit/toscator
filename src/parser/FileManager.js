@@ -101,7 +101,7 @@ export class NodeJsFileManager extends AbstractFileManager {
   }
 
   /**
-   * TO DO: implement it
+   * TODO: implement it
    * get the file from the http address as a string
    * @param {*} abs_path
    * @param {*} repository
@@ -109,7 +109,7 @@ export class NodeJsFileManager extends AbstractFileManager {
    * @returns {string} the file as a string
    */
   getArtifactHttp(abs_path, repository, errors) {
-
+    throw Error('not implemented');
   }
 
   /**
