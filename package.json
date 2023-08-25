@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "ajv": "^8.11.0",
-    "lidy-js": "git+https://github.com/ditrit/lidy-js.git#1.0.1",
+    "lidy-js": "file:./lib/lidy-js",
     "regex": "^0.1.1",
     "sync-request": "^6.1.0"
   },
