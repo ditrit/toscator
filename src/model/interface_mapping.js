@@ -24,14 +24,6 @@ export class ToscaInterfaceMapping extends ToscaNode {
     // TODO: check for valid path
     return true;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**

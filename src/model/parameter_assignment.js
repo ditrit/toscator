@@ -26,14 +26,6 @@ export class ToscaParameterAssignment extends ToscaNode {
     }
     return false;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**

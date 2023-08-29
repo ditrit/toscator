@@ -26,14 +26,6 @@ export class ToscaOperationDef extends ToscaNode {
 
   /**
    *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

@@ -46,14 +46,6 @@ export class ToscaNodeTemplate extends ToscaNode {
       }
     }
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**

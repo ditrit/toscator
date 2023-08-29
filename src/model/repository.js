@@ -1,6 +1,14 @@
 import { ToscaNode } from './tosca_node.js';
 
+/**
+ *
+ */
 export class ToscaRepository extends ToscaNode {
+  /**
+   *
+   * @param input
+   * @param source
+   */
   constructor(input, source) {
     super(source);
     this.url = input.url;
@@ -14,11 +22,19 @@ export class ToscaRepository extends ToscaNode {
     }
   }
 
+  /**
+   *
+   */
   toString() {
     return `{Name: ${this.name},\n      Url: ${this.url}, \n      Descrption: ${this.description}, \n      Token: ${this.token}, \n      Protocol: ${this.prototol}, \n      Token_type: ${this.token_type}, \n      User: ${this.user}}\n`;
     // return `test: ${this.url}`
   }
 
+  /**
+   *
+   * @param input
+   * @param source
+   */
   static isValid(input, source) {
     if (input && source) {
       return true;
@@ -26,6 +42,9 @@ export class ToscaRepository extends ToscaNode {
     return false;
   }
 
+  /**
+   *
+   */
   getFullUrl() {
     let res;
     (this.prototol) ? res += `${this.protocol}://` : 'https://';
@@ -33,10 +52,6 @@ export class ToscaRepository extends ToscaNode {
     if (this.token) { res += `${this.token}@`; }
     res += url;
     return res;
-  }
-
-  setName(name) {
-    this.name = name;
   }
 }
 

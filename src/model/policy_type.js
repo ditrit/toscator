@@ -37,14 +37,6 @@ export class ToscaPolicyType extends ToscaType {
     }
     return true;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**

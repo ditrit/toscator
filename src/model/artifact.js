@@ -50,14 +50,6 @@ export class ToscaArtifact extends ToscaNode {
 
   /**
    *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
-
-  /**
-   *
    * @param service_template
    */
   static correctGrammar(service_template) {

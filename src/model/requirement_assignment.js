@@ -26,15 +26,6 @@ export class ToscaRequirementAssignment extends ToscaNode {
   static isValid(input, source) {
     return true;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    console.log(name);
-    this.name = name;
-  }
 }
 
 /**
