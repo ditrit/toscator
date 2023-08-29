@@ -53,8 +53,10 @@
     }],
 
     "jsdoc/no-undefined-types": "off",
+    "jsdoc/require-jsdoc": ["error", {"require":{"ClassDeclaration":true,"ClassExpression":true,"MethodDefinition":true}}],
     "import/no-default-export": "error",
     "camelcase": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off"
   }
 }
