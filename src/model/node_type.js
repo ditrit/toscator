@@ -55,11 +55,15 @@ export class ToscaNodeType extends ToscaType {
    * @param {ToscaNodeType} parent - Parent type to inherit from.
    */
   inheritFrom(parent) {
-    this.properties = {
-      ...parent.properties,
-      ...this.properties,
-    };
-    // TODO: le reste
+    super.inheritFrom(parent);
+
+    const attributes = ['properties', 'attributes', 'capabilities', 'requirements', 'artifacts', 'interfaces'];
+    for (const attributeName of attributes) {
+      this[attributeName] = {
+        ...parent[attributeName],
+        ...this[attributeName],
+      };
+    }
   }
 }
 

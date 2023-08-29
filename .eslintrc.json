@@ -57,6 +57,7 @@
     "import/no-default-export": "error",
     "camelcase": "off",
     "class-methods-use-this": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off"
   }
 }

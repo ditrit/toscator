@@ -61,4 +61,16 @@ export class ToscaType extends ToscaNode {
     }
     return false;
   }
+
+  /**
+   * Make this type inherit from a given type.
+   * This method allows to implement the 'derived_from' clause.
+   * @param {ToscaType} parent - Parent type to inherit from.
+   */
+  inheritFrom(parent) {
+    // Note: ??= replaces the value if it is undefined/null.
+    this.version ??= parent.version;
+    this.metadata ??= parent.metadata;
+    this.description ??= `[inherited from ${parent.name}] ${parent.description}`;
+  }
 }
