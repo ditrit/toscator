@@ -1,35 +1,53 @@
 import { ToscaNode } from './tosca_node.js';
 
-export class ToscaRequirementAssignment extends ToscaNode{
-    constructor(input, source) {
-        super(source);
-        this.capability = input.capability;
-        this.node = input.node;
-        this.relationship = input.relationship;
-        this.node_filter = input.node_filter;
-        this.occurrences = input.occurrences;
-    }
+/**
+ *
+ */
+export class ToscaRequirementAssignment extends ToscaNode {
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  constructor(input, source) {
+    super(source);
+    this.capability = input.capability;
+    this.node = input.node;
+    this.relationship = input.relationship;
+    this.node_filter = input.node_filter;
+    this.occurrences = input.occurrences;
+  }
 
-    toString() {
-        return super.toString();
-    }
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  static isValid(input, source) {
+    return true;
+  }
 
-    static isValid(input, source) {
-        return true;
-    }
-
-    setName(name) {
-        console.log(name);
-        this.name = name;
-    }
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    console.log(name);
+    this.name = name;
+  }
 }
 
+/**
+ *
+ * @param input
+ * @param source
+ */
 export function newToscaRequirementAssignment(input, source) {
-    let res;
-    if (ToscaRequirementAssignment.isValid(input, source)) {
-        res = new ToscaRequirementAssignment(input, source);
-    } else {
-        res = {};
-    }
-    return res;
+  let res;
+  if (ToscaRequirementAssignment.isValid(input, source)) {
+    res = new ToscaRequirementAssignment(input, source);
+  } else {
+    res = {};
+  }
+  return res;
 }

@@ -1,47 +1,70 @@
 import { ToscaNode } from './tosca_node.js';
 
+/**
+ *
+ */
 export class ToscaRequirement extends ToscaNode {
-    constructor(input, source) {
-        super(source);
-        this.capability = input.capability;
-        this.node = input.node;
-        this.occurences = input.occurences;
-        this.relationship = input.relationship;
-        this.name = input.name;
-    }
-    static _classname = 'requirement';
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  constructor(input, source) {
+    super(source);
+    this.capability = input.capability;
+    this.node = input.node;
+    this.occurences = input.occurences;
+    this.relationship = input.relationship;
+    this.name = input.name;
+  }
 
-    getClassname() {
-        return ToscaRequirement._classname;
-    }
+  static _classname = 'requirement';
 
-    toString() {
-        return super.toString();
-    }
+  /**
+   *
+   */
+  getClassname() {
+    return ToscaRequirement._classname;
+  }
 
-    setName(name) {
-        this.name = name;
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    this.name = name;
+  }
+
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  static isValid(input, source) {
+    if (!typeof input.capability === 'string') {
+      source.ctx.typeError(
+        source.current,
+        'Incorrect definition for requirement',
+      );
+      return false;
     }
-    static isValid(input, source) {
-        if (!typeof input.capability === 'string') {
-            source.ctx.typeError(
-                source.current,
-                'Incorrect definition for requirement'
-            );
-            return false;
-        }
-        //   if (input.properties instanceof ToscaProperty) {
-        //   }
-        return true;
-    }
+    //   if (input.properties instanceof ToscaProperty) {
+    //   }
+    return true;
+  }
 }
 
+/**
+ *
+ * @param input
+ * @param source
+ */
 export function newToscaRequirement(input, source) {
-    let res;
-    if (ToscaRequirement.isValid(input, source)) {
-        res = new ToscaRequirement(input, source);
-    } else {
-        res = {};
-    }
-    return res;
+  let res;
+  if (ToscaRequirement.isValid(input, source)) {
+    res = new ToscaRequirement(input, source);
+  } else {
+    res = {};
+  }
+  return res;
 }

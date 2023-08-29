@@ -1,34 +1,52 @@
 import { ToscaNode } from './tosca_node.js';
 
+/**
+ *
+ */
 export class ToscaParameterAssignment extends ToscaNode {
-    constructor(input, source) {
-        super(source);
-        this.description = input.description;
-        this.value = input.value;
-    }
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  constructor(input, source) {
+    super(source);
+    this.description = input.description;
+    this.value = input.value;
+  }
 
-    toString() {
-        return super.toString();
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  static isValid(input, source) {
+    if (input) {
+      return true;
     }
+    return false;
+  }
 
-    static isValid(input, source) {
-        if (input) {
-            return true;
-        }
-        return false;
-    }
-
-    setName(name) {
-        this.name = name;
-    }
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    this.name = name;
+  }
 }
 
+/**
+ *
+ * @param input
+ * @param source
+ */
 export function newToscaParameterAssignment(input, source) {
-    let res;
-    if (ToscaParameterAssignment.isValid(input, source)) {
-        res = new ToscaParameterAssignment(input, source);
-    } else {
-        res = {};
-    }
-    return res;
+  let res;
+  if (ToscaParameterAssignment.isValid(input, source)) {
+    res = new ToscaParameterAssignment(input, source);
+  } else {
+    res = {};
+  }
+  return res;
 }
