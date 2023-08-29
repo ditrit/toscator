@@ -1,0 +1,15 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  test_parent_type:
+    derived_from: tosca.nodes.Root
+    # TODO: 'properties', 'attributes', 'capabilities', 'interfaces'
+    # TODO: requirements
+    # TODO: artifacts
+    # TODO: version, metadata, description
+
+  test_empty_child_type:
+    derived_from: test_parent_type
+
+  test_full_child_type:
+    derived_from: test_parent_type

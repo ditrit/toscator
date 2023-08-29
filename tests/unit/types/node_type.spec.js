@@ -1,5 +1,9 @@
 import { describe, it, expect } from '@jest/globals';
 import { ToscaNodeType } from '#src/model/node_type.js';
+import { Parser } from '#src/parser/parse.js';
+import { NodeJsFileManager } from '#src/parser/FileManager.js';
+import { ignore_fields_and_circular_ref } from '#tests/unit/utils.js';
+import nodeTypeDerivedFromJson from './node_type_derived_from.output.json';
 
 describe('class ToscaNodeType', () => {
   describe('Constructor', () => {
@@ -132,5 +136,26 @@ describe('class ToscaNodeType', () => {
         expect(childType.description.includes('inherited from')).toBeTruthy();
       });
     }
+  });
+});
+
+describe('Parser: node_type', () => {
+  it('has expected output', () => {
+    const parser = new Parser(new NodeJsFileManager());
+    const result = parser.parse('tests/unit/types/node_type_derived_from.yml');
+    // TODO: update this test when fully implemented.
+    // console.log(JSON.stringify(ignore_fields_and_circular_ref(result)));
+    expect(ignore_fields_and_circular_ref(result)).toEqual(nodeTypeDerivedFromJson);
+  });
+  it('parses a node_type correctly', () => {
+    // TODO
+  });
+
+  it('inherits correctly (empty child)', () => {
+    // TODO
+  });
+
+  it('inherits correctly (full child, redefining everything)', () => {
+    // TODO
   });
 });

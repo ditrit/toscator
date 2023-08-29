@@ -5,7 +5,7 @@ import { ToscaType } from './tosca_type.js';
  */
 export class ToscaNodeType extends ToscaType {
   /**
-   *
+   * ToscaNodeType's constructor.
    * @param {object} input
    * @param {MapNode} source
    */
@@ -59,6 +59,8 @@ export class ToscaNodeType extends ToscaType {
 
     // We merge map attributes with a single depth level.
     // ie. attributes inside the maps are not deeply merged.
+    // NB: Tosca Specification does not explicitely states whether this merge should be
+    // recursively deep. Here we made the choice of simplicity with shallow map merging.
     const mapAttributes = ['properties', 'attributes', 'capabilities', 'interfaces'];
     for (const attributeName of mapAttributes) {
       this[attributeName] = {
