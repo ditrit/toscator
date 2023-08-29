@@ -31,7 +31,6 @@ export class ToscaType extends ToscaNode {
     // This part is probably useless since there shoudln't be any collisions inside the same template thanks to lidy.
     if (current_st[category][`${namespace_name}/${name}`]) {
       parsed_rule.ctx.grammarError(`Type collision : ${this.import_id}`);
-      console.log('Erreur de collision de type');
     } else {
       current_st[category][`${namespace_name}/${name}`] = this;
     }
