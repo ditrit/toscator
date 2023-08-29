@@ -1,13 +1,20 @@
-import { it, describe, expect } from '@jest/globals';
+import {
+  it, describe, expect, beforeEach,
+} from '@jest/globals';
 
+import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { Parser } from '#src/parser/parse.js';
 import { ToscaImport } from '#src/model/imports.js';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
 
 // TODO: réparer ces tests
 describe('Tosca compiler ->', () => {
+  beforeEach(() => {
+    RuleParser.throwOnError = true;
+  });
+
   const correct_simple_import = 'tests/data/import/correct_simple_import.yml';
-  let incorrect_simple_import = 'tests/data/import/incorrect_simple_import.yml';
+  const incorrect_simple_import = 'tests/data/import/incorrect_simple_import_incorrect_child.yml';
   const correct_full_import = 'tests/data/import/correct_full_import.yml';
   const incorect_full_import_no_file = 'tests/data/import/incorect_full_import_no_file.yml';
   const incorrect_full_import_incorrect_repository = 'tests/data/import/correct_full_import.yml';
@@ -58,7 +65,7 @@ describe('Tosca compiler ->', () => {
         }); */
   });
 
-  incorrect_simple_import = 'tests/data/import/incorrect_simple_import_incorrect_child.yml';
+
   const loop_import_file = 'tests/data/import/loop_import_test.yml';
 
   describe('Import files : ', () => {
@@ -70,12 +77,10 @@ describe('Tosca compiler ->', () => {
       // expect(result.service_templates.length).toBeGreaterThanOrEqual(1);
     });
 
-    /*
-    it('incorrect import simple file', () => {
+    /*it('incorrect import simple file', () => {
       const parser = new Parser(new NodeJsFileManager());
       expect(parser.parse(incorrect_simple_import).errors.length).toBeGreaterThanOrEqual(1);
-    });
-    */
+    });*/
 
     /*
         it("loop import file", ()=>{
