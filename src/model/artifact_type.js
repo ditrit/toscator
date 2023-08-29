@@ -46,18 +46,3 @@ export class ToscaArtifactType extends ToscaType {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaArtifactType(input, source) {
-  let res;
-  if (ToscaArtifactType.isValid(input, source)) {
-    res = new ToscaArtifactType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

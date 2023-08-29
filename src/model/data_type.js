@@ -95,18 +95,3 @@ function ValidProperties(properties) {
   }
   return true;
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaDataType(input, source) {
-  let res;
-  if (ToscaDataType.isValid(input, source)) {
-    res = new ToscaDataType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

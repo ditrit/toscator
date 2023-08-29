@@ -20,7 +20,7 @@ export class ToscaOperationAssignment extends ToscaNode {
    *
    */
   getClassname() {
-    return OperationDef._classname;
+    return this._classname;
   }
 
   /**
@@ -32,19 +32,4 @@ export class ToscaOperationAssignment extends ToscaNode {
     // TODO: Check if the implementation is valid
     return true;
   }
-}
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaOperationAssignment(input, source) {
-  let res;
-  if (ToscaOperationAssignment.isValid(input, source)) {
-    res = new ToscaOperationAssignment(input, source);
-  } else {
-    res = {};
-  }
-  return res;
 }

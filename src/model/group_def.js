@@ -27,18 +27,3 @@ export class ToscaGroupDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaGroupDef(input, source) {
-  let res;
-  if (ToscaGroupDef.isValid(input, source)) {
-    res = new ToscaGroupDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

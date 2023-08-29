@@ -27,18 +27,3 @@ export class ToscaPropertyMapping extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaPropertyMapping(input, source) {
-  let res;
-  if (ToscaPropertyMapping.isValid(input, source)) {
-    res = new ToscaPropertyMapping(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

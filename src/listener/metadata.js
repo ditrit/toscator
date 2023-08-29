@@ -1,18 +1,18 @@
-import { newToscaMetadata, newMetadataLeaf } from '../model/metadata.js';
+import { MetadataLeaf, ToscaMetadata } from '../model/metadata.js';
+import { validateCreateAndRegister } from '#src/models.js';
 
 export default {
-    exit_metadata(parsed_rule) {
-        const leafs = [];
-        
-        for (const key in parsed_rule.value) {
-            let metadata_leaf;
-            const name = (key) ? key : '';
-            const value = (parsed_rule.value[key]) ? parsed_rule.value[key].value : '';
-            
-            metadata_leaf = newMetadataLeaf({name, value}, parsed_rule);
-            leafs.push(metadata_leaf);
-        }
+  exit_metadata(parsed_rule) {
+    const leafs = [];
 
-        newToscaMetadata(leafs, parsed_rule);
+    for (const key in parsed_rule.value) {
+      const name = (key) || '';
+      const value = (parsed_rule.value[key]) ? parsed_rule.value[key].value : '';
+
+      const metadata_leaf = validateCreateAndRegister(MetadataLeaf, { name, value }, parsed_rule);
+      leafs.push(metadata_leaf);
     }
+
+    validateCreateAndRegister(ToscaMetadata, leafs, parsed_rule);
+  },
 };

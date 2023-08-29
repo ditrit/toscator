@@ -47,18 +47,3 @@ export class ToscaNodeTemplate extends ToscaNode {
     }
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaNodeTemplate(input, source) {
-  let res;
-  if (ToscaNodeTemplate.isValid(input, source)) {
-    res = new ToscaNodeTemplate(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

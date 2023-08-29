@@ -4,7 +4,15 @@ import {
   is_url,
 } from './utils.js';
 
+/**
+ *
+ */
 export class ToscaImport extends ToscaNode {
+  /**
+   *
+   * @param input
+   * @param source
+   */
   constructor(input, source) {
     super(source);
     this.file = input.file;
@@ -14,14 +22,25 @@ export class ToscaImport extends ToscaNode {
     // this.setAbsolutePath();
   }
 
+  /**
+   *
+   */
   toString() {
     return `\n    {Path: ${this.path}, \n    Repository: ${this.repository}, \n    Namespace_prefix: ${this.namespace_prefix}, \n    Namespace_uri: ${this.namespace_uri}}\n`;
   }
 
+  /**
+   *
+   * @param input
+   * @param source
+   */
   static isValid(input, source) {
     return true;
   }
 
+  /**
+   *
+   */
   setAbsolutePath() {
     if (this.repository) {
 
@@ -34,6 +53,10 @@ export class ToscaImport extends ToscaNode {
     }
   }
 
+  /**
+   *
+   * @param path_arg
+   */
   isRelative(path_arg) {
     return !is_url(path_arg) || !path.isAbsolute(path_arg);
   }
@@ -53,6 +76,10 @@ export class ToscaImport extends ToscaNode {
     return null;
   }
 
+  /**
+   *
+   * @param other
+   */
   equals(other) {
     return (
       other instanceof ToscaImport
@@ -61,19 +88,4 @@ export class ToscaImport extends ToscaNode {
          && this.namespace_uri === other.namespace_uri
     );
   }
-}
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaImport(input, source) {
-  let res;
-  if (ToscaImport.isValid(input, source)) {
-    res = new ToscaImport(input, source);
-  } else {
-    res = {};
-  }
-  return res;
 }

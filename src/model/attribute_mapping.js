@@ -23,18 +23,3 @@ export class ToscaAttributeMapping extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaAttributeMapping(input, source) {
-  let res;
-  if (ToscaAttributeMapping.isValid(input, source)) {
-    res = new ToscaAttributeMapping(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

@@ -46,18 +46,3 @@ export class ToscaCapabilityFilter extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaCapabilityFilter(input, source) {
-  let res;
-  if (ToscaCapabilityFilter.isValid(input, source)) {
-    res = new ToscaCapabilityFilter(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

@@ -27,18 +27,3 @@ export class ToscaRequirementAssignment extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRequirementAssignment(input, source) {
-  let res;
-  if (ToscaRequirementAssignment.isValid(input, source)) {
-    res = new ToscaRequirementAssignment(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

@@ -77,18 +77,3 @@ function getMemberType(service_template, member_name) {
     }
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaGroupType(input, source) {
-  let res;
-  if (ToscaGroupType.isValid(input, source)) {
-    res = new ToscaGroupType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

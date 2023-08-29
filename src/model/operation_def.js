@@ -21,7 +21,7 @@ export class ToscaOperationDef extends ToscaNode {
    *
    */
   getClassname() {
-    return OperationDef._classname;
+    return this._classname;
   }
 
   /**
@@ -33,19 +33,4 @@ export class ToscaOperationDef extends ToscaNode {
     // TODO: Check if the implementation is valid
     return true;
   }
-}
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaOperationDef(input, source) {
-  let res;
-  if (ToscaOperationDef.isValid(input, source)) {
-    res = new ToscaOperationDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
 }

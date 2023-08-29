@@ -26,18 +26,3 @@ export class ToscaParameter extends Charac {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaParameter(input, source) {
-  let res;
-  if (ToscaParameter.isValid(input, source)) {
-    res = new ToscaParameter(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}
