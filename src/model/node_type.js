@@ -56,7 +56,7 @@ export class ToscaNodeType extends ToscaType {
    */
   inheritFrom(parent) {
     this.properties = {
-      ...this.parent.properties,
+      ...parent.properties,
       ...this.properties,
     };
     // TODO: le reste

@@ -1,7 +1,7 @@
 import { describe } from '@jest/globals';
 import { ToscaNodeType } from '#src/model/node_type.js';
 
-describe('class ToscaType', () => {
+describe('class ToscaNodeType', () => {
   describe('Constructor', () => {
     it('defines attributes correctly', () => {
       const input = {
@@ -39,6 +39,33 @@ describe('class ToscaType', () => {
 
       // Defined in ToscaNode
       expect(nodeType.source.attribute).toBe(source.attribute);
+    });
+  });
+
+  describe('Test method: inheritFrom', () => {
+    it('merges properties', () => {
+      const parentInput = {
+        properties: {
+          a: 'parent_value_a',
+          b: 'parent_value_b',
+        },
+      };
+      const parentType = new ToscaNodeType(parentInput, {});
+
+      const childInput = {
+        properties: {
+          b: 'child_value_b',
+          c: 'child_value_c',
+        },
+      };
+      const childType = new ToscaNodeType(childInput, {});
+
+      childType.inheritFrom(parentType);
+
+      expect(childType.properties).toEqual({
+        ...parentType.properties,
+        ...childType.properties,
+      });
     });
   });
 });
