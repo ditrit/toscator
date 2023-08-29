@@ -1,13 +1,15 @@
-import { newtoscaFrequency } from '../model/tosca_freqeuncy.js';
+import { validateCreateAndRegister } from '#src/models.js';
+import { ToscaFrequency } from '#src/model/tosca_freqeuncy.js';
 
 export default {
-    exit_frequency(parsed_rule) {
-        newtoscaFrequency(
-            {
-                type: 'frequency',
-                value: parsed_rule?.value,
-            },
-            parsed_rule
-        );
-    },
+  exit_frequency(parsed_rule) {
+    validateCreateAndRegister(
+      ToscaFrequency,
+      {
+        type: 'frequency',
+        value: parsed_rule?.value,
+      },
+      parsed_rule,
+    );
+  },
 };

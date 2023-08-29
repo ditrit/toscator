@@ -43,18 +43,3 @@ export class ToscaPropertyFilter extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaPropertyFilter(input, source) {
-  let res;
-  if (ToscaPropertyFilter.isValid(input, source)) {
-    res = new ToscaPropertyFilter(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

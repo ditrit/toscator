@@ -51,18 +51,3 @@ export class ToscaSubstitutionMapping extends ToscaNode {
     }
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaSubstitutionMapping(input, source) {
-  let res;
-  if (ToscaSubstitutionMapping.isValid(input, source)) {
-    res = new ToscaSubstitutionMapping(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

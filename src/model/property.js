@@ -41,16 +41,3 @@ export class ToscaProperty extends Charac {
     return res;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaProperty(input, source) {
-  let res;
-  ToscaProperty.isValid(input, source)
-    ? (res = new ToscaProperty(input, source))
-    : (res = {});
-  return res;
-}

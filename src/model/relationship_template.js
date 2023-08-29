@@ -29,18 +29,3 @@ export class ToscaRelationshipTemplate extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRelationshipTemplate(input, source) {
-  let res;
-  if (ToscaRelationshipTemplate.isValid(input, source)) {
-    res = new ToscaRelationshipTemplate(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

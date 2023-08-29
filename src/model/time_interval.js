@@ -24,18 +24,3 @@ export class ToscaTimeInterval extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaTimeInterval(input, source) {
-  let res;
-  if (ToscaTimeInterval.isValid(input, source)) {
-    res = new ToscaTimeInterval(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

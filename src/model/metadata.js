@@ -28,12 +28,12 @@ export class ToscaMetadata extends ToscaNode {
       source.ctx.grammarError('Metadata input is not an array');
       return false;
     }
-    input.forEach((e) => {
-      if (!input instanceof MetadataLeaf) {
+    for (const e of input) {
+      if (!(e instanceof MetadataLeaf)) {
         source.ctx.grammarError('Metadata input is not a valid MetadataLeaf');
         return false;
       }
-    });
+    }
 
     return true;
   }

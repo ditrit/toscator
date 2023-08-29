@@ -1,10 +1,11 @@
-import { newToscaParameterAssignment } from '../model/parameter_assignment.js';
+import { ToscaParameterAssignment } from '../model/parameter_assignment.js';
 import listener_helpers from './listener_helpers/listener_helpers.js';
+import { validateCreateAndRegister } from '#src/models.js';
 
 export default {
   exit_parameter_assignment(parsed_rule) {
     if (parsed_rule.type === 'map') {
-      newToscaParameterAssignment({
+      validateCreateAndRegister(ToscaParameterAssignment, {
         description: parsed_rule.value.description?.value,
         value: (parsed_rule.value.value?.tosca) ? parsed_rule.value.value?.tosca : parsed_rule.value.value?.value,
       }, parsed_rule);

@@ -71,15 +71,3 @@ export class ToscaBitrate extends ToscaScalar {
     }[unit] * value;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaBitrate(input, source) {
-  if (ToscaBitrate.isValid(input, source)) {
-    return new ToscaBitrate(input, source);
-  }
-  return {};
-}

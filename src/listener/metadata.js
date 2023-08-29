@@ -9,7 +9,7 @@ export default {
       const name = (key) || '';
       const value = (parsed_rule.value[key]) ? parsed_rule.value[key].value : '';
 
-      const metadata_leaf = validateCreateAndRegister(MetadataLeaf, { name, value }, parsed_rule);
+      const metadata_leaf = new MetadataLeaf({ name, value }, parsed_rule);
       leafs.push(metadata_leaf);
     }
 

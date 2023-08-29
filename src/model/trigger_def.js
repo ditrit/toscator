@@ -29,18 +29,3 @@ export class ToscaTriggerDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaTriggerDef(input, source) {
-  let res;
-  if (ToscaTriggerDef.isValid(input, source)) {
-    res = new ToscaTriggerDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

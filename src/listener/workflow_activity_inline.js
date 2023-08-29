@@ -1,5 +1,6 @@
-import { newToscaWorkflowActivityInline } from '../model/workflow_activity_inline.js';
 import listener_helpers from './listener_helpers/listener_helpers.js';
+import { validateCreateAndRegister } from '#src/models.js';
+import { ToscaWorkflowActivityInline } from '#src/model/workflow_activity_inline.js';
 
 export default {
   exit_workflow_activity_inline(parsed_rule) {
@@ -7,7 +8,7 @@ export default {
       validateCreateAndRegister(ToscaWorkflowActivityInline, { workflow: parsed_rule.value }, parsed_rule);
     } else {
       const inputs = listener_helpers.propertyMapofHelper('inputs', parsed_rule);
-      newToscaWorkflowActivityInline({
+      validateCreateAndRegister(ToscaWorkflowActivityInline, {
         workflow: parsed_rule.value.workflow?.value,
         inputs,
       }, parsed_rule);

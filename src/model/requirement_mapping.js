@@ -28,18 +28,3 @@ export class ToscaRequirementMapping extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRequirementMapping(input, source) {
-  let res;
-  if (ToscaRequirementMapping.isValid(input, source)) {
-    res = new ToscaRequirementMapping(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

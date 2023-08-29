@@ -25,18 +25,3 @@ export class ToscaTargetFilter extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaTargetFilter(input, source) {
-  let res;
-  if (ToscaTargetFilter.isValid(input, source)) {
-    res = new ToscaTargetFilter(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

@@ -26,18 +26,3 @@ export class ToscaPolicyDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaPolicyDef(input, source) {
-  let res;
-  if (ToscaPolicyDef.isValid(input, source)) {
-    res = new ToscaPolicyDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

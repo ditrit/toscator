@@ -40,18 +40,3 @@ export class ToscaRelationshipType extends ToscaType {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRelationshipType(input, source) {
-  let res;
-  if (ToscaRelationshipType.isValid(input, source)) {
-    res = new ToscaRelationshipType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

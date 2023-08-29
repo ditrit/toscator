@@ -1,5 +1,6 @@
-import { newToscaRepository } from '../model/repository.js';
 import listener_helpers from './listener_helpers/listener_helpers.js';
+import { ToscaRepository } from '#src/model/repository.js';
+import { validateCreateAndRegister } from '#src/models.js';
 
 /**
  *
@@ -21,7 +22,7 @@ function exit_repository(parsed_rule) {
     for (const key in parsed_rule.value.credential.value.keys?.value) {
       keys.set(key, parsed_rule.value.credential.value.keys.value[key].value);
     }
-    newToscaRepository({
+    validateCreateAndRegister(ToscaRepository, {
       url: parsed_rule.value.url?.value,
       description: parsed_rule.value.description?.value,
       token: parsed_rule.value.credential.value.token?.value,
@@ -31,7 +32,7 @@ function exit_repository(parsed_rule) {
       keys,
     }, parsed_rule);
   } else {
-    newToscaRepository({
+    validateCreateAndRegister(ToscaRepository, {
       url: parsed_rule.value.url?.value,
       description: parsed_rule.value.url?.value,
     }, parsed_rule);
