@@ -1,7 +1,7 @@
 import { it, describe, expect } from '@jest/globals';
 
-import { Parser } from 'src/parser/parse.js';
-import { ToscaNamespace } from 'src/model/namespace.js';
+import { Parser } from '#src/parser/parse.js';
+import { ToscaNamespace } from '#src/model/namespace.js';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
 
 describe('Tosca compiler ->', () => {
