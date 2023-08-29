@@ -57,13 +57,22 @@ export class ToscaNodeType extends ToscaType {
   inheritFrom(parent) {
     super.inheritFrom(parent);
 
-    const attributes = ['properties', 'attributes', 'capabilities', 'requirements', 'artifacts', 'interfaces'];
-    for (const attributeName of attributes) {
+    // We merge map attributes with a single depth level.
+    // ie. attributes inside the maps are not deeply merged.
+    const mapAttributes = ['properties', 'attributes', 'capabilities', 'interfaces'];
+    for (const attributeName of mapAttributes) {
       this[attributeName] = {
         ...parent[attributeName],
         ...this[attributeName],
       };
     }
+
+    // Special case: 'requirements' attribute is a list.
+    this.requirements = [...parent.requirements ?? [], ...this.requirements ?? []];
+
+    // Special case: 'artifacts' is a map or a string.
+    // Here, we just inherit if it is undefined. No deep merge.
+    this.artifacts ??= parent.artifacts;
   }
 }
 

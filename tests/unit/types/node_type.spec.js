@@ -43,7 +43,7 @@ describe('class ToscaNodeType', () => {
   });
 
   describe('Test method: inheritFrom', () => {
-    const attributes = ['properties', 'attributes', 'capabilities', 'requirements', 'artifacts', 'interfaces'];
+    const attributes = ['properties', 'attributes', 'capabilities', 'interfaces'];
     for (const attributeName of attributes) {
       it(`merges ${attributeName}`, () => {
         const parentInput = {
@@ -68,6 +68,47 @@ describe('class ToscaNodeType', () => {
           ...parentType[attributeName],
           ...childType[attributeName],
         });
+      });
+
+      it('merges artifacts', () => {
+        const parentInput = {
+          artifacts: '1_artifacts__parent_test_value',
+        };
+        const parentType = new ToscaNodeType(parentInput, {});
+
+        const childInput1 = {
+          artifacts: '1_artifacts__child_test_value',
+        };
+        const childType1 = new ToscaNodeType(childInput1, {});
+
+        childType1.inheritFrom(parentType);
+
+        expect(childType1.artifacts).toEqual(childInput1.artifacts);
+
+        const childInput2 = {
+          artifacts: undefined,
+        };
+        const childType2 = new ToscaNodeType(childInput2, {});
+
+        childType2.inheritFrom(parentType);
+
+        expect(childType2.artifacts).toEqual(parentType.artifacts);
+      });
+
+      it('merges requirements', () => {
+        const parentInput = {
+          requirements: [1, 2],
+        };
+        const parentType = new ToscaNodeType(parentInput, {});
+
+        const childInput = {
+          requirements: [2, 3],
+        };
+        const childType = new ToscaNodeType(childInput, {});
+
+        childType.inheritFrom(parentType);
+
+        expect(childType.requirements).toEqual([1, 2, 2, 3]);
       });
 
       it('inherits scalar attributes when undefined', () => {
