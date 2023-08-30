@@ -1,5 +1,4 @@
 import imports from './imports.js';
-import prog from './prog.js';
 import metadata from './metadata.js';
 import namespace from './namespace.js';
 import nodetype from './node_type.js';
@@ -74,7 +73,6 @@ import interface_mapping from './interface_mapping.js';
   @type {Listener}
  */
 export const listenerObject = {
-  ...prog,
   ...imports,
   ...metadata,
   ...namespace,

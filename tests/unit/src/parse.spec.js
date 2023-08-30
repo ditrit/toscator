@@ -2,11 +2,11 @@ import {
   describe, it, expect, beforeEach,
 } from '@jest/globals';
 
-import { Parser } from 'src/parser/parse.js';
 import { RuleParser } from 'lidy-js/parser/ruleparser.js';
+import { Parser } from '#src/parser/parse.js';
 import parserJson from './parse.json';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
-import { ignore_fields_and_circular_ref } from './utils.js';
+import { ignore_fields_and_circular_ref } from '../utils.js';
 
 describe('Parsing', () => {
   beforeEach(() => {
