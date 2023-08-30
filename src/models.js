@@ -14,7 +14,6 @@ export function validateCreateAndRegister(ClassType, input, source) {
     return object;
   }
 
-  source.ctx;
   // TODO: error reporting
   return {};
 }

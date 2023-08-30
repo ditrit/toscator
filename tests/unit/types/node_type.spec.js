@@ -1,4 +1,7 @@
-import { describe, it, expect } from '@jest/globals';
+import {
+  describe, it, expect, beforeEach,
+} from '@jest/globals';
+import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { ToscaNodeType } from '#src/model/node_type.js';
 import { Parser } from '#src/parser/parse.js';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
@@ -6,6 +9,10 @@ import { ignore_fields_and_circular_ref } from '#tests/unit/utils.js';
 import nodeTypeDerivedFromJson from './node_type_derived_from.output.json';
 
 describe('class ToscaNodeType', () => {
+  beforeEach(() => {
+    RuleParser.throwOnError = true;
+  });
+
   describe('Constructor', () => {
     it('defines attributes correctly', () => {
       const input = {
