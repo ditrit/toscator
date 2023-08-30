@@ -10,4 +10,12 @@ export class ToscaNode {
     this.source = source;
     this.source.tosca = this; // TODO: What is it ? What is this field's purpose ?
   }
+
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    this.name = name;
+  }
 }

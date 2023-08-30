@@ -22,14 +22,6 @@ export class ToscaRelationshipAssignment extends ToscaRelationshipDef {
   static isValid(input, source) {
     return true;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**

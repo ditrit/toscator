@@ -27,14 +27,6 @@ export class ToscaRequirementMapping extends ToscaNode {
     }
     return true;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**

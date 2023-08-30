@@ -25,14 +25,6 @@ export class ToscaPolicyDef extends ToscaNode {
   static isValid() {
     return true;
   }
-
-  /**
-   *
-   * @param name
-   */
-  setName(name) {
-    this.name = name;
-  }
 }
 
 /**
