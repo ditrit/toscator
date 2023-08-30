@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "toscator",
   "version": "0.0.1",
   "description": "tosca compiler (part of leto project)",
@@ -7,15 +6,19 @@
   "directories": {
     "test": "tests"
   },
+  "type": "module",
+  "imports": {
+    "#src/*": "./src/*",
+    "#tests/*": "./tests/*"
+  },
   "scripts": {
-    "test": "node jasmmine.js"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest"
   },
   "dependencies": {
     "ajv": "^8.11.0",
-    "lidy-js": "git+https://github.com/ditrit/lidy-js.git#main",
+    "lidy-js": "git+https://github.com/ditrit/lidy-js.git#thibaud",
     "regex": "^0.1.1",
-    "sync-request": "^6.1.0",
-    "toscator": "github:ditrit/toscator#jest-tests"
+    "sync-request": "^6.1.0"
   },
   "repository": {
     "type": "git",
@@ -36,6 +39,16 @@
   },
   "homepage": "https://github.com/ditrit/toscator#readme",
   "devDependencies": {
-    "jasmine": "^5.0.1"
+    "@jest/globals": "^29.6.3",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jsdoc": "^46.5.0",
+    "jest": "^29.6.3"
+  },
+  "engines": {
+    "node": ">= 18.17.1",
+    "npm": ">= 9.6.7"
   }
 }
