@@ -5,12 +5,12 @@ import path from "path";
 import fs from "fs";
 
 /**
- * TO DO: handle the different protocols. 
+ * TO DO: handle the different protocols.
  * TO DO: can we have a local repository...? If yes then modify the else {}
  * TO DO: I created this function for importation: we want the file in string, but is that
  * the case for all artifacts ?
  * @param {String} cst_path = absolute path the current_service_template
- * @param {String} path = relative path from the current_service_template to the 
+ * @param {String} f_path = relative path from the current_service_template to the
  * artifact or from the repository to the artifact
  * @param {ToscaRepository} repository
  * @param {Array<LidyError>} errors
@@ -44,7 +44,7 @@ export function getArtifact(cst_path, f_path, repository, errors) {
 /**
  * Read the local file
  * @param {String} abs_path absolute path to the file to read
- * @param {*} errors 
+ * @param {*} errors
  * @returns {String} the file as a string
  */
 function getArtifactLocalFile(abs_path, errors) {
@@ -60,9 +60,9 @@ function getArtifactLocalFile(abs_path, errors) {
 /**
  * TO DO: implement it
  * get the file from the http address as a string
- * @param {*} abs_path 
- * @param {*} repository 
- * @param {*} errors 
+ * @param {*} abs_path
+ * @param {*} repository
+ * @param {*} errors
  * @returns {String} the file as a string
  */
 function getArtifactHttp(abs_path, repository, errors) {
@@ -70,14 +70,14 @@ function getArtifactHttp(abs_path, repository, errors) {
 }
 
 /**
- * 
- * @param {ToscaRepository} repository 
+ *
+ * @param {ToscaRepository} repository
  * @param {String} f_path file: relative path from the repository or the cst to the file
  * @param {String} cst_path absolute path to the current_service_template
  * @returns {String} the absolute path to the file
  */
 export function getAbsolutePath(repository, f_path, cst_path) {
-    if (repository) { 
+    if (repository) {
         if (path.isAbsolute(f_path) || is_url(f_path)) {
             return f_path;
         } else {
