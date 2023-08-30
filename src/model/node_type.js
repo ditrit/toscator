@@ -4,6 +4,8 @@ import { ToscaType } from './tosca_type.js';
  * @augments ToscaType
  */
 export class ToscaNodeType extends ToscaType {
+  static _classname = 'node_type';
+
   /**
    * ToscaNodeType's constructor.
    * @param {object} input
@@ -16,15 +18,31 @@ export class ToscaNodeType extends ToscaType {
      * @type {Map<string, ToscaProperty>}
      */
     this.properties = input.properties;
+    /**
+     * Node type attributes.
+     * @type {Map<string, ToscaAttribute>}
+     */
     this.attributes = input.attributes;
+    /**
+     * Node type capabilities.
+     * @type {Map<string, ToscaCapability>}
+     */
     this.capabilities = input.capabilities;
+    /**
+     * Node type requirements.
+     * @type {ToscaRequirement[]}
+     */
     this.requirements = input.requirements;
-    this.artifacts = input.artifacts;
-    this.interfaces = input.interfaces;
-    // this.workflows = input.workflows
-  }
 
-  static _classname = 'node_type';
+    this.artifacts = input.artifacts; // TODO: type.
+    /**
+     * Node type interfaces.
+     * @type {Map<string, ToscaInterface>}
+     */
+    this.interfaces = input.interfaces;
+
+    // this.workflows = input.workflows // TODO: type.
+  }
 
   /**
    *
@@ -57,6 +75,7 @@ export class ToscaNodeType extends ToscaType {
    * Make this type inherit from a given type.
    * This method allows to implement the 'derived_from' clause.
    * @param {ToscaNodeType} parent - Parent type to inherit from.
+   * @override
    */
   inheritFrom(parent) {
     super.inheritFrom(parent);
@@ -89,7 +108,8 @@ export class ToscaNodeType extends ToscaType {
     // Special case: 'requirements' attribute is a list.
     // TODO: What does the specification say?
     // this.requirements = [...parent.requirements ?? [], ...this.requirements ?? []];
-    // As of now, defining requirements implies that we do not inherit any of them from the parent type.
+    // As of now, defining requirements implies that we do not inherit any
+    // of them from the parent type.
     this.requirements ??= parent.requirements;
 
     // Special case: 'artifacts' is a map or a string.
