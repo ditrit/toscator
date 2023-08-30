@@ -1,0 +1,63 @@
+{
+  "root": true,
+
+  "parserOptions": {
+    "parser": "@babel/eslint-parser",
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+
+  "extends": [
+    "airbnb-base",
+    "plugin:jsdoc/recommended-error"
+  ],
+
+  "plugins": [
+    "import"
+  ],
+
+  "globals": {
+  },
+
+  "rules": {
+    "linebreak-style": ["error", "unix"],
+
+    "no-param-reassign": "off",
+    "no-void": "off",
+    "no-nested-ternary": "off",
+    "max-classes-per-file": "off",
+
+    "import/first": "off",
+    "import/named": "error",
+    "import/namespace": "error",
+    "import/default": "error",
+    "import/export": "error",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/prefer-default-export": "off",
+
+    "prefer-promise-reject-errors": "off",
+
+    "no-restricted-imports": ["error", {
+      "patterns": [{
+        "group": ["\\.\\./*"],
+        "message": "Use '#src/' for base of import. Do not use '../'."
+      }]
+    }],
+
+    "jsdoc/no-undefined-types": "off",
+    "jsdoc/require-jsdoc": ["error", {"require":{"ClassDeclaration":true,"ClassExpression":true,"MethodDefinition":true}}],
+    "import/no-default-export": "error",
+    "camelcase": "off",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "no-restricted-syntax": "off"
+  }
+}
