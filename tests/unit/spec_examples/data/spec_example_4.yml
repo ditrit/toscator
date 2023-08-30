@@ -1,0 +1,28 @@
+# Example 4 - Node Template overriding its Node Type's "configure" interface
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+description: Template for deploying a single server with MySQL software on top.
+  
+topology_template:
+   inputs:
+       # omitted here for brevity
+  
+   node_templates:
+       db_server:
+           type: tosca.nodes.Compute
+           # rest omitted here for brevity
+  
+       mysql:
+           type: tosca.nodes.DBMS.MySQL
+           properties:
+               root_password: { get_input: mysql_rootpw }
+               port: { get_input: mysql_port }
+           requirements:
+               - host: db_server
+           interfaces:
+               Standard:
+                   configure: scripts/my_own_configure.sh
+  
+   outputs:
+       # omitted here for brevity
+  

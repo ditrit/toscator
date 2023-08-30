@@ -31,7 +31,6 @@ export class ToscaType extends ToscaNode {
     // This part is probably useless since there shoudln't be any collisions inside the same template thanks to lidy.
     if (current_st[category][`${namespace_name}/${name}`]) {
       parsed_rule.ctx.grammarError(`Type collision : ${this.import_id}`);
-      console.log('Erreur de collision de type');
     } else {
       current_st[category][`${namespace_name}/${name}`] = this;
     }
@@ -60,5 +59,19 @@ export class ToscaType extends ToscaNode {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Make this type inherit from a given type.
+   * This method allows to implement the 'derived_from' clause.
+   * @param {ToscaType} parent - Parent type to inherit from.
+   */
+  inheritFrom(parent) {
+    // Note: ??= replaces the value if it is undefined/null.
+    this.version ??= parent.version;
+    this.metadata ??= parent.metadata;
+    if (parent.description) {
+      this.description ??= `[inherited from ${parent.name}] ${parent.description}`;
+    }
   }
 }

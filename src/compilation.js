@@ -5,6 +5,35 @@ import { substitution } from './substitution/substitution.js';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
 
 /**
+ *
+ * @param {ToscaNodeType} nodeType
+ * @param {Map<string,ToscaNodeType>} node_types
+ */
+function inheritNodeTypeFromParent(nodeType, node_types) {
+  if (!nodeType.derived_from) {
+    return nodeType;
+  }
+
+  // TODO: What should we do here? Right now we ignore TOSCA types.
+  if (nodeType.derived_from.startsWith('tosca.nodes.')) {
+    return nodeType;
+  }
+
+  const parent = node_types.get(nodeType.derived_from);
+
+  if (!parent) {
+    // TODO: Give the corresponding line of code in the error.
+    throw new Error(`Parent type '${nodeType.derived_from}' not found for type '${nodeType.name}'.`);
+  }
+
+  const completedParent = inheritNodeTypeFromParent(parent, node_types);
+
+  nodeType.inheritFrom(completedParent);
+
+  return nodeType;
+}
+
+/**
  * Parse the file, resolve types and substitute abstract nodes
  * @param {string} src - Path to the file to compile.
  * @param {string} [patterns_dir] - Path to the directory containing patterns.
@@ -13,10 +42,13 @@ import { NodeJsFileManager } from '#src/parser/FileManager.js';
 export function compile(src, patterns_dir = undefined) {
   // 1 : Parsing
   const parser = new Parser(new NodeJsFileManager());
-  const cst = parser.parse(src);
+  const serviceTemplate = parser.parse(src);
 
   // 2 : Type resolution
-  // TODO
+  // TODO: Make other types inherit.
+  for (const nodeType of serviceTemplate.node_types.values()) {
+    inheritNodeTypeFromParent(nodeType, serviceTemplate.node_types);
+  }
 
   // 3 : Substitution
   /**
@@ -39,7 +71,7 @@ export function compile(src, patterns_dir = undefined) {
     });
   }
 
-  substitution(cst, list_cst);
+  substitution(serviceTemplate, list_cst);
 
-  return cst;
+  return serviceTemplate;
 }

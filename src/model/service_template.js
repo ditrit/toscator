@@ -12,7 +12,11 @@ export class ToscaServiceTemplate {
     this.imports = [];
     this.repositories = {};
     this.namespace = { value: '' };
-    this.node_types = {};
+    /**
+     * Node types.
+     * @type {Map<string, ToscaNodeType>}
+     */
+    this.node_types = new Map();
     this.relationship_types = {};
     this.data_types = {};
     this.capability_types = {};

@@ -1,0 +1,26 @@
+# Example 22 - Using YAML anchors in TOSCA templates
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+description: >
+   TOSCA simple profile that just defines a YAML macro for commonly reused Compute
+    properties.
+  
+dsl_definitions:
+   my_compute_node_props: &my_compute_node_props
+       disk_size: 10 GB
+       num_cpus: 1
+       mem_size: 2 GB
+  
+topology_template:
+   node_templates:
+       my_server:
+           type: Compute
+           capabilities:
+               host:
+                   properties: *my_compute_node_props
+  
+       my_database:
+           type: Compute
+           capabilities:
+               host:
+                   properties: *my_compute_node_props

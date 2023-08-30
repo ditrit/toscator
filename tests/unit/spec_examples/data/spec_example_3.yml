@@ -1,0 +1,28 @@
+# Example 3 - Simple (MySQL) software installation on a TOSCA Compute node
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+description: Template for deploying a single server with MySQL software on top.
+  
+topology_template:
+   inputs:
+       mysql_rootpw:
+           type: string
+       mysql_port:
+           type: integer
+       # rest omitted here for brevity
+  
+   node_templates:
+       db_server:
+           type: tosca.nodes.Compute
+           # rest omitted here for brevity
+  
+       mysql:
+           type: tosca.nodes.DBMS.MySQL
+           properties:
+               root_password: { get_input: mysql_rootpw }
+               port: { get_input: mysql_port }
+           requirements:
+               - host: db_server
+  
+   outputs:
+       # omitted here for brevity

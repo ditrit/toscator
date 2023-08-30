@@ -1,0 +1,31 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+node_types:
+  test_parent_type:
+    derived_from: tosca.nodes.Root
+    properties:
+      test_property_1:
+        type: fake_type_11
+        default: 11
+      test_property_2:
+        type: fake_type_12
+        default: 12
+
+
+    # TODO: 'properties', 'attributes', 'capabilities', 'interfaces'
+    # TODO: requirements
+    # TODO: artifacts
+    # TODO: version, metadata, description
+
+  test_empty_child_type:
+    derived_from: test_parent_type
+
+  test_full_child_type:
+    derived_from: test_parent_type
+    properties:
+      test_property_2:
+        type: fake_type_22
+        default: 22
+      test_property_3:
+        type: fake_type_23
+        default: 23

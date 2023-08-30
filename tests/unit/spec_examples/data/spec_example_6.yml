@@ -1,0 +1,63 @@
+# Example 6 - Basic two-tier application (web application and database server tiers)
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+description: Template for deploying a two-tier application servers on 2 servers.
+  
+topology_template:
+   inputs:
+       # Admin user name and password to use with the WordPress application
+       wp_admin_username:
+           type: string
+       wp_admin_password:
+           type: string
+       mysql_root_password:
+           type: string
+       context_root:
+           type: string
+       # rest omitted here for brevity
+  
+  
+   node_templates:
+       db_server:
+           type: tosca.nodes.Compute
+           # rest omitted here for brevity
+  
+       mysql:
+           type: tosca.nodes.DBMS.MySQL
+           # rest omitted here for brevity
+  
+       wordpress_db:
+           type: tosca.nodes.Database.MySQL
+           # rest omitted here for brevity
+  
+       web_server:
+           type: tosca.nodes.Compute
+           # rest omitted here for brevity
+  
+       apache:
+           type: tosca.nodes.WebServer.Apache
+           requirements:
+               - host: web_server
+           # rest omitted here for brevity
+  
+       wordpress:
+           type: tosca.nodes.WebApplication.WordPress
+           properties:
+               context_root: { get_input: context_root }
+               admin_user: { get_input: wp_admin_username }
+               admin_password: { get_input: wp_admin_password }
+               db_host: { get_attribute: [ db_server, private_address ] }
+           requirements:
+               - host: apache
+               - database_endpoint: wordpress_db
+           interfaces:
+               Standard:
+                   inputs:
+                       db_host: { get_attribute: [ db_server, private_address ] }
+                       db_port: { get_property: [ mysql, port ] }
+                       db_name: { get_property: [ wordpress_db, name ] }
+                       db_user: { get_property: [ wordpress_db, user ] }
+                       db_password: { get_property: [ wordpress_db, password ] }
+  
+   outputs:
+       # omitted here for brevity

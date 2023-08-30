@@ -1,27 +1,37 @@
-import { it, describe, expect } from '@jest/globals';
+import {
+  it, describe, expect, beforeEach,
+} from '@jest/globals';
 
+import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { Parser } from '#src/parser/parse.js';
 import { ToscaNamespace } from '#src/model/namespace.js';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
 
 describe('Tosca compiler ->', () => {
+  let parser;
+  beforeEach(() => {
+    RuleParser.throwOnError = true;
+    parser = new Parser(new NodeJsFileManager());
+  });
+
   const correct_namespace = 'tests/data/namespace/correct_namespace.yml';
   const incorrect_namespace = 'tests/data/namespace/incorrect_namespace.yml';
   const no_namespace = 'tests/data/namespace/no_namespace.yml';
 
   describe('Namespace: ', () => {
     it('Correct namespace', () => {
-      const parser = new Parser(new NodeJsFileManager());
-      expect(parser.parse(correct_namespace).namespace).toBeInstanceOf(ToscaNamespace);
+      expect(parser.parse(correct_namespace).namespace)
+        .toBeInstanceOf(ToscaNamespace);
     });
 
-    /* it('incorrect namespace type', () => {
-      expect(parse(incorrect_namespace).errors.length).toBeGreaterThanOrEqual(1);
-    }); */
+    it('incorrect namespace type', () => {
+      expect(() => parser.parse(incorrect_namespace))
+        .toThrow(/SyntaxError : Error: value 'undefined' is not a string at line 3, column 12/);
+    });
 
     it('no namespace', () => {
-      const parser = new Parser(new NodeJsFileManager());
-      expect(parser.parse(no_namespace).errors.length).toEqual(0);
+      expect(parser.parse(no_namespace).errors.length)
+        .toEqual(0);
     });
   });
 });
