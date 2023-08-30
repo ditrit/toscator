@@ -25,18 +25,3 @@ export class ToscaCapabilityAssignment extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaCapabilityAssignment(input, source) {
-  let res;
-  if (ToscaCapabilityAssignment.isValid(input, source)) {
-    res = new ToscaCapabilityAssignment(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

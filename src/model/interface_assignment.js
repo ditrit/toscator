@@ -25,18 +25,3 @@ export class ToscaInterfaceAssignment extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaInterfaceAssignment(input, source) {
-  let res;
-  if (ToscaInterfaceAssignment.isValid(input, source)) {
-    res = new ToscaInterfaceAssignment(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

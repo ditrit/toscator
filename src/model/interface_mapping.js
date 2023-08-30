@@ -25,13 +25,3 @@ export class ToscaInterfaceMapping extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaInterfaceMapping(input, source) {
-  if (ToscaInterfaceMapping.isValid(input, source)) return new ToscaInterfaceMapping(input, source);
-  return {};
-}

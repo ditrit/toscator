@@ -31,18 +31,3 @@ export class ToscaTopologyTemplate extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaTopologyTemplate(input, source) {
-  let res;
-  if (ToscaTopologyTemplate.isValid(input, source)) {
-    res = new ToscaTopologyTemplate(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

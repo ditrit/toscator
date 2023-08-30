@@ -33,18 +33,3 @@ export class ToscaNotificationDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaNotificationDef(input, source) {
-  let res;
-  if (ToscaNotificationDef.isValid(input, source)) {
-    res = new ToscaNotificationDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

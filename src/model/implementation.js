@@ -21,7 +21,7 @@ export class ToscaImplementation extends ToscaNode {
    *
    */
   getClassname() {
-    return ToscaArtifact._classname;
+    return this._classname;
   }
 
   /**
@@ -33,14 +33,4 @@ export class ToscaImplementation extends ToscaNode {
     // TODO: check for valid path
     return true;
   }
-}
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaImplentation(input, source) {
-  if (ToscaImplementation.isValid(input, source)) return new ToscaImplementation(input, source);
-  return {};
 }

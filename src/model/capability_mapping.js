@@ -28,18 +28,3 @@ export class ToscaCapabilityMapping extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaCapabilityMapping(input, source) {
-  let res;
-  if (ToscaCapabilityMapping.isValid(input, source)) {
-    res = new ToscaCapabilityMapping(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

@@ -82,14 +82,3 @@ export class Charac extends ToscaNode {
     return res;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newCharac(input, source) {
-  let res;
-  Charac.isValid(input) ? (res = newCharac(input, source)) : (res = {});
-  return res;
-}

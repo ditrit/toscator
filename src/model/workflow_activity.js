@@ -26,18 +26,3 @@ export class ToscaWorkflowActivity extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaWorkflowActivity(input, source) {
-  let res;
-  if (ToscaWorkflowActivity.isValid(input, source)) {
-    res = new ToscaWorkflowActivity(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

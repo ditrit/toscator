@@ -29,18 +29,3 @@ export class ToscaImperativeWorkflowDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaImperativeWorkflowDef(input, source) {
-  let res;
-  if (ToscaImperativeWorkflowDef.isValid(input, source)) {
-    res = new ToscaImperativeWorkflowDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

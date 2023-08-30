@@ -27,18 +27,3 @@ export class ToscaParameterAssignment extends ToscaNode {
     return false;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaParameterAssignment(input, source) {
-  let res;
-  if (ToscaParameterAssignment.isValid(input, source)) {
-    res = new ToscaParameterAssignment(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

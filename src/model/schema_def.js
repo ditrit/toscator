@@ -27,18 +27,3 @@ export class ToscaSchemaDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaSchemaDef(input, source) {
-  let res;
-  if (ToscaSchemaDef.isValid(input, source)) {
-    res = new ToscaSchemaDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

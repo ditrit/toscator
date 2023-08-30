@@ -32,18 +32,3 @@ export class ToscaCapability extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaCapability(input, source) {
-  let res;
-  if (ToscaCapability.isValid(input, source)) {
-    res = new ToscaCapability(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

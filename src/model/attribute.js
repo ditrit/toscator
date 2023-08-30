@@ -27,16 +27,3 @@ export class ToscaAttribute extends Charac {
     return res;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaAttribute(input, source) {
-  let res;
-  ToscaAttribute.isValid(input, source)
-    ? (res = new ToscaAttribute(input, source))
-    : (res = {});
-  return res;
-}

@@ -45,18 +45,3 @@ export class ToscaRequirement extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRequirement(input, source) {
-  let res;
-  if (ToscaRequirement.isValid(input, source)) {
-    res = new ToscaRequirement(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

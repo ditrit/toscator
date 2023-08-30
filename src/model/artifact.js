@@ -62,18 +62,3 @@ export class ToscaArtifact extends ToscaNode {
     }
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaArtifact(input, source) {
-  let res;
-  if (ToscaArtifact.isValid(input, source)) {
-    res = new ToscaArtifact(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

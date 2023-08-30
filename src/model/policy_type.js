@@ -38,18 +38,3 @@ export class ToscaPolicyType extends ToscaType {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaPolicyType(input, source) {
-  let res;
-  if (ToscaPolicyType.isValid(input, source)) {
-    res = new ToscaPolicyType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

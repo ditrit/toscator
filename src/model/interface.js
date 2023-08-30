@@ -4,6 +4,7 @@ import { ToscaNode } from './tosca_node.js';
  *
  */
 export class ToscaInterface extends ToscaNode {
+  // TODO: unused?
   /**
    *
    * @param input
@@ -43,19 +44,4 @@ export class ToscaInterface extends ToscaNode {
     //   }
     return true;
   }
-}
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaInterface(input, source) {
-  let res;
-  if (ToscaInterface.isValid(input, source)) {
-    res = new ToscaInterface(input, source);
-  } else {
-    res = {};
-  }
-  return res;
 }

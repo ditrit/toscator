@@ -24,18 +24,3 @@ export class ToscaRelationshipDef extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRelationshipDef(input, source) {
-  let res;
-  if (ToscaRelationshipDef.isValid(input, source)) {
-    res = new ToscaRelationshipDef(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

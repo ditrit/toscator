@@ -25,18 +25,3 @@ export class ToscaWorkflowPrecondition extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaWorkflowPrecondition(input, source) {
-  let res;
-  if (ToscaWorkflowPrecondition.isValid(input, source)) {
-    res = new ToscaWorkflowPrecondition(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

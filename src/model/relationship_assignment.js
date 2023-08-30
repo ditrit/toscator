@@ -23,18 +23,3 @@ export class ToscaRelationshipAssignment extends ToscaRelationshipDef {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRelationshipAssignment(input, source) {
-  let res;
-  if (ToscaRelationshipAssignment.isValid(input, source)) {
-    res = new ToscaRelationshipAssignment(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

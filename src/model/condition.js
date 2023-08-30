@@ -26,18 +26,3 @@ export class ToscaCondition extends ToscaNode {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaCondition(input, source) {
-  let res;
-  if (ToscaCondition.isValid(input, source)) {
-    res = new ToscaCondition(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

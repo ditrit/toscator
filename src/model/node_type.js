@@ -62,18 +62,3 @@ export class ToscaNodeType extends ToscaType {
     // TODO: le reste
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaNodeType(input, source) {
-  let res;
-  if (ToscaNodeType.isValid(input, source)) {
-    res = new ToscaNodeType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

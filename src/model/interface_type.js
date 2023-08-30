@@ -50,18 +50,3 @@ export class ToscaInterfaceType extends ToscaType {
     return true;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaInterfaceType(input, source) {
-  let res;
-  if (ToscaInterfaceType.isValid(input, source)) {
-    res = new ToscaInterfaceType(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}

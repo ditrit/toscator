@@ -54,18 +54,3 @@ export class ToscaRepository extends ToscaNode {
     return res;
   }
 }
-
-/**
- *
- * @param input
- * @param source
- */
-export function newToscaRepository(input, source) {
-  let res;
-  if (ToscaRepository.isValid(input, source)) {
-    res = new ToscaRepository(input, source);
-  } else {
-    res = {};
-  }
-  return res;
-}
