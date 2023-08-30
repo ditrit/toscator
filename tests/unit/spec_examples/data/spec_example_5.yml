@@ -1,0 +1,46 @@
+# Example 5 - Template for deploying database content on-top of MySQL DBMS middleware
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+description: Template for deploying a single server with predefined properties.
+  
+topology_template:
+   inputs:
+       wordpress_db_name:
+           type: string
+       wordpress_db_user:
+           type: string
+       wordpress_db_password:
+           type: string
+       # rest omitted here for brevity
+  
+   node_templates:
+       db_server:
+           type: tosca.nodes.Compute
+           # rest omitted here for brevity
+  
+       mysql:
+           type: tosca.nodes.DBMS.MySQL
+           # rest omitted here for brevity
+  
+       wordpress_db:
+           type: tosca.nodes.Database.MySQL
+           properties:
+               name: { get_input: wordpress_db_name }
+               user: { get_input: wordpress_db_user }
+               password: { get_input: wordpress_db_password }
+           artifacts:
+               db_content:
+                   file: files/wordpress_db_content.txt
+                   type: tosca.artifacts.File
+           requirements:
+               - host: mysql
+           interfaces:
+               Standard:
+                   create:
+                       implementation: db_create.sh
+                       inputs:
+                           # Copy DB file artifact to server’s staging area
+                           db_data: { get_artifact: [ SELF, db_content ] }
+  
+   outputs:
+       # omitted here for brevity

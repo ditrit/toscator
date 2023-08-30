@@ -1,0 +1,24 @@
+# Example 26 – TOSCA SD-WAN Service Template
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+description: Template for deploying SD-WAN with a variable number of sites.
+  
+topology_template:
+   inputs:
+       numberOfSites:
+           type: integer
+       locations:
+           type: list
+           entry_schema: Location
+  
+   node_templates:
+       sdwan:
+           type: VPN
+       site:
+           type: VPNSite
+           occurrences: [1, UNBOUNDED]
+           instance_count: { get_input: numberOfSites }
+           properties:
+               location: { get_input: [ locations, INDEX ] }
+           requirements:
+               - vpn: sdwan

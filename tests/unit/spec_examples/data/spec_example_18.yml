@@ -1,0 +1,19 @@
+# Example 18 - Defining a TransactionSubsystem node type
+tosca_definitions_version: tosca_simple_yaml_1_3
+  
+node_types:
+   example.TransactionSubsystem:
+       properties:
+           mq_service_ip:
+               type: string
+           receiver_port:
+               type: integer
+       attributes:
+           receiver_ip:
+               type: string
+           receiver_port:
+               type: integer
+       capabilities:
+           message_receiver: tosca.capabilities.Endpoint
+       requirements:
+           - database_endpoint: tosca.capabilities.Endpoint.Database
