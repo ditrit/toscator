@@ -1,35 +1,53 @@
 import { ToscaNode } from './tosca_node.js';
 
+/**
+ *
+ */
 export class ToscaRequirementMapping extends ToscaNode {
-    constructor(input, source) {
-        super(source);
-        this.mapping = input.mapping;
-        this.properties = input.properties;
-        this.attributes = input.attributes;
-    }
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  constructor(input, source) {
+    super(source);
+    this.mapping = input.mapping;
+    this.properties = input.properties;
+    this.attributes = input.attributes;
+  }
 
-    toString() {
-        return super.toString();
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  static isValid(input, source) {
+    if (input.mapping && (input.properties || input.attributes)) {
+      return false;
     }
+    return true;
+  }
 
-    static isValid(input, source) {
-        if (input.mapping && (input.properties || input.attributes)) {
-            return false;
-        }
-        return true;
-    }
-
-    setName(name) {
-        this.name = name;
-    }
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    this.name = name;
+  }
 }
 
+/**
+ *
+ * @param input
+ * @param source
+ */
 export function newToscaRequirementMapping(input, source) {
-    let res;
-    if (ToscaRequirementMapping.isValid(input, source)) {
-        res = new ToscaRequirementMapping(input, source);
-    } else {
-        res = {};
-    }
-    return res;
+  let res;
+  if (ToscaRequirementMapping.isValid(input, source)) {
+    res = new ToscaRequirementMapping(input, source);
+  } else {
+    res = {};
+  }
+  return res;
 }

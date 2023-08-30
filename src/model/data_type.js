@@ -4,7 +4,15 @@ import { DefType } from './def_type.js';
 import { ToscaProperty } from './property.js';
 import { ToscaType } from './tosca_type.js';
 
+/**
+ *
+ */
 export class ToscaDataType extends ToscaType {
+  /**
+   *
+   * @param input
+   * @param source
+   */
   constructor(input, source) {
     super(input, source);
 
@@ -19,14 +27,18 @@ export class ToscaDataType extends ToscaType {
 
   static _classname = 'data_type';
 
+  /**
+   *
+   */
   getClassname() {
     return ToscaDataType._classname;
   }
 
-  toString() {
-    return super.toString();
-  }
-
+  /**
+   *
+   * @param input
+   * @param source
+   */
   static isValid(input, source) { // how to get data_types...?
     if (!super.isValid(input, source)) {
       source.ctx.typeError(

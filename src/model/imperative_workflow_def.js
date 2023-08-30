@@ -1,36 +1,54 @@
 import { ToscaNode } from './tosca_node.js';
 
-export class ToscaImperativeWorkflowDef extends ToscaNode{
-    constructor(input, source) {
-        super(source);
-        this.description = input.description;
-        this.metadata = input.metadata;
-        this.inputs = input.inputs;
-        this.preconditions = input.preconditions;
-        this.steps = input.steps;
-        this.implementation = input.implementation;
-        this.outputs = input.outputs;
-    }
+/**
+ *
+ */
+export class ToscaImperativeWorkflowDef extends ToscaNode {
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  constructor(input, source) {
+    super(source);
+    this.description = input.description;
+    this.metadata = input.metadata;
+    this.inputs = input.inputs;
+    this.preconditions = input.preconditions;
+    this.steps = input.steps;
+    this.implementation = input.implementation;
+    this.outputs = input.outputs;
+  }
 
-    toString() {
-        return super.toString();
-    }
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  static isValid(input, source) {
+    return true;
+  }
 
-    static isValid(input, source) {
-        return true;
-    }
-
-    setName(name) {
-        this.name = name;
-    }
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    this.name = name;
+  }
 }
 
+/**
+ *
+ * @param input
+ * @param source
+ */
 export function newToscaImperativeWorkflowDef(input, source) {
-    let res;
-    if (ToscaImperativeWorkflowDef.isValid(input, source)) {
-        res = new ToscaImperativeWorkflowDef(input, source);
-    } else {
-        res = {};
-    }
-    return res;
+  let res;
+  if (ToscaImperativeWorkflowDef.isValid(input, source)) {
+    res = new ToscaImperativeWorkflowDef(input, source);
+  } else {
+    res = {};
+  }
+  return res;
 }

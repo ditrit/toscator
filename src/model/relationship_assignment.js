@@ -1,30 +1,48 @@
 import { ToscaRelationshipDef } from './relationship_def.js';
 
-export class ToscaRelationshipAssignment extends ToscaRelationshipDef{
-    constructor(input, source) {
-        super(input, source);
-        this.properties = input.properties;
-    }
+/**
+ *
+ */
+export class ToscaRelationshipAssignment extends ToscaRelationshipDef {
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  constructor(input, source) {
+    super(input, source);
+    this.properties = input.properties;
+  }
 
-    toString() {
-        return super.toString();
-    }
+  /**
+   *
+   * @param input
+   * @param source
+   */
+  static isValid(input, source) {
+    return true;
+  }
 
-    static isValid(input, source) {
-        return true;
-    }
-
-    setName(name) {
-        this.name = name;
-    }
+  /**
+   *
+   * @param name
+   */
+  setName(name) {
+    this.name = name;
+  }
 }
 
+/**
+ *
+ * @param input
+ * @param source
+ */
 export function newToscaRelationshipAssignment(input, source) {
-    let res;
-    if (ToscaRelationshipAssignment.isValid(input, source)) {
-        res = new ToscaRelationshipAssignment(input, source);
-    } else {
-        res = {};
-    }
-    return res;
+  let res;
+  if (ToscaRelationshipAssignment.isValid(input, source)) {
+    res = new ToscaRelationshipAssignment(input, source);
+  } else {
+    res = {};
+  }
+  return res;
 }
