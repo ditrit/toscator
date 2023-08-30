@@ -1,6 +1,8 @@
-import {parse} from "../../src/parser/parse.js";
-import {describe, it, expect} from "@jest/globals";
-import parserJson from "./parse.json";
+import {describe, it, expect} from '@jest/globals';
+
+import {parse} from 'src/parser/parse.js';
+import parserJson from './parse.json';
+
 describe('Parsing', ()=>{
     it('gives a reproducible output',()=>{
         // provide the relative path to the tosca file to parse
@@ -9,8 +11,8 @@ describe('Parsing', ()=>{
         const seen = new Set();
         function replacer(key,value)
         {
-            if(key==="origin_file")
-                return "__IGNORED__"; // ignore
+            if(key==='origin_file')
+                return '__IGNORED__'; // ignore
 
             // ignore circular references
             if(seen.has(value))
