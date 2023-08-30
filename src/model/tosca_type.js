@@ -70,6 +70,8 @@ export class ToscaType extends ToscaNode {
     // Note: ??= replaces the value if it is undefined/null.
     this.version ??= parent.version;
     this.metadata ??= parent.metadata;
-    this.description ??= `[inherited from ${parent.name}] ${parent.description}`;
+    if (parent.description) {
+      this.description ??= `[inherited from ${parent.name}] ${parent.description}`;
+    }
   }
 }

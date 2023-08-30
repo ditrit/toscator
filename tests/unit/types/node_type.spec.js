@@ -3,10 +3,8 @@ import {
 } from '@jest/globals';
 import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { ToscaNodeType } from '#src/model/node_type.js';
-import { Parser } from '#src/parser/parse.js';
-import { NodeJsFileManager } from '#src/parser/FileManager.js';
-import { ignore_fields_and_circular_ref } from '#tests/unit/utils.js';
-import nodeTypeDerivedFromJson from './node_type_derived_from.output.json';
+import { compile } from '#src/compilation.js';
+import { ToscaProperty } from '#src/model/property.js';
 
 describe('class ToscaNodeType', () => {
   beforeEach(() => {
@@ -58,27 +56,28 @@ describe('class ToscaNodeType', () => {
     for (const attributeName of attributes) {
       it(`merges ${attributeName}`, () => {
         const parentInput = {
-          [attributeName]: {
-            a: 'parent_value_a',
-            b: 'parent_value_b',
-          },
+          [attributeName]: new Map([
+            ['a', 'parent_value_a'],
+            ['b', 'parent_value_b'], // Will be overwritten by child value.
+          ]),
         };
         const parentType = new ToscaNodeType(parentInput, {});
 
         const childInput = {
-          [attributeName]: {
-            b: 'child_value_b',
-            c: 'child_value_c',
-          },
+          [attributeName]: new Map([
+            ['b', 'child_value_b'], // Will overwrite parent value.
+            ['c', 'child_value_c'],
+          ]),
         };
         const childType = new ToscaNodeType(childInput, {});
 
         childType.inheritFrom(parentType);
 
-        expect(childType[attributeName]).toEqual({
-          ...parentType[attributeName],
-          ...childType[attributeName],
-        });
+        expect(childType[attributeName]).toEqual(new Map([
+          ['a', 'parent_value_a'],
+          ['b', 'child_value_b'],
+          ['c', 'child_value_c'],
+        ]));
       });
 
       it('merges artifacts', () => {
@@ -112,14 +111,23 @@ describe('class ToscaNodeType', () => {
         };
         const parentType = new ToscaNodeType(parentInput, {});
 
-        const childInput = {
-          requirements: [2, 3],
+        const childInput1 = {
+          requirements: [2, 3], // Will not inherit.
         };
-        const childType = new ToscaNodeType(childInput, {});
+        const childType1 = new ToscaNodeType(childInput1, {});
 
-        childType.inheritFrom(parentType);
+        childType1.inheritFrom(parentType);
 
-        expect(childType.requirements).toEqual([1, 2, 2, 3]);
+        expect(childType1.requirements).toEqual([2, 3]);
+
+        const childInput2 = {
+          requirements: undefined, // Will inherit.
+        };
+        const childType2 = new ToscaNodeType(childInput2, {});
+
+        childType2.inheritFrom(parentType);
+
+        expect(childType2.requirements).toEqual([1, 2]);
       });
 
       it('inherits scalar attributes when undefined', () => {
@@ -147,22 +155,69 @@ describe('class ToscaNodeType', () => {
 });
 
 describe('Parser: node_type', () => {
-  it('has expected output', () => {
-    const parser = new Parser(new NodeJsFileManager());
-    const result = parser.parse('tests/unit/types/node_type_derived_from.yml');
-    // TODO: update this test when fully implemented.
-    // console.log(JSON.stringify(ignore_fields_and_circular_ref(result)));
-    expect(ignore_fields_and_circular_ref(result)).toEqual(nodeTypeDerivedFromJson);
+  beforeEach(() => {
+    RuleParser.throwOnError = true;
   });
+
   it('parses a node_type correctly', () => {
-    // TODO
+    const result = compile('tests/unit/types/node_type_derived_from.yml');
+
+    const test_parent_type = result.node_types.get('test_parent_type');
+    expect(test_parent_type).toBeInstanceOf(ToscaNodeType);
+
+    expect(test_parent_type.properties.size).toBe(2);
+
+    const test_property_1 = test_parent_type.properties.get('test_property_1');
+    expect(test_property_1).toBeInstanceOf(ToscaProperty);
+    expect(test_property_1.type).toBe('fake_type_11');
+    expect(test_property_1.default).toBe(11);
+
+    const test_property_2 = test_parent_type.properties.get('test_property_2');
+    expect(test_property_2).toBeInstanceOf(ToscaProperty);
+    expect(test_property_2.type).toBe('fake_type_12');
+    expect(test_property_2.default).toBe(12);
+
+    // TODO: Check other attributes. (only properties are checked as of now)
   });
 
   it('inherits correctly (empty child)', () => {
-    // TODO
+    const result = compile('tests/unit/types/node_type_derived_from.yml');
+
+    const test_empty_child_type = result.node_types.get('test_empty_child_type');
+    expect(test_empty_child_type).toBeInstanceOf(ToscaNodeType);
+    expect(test_empty_child_type.properties.size).toBe(2);
+
+    const test_property_1 = test_empty_child_type.properties.get('test_property_1');
+    expect(test_property_1).toBeInstanceOf(ToscaProperty);
+    expect(test_property_1.type).toBe('fake_type_11');
+    expect(test_property_1.default).toBe(11);
+
+    const test_property_2 = test_empty_child_type.properties.get('test_property_2');
+    expect(test_property_2).toBeInstanceOf(ToscaProperty);
+    expect(test_property_2.type).toBe('fake_type_12');
+    expect(test_property_2.default).toBe(12);
   });
 
   it('inherits correctly (full child, redefining everything)', () => {
-    // TODO
+    const result = compile('tests/unit/types/node_type_derived_from.yml');
+
+    const test_full_child_type = result.node_types.get('test_full_child_type');
+    expect(test_full_child_type).toBeInstanceOf(ToscaNodeType);
+    expect(test_full_child_type.properties.size).toBe(3);
+
+    const test_property_1 = test_full_child_type.properties.get('test_property_1');
+    expect(test_property_1).toBeInstanceOf(ToscaProperty);
+    expect(test_property_1.type).toBe('fake_type_11');
+    expect(test_property_1.default).toBe(11);
+
+    const test_property_2 = test_full_child_type.properties.get('test_property_2');
+    expect(test_property_2).toBeInstanceOf(ToscaProperty);
+    expect(test_property_2.type).toBe('fake_type_22');
+    expect(test_property_2.default).toBe(22);
+
+    const test_property_3 = test_full_child_type.properties.get('test_property_3');
+    expect(test_property_3).toBeInstanceOf(ToscaProperty);
+    expect(test_property_3.type).toBe('fake_type_23');
+    expect(test_property_3.default).toBe(23);
   });
 });
