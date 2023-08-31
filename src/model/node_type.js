@@ -1,6 +1,7 @@
 import { ToscaType } from './tosca_type.js';
 
 /**
+ * Specification 1.3:3759 Node Types
  * @augments ToscaType
  */
 export class ToscaNodeType extends ToscaType {

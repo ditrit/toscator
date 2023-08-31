@@ -5,14 +5,27 @@ node_types:
     derived_from: tosca.nodes.Root
     properties:
       test_property_1:
-        type: fake_type_11
-        default: 11
+        type: val_property_parent_1
       test_property_2:
-        type: fake_type_12
-        default: 12
+        type: val_property_parent_2
 
+    capabilities:
+      test_capability_1:
+        type: val_capability_parent_1
+      test_capability_2:
+        type: val_capability_parent_2
 
-    # TODO: 'properties', 'attributes', 'capabilities', 'interfaces'
+    attributes:
+      test_attribute_1:
+        type: val_attribute_parent_1
+      test_attribute_2:
+        type: val_attribute_parent_2
+
+    interfaces:
+      test_interface_1:
+        type: val_interface_parent_1
+      test_interface_2:
+        type: val_interface_parent_2
     # TODO: requirements
     # TODO: artifacts
     # TODO: version, metadata, description
@@ -24,8 +37,24 @@ node_types:
     derived_from: test_parent_type
     properties:
       test_property_2:
-        type: fake_type_22
-        default: 22
+        type: val_property_child_2
       test_property_3:
-        type: fake_type_23
-        default: 23
+        type: val_property_child_3
+
+    capabilities:
+      test_capability_2:
+        type: val_capability_child_2
+      test_capability_3:
+        type: val_capability_child_3
+
+    attributes:
+      test_attribute_2:
+        type: val_attribute_child_2
+      test_attribute_3:
+        type: val_attribute_child_3
+
+    interfaces:
+      test_interface_2:
+        type: val_interface_child_2
+      test_interface_3:
+        type: val_interface_child_3
