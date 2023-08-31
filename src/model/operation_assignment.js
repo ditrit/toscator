@@ -15,14 +15,4 @@ export class ToscaOperationAssignment extends ToscaNode {
     this.inputs = input.inputs;
     this.implementation = input.implementation;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: Check if the implementation is valid
-    return true;
-  }
 }

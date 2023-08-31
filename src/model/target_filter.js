@@ -15,13 +15,4 @@ export class ToscaTargetFilter extends ToscaNode {
     this.requirement = input.requirement;
     this.capability = input.capability;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

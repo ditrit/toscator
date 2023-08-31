@@ -16,14 +16,4 @@ export class ToscaOperationDef extends ToscaNode {
     this.implementation = input.implementation; // is either a name or the entire definition
     this.outputs = input.outputs;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: Check if the implementation is valid
-    return true;
-  }
 }

@@ -16,13 +16,4 @@ export class ToscaWorkflowActivity extends ToscaNode {
     this.call_operation = input.call_operation;
     this.inline = input.inline;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

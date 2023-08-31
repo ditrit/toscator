@@ -20,15 +20,4 @@ export class ToscaCapability extends ToscaNode {
   }
 
   static _classname = 'property';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: add verification on type with list of already defined types
-
-    return true;
-  }
 }

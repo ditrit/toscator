@@ -17,13 +17,4 @@ export class ToscaSchemaDef extends ToscaNode {
     this.entry_schema = input.entry_schema;
     this.key_schema = input.key_schema;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

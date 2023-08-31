@@ -24,13 +24,6 @@ export class ToscaInterfaceType extends ToscaType {
    * @param source
    */
   static isValid(input, source) {
-    if (!ToscaType.isValid(input, source)) {
-      source.ctx.typeError(
-        source.current,
-        'Incorrect definition for InterfaceType: incorrect type',
-      );
-      return false;
-    }
     for (const operation_name in this.operations) {
       if (operation_name === 'inputs') {
         source.ctx.typeError(

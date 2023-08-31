@@ -17,13 +17,6 @@ export class ToscaWorkflowConditionOperator extends ToscaNode {
     this.conditions = input.conditions;
     this.assertions = input.assertions;
   }
-
-  /**
-   *
-   */
-  static isValid() {
-    return true;
-  }
 }
 
 // When there is no operator, we create a ToscaWorkflowConditionOperatorAnd since no operator is the same as the operator and
@@ -36,7 +29,7 @@ export class ToscaWorkflowConditionOperatorAnd extends ToscaWorkflowConditionOpe
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'and';
+    return input.operator === 'and';
   }
 
   /**
@@ -135,7 +128,7 @@ export class ToscaWorkflowConditionOperatorAssert extends ToscaWorkflowCondition
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'assert';
+    return input.operator === 'assert';
   }
 
   /**

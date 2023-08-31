@@ -16,13 +16,4 @@ export class ToscaCondition extends ToscaNode {
     this.evaluations = input.evaluations;
     this.method = input.method;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

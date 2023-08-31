@@ -15,13 +15,4 @@ export class ToscaInterfaceAssignment extends ToscaNode {
     this.operations = input.operations;
     this.notifications = input.notifications;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

@@ -26,23 +26,6 @@ export class ToscaArtifact extends ToscaNode {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: add file path validation
-    if (typeof input.file !== 'string') {
-      source.ctx.typeError(
-        source.current,
-        'Incorrect definition for Artifact',
-      );
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   *
    * @param service_template
    */
   static correctGrammar(service_template) {

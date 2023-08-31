@@ -17,17 +17,4 @@ export class ToscaPolicyType extends ToscaType {
   }
 
   static _classname = 'policy_type';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (!ToscaType.isValid(input, source)) {
-      source.ctx.typeError(source.current, 'Incorrect definition for PolicyType');
-      return false;
-    }
-    return true;
-  }
 }

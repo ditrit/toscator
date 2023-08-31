@@ -22,40 +22,6 @@ export class ToscaDataType extends ToscaType {
   }
 
   static _classname = 'data_type';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) { // how to get data_types...?
-    if (!super.isValid(input, source)) {
-      source.ctx.typeError(
-        source.current,
-        'Incorrect definition for DataType',
-      );
-      return false;
-    }
-    /* constraint...?
-      if (this.properties.size===0) {
-         if (!this.derived_from || validDerivedFrom(this.derived_from, data_type)) {
-            source.ctx.typeError(
-               source.current,
-               "Incorrect definition for DataType"
-            );
-            return false;
-         }
-      } else {
-         if (!ValidProperties(this.properties)) {
-            source.ctx.typeError(
-               source.current,
-               "Incorrect definition for DataType"
-            );
-            return false;
-         }
-      } */
-    return true;
-  }
 }
 
 /**

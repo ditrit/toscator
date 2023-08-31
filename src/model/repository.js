@@ -32,18 +32,6 @@ export class ToscaRepository extends ToscaNode {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (input && source) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   *
    */
   getFullUrl() {
     let res;

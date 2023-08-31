@@ -19,13 +19,4 @@ export class ToscaTriggerDef extends ToscaNode {
     this.condition = input.condition;
     this.action = input.action;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

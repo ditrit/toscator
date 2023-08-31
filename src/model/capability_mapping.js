@@ -22,9 +22,6 @@ export class ToscaCapabilityMapping extends ToscaNode {
    * @param source
    */
   static isValid(input, source) {
-    if (input.mapping && (input.properties || input.attributes)) {
-      return false;
-    }
-    return true;
+    return !(input.mapping && (input.properties || input.attributes));
   }
 }

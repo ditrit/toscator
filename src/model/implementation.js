@@ -16,14 +16,4 @@ export class ToscaImplementation extends ToscaNode {
   }
 
   static _classname = 'implementation';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: check for valid path
-    return true;
-  }
 }

@@ -19,13 +19,4 @@ export class ToscaRelationshipTemplate extends ToscaNode {
     this.interfaces = input.interfaces;
     this.copy = input.copy;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

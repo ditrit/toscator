@@ -50,18 +50,6 @@ export class ToscaType extends ToscaNode {
   }
 
   /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (input) { // TODO
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * Make this type inherit from a given type.
    * This method allows to implement the 'derived_from' clause.
    * @param {ToscaType} parent - Parent type to inherit from.

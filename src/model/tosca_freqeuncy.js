@@ -21,28 +21,6 @@ export class ToscaFrequency extends ToscaScalar {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    /* this creates a bug since and it is useless since lidy already check whether or not the parsed_rule follows the regex rules.
-
-      let regex =
-         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]Hz/i;
-      console.log('_________________input?.value_________________');
-      console.log(input.value);
-      if (!regex.test(input.value.trim())) {
-         source.ctx.grammarError(`Type frequency could not be created.`);
-         return false;
-      } */
-    if (source) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   *
    */
   setNormalizedValue() {
     const value = this.value

@@ -28,15 +28,6 @@ export class ToscaNodeTemplate extends ToscaNode {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
-
-  /**
-   *
    * @param node_templates
    */
   static correctGrammar(node_templates) {

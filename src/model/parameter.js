@@ -16,13 +16,4 @@ export class ToscaParameter extends Charac {
     this.value = input.value;
     this.metadata = input.metadata;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

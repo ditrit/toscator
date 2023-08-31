@@ -17,13 +17,4 @@ export class ToscaRequirementAssignment extends ToscaNode {
     this.node_filter = input.node_filter;
     this.occurrences = input.occurrences;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

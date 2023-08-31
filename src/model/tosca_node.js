@@ -32,4 +32,14 @@ export class ToscaNode {
     // TODO: what is the purpose of this method ...?
     return this.constructor._classname;
   }
+
+  /**
+   * @param input
+   * @param source
+   * @returns {boolean}
+   */
+  // eslint-disable-next-line no-unused-vars
+  static isValid(input, source) {
+    return true;
+  }
 }

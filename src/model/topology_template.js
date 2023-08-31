@@ -21,13 +21,4 @@ export class ToscaTopologyTemplate extends ToscaNode {
     this.substitution_mappings = input.substitution_mappings;
     // this.workflows = input.workflows;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

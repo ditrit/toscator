@@ -46,25 +46,6 @@ export class ToscaNodeType extends ToscaType {
   }
 
   /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (!ToscaType.isValid(input, source)) {
-      source.ctx.typeError(
-        source.current,
-        'Incorrect definition for NodeType',
-      );
-      return false;
-    }
-    // TODO: Check properties correctness.
-    // if (input.properties instanceof ToscaProperty) {
-    // }
-    return true;
-  }
-
-  /**
    * Make this type inherit from a given type.
    * This method allows to implement the 'derived_from' clause.
    * @param {ToscaNodeType} parent - Parent type to inherit from.

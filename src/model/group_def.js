@@ -17,13 +17,4 @@ export class ToscaGroupDef extends ToscaNode {
     this.members = input.members;
     this.metadata = input.metadata;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

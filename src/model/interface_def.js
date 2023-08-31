@@ -13,13 +13,4 @@ export class ToscaInterfaceDef extends ToscaInterfaceAssignment {
     super(input, source);
     this.type = input.type;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

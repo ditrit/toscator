@@ -17,20 +17,4 @@ export class ToscaCapabilityType extends ToscaType {
   }
 
   static _classname = 'capability_type';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (!super.isValid(input, source)) {
-      source.ctx.typeError(
-        source.current,
-        'Incorrect definition for CapabilityType',
-      );
-      return false;
-    }
-    return true;
-  }
 }

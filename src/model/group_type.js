@@ -17,34 +17,7 @@ export class ToscaGroupType extends ToscaType {
   }
 
   static _classname = 'group_type';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (!super.isValid(input, source)) {
-      source.ctx.typeError(
-        source.current,
-        'Incorrect definition for GroupType',
-      );
-      return false;
-    }
-    /*
-      let type;
-      for (const i in this.members) {
-         if (type === undefined) {
-            type = getMemberType(service_template, this.members[i]);
-         } else if (type !== members[i].type) {
-            return false;
-         }
-      } */
-
-    return true;
-  }
 }
-
 /**
  *
  * @param service_template

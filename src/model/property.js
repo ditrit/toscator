@@ -17,20 +17,4 @@ export class ToscaProperty extends Charac {
   }
 
   static _classname = 'property';
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    let res = true;
-    if (!super.isValid(input, source)) {
-      res = false;
-    }
-    if (input.required && !input.required instanceof Boolean) {
-      res = false;
-    }
-    return res;
-  }
 }

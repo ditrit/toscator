@@ -73,7 +73,7 @@ export class ToscaConstraintEquals extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'equal' && value.includes(input.type);
+    return input.operator === 'equal' && value.includes(input.type);
   }
 
   /**
@@ -82,7 +82,7 @@ export class ToscaConstraintEquals extends ToscaConstraint {
    */
   eval(value) {
     if (typeof value === 'string' || typeof value === 'number') {
-      return this.value == value;
+      return this.value === value;
     }
     return this.value.equals(value);
   }
@@ -97,7 +97,7 @@ export class ToscaConstraintGreaterThan extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'greater_than' && value.includes(input.type);
+    return input.operator === 'greater_than' && value.includes(input.type);
   }
 
   /**
@@ -123,7 +123,7 @@ export class ToscaConstraintGreaterOrEqual extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'greater_or_equal' && value.includes(input.type);
+    return input.operator === 'greater_or_equal' && value.includes(input.type);
   }
 
   /**
@@ -174,7 +174,7 @@ export class ToscaConstraintLessOrEqual extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'less_or_equal' && value.includes(input.type);
+    return input.operator === 'less_or_equal' && value.includes(input.type);
   }
 
   /**
@@ -331,7 +331,7 @@ export class ToscaConstraintSchema extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'schema' && input.type == 'string';
+    return input.operator === 'schema' && input.type === 'string';
   }
 
   /**

@@ -35,10 +35,6 @@ export class Charac extends ToscaNode {
    * @param source
    */
   static isValid(input, source) {
-    let res = true;
-    // if (!super.isValid(input)) {
-    //    res = false;
-    // }
     if (
       input.default
          && input.constraints
@@ -48,21 +44,10 @@ export class Charac extends ToscaNode {
         `Default value ${input.default} does not verify constraints `,
       );
 
-      res = false;
-    }
-    if (input.status && !input.status instanceof String) {
-      res = false;
-    } else if (!input.status in this.statusValues) {
-      res = false;
-    }
-    if (input.metadata && !input.metadata instanceof ToscaMetadata) {
-      res = false;
-    }
-    if (input.name && !input.name instanceof String) {
-      res = false;
+      return false;
     }
 
-    return res;
+    return true;
   }
 
   /**
@@ -73,7 +58,7 @@ export class Charac extends ToscaNode {
   static check(input, value) {
     let res = true;
     const { constraints } = input.type;
-    // TO DO reduce, every: constraints.every((constraint)=> constraint.tosca.check(value))
+    // TODO reduce, every: constraints.every((constraint)=> constraint.tosca.check(value))
     constraints?.forEach((ele) => {
       if (!ele.eval(value)) {
         res = false;

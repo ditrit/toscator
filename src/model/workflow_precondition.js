@@ -15,13 +15,4 @@ export class ToscaWorkflowPrecondition extends ToscaNode {
     this.target_relationship = input.target_relationship;
     this.condition = input.condition;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

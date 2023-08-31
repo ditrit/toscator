@@ -14,14 +14,4 @@ export class ToscaInterfaceMapping extends ToscaNode {
     this.operation = input.operation;
     this.workflow = input.workflow;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: check for valid path
-    return true;
-  }
 }

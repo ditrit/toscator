@@ -36,13 +36,4 @@ export class ToscaCapabilityFilter extends ToscaNode {
     });
     return pass;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

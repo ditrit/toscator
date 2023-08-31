@@ -15,13 +15,4 @@ export class ToscaCapabilityAssignment extends ToscaNode {
     this.attributes = input.attributes;
     this.occurences = input.occurences;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

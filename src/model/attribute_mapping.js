@@ -13,13 +13,4 @@ export class ToscaAttributeMapping extends ToscaNode {
     super(source);
     this.mapping = input.mapping;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

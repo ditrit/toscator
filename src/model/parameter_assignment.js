@@ -14,16 +14,4 @@ export class ToscaParameterAssignment extends ToscaNode {
     this.description = input.description;
     this.value = input.value;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    if (input) {
-      return true;
-    }
-    return false;
-  }
 }

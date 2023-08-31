@@ -18,11 +18,4 @@ export class ToscaPolicyDef extends ToscaNode {
     this.targets = input.targets;
     this.triggers = input.triggers;
   }
-
-  /**
-   *
-   */
-  static isValid() {
-    return true;
-  }
 }

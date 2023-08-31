@@ -13,13 +13,4 @@ export class ToscaRelationshipAssignment extends ToscaRelationshipDef {
     super(input, source);
     this.properties = input.properties;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

@@ -22,15 +22,6 @@ export class ToscaSubstitutionMapping extends ToscaNode {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
-
-  /**
-   *
    * @param node_type
    */
   static correctGrammar(node_type) { // should I always give the service_template so that the input is always the same ?

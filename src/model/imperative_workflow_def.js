@@ -19,13 +19,4 @@ export class ToscaImperativeWorkflowDef extends ToscaNode {
     this.implementation = input.implementation;
     this.outputs = input.outputs;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }

@@ -21,30 +21,6 @@ export class ToscaTime extends ToscaScalar {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    // TODO: add regex for time
-    /* creates a bug if source = null (which can happen in a _oneof for example)
-         and is useless since lidy already does the regex check
-
-      let regex =
-         /([+-]?(?=\.\d|\d)(?:\d+)?(?:\.?\d*))(?:[eE]([+-]?\d+))?\s+[a-zA-Z]+/i;
-
-      if (!regex.test(input.value.trim())) {
-         source.ctx.grammarError(`Type time could not be created.`);
-
-         return false;
-      } */
-    if (source) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
-   *
    */
   setNormalizedValue() {
     const value = this.value

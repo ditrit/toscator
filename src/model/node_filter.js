@@ -17,15 +17,6 @@ export class ToscaNodeFilter extends ToscaNode {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
-
-  /**
-   *
    * @param node
    */
   passFilter(node) {

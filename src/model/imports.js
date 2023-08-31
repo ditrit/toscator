@@ -31,15 +31,6 @@ export class ToscaImport extends ToscaNode {
 
   /**
    *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
-
-  /**
-   *
    * @param origin_file
    */
   setAbsolutePath(origin_file) {

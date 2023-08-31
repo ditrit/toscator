@@ -19,13 +19,4 @@ export class ToscaImperativeWorkflowStep extends ToscaNode {
     this.on_success = input.on_success;
     this.on_failure = input.on_failure;
   }
-
-  /**
-   *
-   * @param input
-   * @param source
-   */
-  static isValid(input, source) {
-    return true;
-  }
 }
