@@ -20,13 +20,6 @@ export class ToscaArtifactType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaArtifactType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

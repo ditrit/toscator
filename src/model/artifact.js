@@ -26,13 +26,6 @@ export class ToscaArtifact extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaArtifact._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

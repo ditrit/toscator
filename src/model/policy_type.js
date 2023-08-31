@@ -20,13 +20,6 @@ export class ToscaPolicyType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaPolicyType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

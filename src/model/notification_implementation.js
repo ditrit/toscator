@@ -19,13 +19,6 @@ export class ToscaNotificationImplementation extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaArtifact._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

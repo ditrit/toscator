@@ -20,13 +20,6 @@ export class ToscaProperty extends Charac {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaProperty._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

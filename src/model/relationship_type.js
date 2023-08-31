@@ -22,13 +22,6 @@ export class ToscaRelationshipType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaRelationshipType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

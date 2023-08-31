@@ -20,13 +20,6 @@ export class ToscaCapabilityType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaCapabilityType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

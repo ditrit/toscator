@@ -19,13 +19,6 @@ export class ToscaImplementation extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return this._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

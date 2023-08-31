@@ -25,13 +25,6 @@ export class ToscaDataType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaDataType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

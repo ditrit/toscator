@@ -20,13 +20,6 @@ export class ToscaGroupType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaGroupType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

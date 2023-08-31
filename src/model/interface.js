@@ -22,13 +22,6 @@ export class ToscaInterface extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaInterface._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

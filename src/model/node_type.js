@@ -47,14 +47,6 @@ export class ToscaNodeType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    // TODO: This method could be inherited from ToscaType
-    return ToscaNodeType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

@@ -20,13 +20,6 @@ export class ToscaInterfaceType extends ToscaType {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaInterfaceType._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

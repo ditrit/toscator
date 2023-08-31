@@ -24,4 +24,12 @@ export class ToscaNode {
   setName(name) {
     this.name = name;
   }
+
+  /**
+   * @returns {string}
+   */
+  getClassname() {
+    // TODO: what is the purpose of this method ...?
+    return this.constructor._classname;
+  }
 }

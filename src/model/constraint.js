@@ -35,13 +35,6 @@ export class ToscaConstraints extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaDataType._classname;
-  }
-
-  /**
-   *
    * @param input
    */
   static isValid(input) {
@@ -69,13 +62,6 @@ export class ToscaConstraint extends ToscaNode {
   }
 
   static _classname = 'data_type';
-
-  /**
-   *
-   */
-  getClassname() {
-    return ToscaDataType._classname;
-  }
 }
 
 /**

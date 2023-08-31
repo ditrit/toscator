@@ -19,13 +19,6 @@ export class ToscaOperationDef extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return this._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

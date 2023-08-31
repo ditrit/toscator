@@ -18,13 +18,6 @@ export class ToscaNotificationDef extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return OperationDef._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

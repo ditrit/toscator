@@ -8,13 +8,6 @@ export class ToscaAttribute extends Charac {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaAttribute._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */

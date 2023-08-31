@@ -22,13 +22,6 @@ export class ToscaRequirement extends ToscaNode {
 
   /**
    *
-   */
-  getClassname() {
-    return ToscaRequirement._classname;
-  }
-
-  /**
-   *
    * @param input
    * @param source
    */
