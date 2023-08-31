@@ -7,7 +7,6 @@ import { compile } from '#src/compilation.js';
 import { ToscaProperty } from '#src/model/property.js';
 import { ToscaCapability } from '#src/model/capability.js';
 import { ToscaAttribute } from '#src/model/attribute.js';
-import { ToscaInterface } from '#src/model/interface.js';
 import { ToscaInterfaceDef } from '#src/model/interface_def.js';
 
 describe('class ToscaNodeType', () => {
