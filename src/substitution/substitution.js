@@ -1,4 +1,3 @@
-import { ToscaServiceTemplate } from '#src/model/service_template.js';
 import { nodeFilterSubstitute, substituteRequirementNode } from './node_filter_substitution.js';
 import { mappingSubstitution } from './mapping_substitution.js';
 

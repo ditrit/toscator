@@ -29,6 +29,7 @@ export class ToscaArtifact extends ToscaNode {
    * @param service_template
    */
   static correctGrammar(service_template) {
+    // TODO: What is the purpose? Is this unfinished?
     const artifact_type = service_template.artifact_types[this.type];
     // mime_type...?
     if (artifact_type.file_ext.length !== 0) {

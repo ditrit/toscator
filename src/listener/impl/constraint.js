@@ -30,7 +30,7 @@ export default {
     for (const key in parsed_rule?.value) {
       operator = key;
       type = parsed_rule.value[key].type;
-      if (type == 'list') {
+      if (type === 'list') {
         value = [];
         for (const node in parsed_rule.value[key].value) {
           value.push(parsed_rule.value[key].value[node].tosca
@@ -46,7 +46,11 @@ export default {
 
     switch (operator) {
       case 'equal':
-        validateCreateAndRegister(ToscaConstraintEquals, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintEquals,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
       case 'greater_than':
         validateCreateAndRegister(
@@ -65,7 +69,11 @@ export default {
         break;
 
       case 'less_than':
-        validateCreateAndRegister(ToscaConstraintLessThan, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintLessThan,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
 
       case 'less_or_equal':
@@ -77,7 +85,11 @@ export default {
         break;
 
       case 'in_range':
-        validateCreateAndRegister(ToscaConstraintInRange, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintInRange,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
 
       case 'valid_values':
@@ -89,19 +101,39 @@ export default {
         break;
 
       case 'length':
-        validateCreateAndRegister(ToscaConstraintLength, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintLength,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
       case 'min_length':
-        validateCreateAndRegister(ToscaConstraintMinLength, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintMinLength,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
       case 'max_length':
-        validateCreateAndRegister(ToscaConstraintMaxLength, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintMaxLength,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
       case 'pattern':
-        validateCreateAndRegister(ToscaConstraintPattern, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintPattern,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
       case 'schema':
-        validateCreateAndRegister(ToscaConstraintSchema, { operator, type, value }, parsed_rule);
+        validateCreateAndRegister(
+          ToscaConstraintSchema,
+          { operator, type, value },
+          parsed_rule,
+        );
         break;
     }
   },

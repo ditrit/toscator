@@ -25,16 +25,32 @@ export default {
 
         switch (operator) {
           case 'and':
-            validateCreateAndRegister(ToscaWorkflowConditionOperatorAnd, { operator, conditions, assertions }, parsed_rule);
+            validateCreateAndRegister(
+              ToscaWorkflowConditionOperatorAnd,
+              { operator, conditions, assertions },
+              parsed_rule,
+            );
             break;
           case 'or':
-            validateCreateAndRegister(ToscaWorkflowConditionOperatorOr, { operator, conditions, assertions }, parsed_rule);
+            validateCreateAndRegister(
+              ToscaWorkflowConditionOperatorOr,
+              { operator, conditions, assertions },
+              parsed_rule,
+            );
             break;
           case 'not':
-            validateCreateAndRegister(ToscaWorkflowConditionOperatorNot, { operator, conditions, assertions }, parsed_rule);
+            validateCreateAndRegister(
+              ToscaWorkflowConditionOperatorNot,
+              { operator, conditions, assertions },
+              parsed_rule,
+            );
             break;
           case 'assert':
-            validateCreateAndRegister(ToscaWorkflowConditionOperatorAssert, { operator, conditions, assertions }, parsed_rule);
+            validateCreateAndRegister(
+              ToscaWorkflowConditionOperatorAssert,
+              { operator, conditions, assertions },
+              parsed_rule,
+            );
             break;
         }
       }

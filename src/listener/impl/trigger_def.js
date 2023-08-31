@@ -6,7 +6,7 @@ import { propertyListofHelper } from '#src/listener/listener_helpers/property_li
 export default {
 
   exit_trigger_defs(parsed_rule) {
-    parsed_rule.tosca = defMapofHelperSetname(parsed_rule);
+    defMapofHelperSetname(parsed_rule);
   },
 
   exit_trigger_def(parsed_rule) {

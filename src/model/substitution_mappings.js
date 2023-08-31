@@ -24,7 +24,8 @@ export class ToscaSubstitutionMapping extends ToscaNode {
    *
    * @param node_type
    */
-  static correctGrammar(node_type) { // should I always give the service_template so that the input is always the same ?
+  static correctGrammar(node_type) {
+    // should I always give the service_template so that the input is always the same ?
     for (const property in this.properties) {
       if (!node_type.properties.has(property)) {
         return false;

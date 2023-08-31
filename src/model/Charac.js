@@ -1,4 +1,3 @@
-import { ToscaMetadata } from './metadata.js';
 import { ToscaNode } from './tosca_node.js';
 
 /**

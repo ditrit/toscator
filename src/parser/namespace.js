@@ -1,5 +1,3 @@
-import { ToscaServiceTemplate } from '#src/model/service_template.js';
-
 /**
  * fill the namespace with the objects inside the current_service_template by duplicating in the current_service_template the objects for each names they can be called with
  * also changes the structure of current_service_template: now the ..._types are Map<ToscaTypeName, {type: ToscaType, name_ctg: string}>
@@ -23,12 +21,14 @@ export function localNames(cst) {
     const ns_names = new Map();
 
     cst[attribute]?.forEach((element, name) => {
-      // if there is no "." inside it's not a real full_name accordint to TOSCA, but it helps in the implementation to consider it as such
+      // if there is no "." inside it's not a real full_name accordint to TOSCA,
+      // but it helps in the implementation to consider it as such
       full_names.set(name, { type: element, name_ctg: 'full_name' });
 
       const name_parts = name.split('.');
       const short_name = name_parts[name_parts.length - 1];
-      // Conflict name policy: if 2 elements have the same short name, then only the 1st one will have a short_name copy
+      // Conflict name policy: if 2 elements have the same short name,
+      // then only the 1st one will have a short_name copy
       if (name !== short_name && !short_names.has(short_name)) {
         short_names.set(short_name, { type: element, name_ctg: 'short_name' });
       }
@@ -44,7 +44,8 @@ export function localNames(cst) {
  * export the objects from the current_service_template to the parent_service_template
  * should I raise errors when there is a name conflict or should I prioritize the order ?
  * only add the namespace_prefix, the namespace_uri and the pst's namespace to the full names
- * @param {ToscaImport} file_import is the ToscaImport instance used to import the current_service_template
+ * @param {ToscaImport} file_import is the ToscaImport instance used to
+ * import the current_service_template
  * @param {ToscaServiceTemplate} pst = parent_service_template
  * @param {ToscaServiceTemplate} cst = current_service_template
  */

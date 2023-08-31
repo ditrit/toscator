@@ -10,7 +10,9 @@ export default {
       validateCreateAndRegister(
         ToscaImplementation,
         {
-          primary: typeof parsed_rule.value.primary?.value === 'string' ? parsed_rule.value.primary?.value : parsed_rule.value.primary?.tosca,
+          primary: typeof parsed_rule.value.primary?.value === 'string'
+            ? parsed_rule.value.primary?.value
+            : parsed_rule.value.primary?.tosca,
           dependencies,
         },
         parsed_rule,

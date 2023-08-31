@@ -77,7 +77,7 @@ export class Parser {
    * @param {*} errors - Errors.
    * @param {Array<string>} import_branch = list of the files imported in the
    * current recursive branch
-   * @param origin_file
+   * @param {string} origin_file
    * @returns {ToscaServiceTemplate} current_service_template parsed with the imports
    */
   parseWithImports(file_import, parent_service_template, errors, import_branch, origin_file) {

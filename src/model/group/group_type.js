@@ -27,7 +27,7 @@ function getMemberType(service_template, member_name) {
   for (const key in service_template) {
     if (key.match('types')) {
       if (key.match('policy_types')) { // treated differently because it's an Array
-        for (i in service_template[key].value) { // .value ?
+        for (const i in service_template[key].value) { // .value ?
           if (service_template[key].value[i].key.value === 'member_name') {
             return service_template[key].value[i].constructor.name; // to test
           }

@@ -1,5 +1,7 @@
 import { ToscaNode } from '../tosca_node.js';
 
+// TODO: This file looks like it has not been tested...
+
 let condition = ['or', 'and', 'nnot', 'assert'];
 
 /**
@@ -62,7 +64,7 @@ export class ToscaWorkflowConditionOperatorOr extends ToscaWorkflowConditionOper
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'or';
+    return input.operator === 'or';
   }
 
   /**
@@ -70,7 +72,7 @@ export class ToscaWorkflowConditionOperatorOr extends ToscaWorkflowConditionOper
    */
   eval() {
     if (this.assertions.length > 0) { // this should imply that conditions.length === 0
-      for (value in this.assertions) {
+      for (const value in this.assertions) {
         if (assertions[value].eval(value)) {
           return true;
         }

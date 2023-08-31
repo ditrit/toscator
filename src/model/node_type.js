@@ -10,7 +10,7 @@ export class ToscaNodeType extends ToscaType {
   /**
    * ToscaNodeType's constructor.
    * @param {object} input
-   * @param {MapNode} source
+   * @param source
    */
   constructor(input, source) {
     super(input, source);

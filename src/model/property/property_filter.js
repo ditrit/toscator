@@ -1,5 +1,3 @@
-import { ToscaParameter } from '../parameter/parameter.js';
-import { ToscaParameterAssignment } from '../parameter/parameter_assignment.js';
 import { ToscaNode } from '../tosca_node.js';
 
 /**

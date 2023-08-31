@@ -26,7 +26,7 @@ export class ToscaRequirement extends ToscaNode {
    * @param source
    */
   static isValid(input, source) {
-    if (!typeof input.capability === 'string') {
+    if (typeof input.capability !== 'string') {
       source.ctx.typeError(
         source.current,
         'Incorrect definition for requirement',

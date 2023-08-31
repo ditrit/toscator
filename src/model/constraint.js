@@ -150,7 +150,7 @@ export class ToscaConstraintLessThan extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'less_than' && value.includes(input.type);
+    return input.operator === 'less_than' && value.includes(input.type);
   }
 
   /**
@@ -198,9 +198,9 @@ export class ToscaConstraintInRange extends ToscaConstraint {
    */
   static isValid(input) {
     return (
-      input.operator == 'in_range'
-         && input.type == 'list'
-         && input.value.length == 2
+      input.operator === 'in_range'
+         && input.type === 'list'
+         && input.value.length === 2
     );
   }
 
@@ -225,7 +225,7 @@ export class ToscaConstraintValidValues extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'valid_values' && input.type == 'list';
+    return input.operator === 'valid_values' && input.type === 'list';
   }
 
   /**
@@ -249,7 +249,7 @@ export class ToscaConstraintLength extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'length' && input.type == 'int';
+    return input.operator === 'length' && input.type === 'int';
   }
 
   /**
@@ -257,7 +257,7 @@ export class ToscaConstraintLength extends ToscaConstraint {
    * @param value
    */
   eval(value) {
-    return value.toString().length == this.value;
+    return value.toString().length === this.value;
   }
 }
 /**
@@ -269,7 +269,7 @@ export class ToscaConstraintMaxLength extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'max_length' && input.type == 'int';
+    return input.operator === 'max_length' && input.type === 'int';
   }
 
   /**
@@ -289,7 +289,7 @@ export class ToscaConstraintMinLength extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'min_length' && input.type == 'int';
+    return input.operator === 'min_length' && input.type === 'int';
   }
 
   /**
@@ -310,7 +310,7 @@ export class ToscaConstraintPattern extends ToscaConstraint {
    * @param input
    */
   static isValid(input) {
-    return input.operator == 'pattern' && input.type == 'regex';
+    return input.operator === 'pattern' && input.type === 'regex';
   }
 
   /**

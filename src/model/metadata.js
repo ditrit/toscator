@@ -66,9 +66,9 @@ export class MetadataLeaf {
    */
   static isValid(input, source) { // parsed_rule is given only for error management
     if (typeof (input.name) !== 'string'
-            || input.name == ''
+            || input.name === ''
             || typeof (input.value) !== 'string'
-            || input.value == '' || (input.name == 'template_version' && !input.value instanceof ToscaVersion)) {
+            || input.value === '' || (input.name === 'template_version' && !(input.value instanceof ToscaVersion))) {
       source.ctx.grammarError('Incorrect input for metadata');
       return false;
     }

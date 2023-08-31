@@ -10,7 +10,11 @@ export default {
 
   exit_operation_def(parsed_rule) {
     if (typeof parsed_rule.value === 'string') {
-      validateCreateAndRegister(ToscaOperationDef, { implementation: parsed_rule.value }, parsed_rule);
+      validateCreateAndRegister(
+        ToscaOperationDef,
+        { implementation: parsed_rule.value },
+        parsed_rule,
+      );
     } else {
       const inputs = propertyMapofHelper('inputs', parsed_rule);
       const outputs = propertyMapofHelper('outputs', parsed_rule);

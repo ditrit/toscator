@@ -1,7 +1,4 @@
-import { ToscaNodeTemplate } from '#src/model/node_template.js';
 import { ToscaRequirementAssignment } from '#src/model/requirement/requirement_assignment.js';
-import { ToscaServiceTemplate } from '#src/model/service_template.js';
-import { ToscaTopologyTemplate } from '#src/model/topology_template.js';
 
 /**
  * Substitute the abstract node with a topology_template from one of the service_template in list_st

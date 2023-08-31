@@ -27,7 +27,7 @@ export class ToscaNamespace extends ToscaNode {
    * @param source
    */
   static isValid(input, source) {
-    if (typeof (input) !== 'string' || input == '') {
+    if (typeof (input) !== 'string' || input === '') {
       source.ctx.grammarError('Incorrect input for namespace');
       return false;
     }

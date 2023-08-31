@@ -20,7 +20,11 @@ function exit_requirement_assignments(parsed_rule) {
 function exit_requirement_assignment(parsed_rule) {
   for (const requirement_name in parsed_rule?.value) {
     if (typeof parsed_rule.value[requirement_name].value === 'string') {
-      validateCreateAndRegister(ToscaRequirementAssignment, { node: parsed_rule.value[requirement_name].value }, parsed_rule);
+      validateCreateAndRegister(
+        ToscaRequirementAssignment,
+        { node: parsed_rule.value[requirement_name].value },
+        parsed_rule,
+      );
     } else {
       validateCreateAndRegister(ToscaRequirementAssignment, {
         node: parsed_rule.value[requirement_name].value.node?.value,

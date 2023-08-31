@@ -21,7 +21,7 @@ export class ToscaScalar extends ToscaValue {
    * @param value
    */
   equals(value) {
-    return this.normalized_value == value.normalized_value;
+    return this.normalized_value === value.normalized_value;
   }
 
   /**

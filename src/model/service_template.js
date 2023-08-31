@@ -9,7 +9,7 @@ export class ToscaServiceTemplate {
     /**
      * @type {string}
      */
-    this.tosca_definitions_version = null;
+    this.tosca_definitions_version = undefined;
     this.description = {}; // TODO: esdoc type
     this.metadata = {}; // TODO: esdoc type
     this.imports = []; // TODO: esdoc type

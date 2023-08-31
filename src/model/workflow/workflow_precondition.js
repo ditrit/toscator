@@ -7,9 +7,9 @@ export class ToscaWorkflowPrecondition extends ToscaNode {
   /**
    *
    * @param input
-   * @param sourcee
+   * @param source
    */
-  constructor(input, sourcee) {
+  constructor(input, source) {
     super(source);
     this.target = input.target;
     this.target_relationship = input.target_relationship;

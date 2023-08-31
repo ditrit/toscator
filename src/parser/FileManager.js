@@ -3,6 +3,9 @@ import fs from 'fs';
 import { LidyError } from 'lidy-js';
 import { getProtocol, is_url } from '#src/model/utils.js';
 
+/**
+ *
+ */
 export class AbstractFileManager {
   /**
    * TODO: handle the different protocols.
@@ -82,6 +85,9 @@ export class AbstractFileManager {
   }
 }
 
+/**
+ *
+ */
 export class NodeJsFileManager extends AbstractFileManager {
   /**
    * Read the local file
@@ -108,6 +114,7 @@ export class NodeJsFileManager extends AbstractFileManager {
    * @param {any[]} errors
    * @returns {string} the file as a string
    */
+  // eslint-disable-next-line no-unused-vars
   getArtifactHttp(abs_path, repository, errors) {
     throw Error('not implemented');
   }
@@ -142,19 +149,46 @@ export class NodeJsFileManager extends AbstractFileManager {
     return path.resolve(path.dirname(cst_path), f_path);
   }
 }
+/**
+ *
+ */
 class BrowserFileManager extends AbstractFileManager {
+  /**
+   *
+   * @param repository
+   * @param f_path
+   * @param cst_path
+   */
   getAbsolutePath(repository, f_path, cst_path) {
     throw Error('not implemented yet'); // TODO: implement
   }
 
+  /**
+   *
+   * @param cst_path
+   * @param f_path
+   * @param repository
+   * @param errors
+   */
   getArtifact(cst_path, f_path, repository, errors) {
     throw Error('not implemented yet'); // TODO: implement
   }
 
+  /**
+   *
+   * @param abs_path
+   * @param repository
+   * @param errors
+   */
   getArtifactHttp(abs_path, repository, errors) {
     throw Error('not implemented yet'); // TODO: implement
   }
 
+  /**
+   *
+   * @param abs_path
+   * @param errors
+   */
   getArtifactLocalFile(abs_path, errors) {
     throw Error('not implemented yet'); // TODO: implement
   }

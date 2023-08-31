@@ -5,7 +5,11 @@ import { propertyMapofHelper } from '#src/listener/listener_helpers/property_map
 export default {
   exit_relationship_assignment(parsed_rule) {
     if (typeof parsed_rule.value === 'string') {
-      validateCreateAndRegister(ToscaRelationshipAssignment, { type: parsed_rule.value }, parsed_rule);
+      validateCreateAndRegister(
+        ToscaRelationshipAssignment,
+        { type: parsed_rule.value },
+        parsed_rule,
+      );
     } else {
       const interfaces = propertyMapofHelper('interfaces', parsed_rule);
       const properties = propertyMapofHelper('properties', parsed_rule);
