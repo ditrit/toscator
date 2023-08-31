@@ -1,6 +1,6 @@
 import { ToscaNodeType } from '../model/node_type.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 
 export default {
   exit_node_types(parsed_rule) {
@@ -10,11 +10,11 @@ export default {
   },
 
   exit_node_type(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-    const attributes = listener_helpers.propertyMapofHelper('attributes', parsed_rule);
-    const capabilities = listener_helpers.propertyMapofHelper('capabilities', parsed_rule);
-    const artifacts = listener_helpers.propertyMapofHelper('artifacts', parsed_rule);
-    const interfaces = listener_helpers.propertyMapofHelper('interfaces', parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
+    const attributes = propertyMapofHelper('attributes', parsed_rule);
+    const capabilities = propertyMapofHelper('capabilities', parsed_rule);
+    const artifacts = propertyMapofHelper('artifacts', parsed_rule);
+    const interfaces = propertyMapofHelper('interfaces', parsed_rule);
 
     validateCreateAndRegister(
       ToscaNodeType,

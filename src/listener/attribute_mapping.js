@@ -1,6 +1,8 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { ToscaAttributeMapping } from '#src/model/attribute_mapping.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 
 export default { exit_attributes_mapping, exit_attribute_mapping };
 
@@ -9,7 +11,7 @@ export default { exit_attributes_mapping, exit_attribute_mapping };
  * @param parsed_rule
  */
 function exit_attributes_mapping(parsed_rule) {
-  listener_helpers.defMapofHelperSetname(parsed_rule);
+  defMapofHelperSetname(parsed_rule);
 }
 
 /**
@@ -19,9 +21,9 @@ function exit_attributes_mapping(parsed_rule) {
 function exit_attribute_mapping(parsed_rule) {
   let mapping;
   if (parsed_rule.value instanceof Array) {
-    mapping = listener_helpers.defListofHelper(false, parsed_rule);
+    mapping = defListofHelper(false, parsed_rule);
   } else {
-    mapping = listener_helpers.propertyListofHelper('mapping', false, parsed_rule);
+    mapping = propertyListofHelper('mapping', false, parsed_rule);
   }
   validateCreateAndRegister(ToscaAttributeMapping, { mapping }, parsed_rule);
 }

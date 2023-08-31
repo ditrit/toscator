@@ -1,7 +1,7 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 
 export default {
-    exit_attribute_assignments(parsed_rule) {
-        listener_helpers.defMapofHelperSetname(parsed_rule);
-    }
+  exit_attribute_assignments(parsed_rule) {
+    defMapofHelperSetname(parsed_rule);
+  },
 };

@@ -1,6 +1,6 @@
 import { ToscaInterfaceType } from '../model/interface_type.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 
 export default {
   exit_interface_types(parsed_rule) {
@@ -14,9 +14,9 @@ export default {
   },
 
   exit_interface_type(parsed_rule) {
-    const inputs = listener_helpers.propertyMapofHelper('inputs', parsed_rule);
-    const operations = listener_helpers.propertyMapofHelper('operations', parsed_rule);
-    const notifications = listener_helpers.propertyMapofHelper('notifications', parsed_rule);
+    const inputs = propertyMapofHelper('inputs', parsed_rule);
+    const operations = propertyMapofHelper('operations', parsed_rule);
+    const notifications = propertyMapofHelper('notifications', parsed_rule);
     validateCreateAndRegister(
       ToscaInterfaceType,
       {

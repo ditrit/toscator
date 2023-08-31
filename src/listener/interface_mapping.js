@@ -1,6 +1,6 @@
 import { ToscaInterfaceMapping } from '../model/interface_mapping.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 
 export default { exit_interfaces_mapping, exit_interface_mapping };
 
@@ -9,7 +9,7 @@ export default { exit_interfaces_mapping, exit_interface_mapping };
  * @param parsed_rule
  */
 function exit_interfaces_mapping(parsed_rule) {
-  listener_helpers.defMapofHelperSetname(parsed_rule);
+  defMapofHelperSetname(parsed_rule);
 }
 
 /**

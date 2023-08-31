@@ -1,13 +1,13 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { ToscaRepository } from '#src/model/repository.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 
 /**
  *
  * @param parsed_rule
  */
 function exit_repositories(parsed_rule) {
-  listener_helpers.defMapofHelperSetname(parsed_rule);
+  defMapofHelperSetname(parsed_rule);
 }
 
 /**

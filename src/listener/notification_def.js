@@ -1,14 +1,15 @@
 import { ToscaNotificationDef } from '../model/notification_def.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 
 export default {
   exit_notification_defs(parsed_rule) {
-    listener_helpers.defMapofHelperSetname(parsed_rule);
+    defMapofHelperSetname(parsed_rule);
   },
 
   exit_notification_def(parsed_rule) {
-    const outputs = listener_helpers.propertyMapofHelper('outputs', parsed_rule);
+    const outputs = propertyMapofHelper('outputs', parsed_rule);
     validateCreateAndRegister(
       ToscaNotificationDef,
       {

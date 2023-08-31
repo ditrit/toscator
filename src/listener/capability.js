@@ -1,6 +1,7 @@
 import { ToscaCapability } from '../model/capability.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_capability_defs(parsed_rule) {
@@ -13,9 +14,9 @@ export default {
     if (typeof parsed_rule.value === 'string') {
       validateCreateAndRegister(ToscaCapability, { type: parsed_rule.value }, parsed_rule);
     } else {
-      const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-      const attributes = listener_helpers.propertyMapofHelper('attributes', parsed_rule);
-      const valid_source_types = listener_helpers.propertyListofHelper('valid_source_types', false, parsed_rule);
+      const properties = propertyMapofHelper('properties', parsed_rule);
+      const attributes = propertyMapofHelper('attributes', parsed_rule);
+      const valid_source_types = propertyListofHelper('valid_source_types', false, parsed_rule);
       validateCreateAndRegister(
         ToscaCapability,
         {

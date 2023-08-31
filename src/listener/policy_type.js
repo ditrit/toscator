@@ -1,6 +1,7 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { ToscaPolicyType } from '#src/model/policy_type.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_policy_types(parsed_rule) {
@@ -10,9 +11,9 @@ export default {
   },
 
   exit_policy_type(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-    const targets = listener_helpers.propertyListofHelper('targets', false, parsed_rule);
-    const triggers = listener_helpers.propertyListofHelper('triggers', true, parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
+    const targets = propertyListofHelper('targets', false, parsed_rule);
+    const triggers = propertyListofHelper('triggers', true, parsed_rule);
     validateCreateAndRegister(ToscaPolicyType, {
       derived_from: parsed_rule.value.derived_from?.value,
       version: parsed_rule.value.version?.tosca,

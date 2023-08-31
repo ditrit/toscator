@@ -1,11 +1,11 @@
 import { ToscaPropertyFilter } from '../model/property_filter.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { ToscaConstraint, ToscaConstraintEquals } from '../model/constraint.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 
 export default {
   exit_properties_filter(parsed_rule) {
-    parsed_rule.tosca = listener_helpers.defListofHelper(true, parsed_rule);
+    parsed_rule.tosca = defListofHelper(true, parsed_rule);
   },
 
   exit_property_filter(parsed_rule) {
@@ -32,7 +32,7 @@ export default {
           values.forEach((val) => {
             const { type } = val;
             let value;
-            if (type == 'list') {
+            if (type === 'list') {
               value = val.value.map((v) => (v.tosca ? v.tosca : v.value));
             } else {
               value = val.tosca ? val.tosca : val.value;
@@ -65,7 +65,7 @@ export default {
       } else {
         const { type } = parsed_rule.value[property_name];
         let value;
-        if (type == 'list') {
+        if (type === 'list') {
           value = [];
           for (const node in parsed_rule.value[property_name].value) {
             value.push(parsed_rule.value[property_name].value[node].value);
@@ -77,7 +77,7 @@ export default {
         }
 
         const constraints = [
-          validateCreateAndRegister(ToscaConstraintEqual, {
+          validateCreateAndRegister(ToscaConstraintEquals, {
             operator: 'equal',
             type,
             value,

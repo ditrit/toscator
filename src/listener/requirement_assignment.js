@@ -1,6 +1,7 @@
 import { ToscaRequirementAssignment } from '../model/requirement_assignment.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
+
 import { validateCreateAndRegister } from '#src/models.js';
+import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 
 export default { exit_requirement_assignment, exit_requirement_assignments };
 
@@ -9,7 +10,7 @@ export default { exit_requirement_assignment, exit_requirement_assignments };
  * @param parsed_rule
  */
 function exit_requirement_assignments(parsed_rule) {
-  parsed_rule.tosca = listener_helpers.defListofHelper(true, parsed_rule);
+  parsed_rule.tosca = defListofHelper(true, parsed_rule);
 }
 
 /**

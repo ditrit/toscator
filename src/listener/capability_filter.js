@@ -1,15 +1,16 @@
 import { ToscaCapabilityFilter } from '../model/capability_filter.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_capabilities_filter(parsed_rule) {
-    parsed_rule.tosca = listener_helpers.defListofHelper(true, parsed_rule);
+    parsed_rule.tosca = defListofHelper(true, parsed_rule);
   },
 
   exit_capability_filter(parsed_rule) {
     for (const capability_name in parsed_rule.value) {
-      const properties = listener_helpers.propertyListofHelper('properties', true, parsed_rule.value[capability_name]);
+      const properties = propertyListofHelper('properties', true, parsed_rule.value[capability_name]);
       validateCreateAndRegister(ToscaCapabilityFilter, {
         name: capability_name,
         properties,

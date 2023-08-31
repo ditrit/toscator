@@ -1,6 +1,7 @@
 import { ToscaDataType } from '../model/data_type.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_data_types(parsed_rule) {
@@ -10,8 +11,8 @@ export default {
   },
 
   exit_data_type(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-    const constraints = listener_helpers.propertyListofHelper('constraints', false, parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
+    const constraints = propertyListofHelper('constraints', false, parsed_rule);
     validateCreateAndRegister(
       ToscaDataType,
       {

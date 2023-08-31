@@ -1,6 +1,7 @@
 import { ToscaGroupType } from '../model/group_type.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 
 export default {
   exit_group_types(parsed_rule) {
@@ -10,9 +11,9 @@ export default {
   },
 
   exit_group_type(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-    const attributes = listener_helpers.propertyMapofHelper('attributes', parsed_rule);
-    const members = listener_helpers.propertyListofHelper('members', false, parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
+    const attributes = propertyMapofHelper('attributes', parsed_rule);
+    const members = propertyListofHelper('members', false, parsed_rule);
 
     validateCreateAndRegister(
       ToscaGroupType,

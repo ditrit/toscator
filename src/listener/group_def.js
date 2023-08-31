@@ -1,15 +1,17 @@
 import { ToscaGroupDef } from '../model/group_def.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_group_defs(parsed_rule) {
-    listener_helpers.defMapofHelperSetname(parsed_rule);
+    defMapofHelperSetname(parsed_rule);
   },
 
   exit_group_def(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-    const members = listener_helpers.propertyListofHelper('members', false, parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
+    const members = propertyListofHelper('members', false, parsed_rule);
 
     validateCreateAndRegister(ToscaGroupDef, {
       type: parsed_rule.value.type?.value,

@@ -1,15 +1,16 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { ToscaTriggerDef } from '#src/model/trigger_def.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
 
   exit_trigger_defs(parsed_rule) {
-    parsed_rule.tosca = listener_helpers.defMapofHelperSetname(parsed_rule);
+    parsed_rule.tosca = defMapofHelperSetname(parsed_rule);
   },
 
   exit_trigger_def(parsed_rule) {
-    const action = listener_helpers.propertyListofHelper('action', false, parsed_rule);
+    const action = propertyListofHelper('action', false, parsed_rule);
     validateCreateAndRegister(ToscaTriggerDef, {
       description: parsed_rule.value.description?.value,
       event: parsed_rule.value.event?.value,

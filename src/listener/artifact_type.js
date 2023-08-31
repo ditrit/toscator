@@ -1,5 +1,6 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { ToscaArtifactType } from '#src/model/artifact_type.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 
 export default {
   exit_artifact_types(parsed_rule) {
@@ -13,7 +14,7 @@ export default {
   },
 
   exit_artifact_type(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
     const file_ext = [];
     for (const key in parsed_rule.value.file_ext?.value) {
       file_ext.push(parsed_rule.value.file_ext.value[key].value);

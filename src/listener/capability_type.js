@@ -1,6 +1,7 @@
 import { ToscaCapabilityType } from '#src/model/capability_type.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 /**
  * TODO
@@ -22,9 +23,9 @@ exit_capability_types(parsed_rule) {
  * @param parsed_rule
  */
 export function exit_capability_type(parsed_rule) {
-  const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-  const attributes = listener_helpers.propertyMapofHelper('attributes', parsed_rule);
-  const valid_source_types = listener_helpers.propertyListofHelper('valid_source_types', false, parsed_rule);
+  const properties = propertyMapofHelper('properties', parsed_rule);
+  const attributes = propertyMapofHelper('attributes', parsed_rule);
+  const valid_source_types = propertyListofHelper('valid_source_types', false, parsed_rule);
 
   validateCreateAndRegister(
     ToscaCapabilityType,

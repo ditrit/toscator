@@ -1,6 +1,6 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { ToscaWorkflowActivity } from '#src/model/workflow_activity.js';
+import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 
 export default { exit_workflow_activities, exit_workflow_activity };
 
@@ -9,7 +9,7 @@ export default { exit_workflow_activities, exit_workflow_activity };
  * @param parsed_rule
  */
 function exit_workflow_activities(parsed_rule) {
-  parsed_rule.tosca = listener_helpers.defListofHelper(false, parsed_rule);
+  parsed_rule.tosca = defListofHelper(false, parsed_rule);
 }
 
 /**

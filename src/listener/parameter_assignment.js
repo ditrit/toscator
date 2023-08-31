@@ -1,6 +1,6 @@
 import { ToscaParameterAssignment } from '../model/parameter_assignment.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 
 export default {
   exit_parameter_assignment(parsed_rule) {
@@ -32,5 +32,5 @@ export default {
  * @param parsed_rule
  */
 function exit_parameter_assignments(parsed_rule) {
-  listener_helpers.defMapofHelperSetname(parsed_rule);
+  defMapofHelperSetname(parsed_rule);
 }

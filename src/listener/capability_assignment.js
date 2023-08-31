@@ -1,15 +1,16 @@
 import { ToscaCapabilityAssignment } from '../model/capability_assignment.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 
 export default {
   exit_capability_assignments(parsed_rule) {
-    listener_helpers.defMapofHelperSetname(parsed_rule);
+    defMapofHelperSetname(parsed_rule);
   },
 
   exit_capability_assignment(parsed_rule) {
-    const properties = listener_helpers.propertyMapofHelper('properties', parsed_rule);
-    const attributes = listener_helpers.propertyMapofHelper('attributes', parsed_rule);
+    const properties = propertyMapofHelper('properties', parsed_rule);
+    const attributes = propertyMapofHelper('attributes', parsed_rule);
 
     validateCreateAndRegister(ToscaCapabilityAssignment, {
       properties,

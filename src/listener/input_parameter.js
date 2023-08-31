@@ -1,14 +1,15 @@
 import { ToscaParameter } from '../model/parameter.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_input_parameters(parsed_rule) {
-    listener_helpers.defMapofHelperSetname(parsed_rule);
+    defMapofHelperSetname(parsed_rule);
   },
 
   exit_input_parameter(parsed_rule) {
-    const constraints = listener_helpers.propertyListofHelper('constraints', false, parsed_rule);
+    const constraints = propertyListofHelper('constraints', false, parsed_rule);
     validateCreateAndRegister(ToscaParameter, {
       type: parsed_rule.value.type?.value,
       description: parsed_rule.value.description?.value,

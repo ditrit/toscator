@@ -1,10 +1,10 @@
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { ToscaWorkflowPrecondition } from '#src/model/workflow_precondition.js';
+import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 
 export default {
   exit_workflow_preconditions(parsed_rule) {
-    listener_helpers.defListofHelper(false, parsed_rule);
+    defListofHelper(false, parsed_rule);
   },
 
   exit_workflow_precondition(parsed_rule) {

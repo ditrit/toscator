@@ -1,6 +1,6 @@
 import { ToscaProperty } from '../model/property.js';
-import listener_helpers from './listener_helpers/listener_helpers.js';
 import { validateCreateAndRegister } from '#src/models.js';
+import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
   exit_properties(parsed_rule) {
@@ -12,7 +12,7 @@ export default {
   },
 
   exit_property(parsed_rule) {
-    const constraints = listener_helpers.propertyListofHelper('constraints', false, parsed_rule);
+    const constraints = propertyListofHelper('constraints', false, parsed_rule);
     if (parsed_rule) {
       validateCreateAndRegister(
         ToscaProperty,
