@@ -7,40 +7,37 @@ import { parse as parse_tosca } from '#src/schemas/tosca_1_3.js';
 import { listenerObject } from '#src/listener/listener.js';
 import { localNames, exportToParent, getRidOfNameCtg } from './namespace.js';
 
+/**
+ *
+ */
 export class Parser {
   /**
    * Parser's constructor.
    * @param {AbstractFileManager} fileManager - A platform-specific file manager.
    */
   constructor(fileManager) {
+    /**
+     * A platform-specific file manager.
+     * @type {AbstractFileManager}
+     */
     this.fileManager = fileManager;
   }
 
-  // src has to be the relative path from the working directory to the file to parse
-  // it should also work with an absolute path
   /**
-   * Parse a TOSCA yaml file.
-   * @param {string} src - Path of the file to parse.
+   * Parse a TOSCA YAML file.
+   * @param {string} src - Path of the file to parse. Absolute or relative
+   * from the working directory.
    * @returns {ToscaServiceTemplate} Parsed service template.
    */
   parse(src) {
-    const errors = [];
-    const ctx = new Ctx();
-    let cst = new ToscaServiceTemplate();
-    cst.origin_file = src;
-    ctx.prog = cst;
     const init_import = new ToscaImport({
       file: path.basename(src),
       namespace_prefix: '',
       namespace_uri: '',
-    }, {
-      ctx,
     });
-    init_import.setAbsolutePath();
+    init_import.setAbsolutePath(src);
 
-    cst = this.parseWithImports(init_import, null, errors, [init_import.path]);
-
-    return cst;
+    return this.parseWithImports(init_import, null, [], [init_import.path], src);
   }
 
   /**
@@ -56,13 +53,10 @@ export class Parser {
       throw Error('empty src_data');
     }
 
-    const { namespace_uri } = file;
-    const { namespace_prefix } = file;
-
     const current_service_template = new ToscaServiceTemplate();
     current_service_template.origin_file = abs_path;
-    current_service_template.ns_uri = namespace_uri || '';
-    current_service_template.ns_prefix = namespace_prefix || '';
+    current_service_template.ns_uri = file.namespace_uri || '';
+    current_service_template.ns_prefix = file.namespace_prefix || '';
 
     parse_tosca({
       src_data,
@@ -84,13 +78,14 @@ export class Parser {
    * @param {*} errors - Errors.
    * @param {Array<string>} import_branch = list of the files imported in the
    * current recursive branch
+   * @param origin_file
    * @returns {ToscaServiceTemplate} current_service_template parsed with the imports
    */
-  parseWithImports(file_import, parent_service_template, errors, import_branch) {
+  parseWithImports(file_import, parent_service_template, errors, import_branch, origin_file) {
   // Note: can optimize here by giving last element of import_branch which is abs_path
   // as an argument so that getartifact() doesn't have to get it itself
     const { src_data, abs_path } = this.fileManager.getArtifact(
-      file_import.source.ctx.prog.origin_file,
+      origin_file,
       file_import.file,
       file_import.getRepository(),
       errors,
@@ -110,12 +105,18 @@ export class Parser {
       const imp_abs_path = this.fileManager.getAbsolutePath(
         file_imp.repository,
         file_imp.file,
-        file_imp.source.ctx.prog.origin_file,
+        origin_file,
       );
       if (!import_branch.includes(imp_abs_path)) {
         const new_import_branch = JSON.parse(JSON.stringify(import_branch));
         new_import_branch.push(imp_abs_path);
-        this.parseWithImports(file_imp, current_service_template, errors, new_import_branch);
+        this.parseWithImports(
+          file_imp,
+          current_service_template,
+          errors,
+          new_import_branch,
+          origin_file,
+        );
       }
     });
 

@@ -6,34 +6,60 @@ export class ToscaServiceTemplate {
    *
    */
   constructor() {
-    this.tosca_definitions_version = '';
-    this.description = {};
-    this.metadata = {};
-    this.imports = [];
-    this.repositories = {};
-    this.namespace = { value: '' };
+    /**
+     * @type {string}
+     */
+    this.tosca_definitions_version = null;
+    this.description = {}; // TODO: esdoc type
+    this.metadata = {}; // TODO: esdoc type
+    this.imports = []; // TODO: esdoc type
+    this.repositories = {}; // TODO: esdoc type
+    this.namespace = { value: '' }; // TODO: esdoc type
     /**
      * Node types.
      * @type {Map<string, ToscaNodeType>}
      */
     this.node_types = new Map();
-    this.relationship_types = {};
-    this.data_types = {};
-    this.capability_types = {};
-    this.artifact_types = {};
-    this.group_types = {};
-    this.interface_types = {};
-    this.policy_types = {};
-    this.topology_template;
-    // what are those ?
-    this.errors = [];
-    this.warnings = [];
-    this.tosca_types = [];
+    /**
+     * @type {Map<string, ToscaRelationshipType>}
+     */
+    this.relationship_types = new Map();
+    /**
+     * @type {Map<string, ToscaDataType>}
+     */
+    this.data_types = new Map();
+    /**
+     * @type {Map<string, ToscaCapabilityType>}
+     */
+    this.capability_types = new Map();
+    /**
+     * @type {Map<string, ToscaArtifactType>}
+     */
+    this.artifact_types = new Map();
+    /**
+     * @type {Map<string, ToscaGroupType>}
+     */
+    this.group_types = new Map();
+    /**
+     * @type {Map<string, ToscaInterfaceType>}
+     */
+    this.interface_types = new Map();
+    /**
+     * @type {Map<string, ToscaPolicyType>}
+     */
+    this.policy_types = new Map();
+
+    // TODO: What are those ?
+    this.topology_template = undefined; // TODO: esdoc type
+    this.errors = []; // TODO: esdoc type
+    this.warnings = []; // TODO: esdoc type
+    this.tosca_types = []; // TODO: esdoc type
   }
 
   /**
    *
    * @param tosca_type
+   * @returns {string}
    */
   toStringType(tosca_type) {
     let str = `\n ${tosca_type} : \n`;
@@ -45,7 +71,7 @@ export class ToscaServiceTemplate {
   }
 
   /**
-   *
+   * @returns {string}
    */
   toString() {
     let str = 'prog: \n';

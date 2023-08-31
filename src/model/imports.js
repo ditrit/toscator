@@ -40,17 +40,10 @@ export class ToscaImport extends ToscaNode {
 
   /**
    *
+   * @param origin_file
    */
-  setAbsolutePath() {
-    if (this.repository) {
-
-    }
-
-    if (is_url(this.file)) {
-      this.path = this.file;
-    } else {
-      this.path = path.resolve(path.dirname(this.source.ctx.prog.origin_file), this.file);
-    }
+  setAbsolutePath(origin_file) {
+    this.path = path.resolve(path.dirname(origin_file), this.file);
   }
 
   /**
