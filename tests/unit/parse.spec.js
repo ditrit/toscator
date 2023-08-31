@@ -13,7 +13,7 @@ describe('Parsing', () => {
     const seen = new Set();
 
     const replacer = (key, value) => {
-      if (key === 'origin_file') return '__IGNORED__'; // ignore
+      if (['origin_file', 'file'].includes(key)) return '__IGNORED__'; // ignore
 
       // ignore circular references
       if (seen.has(value)) return undefined;

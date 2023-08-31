@@ -49,6 +49,7 @@
         },
         "txt": "tosca_definitions_version: tosca_simple_yaml_1_3\n\ntopology_template:\n  substitution_mappings:\n    node_type: node_type\n    interfaces: \n      interface1:\n        ope1: wf1\n      interface2:\n        ope2: wf2",
         "errors": [],
+        "file": "__IGNORED__",
         "warnings": [],
         "yaml_ok": true,
         "contents": {
@@ -274,7 +275,9 @@
             ]
           },
           "import.target": {
-            "_map": {},
+            "_map": {
+              "file": "__IGNORED__"
+            },
             "_mapFacultative": {}
           },
           "imports": {
@@ -443,7 +446,9 @@
             "_oneOf": [
               null,
               {
-                "_map": {},
+                "_map": {
+                  "file": "__IGNORED__"
+                },
                 "_mapFacultative": {
                   "properties": "property_assignments"
                 }
