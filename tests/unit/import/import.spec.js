@@ -15,13 +15,13 @@ describe('Tosca compiler ->', () => {
     parser = new Parser(new NodeJsFileManager());
   });
 
-  const correct_simple_import = 'tests/data/import/correct_simple_import.yml';
-  const incorrect_simple_import = 'tests/data/import/incorrect_simple_import_incorrect_child.yml';
-  const correct_full_import = 'tests/data/import/correct_full_import.yml';
-  const incorect_full_import_no_file = 'tests/data/import/incorect_full_import_no_file.yml';
-  const incorrect_full_import_incorrect_repository = 'tests/data/import/correct_full_import.yml';
-  const incorrect_full_import_incorrect_namespace_prefix = 'tests/data/import/incorrect_full_import_incorrect_namespace_prefix.yml';
-  const incorrect_full_import_incorrect_namespace_uri = 'tests/data/import/incorrect_full_import_incorrect_namespace_uri.yml';
+  const correct_simple_import = 'tests/unit/import/data/correct_simple_import.yml';
+  const incorrect_simple_import = 'tests/unit/import/data/incorrect_simple_import_incorrect_child.yml';
+  const correct_full_import = 'tests/unit/import/data/correct_full_import.yml';
+  const incorect_full_import_no_file = 'tests/unit/import/data/incorect_full_import_no_file.yml';
+  const incorrect_full_import_incorrect_repository = 'tests/unit/import/data/correct_full_import.yml';
+  const incorrect_full_import_incorrect_namespace_prefix = 'tests/unit/import/data/incorrect_full_import_incorrect_namespace_prefix.yml';
+  const incorrect_full_import_incorrect_namespace_uri = 'tests/unit/import/data/incorrect_full_import_incorrect_namespace_uri.yml';
 
   describe('Import tosca object: ', () => {
     it('Correct simple import', () => {
@@ -61,7 +61,7 @@ describe('Tosca compiler ->', () => {
     });
   });
 
-  const loop_import_file = 'tests/data/import/loop_import_test.yml';
+  const loop_import_file = 'tests/unit/import/data/loop_import_test.yml';
 
   describe('Import files : ', () => {
     it('incorrect import simple file', () => {
@@ -75,8 +75,8 @@ describe('Tosca compiler ->', () => {
     });
   });
 
-  const correct_import_url = 'tests/data/import/url/correct_simple_import.yml';
-  const correct_interlock_import_url = 'tests/data/import/url/correct_interlock_import.yml';
+  const correct_import_url = 'tests/unit/import/data/url/correct_simple_import.yml';
+  const correct_interlock_import_url = 'tests/unit/import/data/url/correct_interlock_import.yml';
   describe('Imports urls : ', () => {
 
     // TODO: Enable/implement these tests once fetching remote resources is possible.

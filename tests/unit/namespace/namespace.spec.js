@@ -14,9 +14,9 @@ describe('Tosca compiler ->', () => {
     parser = new Parser(new NodeJsFileManager());
   });
 
-  const correct_namespace = 'tests/data/namespace/correct_namespace.yml';
-  const incorrect_namespace = 'tests/data/namespace/incorrect_namespace.yml';
-  const no_namespace = 'tests/data/namespace/no_namespace.yml';
+  const correct_namespace = 'tests/unit/namespace/data/correct_namespace.yml';
+  const incorrect_namespace = 'tests/unit/namespace/data/incorrect_namespace.yml';
+  const no_namespace = 'tests/unit/namespace/data/no_namespace.yml';
 
   describe('Namespace: ', () => {
     it('Correct namespace', () => {

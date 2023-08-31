@@ -14,11 +14,11 @@ describe('Tosca compiler ->', () => {
     parser = new Parser(new NodeJsFileManager());
   });
 
-  const version_ok = 'tests/data/minimal_file/version_ok.yml';
-  const empty_file = 'tests/data/minimal_file/empty_file.yml';
-  const bad_path_file = 'tests/data/minimal_file/bad_path_file.yml';
+  const version_ok = 'tests/unit/minimal_file/data/version_ok.yml';
+  const empty_file = 'tests/unit/minimal_file/data/empty_file.yml';
+  const bad_path_file = 'tests/unit/minimal_file/data/bad_path_file.yml';
   const bad_path_url = 'https://orness.com/minimal_file/bad_path_file.yml';
-  const bad_version = 'tests/data/minimal_file/bad_version.yml';
+  const bad_version = 'tests/unit/minimal_file/data/bad_version.yml';
 
   describe('Minimal source file: ', () => {
     it('Minimal file compilation provides ToscaServiceTemplate object', () => {

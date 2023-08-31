@@ -164,7 +164,7 @@ describe('Parser: node_type', () => {
   });
 
   it('parses a node_type correctly', () => {
-    const result = compile('tests/unit/types/node_type_derived_from.yml');
+    const result = compile('tests/unit/types_inheritance/node_type_derived_from.yml');
 
     const test_parent_type = result.node_types.get('test_parent_type');
     expect(test_parent_type).toBeInstanceOf(ToscaNodeType);
@@ -214,7 +214,7 @@ describe('Parser: node_type', () => {
   });
 
   it('inherits correctly (empty child)', () => {
-    const result = compile('tests/unit/types/node_type_derived_from.yml');
+    const result = compile('tests/unit/types_inheritance/node_type_derived_from.yml');
 
     const test_empty_child_type = result.node_types.get('test_empty_child_type');
     expect(test_empty_child_type).toBeInstanceOf(ToscaNodeType);
@@ -263,7 +263,7 @@ describe('Parser: node_type', () => {
   });
 
   it('inherits correctly (full child, redefining everything)', () => {
-    const result = compile('tests/unit/types/node_type_derived_from.yml');
+    const result = compile('tests/unit/types_inheritance/node_type_derived_from.yml');
 
     const test_full_child_type = result.node_types.get('test_full_child_type');
     expect(test_full_child_type).toBeInstanceOf(ToscaNodeType);

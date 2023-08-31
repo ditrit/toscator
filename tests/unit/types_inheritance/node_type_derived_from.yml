@@ -58,3 +58,28 @@ node_types:
         type: val_interface_child_2
       test_interface_3:
         type: val_interface_child_3
+
+#artifact_types
+#data_types
+#capability_types
+#interface_types
+#relationship_types
+#group_types
+#policy_types
+
+# multiple heritage
+# loop heritage
+# héritage depuis type inexistant
+# gestion des namespaces ?
+
+# est-ce que:
+# - on hérite de version, metadata, description...? On hérite de *tout* ?
+# - quelle profondeur de merge ?
+# x:
+#   truc:
+#      bidule:
+#          machin:
+#            a:1
+# --> Si on hérite et qu'on met truc:bidule:machin:b:2 , on garde a et b (merge au niveau machin) ou juste b (merge au niveau bidule) ?
+#
+#
