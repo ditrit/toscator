@@ -4,10 +4,10 @@ import {
 import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { ToscaNodeType } from '#src/model/node_type.js';
 import { compile } from '#src/compilation.js';
-import { ToscaProperty } from '#src/model/property.js';
-import { ToscaCapability } from '#src/model/capability.js';
-import { ToscaAttribute } from '#src/model/attribute.js';
-import { ToscaInterfaceDef } from '#src/model/interface_def.js';
+import { ToscaProperty } from '#src/model/property/property.js';
+import { ToscaCapability } from '#src/model/capability/capability.js';
+import { ToscaAttribute } from '#src/model/attribute/attribute.js';
+import { ToscaInterfaceDef } from '#src/model/interface/interface_def.js';
 
 describe('class ToscaNodeType', () => {
   beforeEach(() => {

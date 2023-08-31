@@ -1,5 +1,5 @@
 import { ToscaNodeTemplate } from '#src/model/node_template.js';
-import { ToscaRequirementAssignment } from '#src/model/requirement_assignment.js';
+import { ToscaRequirementAssignment } from '#src/model/requirement/requirement_assignment.js';
 import { ToscaServiceTemplate } from '#src/model/service_template.js';
 import { ToscaTopologyTemplate } from '#src/model/topology_template.js';
 

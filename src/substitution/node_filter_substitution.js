@@ -1,5 +1,5 @@
 import { ToscaNodeTemplate } from '#src/model/node_template.js';
-import { ToscaRequirementAssignment } from '#src/model/requirement_assignment.js';
+import { ToscaRequirementAssignment } from '#src/model/requirement/requirement_assignment.js';
 
 /**
  * add the concrete node that fits the requirement to the topology template
