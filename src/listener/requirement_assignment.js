@@ -1,4 +1,4 @@
-import { ToscaRequirementAssignment } from '../model/requirement_assignment.js';
+import { ToscaRequirementAssignment } from '#src/model/requirement_assignment.js';
 
 import { validateCreateAndRegister } from '#src/models.js';
 import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';

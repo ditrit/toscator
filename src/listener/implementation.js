@@ -1,4 +1,4 @@
-import { ToscaImplementation } from '../model/implementation.js';
+import { ToscaImplementation } from '#src/model/implementation.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {

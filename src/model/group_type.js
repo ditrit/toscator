@@ -1,4 +1,3 @@
-import policy_type from '../listener/policy_type.js';
 import { ToscaType } from './tosca_type.js';
 
 /**

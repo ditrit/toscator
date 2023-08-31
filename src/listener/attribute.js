@@ -1,4 +1,4 @@
-import { ToscaAttribute } from '../model/attribute.js';
+import { ToscaAttribute } from '#src/model/attribute.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {

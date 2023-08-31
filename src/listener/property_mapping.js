@@ -1,4 +1,4 @@
-import { ToscaPropertyMapping } from '../model/property_mapping.js';
+import { ToscaPropertyMapping } from '#src/model/property_mapping.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';

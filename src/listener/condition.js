@@ -1,4 +1,4 @@
-import { ToscaCondition } from '../model/condition.js';
+import { ToscaCondition } from '#src/model/condition.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {

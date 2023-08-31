@@ -1,6 +1,6 @@
 import {
   ToscaNotificationImplementation,
-} from '../model/notification_implementation.js';
+} from '#src/model/notification_implementation.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {

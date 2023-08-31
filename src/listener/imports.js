@@ -1,4 +1,4 @@
-import { ToscaImport } from '../model/imports.js';
+import { ToscaImport } from '#src/model/imports.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 

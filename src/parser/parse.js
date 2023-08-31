@@ -1,6 +1,5 @@
 import path from 'path';
 
-import { Ctx } from 'lidy-js/parser/lidyctx.js';
 import { ToscaImport } from '#src/model/imports.js';
 import { ToscaServiceTemplate } from '#src/model/service_template.js';
 import { parse as parse_tosca } from '#src/schemas/tosca_1_3.js';

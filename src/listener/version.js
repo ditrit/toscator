@@ -1,8 +1,8 @@
-import { newToscaVersion } from '../model/version.js';
+import { newToscaVersion } from '#src/model/version.js';
 
 export default {
-    exit_version(parsed_rule) {
-        const version = (parsed_rule?.value) ? parsed_rule.value : '';
-        newToscaVersion(version, parsed_rule);
-    }
+  exit_version(parsed_rule) {
+    const version = (parsed_rule?.value) ? parsed_rule.value : '';
+    newToscaVersion(version, parsed_rule);
+  },
 };

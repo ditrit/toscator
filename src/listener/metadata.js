@@ -1,4 +1,4 @@
-import { MetadataLeaf, ToscaMetadata } from '../model/metadata.js';
+import { MetadataLeaf, ToscaMetadata } from '#src/model/metadata.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {

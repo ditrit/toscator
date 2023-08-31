@@ -1,4 +1,4 @@
-import { ToscaNodeFilter } from '../model/node_filter.js';
+import { ToscaNodeFilter } from '#src/model/node_filter.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 

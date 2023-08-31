@@ -1,4 +1,4 @@
-import { ToscaCapabilityAssignment } from '../model/capability_assignment.js';
+import { ToscaCapabilityAssignment } from '#src/model/capability_assignment.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';

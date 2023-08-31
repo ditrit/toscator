@@ -1,4 +1,4 @@
-import { ToscaInterfaceMapping } from '../model/interface_mapping.js';
+import { ToscaInterfaceMapping } from '#src/model/interface_mapping.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 

@@ -1,4 +1,4 @@
-import { ToscaNodeType } from '../model/node_type.js';
+import { ToscaNodeType } from '#src/model/node_type.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 

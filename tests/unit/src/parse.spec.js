@@ -6,7 +6,7 @@ import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { Parser } from '#src/parser/parse.js';
 import parserJson from './parse.json';
 import { NodeJsFileManager } from '#src/parser/FileManager.js';
-import { ignore_fields_and_circular_ref } from '../utils.js';
+import { ignore_fields_and_circular_ref } from '#tests/unit/utils.js';
 
 describe('Parsing', () => {
   beforeEach(() => {

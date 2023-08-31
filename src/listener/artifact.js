@@ -1,4 +1,4 @@
-import { ToscaArtifact } from '../model/artifact.js';
+import { ToscaArtifact } from '#src/model/artifact.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 

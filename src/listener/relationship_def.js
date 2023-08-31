@@ -1,4 +1,4 @@
-import { ToscaRelationshipDef } from '../model/relationship_def.js';
+import { ToscaRelationshipDef } from '#src/model/relationship_def.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 

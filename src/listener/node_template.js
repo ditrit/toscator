@@ -1,4 +1,4 @@
-import { ToscaNodeTemplate } from '../model/node_template.js';
+import { ToscaNodeTemplate } from '#src/model/node_template.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';

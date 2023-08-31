@@ -1,4 +1,4 @@
-import { ToscaCapabilityFilter } from '../model/capability_filter.js';
+import { ToscaCapabilityFilter } from '#src/model/capability_filter.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';

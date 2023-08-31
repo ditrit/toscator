@@ -1,4 +1,4 @@
-import { ToscaImperativeWorkflowStep } from '../model/imperative_workflow_step.js';
+import { ToscaImperativeWorkflowStep } from '#src/model/imperative_workflow_step.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';

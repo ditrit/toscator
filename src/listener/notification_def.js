@@ -1,4 +1,4 @@
-import { ToscaNotificationDef } from '../model/notification_def.js';
+import { ToscaNotificationDef } from '#src/model/notification_def.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';

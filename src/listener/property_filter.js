@@ -1,5 +1,5 @@
-import { ToscaPropertyFilter } from '../model/property_filter.js';
-import { ToscaConstraint, ToscaConstraintEquals } from '../model/constraint.js';
+import { ToscaPropertyFilter } from '#src/model/property_filter.js';
+import { ToscaConstraint, ToscaConstraintEquals } from '#src/model/constraint.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defListofHelper } from '#src/listener/listener_helpers/def_listof_helper.js';
 

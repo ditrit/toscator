@@ -1,4 +1,4 @@
-import { ToscaCapabilityMapping } from '../model/capability_mapping.js';
+import { ToscaCapabilityMapping } from '#src/model/capability_mapping.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';

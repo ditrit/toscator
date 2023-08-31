@@ -1,4 +1,4 @@
-import { ToscaProperty } from '../model/property.js';
+import { ToscaProperty } from '#src/model/property.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 

@@ -1,4 +1,4 @@
-import { ToscaDataType } from '../model/data_type.js';
+import { ToscaDataType } from '#src/model/data_type.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';

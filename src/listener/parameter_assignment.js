@@ -1,4 +1,4 @@
-import { ToscaParameterAssignment } from '../model/parameter_assignment.js';
+import { ToscaParameterAssignment } from '#src/model/parameter_assignment.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { defMapofHelperSetname } from '#src/listener/listener_helpers/def_mapof_helper.js';
 

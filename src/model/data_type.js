@@ -1,7 +1,3 @@
-import data_type from '../listener/data_type.js';
-import property from '../listener/property.js';
-import { DefType } from './def_type.js';
-import { ToscaProperty } from './property.js';
 import { ToscaType } from './tosca_type.js';
 
 /**
