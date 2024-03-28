@@ -9,15 +9,21 @@ export default {
   },
 
   exit_interface_def(parsed_rule) {
-    const inputs = propertyMapofHelper('inputs', parsed_rule);
-    const notifications = propertyMapofHelper('notifications', parsed_rule);
-    const operations = propertyMapofHelper('operations', parsed_rule);
+    if (parsed_rule.value instanceof Object) {
+      validateCreateAndRegister(ToscaInterfaceDef, {
+        operations: parsed_rule.value,
+      }, parsed_rule);
+    } else {
+      const inputs = propertyMapofHelper('inputs', parsed_rule);
+      const notifications = propertyMapofHelper('notifications', parsed_rule);
+      const operations = propertyMapofHelper('operations', parsed_rule);
 
-    validateCreateAndRegister(ToscaInterfaceDef, {
-      type: parsed_rule.value.type?.value,
-      inputs,
-      notifications,
-      operations,
-    }, parsed_rule);
+      validateCreateAndRegister(ToscaInterfaceDef, {
+        type: parsed_rule.value.type?.value,
+        inputs,
+        notifications,
+        operations,
+      }, parsed_rule);
+    }
   },
 };
