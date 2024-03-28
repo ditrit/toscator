@@ -10,7 +10,7 @@ export default {
   },
 
   exit_node_template(parsed_rule) {
-    const directives = propertyListofHelper('directives', false, parsed_rule);
+    const directives = propertyListofHelper('directives', true, parsed_rule);
     const properties = propertyMapofHelper('properties', parsed_rule);
     const attributes = propertyMapofHelper('attributes', parsed_rule);
     const capabilities = propertyMapofHelper('capabilities', parsed_rule);

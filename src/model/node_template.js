@@ -21,7 +21,7 @@ export class ToscaNodeTemplate extends ToscaNode {
     this.requirements = input.requirements;
     this.capabilities = input.capabilities;
     this.interfaces = input.interfaces;
-    this.articats = input.articats;
+    this.artifacts = input.artifacts;
     this.node_filter = input.node_filter;
     this.copy = input.copy;
   }
