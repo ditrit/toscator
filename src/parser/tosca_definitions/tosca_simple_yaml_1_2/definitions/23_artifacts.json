@@ -1,0 +1,69 @@
+{
+  "artifact_def": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/artifact_def",
+      "anyOf": [
+        { "instanceofyaml": "str"},
+        { "dictRequired": [ "type", "file"],
+          "dictProperties": {
+            "type": { "instanceofyaml": "str" },
+            "file": { "instanceofyaml": "str" },
+            "repository": { "instanceofyaml": "str" },
+            "description": { "$ref": "description" },
+            "deploy_path": { "instanceofyaml": "str"}
+          }
+        }
+      ]
+    },
+    "factory": {
+      "type": "ToscaArtifactDef",
+      "anyOf": [
+        { "args": {
+            "type":         { "type": "ToscaStr",     "path": "/type" },
+            "file":         { "type": "ToscaPath",     "path": "/file" },
+            "repository":   { "type": "ToscaStr",     "path": "/repository" },
+            "description":  { "ref":  "description",  "path": "/description" }, 
+            "deploy_path":  { "type": "ToscaPath",     "path": "/deploy_path" }
+          }
+        },
+        { "type": "ToscaPath", "path": "/" }
+      ]
+    }
+  },
+
+  "artifact_defs": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/artifact_defs",
+      "dictIdsDefinition": { "$ref": "artifact_def"}
+    },
+    "factory": {
+      "type": "ToscaArtifactDefs",
+      "args": { 
+        "@id": { 
+          "path": "/@id", 
+          "ref": "artifact_def" 
+        } 
+      }
+    }
+  },
+  
+  "artifact_types": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/artifact_types",
+      "dictIdsDefinition": {
+        "dictProperties": {
+          "derived_from": { "instanceofyaml": "str" },
+          "version":      { "instanceofyaml": [ "float", "str" ] },
+          "metadata":     { "$ref": "metadata" },
+          "description":  { "$ref": "description" },
+          "file_ext":     { "listItems": { "instanceofyaml": "str"} },
+          "mime_type":    { "instanceofyaml": "str" },
+          "properties":   { "$ref": "properties" }
+        }
+      }
+    },
+    "ast": {
+      
+    }
+  }
+}

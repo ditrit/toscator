@@ -1,0 +1,99 @@
+{
+  "requirement_defs": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/requirement_defs",
+      "listItems": {
+        "anyOf": [
+          { "idDefinition": { "instanceofyaml": "str" } },
+          { "idDefinition": {
+              "dictRequired": [ "capability" ],
+              "dictProperties": {
+                "capability":       { "instanceofyaml": "str" },
+                "description":      { "$ref": "description" },
+                "node":             { "instanceofyaml": "str" },
+                "occurrences":      { "$ref": "occurrences" },
+                "relationship":     {
+                  "anyOf": [ 
+                    { "instanceofyaml": "str" },
+                    { "dictProperties": {
+                        "type": { "instanceofyaml": "str" },
+                        "interfaces": { "$ref": "interface_defs" }
+                      }
+                    }  
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "factory": {
+      "type": "ToscaRequirementDefs",
+      "items": {
+        "type": "ToscaRequirementDef",
+        "args": {
+          "@id": { 
+            "path": "/@id", 
+            "anyOf": [
+              { "args": { "capability": { "type": "ToscaStr", "path": "/" } }},
+              { "args": {
+                  "capability": { "type": "ToscaStr", "path": "/capability" },
+                  "description":  { "ref": "description", "path": "/description" },
+                  "node": { "type": "ToscaStr", "path": "/node" },
+                  "occurrences": { "ref": "occurrences", "path": "/occurrences"},
+                  "relationship": {
+                    "type": "ToscaRelationshipDef",
+                    "anyOf": [
+                      { "type": "ToscaStr", "path": "/" },
+                      { "args": { 
+                          "type": { "type": "ToscaStr", "path": "/type" },
+                          "interfaces": { "ref": "interface_defs" }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+
+  "requirement_assignments": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/requirement_assignments",
+      "listItems": {
+        "anyOf": [
+          { "idDefinition": { "instanceofyaml": "str" } },
+          { "idDefinition": {
+              "dictProperties": {
+                "node": { "instanceofyaml": "str"},
+                "relationship": {
+                  "anyOf": [
+                    { "instanceofyaml": "str"},
+                    { "dictProperties": {
+                        "type": { "instanceofyaml": "str"},
+                        "properties": { "$ref": "property_assignments"},
+                        "interfaces": { "$ref": "interface_defs_template" }
+                      }
+                    }
+                  ]
+                },
+                "capability": { "instanceofyaml": "str"},
+                "occurrences": { "instanceof": "Sequence" },
+                "node_filter": { "$ref": "node_filter" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "ast": {
+      
+    }
+  }
+
+}

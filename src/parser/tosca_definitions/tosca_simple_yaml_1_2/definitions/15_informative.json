@@ -1,0 +1,53 @@
+       
+{ 
+
+  "description": { 
+    "schema": {
+      "$id": "http://ditrit.io/schemas/description",
+      "instanceofyaml": "str"
+    },
+    "factory": {
+      "type": "ToscaStr", "path": "/"
+    }
+  },
+
+  "namespace": { 
+    "schema": {
+      "$id": "http://ditrit.io/schemas/namespace",
+      "instanceofyaml": "str"
+    },
+    "factory": {
+      "type": "ToscaURL", "path": "/" 
+    }
+  },
+
+  "metadata": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/metadata",
+      "dictProperties": {
+        "template_name":    { "instanceofyaml": "str" },
+        "template_author":  { "instanceofyaml": "str" },
+        "template_version": { "instanceofyaml": [ "float", "str" ] }
+      },
+      "dictAdditionalProperties": { "instanceofyaml": "str" }
+    },
+    "factory": {
+      "type": "ToscaMetadata",
+      "args": {
+        "template_name":    { 
+          "type": "ToscaStr", "path": "/template_name" 
+        },
+        "template_author":  { 
+          "type": "ToscaStr", "path": "/template_author"
+        },
+        "template_version": { 
+          "type": "ToscaVersion", "path": "/template_version"
+        },
+        "@other": {
+          "type": "ToscaStr", "path": "/@other", "isnotin": [ "template_name", "template_author", "template_version" ]
+        }
+      }
+    }
+  }
+
+}
