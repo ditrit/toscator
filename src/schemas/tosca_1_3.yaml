@@ -5,8 +5,6 @@ unbounded:
 
 namespace: string
 
-description: string
-
 range:
    _list: [scalarOrUnbounded, scalarOrUnbounded]
 
@@ -18,29 +16,26 @@ metadata:
    _mapOf: { string: string }
 
 version:
-   _regex: '^[0-d]+(\.[0-d]+(\.[0-9]+(.[a-zA-Z0-9_]+(\-[0-9]+)?)?)?)?$'
+   _regex: '^(\d+)\.(\d+)(\.(\d+))?(\.(alpha|beta)(-\d+)?)?$'
 
 url:
    _regex: '^(https?:\\/\\/)?((([a-z\\d]([a-z\\d_-]*[a-z\\d])*)\\.?)+[a-z\\d_-]{2,}|((\\d{1,3}\\.){3}\\d{1,3}))(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*(\\?[;&a-z\\d%_.~+=-]*)?(\\#[-a-z\\d_]*)?$'
 
-size: scalar_unit.size
-scalar_unit.size:
+size:
    _regex: '((?<sign>[+-]) *)?(?<value>[0-9]+(\.[0-9]+)?) *(?<unit>B|kB|KiB|MB|MiB|GB|GiB|TB|TiB)$'
 
-time: scalar_unit.time
-scalar_unit.time:
+time:
    _regex: '((?<sign>[+-]) *)?(?<value>[0-9]+(\.[0-9]+)?) *(?<unit>d|h|m|s|ms|us|ns)$'
 
-frequency: scalar_unit.frequency
-scalar_unit.frequency:
+frequency:
    _regex: '((?<sign>[+-]) *)?(?<value>[0-9]+(\.[0-9]+)?) *(?<unit>Hz|kHz|MHz|GHz)$'
 
-bitrate: scalar_unit.bitrate
-scalar_unit.bitrate:
+bitrate:
    _regex: '((?<sign>[+-]) *)?(?<value>[0-9]+(\.[0-9]+)?) *(?<unit>bps|Kbps|Kibps|Mbps|Mibps|Gbps|Gibps|Tbps|Tibps|Bps|KBps|KiBps|MBps|MiBps|GBps|GiBps|TBps|TiBps)$'
 
 string_value_expresion:
    _oneOf:
+      # order is important here because the parser matches the first value found
       - string
       - value_expression
 
@@ -61,15 +56,15 @@ scalarOrUnbounded:
 
 value:
    _oneOf:
-      - boolean
-      - int
-      - float
       - version
       - range
       - frequency
       - bitrate
       - time
       - size
+      - float
+      - boolean
+      - int
       - timestamp
       - string
       - { _listOf: any }
@@ -166,24 +161,16 @@ schema_def:
       - _map:
            type: string
         _mapFacultative:
-           description: description
+           description: string
            constraints: constraints
            entry_schema: schema_def
            key_schema: schema_def
 
-parameter_assignment:
-   _oneOf:
-      - value_expression
-      - value
-      - _mapFacultative:
-           description: description
-           value: { _oneOf: [value_expression, value] }
-
-property:
+property_def:
    _map:
       type: string
    _mapFacultative:
-      description: description
+      description: string
       constraints: constraints
       required: boolean
       default: value
@@ -193,8 +180,16 @@ property:
       entry_schema: schema_def
       key_schema: schema_def
 
-properties:
-   _mapOf: { string: property }
+property_defs:
+   _mapOf: { string: property_def }
+
+parameter_assignment:
+   _oneOf:
+      - value_expression
+      - value
+      - _mapFacultative:
+           description: string
+           value: { _oneOf: [value_expression, value] }
 
 property_assignments:
    _mapOf: { string: parameter_assignment }
@@ -203,7 +198,7 @@ attribute:
    _map:
       type: string
    _mapFacultative:
-      description: description
+      description: string
       default: value
       status:
          { _in: [supported, unsupported, experimental, deprecated, optional] }
@@ -216,10 +211,10 @@ attributes:
 attribute_assignments:
    _mapOf: { string: parameter_assignment }
 
-input_parameter: 
+input_parameter:
    _mapFacultative:
       type: string
-      description: description
+      description: string
       constraints: constraints
       required: boolean
       default: value
@@ -239,7 +234,7 @@ input_assignments:
 output_parameter:
    _mapFacultative:
       type: string
-      description: description
+      description: string
       constraints: constraints
       required: boolean
       default: value
@@ -259,7 +254,7 @@ repository:
       - _map:
            url: string
         _mapFacultative:
-           description: description
+           description: string
            credential:
               _map:
                  token: string
@@ -279,7 +274,7 @@ artifact_def:
            type: string
            file: string
         _mapFacultative:
-           description: description
+           description: string
            repository: string
            deploy_path: string
            version: version
@@ -295,13 +290,13 @@ type_common_keys:
       derived_from: string
       version: version
       metadata: metadata
-      description: description
+      description: string
 
 artifact_type:
    _mapFacultative:
       file_ext: { _listOf: string, _min: 1 }
       mime_type: string
-      properties: properties
+      properties: property_defs
    _merge: [type_common_keys]
 
 artifact_types:
@@ -309,7 +304,7 @@ artifact_types:
 
 data_type:
    _mapFacultative:
-      properties: properties
+      properties: property_defs
       constraints: constraints
       key_schema: schema_def
       entry_schema: schema_def
@@ -344,10 +339,13 @@ operation_def:
    _oneOf:
       - string
       - _mapFacultative:
-           description: description
-           inputs: properties
-           implementation: operation_implementation
-           outputs: attributes_mapping
+            description: string
+            inputs:
+               _oneOf:
+                  - property_defs # for a type def
+                  - property_assignments # for a template def
+            implementation: operation_implementation
+            outputs: attributes_mapping
 
 operation_defs:
   _mapOf: {string: operation_def}
@@ -356,7 +354,7 @@ operation_assignment:
    _oneOf:
       - string
       - _mapFacultative:
-           description: description
+           description: string
            inputs: input_assignments
            implementation: operation_implementation
 
@@ -365,7 +363,7 @@ operation_assignments:
 
 notification_def:
   _mapFacultative:
-    description: description
+    description: string
     implementation: notification_implementation
     outputs: attributes_mapping
 
@@ -374,7 +372,7 @@ notification_defs:
 
 interface_type:
    _mapFacultative:
-      inputs: properties
+      inputs: property_defs
       operations: operation_defs
       notifications: notification_defs
    _merge: [type_common_keys]
@@ -383,14 +381,16 @@ interface_types:
    _mapOf: { string: interface_type }
 
 interface_def:
-   _mapFacultative:
-      type: string # for a type def
-      inputs: 
-         _oneOf:
-            - properties # for a type def
-            - property_assignments # for a template def
-      operations: operation_defs
-      notifications: notification_defs
+   _oneOf:
+      - _mapFacultative:
+         type: string # for a type def
+         inputs:
+            _oneOf:
+               - property_defs # for a type def
+               - property_assignments # for a template def
+         operations: operation_defs
+         notifications: notification_defs
+      - operation_defs
 
 interface_defs:
    _mapOf: { string: interface_def }
@@ -406,7 +406,7 @@ interface_assignments:
 
 capability_type:
    _mapFacultative:
-      properties: properties
+      properties: property_defs
       attributes: attributes
       valid_source_types: { _listOf: string, _min: 1 }
    _merge: [type_common_keys]
@@ -419,8 +419,8 @@ capability_def:
       - _map:
            type: string
         _mapFacultative:
-           description: description
-           properties: properties
+           description: string
+           properties: property_defs
            attributes: attributes
            valid_source_types: { _listOf: string, _min: 1 }
            occurrences: range
@@ -439,7 +439,6 @@ capability_assignments:
    _mapOf: { string: capability_assignment }
 
 property_filter:
-   _nb: 1
    _mapOf:
       string:
          _oneOf:
@@ -450,8 +449,11 @@ property_filter:
               _min: 1
             - value
 
+# The specification says it should be a map, but many of its examples uses a list so we accept both
 properties_filter:
-   _listOf: property_filter
+   _oneOf:
+      - _listOf: property_filter
+      - property_filter
 
 capability_filter:
    _nb: 1
@@ -461,7 +463,7 @@ capability_filter:
 capabilities_filter:
    _listOf: capability_filter
 
-node_filter:
+node_filter_def:
    _mapFacultative:
       properties: properties_filter
       capabilities: capabilities_filter
@@ -508,7 +510,7 @@ requirement_assignment:
                  relationship: relationship_assignment
                  capability: string
                  occurrences: range
-                 node_filter: node_filter
+                 node_filter: node_filter_def
 
 requirement_assignments:
    _listOf: requirement_assignment
@@ -532,7 +534,7 @@ workflow_preconditions:
    _min: 1
 
 workflow_precondition:
-   _map: 
+   _map:
       target: string
    _mapFacultative:
       target_relationship: string
@@ -608,7 +610,7 @@ imperative_workflow_step:
       target_relationship: string
       filter: workflow_condition_clause
       operation_host: string
-      on_succes:
+      on_success:
          _oneOf: [string, { _listOf: string, _min: 1 }]
       on_failure:
          _oneOf: [string, { _listOf: string, _min: 1 }]
@@ -643,9 +645,9 @@ declarative_workflow_node_defs:
 
 declarative_workflow_node_def:
    _mapFacultative:
-      description: description
+      description: string
       metadata: metadata
-      inputs: properties
+      inputs: property_defs
       preconditions: workflow_preconditions
       steps: declarative_workflow_steps
 
@@ -655,9 +657,9 @@ declarative_workflow_rel_defs:
 
 declarative_workflow_rel_def:
    _mapFacultative:
-      description: description
+      description: string
       metadata: metadata
-      inputs: properties
+      inputs: property_defs
       preconditions: workflow_preconditions
       source_weaving: workflow_source_weaving_list
       target_weaving: workflow_target_weaving_list
@@ -668,9 +670,9 @@ imperative_workflow_defs:
 
 imperative_workflow_def:
    _mapFacultative:
-      description: description
+      description: string
       metadata: metadata
-      inputs: properties
+      inputs: property_defs
       preconditions: workflow_preconditions
       steps: imperative_workflow_steps
       implementation: operation_implementation
@@ -678,7 +680,7 @@ imperative_workflow_def:
 
 node_type:
    _mapFacultative:
-      properties: properties
+      properties: property_defs
       attributes: attributes
       capabilities: capability_defs
       requirements: requirement_defs
@@ -699,22 +701,24 @@ node_template:
                 copy: string
    _mapFacultative:
       metadata: metadata
-      description: description
+      description: string
       directives: { _listOf: string }
       properties: property_assignments
       attributes: attribute_assignments
       capabilities: capability_assignments
       requirements: requirement_assignments
-      interfaces: interface_assignments
+      interfaces: interface_defs
       artifacts: artifact_defs
-      node_filter: node_filter
+      node_filter: node_filter_def
+      occurrences: range
+      instance_count: property_assignments
 
 node_templates:
    _mapOf: { string: node_template }
 
 relationship_type:
    _mapFacultative:
-      properties: properties
+      properties: property_defs
       attributes: attributes
       interfaces: interface_defs
       valid_target_types: { _listOf: string, _min: 1 }
@@ -732,7 +736,7 @@ relationship_template:
            - _map:
                 copy: string
    _mapFacultative:
-      description: description
+      description: string
       metadata: metadata
       properties: property_assignments
       attributes: attribute_assignments
@@ -744,7 +748,7 @@ relationship_templates:
 group_type:
    _mapFacultative:
       attributes: attributes
-      properties: properties
+      properties: property_defs
       members: { _listOf: string, _min: 1 }
    _merge: [type_common_keys]
 
@@ -755,10 +759,10 @@ group_def:
    _map:
       type: string
    _mapFacultative:
-      description: description
+      description: string
       properties: property_assignments
       members: { _listOf: string, _min: 1 }
-      metadat: metadat
+      metadata: metadata
 
 group_defs:
    _mapOf: { string: group_def }
@@ -775,7 +779,7 @@ trigger_def:
       event: string
       action: workflow_activities
    _mapFacultative:
-      description: description
+      description: string
       schedule: time_interval
       target_filter: target_filter
       condition: condition
@@ -789,7 +793,7 @@ time_interval:
       start_time: timestamp
       end_time: timestamp
 
-condition: 
+condition:
    _oneOf:
       - workflow_condition_operator
       - _mapFacultative:
@@ -800,7 +804,7 @@ condition:
 
 policy_type:
    _mapFacultative:
-      properties: properties
+      properties: property_defs
       targets: { _listOf: string, _min: 1 }
       triggers: trigger_defs
    _merge: [type_common_keys]
@@ -816,10 +820,10 @@ policy_def:
    _nb: 1
    _mapOf:
       string:
-         _map: 
+         _map:
             type: string
          _mapFacultative:
-            description: description
+            description: string
             properties: property_assignments
             targets: { _listOf: string, _min: 1 }
             triggers: trigger_defs
@@ -836,7 +840,7 @@ property_mapping:
       - _listOf: string
         _nb: 1
       - _nb: 1
-        _mapFacultative: 
+        _mapFacultative:
            mapping: { _nb: 1, _listOf: string }
            value:
               _oneOf: [value, value_expression]
@@ -889,7 +893,7 @@ substitution_mappings:
    _map:
       node_type: string
    _mapFacultative:
-      substitution_filter: node_filter
+      substitution_filter: node_filter_def
       properties: properties_mapping
       capabilities: capabilities_mapping
       requirements: requirements_mapping
@@ -898,7 +902,7 @@ substitution_mappings:
 
 topology_template:
    _mapFacultative:
-      description: description
+      description: string
       inputs: input_parameters
       outputs: output_parameters
       node_templates: node_templates
@@ -912,7 +916,7 @@ service_template:
    _map:
       tosca_definitions_version: string
    _mapFacultative:
-      description: description
+      description: string
       #dsl_definitions: value
       namespace: namespace
       metadata: metadata
