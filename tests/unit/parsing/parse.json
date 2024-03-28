@@ -321,7 +321,7 @@
               }
             ]
           },
-          "property": {
+          "property_def": {
             "_map": {},
             "_mapFacultative": {
               "status": {

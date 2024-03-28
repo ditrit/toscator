@@ -3,7 +3,7 @@ import { Charac } from '../Charac.js';
 /**
  *
  */
-export class ToscaProperty extends Charac {
+export class ToscaPropertyDef extends Charac {
   /**
    *
    * @param input

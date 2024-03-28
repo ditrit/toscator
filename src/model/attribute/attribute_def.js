@@ -3,6 +3,6 @@ import { Charac } from '../Charac.js';
 /**
  *
  */
-export class ToscaAttribute extends Charac {
+export class ToscaAttributeDef extends Charac {
   static _classname = 'attribute';
 }

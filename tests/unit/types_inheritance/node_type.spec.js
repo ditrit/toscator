@@ -4,9 +4,9 @@ import {
 import { RuleParser } from 'lidy-js/parser/ruleparser.js';
 import { ToscaNodeType } from '#src/model/node_type.js';
 import { compile } from '#src/compilation.js';
-import { ToscaProperty } from '#src/model/property/property.js';
-import { ToscaCapability } from '#src/model/capability/capability.js';
-import { ToscaAttribute } from '#src/model/attribute/attribute.js';
+import { ToscaPropertyDef } from '#src/model/property/property_def.js';
+import { ToscaCapabilityDef } from '#src/model/capability/capability.js';
+import { ToscaAttributeDef } from '#src/model/attribute/attribute_def.js';
 import { ToscaInterfaceDef } from '#src/model/interface/interface_def.js';
 
 describe('class ToscaNodeType', () => {
@@ -171,31 +171,31 @@ describe('Parser: node_type', () => {
     /* --PROPERTIES-- */
     expect(test_parent_type.properties.size).toBe(2);
     const test_property_1 = test_parent_type.properties.get('test_property_1');
-    expect(test_property_1).toBeInstanceOf(ToscaProperty);
+    expect(test_property_1).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_1.type).toBe('val_property_parent_1');
 
     const test_property_2 = test_parent_type.properties.get('test_property_2');
-    expect(test_property_2).toBeInstanceOf(ToscaProperty);
+    expect(test_property_2).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_2.type).toBe('val_property_parent_2');
 
     /* --CAPABILITIES-- */
     expect(test_parent_type.capabilities.size).toBe(2);
     const test_capability_1 = test_parent_type.capabilities.get('test_capability_1');
-    expect(test_capability_1).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_1).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_1.type).toBe('val_capability_parent_1');
 
     const test_capability_2 = test_parent_type.capabilities.get('test_capability_2');
-    expect(test_capability_2).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_2).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_2.type).toBe('val_capability_parent_2');
 
     /* --ATTRIBUTES-- */
     expect(test_parent_type.attributes.size).toBe(2);
     const test_attribute_1 = test_parent_type.attributes.get('test_attribute_1');
-    expect(test_attribute_1).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_1).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_1.type).toBe('val_attribute_parent_1');
 
     const test_attribute_2 = test_parent_type.attributes.get('test_attribute_2');
-    expect(test_attribute_2).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_2).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_2.type).toBe('val_attribute_parent_2');
 
     /* --INTERFACES-- */
@@ -221,31 +221,31 @@ describe('Parser: node_type', () => {
     /* --PROPERTIES-- */
     expect(test_empty_child_type.properties.size).toBe(2);
     const test_property_1 = test_empty_child_type.properties.get('test_property_1');
-    expect(test_property_1).toBeInstanceOf(ToscaProperty);
+    expect(test_property_1).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_1.type).toBe('val_property_parent_1');
 
     const test_property_2 = test_empty_child_type.properties.get('test_property_2');
-    expect(test_property_2).toBeInstanceOf(ToscaProperty);
+    expect(test_property_2).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_2.type).toBe('val_property_parent_2');
 
     /* --CAPABILITIES-- */
     expect(test_empty_child_type.capabilities.size).toBe(2);
     const test_capability_1 = test_empty_child_type.capabilities.get('test_capability_1');
-    expect(test_capability_1).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_1).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_1.type).toBe('val_capability_parent_1');
 
     const test_capability_2 = test_empty_child_type.capabilities.get('test_capability_2');
-    expect(test_capability_2).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_2).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_2.type).toBe('val_capability_parent_2');
 
     /* --ATTRIBUTES-- */
     expect(test_empty_child_type.attributes.size).toBe(2);
     const test_attribute_1 = test_empty_child_type.attributes.get('test_attribute_1');
-    expect(test_attribute_1).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_1).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_1.type).toBe('val_attribute_parent_1');
 
     const test_attribute_2 = test_empty_child_type.attributes.get('test_attribute_2');
-    expect(test_attribute_2).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_2).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_2.type).toBe('val_attribute_parent_2');
 
     /* --INTERFACES-- */
@@ -270,43 +270,43 @@ describe('Parser: node_type', () => {
     /* --PROPERTIES-- */
     expect(test_full_child_type.properties.size).toBe(3);
     const test_property_1 = test_full_child_type.properties.get('test_property_1');
-    expect(test_property_1).toBeInstanceOf(ToscaProperty);
+    expect(test_property_1).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_1.type).toBe('val_property_parent_1');
 
     const test_property_2 = test_full_child_type.properties.get('test_property_2');
-    expect(test_property_2).toBeInstanceOf(ToscaProperty);
+    expect(test_property_2).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_2.type).toBe('val_property_child_2');
 
     const test_property_3 = test_full_child_type.properties.get('test_property_3');
-    expect(test_property_3).toBeInstanceOf(ToscaProperty);
+    expect(test_property_3).toBeInstanceOf(ToscaPropertyDef);
     expect(test_property_3.type).toBe('val_property_child_3');
 
     /* --CAPABILITIES-- */
     expect(test_full_child_type.capabilities.size).toBe(3);
     const test_capability_1 = test_full_child_type.capabilities.get('test_capability_1');
-    expect(test_capability_1).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_1).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_1.type).toBe('val_capability_parent_1');
 
     const test_capability_2 = test_full_child_type.capabilities.get('test_capability_2');
-    expect(test_capability_2).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_2).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_2.type).toBe('val_capability_child_2');
 
     const test_capability_3 = test_full_child_type.capabilities.get('test_capability_3');
-    expect(test_capability_3).toBeInstanceOf(ToscaCapability);
+    expect(test_capability_3).toBeInstanceOf(ToscaCapabilityDef);
     expect(test_capability_3.type).toBe('val_capability_child_3');
 
     /* --ATTRIBUTES-- */
     expect(test_full_child_type.attributes.size).toBe(3);
     const test_attribute_1 = test_full_child_type.attributes.get('test_attribute_1');
-    expect(test_attribute_1).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_1).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_1.type).toBe('val_attribute_parent_1');
 
     const test_attribute_2 = test_full_child_type.attributes.get('test_attribute_2');
-    expect(test_attribute_2).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_2).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_2.type).toBe('val_attribute_child_2');
 
     const test_attribute_3 = test_full_child_type.attributes.get('test_attribute_3');
-    expect(test_attribute_3).toBeInstanceOf(ToscaAttribute);
+    expect(test_attribute_3).toBeInstanceOf(ToscaAttributeDef);
     expect(test_attribute_3.type).toBe('val_attribute_child_3');
 
     /* --INTERFACES-- */

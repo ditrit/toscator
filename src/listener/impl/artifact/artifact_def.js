@@ -1,4 +1,4 @@
-import { ToscaArtifact } from '#src/model/artifact/artifact.js';
+import { ToscaArtifactDef } from '#src/model/artifact/artifact_def.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyMapofHelper } from '#src/listener/listener_helpers/property_mapof_helper.js';
 
@@ -10,11 +10,11 @@ export default {
   },
   exit_artifact_def(parsed_rule) {
     if (typeof parsed_rule.value === 'string') {
-      validateCreateAndRegister(ToscaArtifact, { file: parsed_rule.value }, parsed_rule);
+      validateCreateAndRegister(ToscaArtifactDef, { file: parsed_rule.value }, parsed_rule);
     } else {
       const properties = propertyMapofHelper('properties', parsed_rule);
       validateCreateAndRegister(
-        ToscaArtifact,
+        ToscaArtifactDef,
         {
           file: parsed_rule.value.file.value,
           type: parsed_rule.value.type.value,

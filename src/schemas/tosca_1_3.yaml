@@ -194,7 +194,7 @@ parameter_assignment:
 property_assignments:
    _mapOf: { string: parameter_assignment }
 
-attribute:
+attribute_def:
    _map:
       type: string
    _mapFacultative:
@@ -205,8 +205,8 @@ attribute:
       entry_schema: schema_def
       key_schema: schema_def
 
-attributes:
-   _mapOf: { string: attribute }
+attribute_defs:
+   _mapOf: { string: attribute_def }
 
 attribute_assignments:
    _mapOf: { string: parameter_assignment }
@@ -407,7 +407,7 @@ interface_assignments:
 capability_type:
    _mapFacultative:
       properties: property_defs
-      attributes: attributes
+      attributes: attribute_defs
       valid_source_types: { _listOf: string, _min: 1 }
    _merge: [type_common_keys]
 
@@ -421,7 +421,7 @@ capability_def:
         _mapFacultative:
            description: string
            properties: property_defs
-           attributes: attributes
+           attributes: attribute_defs
            valid_source_types: { _listOf: string, _min: 1 }
            occurrences: range
       - string
@@ -487,6 +487,7 @@ requirement_def:
                  node: string
                  occurrences: range
                  relationship: relationship_def
+                 description: string
 
 requirement_defs:
    _listOf: requirement_def
@@ -681,7 +682,7 @@ imperative_workflow_def:
 node_type:
    _mapFacultative:
       properties: property_defs
-      attributes: attributes
+      attributes: attribute_defs
       capabilities: capability_defs
       requirements: requirement_defs
       interfaces: interface_defs
@@ -719,7 +720,7 @@ node_templates:
 relationship_type:
    _mapFacultative:
       properties: property_defs
-      attributes: attributes
+      attributes: attribute_defs
       interfaces: interface_defs
       valid_target_types: { _listOf: string, _min: 1 }
       workflows: declarative_workflow_rel_defs
@@ -747,7 +748,7 @@ relationship_templates:
 
 group_type:
    _mapFacultative:
-      attributes: attributes
+      attributes: attribute_defs
       properties: property_defs
       members: { _listOf: string, _min: 1 }
    _merge: [type_common_keys]

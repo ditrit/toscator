@@ -1,16 +1,16 @@
-import { ToscaAttribute } from '#src/model/attribute/attribute.js';
+import { ToscaAttributeDef } from '#src/model/attribute/attribute_def.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {
-  exit_attributes(parsed_rule) {
+  exit_attribute_defs(parsed_rule) {
     for (const key in parsed_rule.value) {
       parsed_rule.value[key].tosca?.setName(key);
     }
   },
 
-  exit_attribute(parsed_rule) {
+  exit_attribute_def(parsed_rule) {
     validateCreateAndRegister(
-      ToscaAttribute,
+      ToscaAttributeDef,
       {
         type: parsed_rule.value.type?.value,
         description: parsed_rule.value.description?.value,

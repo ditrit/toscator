@@ -1,4 +1,4 @@
-import { ToscaRequirement } from '#src/model/requirement/requirement.js';
+import { ToscaRequirementDef } from '#src/model/requirement/requirement_def.js';
 import { validateCreateAndRegister } from '#src/models.js';
 
 export default {
@@ -19,13 +19,13 @@ export default {
     for (const key in parsed_rule.value) {
       if (typeof parsed_rule.value[key].value === 'string') {
         validateCreateAndRegister(
-          ToscaRequirement,
+          ToscaRequirementDef,
           { capability: parsed_rule.value[key].value, name: key },
           parsed_rule,
         );
       } else {
         validateCreateAndRegister(
-          ToscaRequirement,
+          ToscaRequirementDef,
           {
             capability: parsed_rule.value[key].value.capability?.value,
             node: parsed_rule.value[key].value.node?.value,

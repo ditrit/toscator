@@ -16,22 +16,22 @@ export class ToscaNodeType extends ToscaType {
     super(input, source);
     /**
      * Node type properties.
-     * @type {Map<string, ToscaProperty>}
+     * @type {Map<string, ToscaPropertyDef>}
      */
     this.properties = input.properties;
     /**
      * Node type attributes.
-     * @type {Map<string, ToscaAttribute>}
+     * @type {Map<string, ToscaAttributeDef>}
      */
     this.attributes = input.attributes;
     /**
      * Node type capabilities.
-     * @type {Map<string, ToscaCapability>}
+     * @type {Map<string, ToscaCapabilityDef>}
      */
     this.capabilities = input.capabilities;
     /**
      * Node type requirements.
-     * @type {ToscaRequirement[]}
+     * @type {ToscaRequirementDef[]}
      */
     this.requirements = input.requirements;
 

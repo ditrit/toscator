@@ -13,7 +13,7 @@ export class ToscaDataType extends ToscaType {
     super(input, source);
 
     /**
-     * @type {Map<string, ToscaProperty>}
+     * @type {Map<string, ToscaPropertyDef>}
      */
     this.properties = input.properties;
     this.constraints = input.constraints;
@@ -39,7 +39,7 @@ function validDerivedFrom(derived_from, data_types) {
 }
 
 /**
- * @param {Map<string, ToscaProperty>} properties
+ * @param {Map<string, ToscaPropertyDef>} properties
  * @returns {boolean} true if valid, else false
  */
 function ValidProperties(properties) {

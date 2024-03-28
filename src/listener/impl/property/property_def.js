@@ -1,9 +1,9 @@
-import { ToscaProperty } from '#src/model/property/property.js';
+import { ToscaPropertyDef } from '#src/model/property/property_def.js';
 import { validateCreateAndRegister } from '#src/models.js';
 import { propertyListofHelper } from '#src/listener/listener_helpers/property_listof_helper.js';
 
 export default {
-  exit_properties(parsed_rule) {
+  exit_property_defs(parsed_rule) {
     if (parsed_rule) {
       for (const key in parsed_rule.value) {
         parsed_rule.value[key].tosca?.setName(key);
@@ -11,11 +11,11 @@ export default {
     }
   },
 
-  exit_property(parsed_rule) {
+  exit_property_def(parsed_rule) {
     const constraints = propertyListofHelper('constraints', false, parsed_rule);
     if (parsed_rule) {
       validateCreateAndRegister(
-        ToscaProperty,
+        ToscaPropertyDef,
         {
           type: parsed_rule.value.type?.value,
           description: parsed_rule.value.description?.value,

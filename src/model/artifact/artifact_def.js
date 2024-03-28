@@ -3,7 +3,7 @@ import { ToscaNode } from '../tosca_node.js';
 /**
  *
  */
-export class ToscaArtifact extends ToscaNode {
+export class ToscaArtifactDef extends ToscaNode {
   /**
    *
    * @param input

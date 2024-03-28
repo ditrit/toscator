@@ -5,21 +5,21 @@ import nodetype from './impl/node_type.js';
 import repository from './impl/repository.js';
 import version from './impl/version.js';
 import servicetemplate from './impl/service_template.js';
-import property from './impl/property/property.js';
+import property_def from './impl/property/property_def.js';
 import constraint from './impl/constraint.js';
 import bitrate from './impl/bitrate.js';
 import size from './impl/size.js';
 import time from './impl/time.js';
 import frequency from './impl/frequency.js';
-import attribute from './impl/attribute/attribute.js';
-import capability from './impl/capability/capability.js';
+import attribute_def from './impl/attribute/attribute_def.js';
+import capability_def from './impl/capability/capability_def.js';
 import * as capability_type from './impl/capability/capability_type.js';
 import data_type from './impl/data_type.js';
-import requirement from './impl/requirement/requirement.js';
+import requirement_def from './impl/requirement/requirement_def.js';
 import operation_def from './impl/operation/operation_def.js';
 import interface_type from './impl/interface/interface_type.js';
 import artifact_type from './impl/artifact/artifact_type.js';
-import artifact from './impl/artifact/artifact.js';
+import artifact_def from './impl/artifact/artifact_def.js';
 import notification_implementation from './impl/notification/notification_implementation.js.js';
 import operation_implementation from './impl/operation/operation_implementation.js';
 import group_type from './impl/group/group_type.js';
@@ -80,21 +80,21 @@ export const listenerObject = {
   ...repository,
   ...version,
   ...servicetemplate,
-  ...property,
+  ...property_def,
   ...constraint,
   ...bitrate,
   ...size,
   ...time,
   ...frequency,
-  ...attribute,
+  ...attribute_def,
   ...capability_type,
-  ...capability,
-  ...requirement,
+  ...capability_def,
+  ...requirement_def,
   ...data_type,
   ...operation_def,
   ...interface_type,
   ...artifact_type,
-  ...artifact,
+  ...artifact_def,
   ...operation_implementation,
   ...notification_implementation,
   ...group_type,
