@@ -1,0 +1,45 @@
+{
+  "imports": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/imports",
+      "listItems": {
+        "anyOf": [
+          { "instanceofyaml": "str" },
+          { "idDefinition": { "instanceofyaml": "str" } },
+          { "idDefinition": {
+              "dictRequired": [ "file" ],
+              "dictProperties": {
+                "file":             { "instanceofyaml": "str" },
+                "repository":       { "instanceofyaml": "str" },
+                "namespace_prefix": { "instanceofyaml": "str" },
+                "namespace_uri":    { "instanceofyaml": "str" }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "factory": {
+      "type": "ToscaImports",
+      "items": {
+        "anyOf": [
+          { "type": "ToscaImport", "args": {
+              "@id": { "path": "/@id", "args": {
+                  "file": { "type": "ToscaURL", "path": "/file" },
+                  "repository": { "type": "ToscaStr", "path": "/repository" },
+                  "namespace_prefix": { "type": "ToscaURL", "path": "/namespace_prefix" },
+                  "namespace_uri": { "type": "ToscaURL", "path": "/namespace_uri" }
+                }
+              }
+            }
+          },
+          { "type": "ToscaImport", "args": { 
+              "@id": { "path": "/@id", "args": { 
+                "file": { "type": "ToscaURL", "path": "/" } } } } },
+          { "type": "ToscaImport", "args": { 
+                "file": { "type": "ToscaURL", "path": "/" } } }
+        ]
+      }
+    }
+  }
+}

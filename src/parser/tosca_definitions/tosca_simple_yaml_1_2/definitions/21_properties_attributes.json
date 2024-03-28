@@ -1,0 +1,194 @@
+{
+  "constraint": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/constraint",
+      "dictMinProperties": 1,
+      "dictMaxProperties": 1,
+      "dictProperties": { 
+        "equal":            { "instanceof": "Value" },
+        "greater_than":     { "instanceof": "Value" },
+        "greater_or_equal": { "instanceof": "Value" },
+        "less_than":        { "instanceof": "Value" },
+        "less_or_equal":    { "instanceof": "Value" },
+        "in_range":         { "instanceof": "Sequence" },
+        "valid_values":     { "instanceof": "Sequence" },
+        "length":           { "instanceofyaml": "int" },
+        "min_length":       { "instanceofyaml": "int" }, 
+        "max_length":       { "instanceofyaml": "int" },
+        "pattern":          { "instanceofyaml": "str" },
+        "schema":           { "instanceofyaml": "str" } 
+      }
+    },
+    "factory": {
+      "anyOf": [
+        { "type": "ToscaConstraintEqual", "path": "/equal" },
+        { "type": "ToscaConstraintGreaterThan", "path": "/greater_than" },
+        { "type": "ToscaConstraintGreaterOrEqual", "path": "/greater_or_equal" },
+        { "type": "ToscaConstraintLessThan", "path": "/less_than" },
+        { "type": "ToscaConstraintLessOrEqual", "path": "/less_or_equal" },
+        { "type": "ToscaConstraintInRange", "path": "/in_range" },
+        { "type": "ToscaConstraintValidValues", "path": "/valid_values" },
+        { "type": "ToscaConstraintLength", "path": "/length" },
+        { "type": "ToscaConstraintMinLength", "path": "/min_length" },
+        { "type": "ToscaConstraintMaxLength", "path": "/max_length" },
+        { "type": "ToscaConstraintPattern", "path": "/pattern" },
+        { "type": "ToscaConstraintSchema", "path": "/schema" }
+      ]
+    }
+  },
+
+  "constraints": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/constraints",
+      "listItems": { "$ref": "constraint" }
+    },
+    "factory": {
+      "type": "ToscaConstraints", "items": { "ref": "constraint" }
+    }
+  },
+
+  "entry_schema": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/entry_schema",
+      "oneOf": [
+        { "instanceofyaml": "str"},
+        { "dictRequired": [ "type" ],
+          "dictProperties": {
+            "type":         { "instanceofyaml": "str"},
+            "description":  { "$ref": "description" },
+            "constraints":  { "$ref": "constraints" },
+            "entry_schema": { "$ref": "entry_schema" }
+          }
+        }
+      ]
+    },
+    "factory": {
+      "type": "ToscaTypeDef",
+      "anyOf": [
+        { "args": {
+            "type": { "type": "ToscaStr", "path": "/type"},
+            "description": { "path": "/description", "ref": "description"},
+            "constraints": { "path": "/constraints", "ref": "constraints"},
+            "entry_schema": { "path": "/entry_schema", "ref": "entry_schema"}
+          }
+        },
+        { "type": "ToscaStr" }
+      ]
+    }
+  },
+
+  "properties": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/properties",
+      "dictIdsDefinition": {
+        "dictRequired": [ "type" ],
+        "dictProperties": {
+          "type":         { "instanceofyaml": "str" },
+          "description":  { "$ref": "description" }, 
+          "constraints":  { "$ref": "constraints" },
+          "required":     { "instanceofyaml": "bool" },
+          "default":      { "instanceof": "Value" },
+          "status":       {
+            "properties": {
+              "val": { 
+                "enum": ["supported", "unsupported", "experimental", "deprecated"]
+              }
+            }
+          },
+          "metadata":     { "$ref": "metadata" },
+          "entry_schema": { "$ref": "entry_schema" } 
+        }
+      }
+    },
+    "factory": {
+      "type": "ToscaProperties",
+      "args": {
+        "@id": { 
+          "path": "/@id", 
+          "type": "ToscaProperty", 
+          "args": {
+            "type": { "ref": "entry_schema", "path": "/" },
+            "description": { "ref": "description", "path": "/description" },
+            "constraints": { "ref": "constraints", "path": "/constraints" },
+            "required":    { "type": "ToscaBool", "path": "/required" },
+            "status":      { "type": "ToscaStr", "path": "/status" },
+            "metadata":    { "ref": "metadata", "path": "/metadata" },
+            "default":     { "path": "/default" } 
+          }
+        }
+      }
+    }
+  },
+
+  "property_asignments": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/property_assignments",
+      "dictIdsDefinition": {
+        "anyOf": [
+          { "instanceof": "Value" },
+          { "$ref": "value_expression"},
+          { "dictRequired": [ "value" ], 
+            "dictProperties": {
+              "description": { "$ref": "description" },
+              "value": { "anyOf": [ { "$ref": "value_expression"}, { "instanceof": "Value" } ] }
+            }
+          }
+        ]
+      }
+    },
+    "ast": {
+
+    }
+  },
+
+  "attributes": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/attributes",
+      "dictIdsDefinition": {
+        "dictRequired": [ "type" ],
+        "dictProperties": {
+          "type":         { "instanceofyaml": "str" },
+          "description":  { "$ref": "description"   }, 
+          "default":      { "instanceof": "Value"   },
+          "status":       { "properties": { "val": { "enum": ["supported", "unsupported", "experimental", "deprecated"] }}},
+          "entry_schema": { "$ref": "entry_schema"  } 
+        }
+      }
+    },
+    "factory": {
+      "type": "ToscaAttributes",
+      "args": {
+        "@id": { 
+          "path": "/@id", 
+          "type": "ToscaAttribute", 
+          "args": {
+            "type": { "ref": "entry_schema", "path": "/" },
+            "description": { "ref": "description", "path": "/description" },
+            "status":      { "type": "ToscaStr", "path": "/status" },
+            "default":     { "path": "/default" } 
+          }
+        }
+      }
+    }
+  },
+
+  "attribute_asignments": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/attribute_assignments",
+      "dictIdsDefinition": {
+        "anyOf": [
+          { "instanceof": "Value" },
+          { "$ref": "value_expression"},
+          { "dictRequired": [ "value" ], 
+            "dictProperties": {
+              "description": { "$ref": "description" },
+              "value": { "anyOf": [ { "instanceof": "Value" }, { "$ref": "value_expression"} ] }
+            }
+          }
+        ]
+      }
+    },
+    "ast": {   
+    }
+  }
+}

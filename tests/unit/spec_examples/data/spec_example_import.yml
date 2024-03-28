@@ -1,0 +1,35 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: TOSCA simple profile that shows how the (notification_port) property is reflected as an attribute and can be referenced elsewhere.
+
+imports:
+   - spec_example_23.yml
+
+node_types:
+   ExampleNode:
+       derived_from: ServerNode
+       properties:
+           notification_port:
+               type: integer
+       # capabilities:
+           # omitted here for brevity
+
+   TestStorage:
+    derived_from: tosca.nodes.Root
+    description: >-
+      The TOSCA Abstract.Storage node represents an abstract storage
+      resource without any requirements on compute or network
+      resources.
+    properties:
+      name:
+        type: string
+        description: >-
+          The logical name (or ID) of the storage resource.
+      size:
+        type: scalar-unit.size
+        description: >-
+          The requested initial storage size (default unit is in
+          Gigabytes).
+        default: 0 MB
+        constraints:
+          - greater_or_equal: 0 MB

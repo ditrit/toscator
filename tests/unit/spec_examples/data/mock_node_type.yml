@@ -1,0 +1,230 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: >
+  Definition of mock node types for specification examples.
+  Note: These node types do not exist in the standard TOSCA specifications.
+  They are only used for demo/testing purposes.
+
+node_types:
+  tosca.nodes.DBMS.MySQL:
+    derived_from: tosca.nodes.DBMS
+    properties:
+      root_password:
+        type: string
+        description: The root password for the MySQL database.
+        required: true
+      version:
+        type: string
+        description: The version of the MySQL database.
+        required: false
+        default: '5.7'
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          relationship: tosca.relationships.HostedOn
+          occurrences: [1, 1]
+    capabilities:
+      database_endpoint:
+        type: tosca.capabilities.Endpoint.Database
+        description: The endpoint for the MySQL database.
+    interfaces:
+      Standard:
+        create:
+          implementation: scripts/mysql_install.sh
+          inputs:
+            root_password: { get_property: [SELF, root_password] }
+            version: { get_property: [SELF, version] }
+        configure:
+          implementation: scripts/mysql_configure.sh
+          inputs:
+            root_password: { get_property: [SELF, root_password] }
+
+  tosca.nodes.Database.MySQL:
+    derived_from: tosca.nodes.Database
+    properties:
+      name:
+        type: string
+        description: The name of the MySQL database.
+        required: true
+      user:
+        type: string
+        description: The user for the MySQL database.
+        required: true
+      password:
+        type: string
+        description: The password for the MySQL database.
+        required: true
+    requirements:
+      - host:
+          capability: tosca.capabilities.Endpoint.Database
+          relationship: tosca.relationships.HostedOn
+          occurrences: [1, 1]
+    artifacts:
+      db_content:
+        type: tosca.artifacts.File
+        file: files/wordpress_db_content.txt
+        description: The initial content of the MySQL database.
+    interfaces:
+      Standard:
+        create:
+          implementation: scripts/db_create.sh
+          inputs:
+            db_data: { get_artifact: [ SELF, db_content ] }
+
+            tosca_definitions_version: tosca_simple_yaml_1_3
+
+  tosca.nodes.WebServer.Apache:
+    derived_from: tosca.nodes.WebServer
+    properties:
+      version:
+        type: string
+        description: The version of the Apache WebServer.
+        required: false
+        default: '2.4'
+    requirements:
+      - host:
+          capability: tosca.capabilities.Container
+          relationship: tosca.relationships.HostedOn
+          occurrences: [1, 1]
+    interfaces:
+      Standard:
+        create:
+          implementation: scripts/apache_install.sh
+          inputs:
+            version: { get_property: [SELF, version] }
+
+  tosca.nodes.WebApplication.WordPress:
+    derived_from: tosca.nodes.WebApplication
+    properties:
+      context_root:
+        type: string
+        description: The context root for the WordPress application.
+        required: true
+      admin_user:
+        type: string
+        description: The admin user for the WordPress application.
+        required: true
+      admin_password:
+        type: string
+        description: The admin password for the WordPress application.
+        required: true
+      db_host:
+        type: string
+        description: The host for the WordPress database.
+        required: true
+    requirements:
+      - host:
+          capability: tosca.capabilities.Endpoint.WebApp
+          relationship: tosca.relationships.HostedOn
+          occurrences: [1, 1]
+      - database_endpoint:
+          capability: tosca.capabilities.Endpoint.Database
+          relationship: tosca.relationships.ConnectsTo
+          occurrences: [1, 1]
+    interfaces:
+      Standard:
+        configure:
+          implementation: scripts/wordpress_configure.sh
+          inputs:
+            context_root: { get_property: [SELF, context_root] }
+            admin_user: { get_property: [SELF, admin_user] }
+            admin_password: { get_property: [SELF, admin_password] }
+            db_host: { get_property: [SELF, db_host] }
+
+  my.types.MyApplication:
+    derived_from: tosca.nodes.Root
+    properties:
+      app_name:
+        type: string
+        description: The name of the application.
+        required: true
+      app_version:
+        type: string
+        description: The version of the application.
+        required: true
+    requirements:
+      - dependency:
+          capability: tosca.capabilities.Node
+          relationship: tosca.relationships.DependsOn
+          occurrences: [1, 1]
+
+  some.nodetype.SomeService:
+    derived_from: tosca.nodes.Root
+    properties:
+      service_name:
+        type: string
+        description: The name of the service.
+        required: true
+      service_port:
+        type: integer
+        description: The port on which the service runs.
+        required: true
+
+  my.types.nodes.MyDatabase:
+    derived_from: tosca.nodes.Database
+    properties:
+      db_name:
+        type: string
+        description: The name of the database.
+        required: true
+      db_version:
+        type: string
+        description: The version of the database.
+        required: true
+
+  tosca.nodes.WebApplication.MyWebApp:
+    derived_from: tosca.nodes.WebApplication
+    properties:
+      app_url:
+        type: string
+        description: The URL of the web application.
+        required: true
+      app_port:
+        type: integer
+        description: The port on which the web application runs.
+        required: true
+
+  example.QueuingSubsystem:
+    derived_from: tosca.nodes.Root
+    properties:
+      queue_name:
+        type: string
+        description: The name of the message queue.
+        required: true
+    capabilities:
+      message_queue_endpoint:
+        type: tosca.capabilities.Endpoint
+        description: The endpoint for the message queue.
+
+  example.TransactionSubsystem:
+    derived_from: tosca.nodes.Root
+    properties:
+      mq_service_ip:
+        type: string
+        description: The IP address of the message queue service.
+        required: true
+      receiver_port:
+        type: integer
+        description: The port on which the transaction subsystem receives messages.
+        required: true
+    capabilities:
+      message_receiver:
+        type: tosca.capabilities.Endpoint
+        description: The endpoint for receiving messages.
+    requirements:
+      - database_endpoint:
+          capability: tosca.capabilities.Endpoint.Database
+          relationship: tosca.relationships.ConnectsTo
+          occurrences: [1, 1]
+
+  example.DatabaseSubsystem:
+    derived_from: tosca.nodes.Database
+    properties:
+      db_name:
+        type: string
+        description: The name of the database.
+        required: true
+    capabilities:
+      database_endpoint:
+        type: tosca.capabilities.Endpoint.Database
+        description: The endpoint for the database.

@@ -1,0 +1,144 @@
+{
+
+  "implementation": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/implementation",
+      "anyOf": [
+        { "instanceofyaml": "str"},
+        { "dictRequired": [ "primary" ],
+          "dictProperties": {
+            "primary": {
+              "anyOf": [
+                { "instanceofyaml": "str" },
+                { "$ref": "artifact_def"}
+              ]
+            },
+            "dependencies": {
+              "listItems": {
+                "AnyOf": [
+                  { "instanceofstr": "str" },
+                  { "$ref": "artifact_def"}
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "factory": {
+      "type": "ToscaImplementation",
+      "anyOf": [
+        { "type": "ToscaStr", "path": "/" },
+        { "args": { 
+            "primary":      { "path": "/primary", "anyOf": [
+                { "type": "ToscaStr",     "path": "/" },
+                { "ref":  "artifact_def", "path": "/" } ]
+            },
+            "dependencies": { "path": "/primary", "anyOf": [
+                { "type": "ToscaStr",     "path": "/" },
+                { "ref":  "artifact_def", "path": "/" } ]              
+            }
+          }
+        }
+      ]
+    }
+  },
+
+  "operation_def": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/operation_def",
+      "dictProperties": {
+        "description":    { "$ref": "description" },
+        "inputs":         { "$ref": "properties" },
+        "implementation": { "$ref": "implementation" } 
+      } 
+    },
+    "factory": {
+      "type": "ToscaOperationDef",
+      "args": {
+        "description":    { "ref": "description", "path": "/description" },
+        "inputs":         { "ref": "properties",     "path": "/inputs" },
+        "implementation": { "ref": "implementation", "path": "/implementation" }
+      }
+    }
+  },
+
+  "operation_def_template": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/operation_def_template",
+      "dictProperties": {
+        "description":    { "$ref": "description" },
+        "inputs":         { "$ref": "input_assignments" },
+        "implementation": {  "$ref": "implementation" } 
+      }
+    },
+    "ast": {
+
+    }
+  },
+
+  "interface_types": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/interface_types",
+      "dictIdsDefinition": {
+        "dictProperties": {
+          "derived_from": { "instanceofyaml": "str" },
+          "version":      { "instanceofyaml": ["str", "float"] },
+          "metadata":     { "$ref": "metadata" },
+          "description":  { "$ref": "description" },
+          "inputs":       { "$ref": "properties" }
+        },
+        "dictAdditionalProperties": { "$ref": "operation_def" }
+      }
+    },
+    "ast": {
+
+    }
+  },
+
+  "interface_defs": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/interface_defs",
+      "dictIdsDefinition": {
+        "dictRequired": [ "type" ],
+        "dictProperties": {
+          "type":       { "instanceofyaml": "str" },
+          "inputs":     { "$ref": "properties" }
+        },  
+        "dictAdditionalProperties": { "$ref": "operation_def" }
+      }
+    },
+    "factory": {
+      "type": "ToscaInterfaceDefs",
+      "args": {
+        "@id": { 
+          "path": "/@id", 
+          "type": "ToscaInterfaceDef",
+          "args": {
+            "type": { "type": "ToscaStr", "path": "/type" },
+            "inputs": { "ref": "properties", "path": "/inputs" },
+            "@other": { "ref": "operation_def", "path": "/@other", 
+                        "isnotin": [ "type", "inputs" ] }
+          }
+        }
+      }
+
+    }
+  },
+
+  "interface_defs_template": {
+    "schema": {
+      "$id": "http://ditrit.io/schemas/interface_defs_template",
+      "dictIdsDefinition": {
+        "dictProperties": {
+          "inputs":     { "$ref": "input_assignments" }
+        },  
+        "dictAdditionalProperties": { "$ref": "operation_def_template" }
+      }
+    },
+    "ast": {
+
+    }
+  }
+
+}
