@@ -1,21 +1,21 @@
 # Example 10 - Simple dependency relationship between two nodes
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 description: Template with a generic dependency between two nodes.
-  
+
 topology_template:
-   inputs:
+   # inputs:
        # omitted here for brevity
-  
+
    node_templates:
        my_app:
            type: my.types.MyApplication
-           properties:
+           # properties:
                # omitted here for brevity
            requirements:
                - dependency: some_service
-  
+
        some_service:
            type: some.nodetype.SomeService
-           properties:
+           # properties:
                # omitted here for brevity

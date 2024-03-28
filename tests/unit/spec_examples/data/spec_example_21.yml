@@ -1,16 +1,16 @@
 # Example 21 - Grouping nodes for anti-colocation policy application
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 description: Template hosting requirements and placement policy.
-  
+
 topology_template:
-   inputs:
+   # inputs:
        # omitted here for brevity
-  
+
    node_templates:
        wordpress_server:
            type: tosca.nodes.WebServer
-           properties:
+           # properties:
                # omitted here for brevity
            requirements:
                - host:
@@ -25,10 +25,10 @@ topology_template:
                                        properties:
                                            - architecture: x86_64
                                            - type: linux
-  
+
        mysql:
            type: tosca.nodes.DBMS.MySQL
-           properties:
+           # properties:
                # omitted here for brevity
            requirements:
                - host:
@@ -42,12 +42,12 @@ topology_template:
                                        properties:
                                            - architecture: x86_64
                                            - type: linux
-  
+
    groups:
        my_co_location_group:
            type: tosca.groups.Root
            members: [ wordpress_server, mysql ]
-    
+
    policies:
        - my_anti_collocation_policy:
                type: my.policies.anticolocateion

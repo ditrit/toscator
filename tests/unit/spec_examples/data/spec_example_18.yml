@@ -1,6 +1,6 @@
 # Example 18 - Defining a TransactionSubsystem node type
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 node_types:
    example.TransactionSubsystem:
        properties:

@@ -1,8 +1,8 @@
 # Example 2 - Template with input and output parameter sections
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 description: Template for deploying a single server with predefined properties.
-  
+
 topology_template:
    inputs:
          db_server_num_cpus:
@@ -10,7 +10,7 @@ topology_template:
            description: Number of CPUs for the server.
            constraints:
                - valid_values: [ 1, 2, 4, 8 ]
-  
+
    node_templates:
        db_server:
            type: tosca.nodes.Compute
@@ -22,11 +22,11 @@ topology_template:
                        num_cpus: { get_input: db_server_num_cpus }
                        mem_size: 2048   MB
                        disk_size: 10 GB
-                       mem_size: 4096 MB
+                       # mem_size: 4096 MB (error in the example - duplicate property name)
                # Guest Operating System properties
-               os:
+               # os:
                    # omitted for brevity
-  
+
    outputs:
        server_ip:
            description: The private IP address of the provisioned server.

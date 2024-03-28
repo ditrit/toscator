@@ -1,8 +1,8 @@
 # Example 6 - Basic two-tier application (web application and database server tiers)
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 description: Template for deploying a two-tier application servers on 2 servers.
-  
+
 topology_template:
    inputs:
        # Admin user name and password to use with the WordPress application
@@ -15,31 +15,31 @@ topology_template:
        context_root:
            type: string
        # rest omitted here for brevity
-  
-  
+
+
    node_templates:
        db_server:
            type: tosca.nodes.Compute
            # rest omitted here for brevity
-  
+
        mysql:
            type: tosca.nodes.DBMS.MySQL
            # rest omitted here for brevity
-  
+
        wordpress_db:
            type: tosca.nodes.Database.MySQL
            # rest omitted here for brevity
-  
+
        web_server:
            type: tosca.nodes.Compute
            # rest omitted here for brevity
-  
+
        apache:
            type: tosca.nodes.WebServer.Apache
            requirements:
                - host: web_server
            # rest omitted here for brevity
-  
+
        wordpress:
            type: tosca.nodes.WebApplication.WordPress
            properties:
@@ -58,6 +58,6 @@ topology_template:
                        db_name: { get_property: [ wordpress_db, name ] }
                        db_user: { get_property: [ wordpress_db, user ] }
                        db_password: { get_property: [ wordpress_db, password ] }
-  
-   outputs:
+
+   # outputs:
        # omitted here for brevity

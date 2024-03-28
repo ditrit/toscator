@@ -1,23 +1,23 @@
 # Example 17 - Declaring a transaction subsystem as a chain of substitutable node templates
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 topology_template:
    description: Template of online transaction processing service.
-  
+
    node_templates:
        mq:
            type: example.QueuingSubsystem
            directives:
                - substitute
-           properties:
+           # properties:
                # properties omitted for brevity
-           capabilities:
-               message_queue_endpoint:
+           # capabilities:
+               # message_queue_endpoint:
                    # details omitted for brevity
            requirements:
                - receiver: trans1
                - receiver: trans2
-  
+
        trans1:
            type: example.TransactionSubsystem
            directives:
@@ -25,12 +25,12 @@ topology_template:
            properties:
                mq_service_ip: { get_attribute: [ mq, service_ip ] }
                receiver_port: 8080
-           capabilities:
-               message_receiver:
+           # capabilities:
+               # message_receiver:
                    # details omitted for brevity
            requirements:
                - database_endpoint: dbsys
-  
+
        trans2:
            type: example.TransactionSubsystem
            directives:
@@ -38,18 +38,18 @@ topology_template:
            properties:
                mq_service_ip: { get_attribute: [ mq, service_ip ] }
                receiver_port: 8080
-           capabilities:
-               message_receiver:
+           # capabilities:
+               # message_receiver:
                    # details omitted for brevity
            requirements:
                - database_endpoint: dbsys
-  
+
        dbsys:
            type: example.DatabaseSubsystem
            directives:
                - substitute
-           properties:
+           # properties:
                # properties omitted for brevity
-           capabilities:
-               database_endpoint:
+           # capabilities:
+               # database_endpoint:
                    # details omitted for brevity

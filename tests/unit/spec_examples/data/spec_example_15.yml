@@ -1,25 +1,25 @@
 # Example 15 - Referencing an abstract database node template
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 topology_template:
    description: Template of an application connecting to a database.
-  
+
    node_templates:
        web_app:
            type: tosca.nodes.WebApplication.MyWebApp
            requirements:
                - host: web_server
                - database_endpoint: db
-  
+
        web_server:
            type: tosca.nodes.WebServer
            requirements:
                - host: server
-  
+
        server:
            type: tosca.nodes.Compute
            # details omitted for brevity
-  
+
        db:
            # This node is abstract as specified by the substitute directive
            # and must be substituted with a topology provided by another template

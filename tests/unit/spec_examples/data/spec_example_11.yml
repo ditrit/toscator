@@ -1,16 +1,16 @@
 # Example 11 - An abstract "host" requirement using a node filter
 tosca_definitions_version: tosca_simple_yaml_1_3
-  
+
 description: Template with requirements against hosting infrastructure.
-  
+
 topology_template:
-   inputs:
+   # inputs:
        # omitted here for brevity
-  
+
    node_templates:
        mysql:
            type: tosca.nodes.DBMS.MySQL
-           properties:
+           # properties:
                # omitted here for brevity
            requirements:
                - host:

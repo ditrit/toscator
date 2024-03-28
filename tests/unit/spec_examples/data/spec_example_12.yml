@@ -1,20 +1,20 @@
 # Example 12 - An abstract Compute node template with a node filter
 tosca_definitions_version: tosca_simple_yaml_1_3
-                            
+
 description: Template with requirements against hosting infrastructure.
-  
+
 topology_template:
-   inputs:
+   # inputs:
        # omitted here for brevity
-  
+
    node_templates:
        mysql:
            type: tosca.nodes.DBMS.MySQL
-           properties:
+           # properties:
                # omitted here for brevity
            requirements:
                - host: mysql_compute
-  
+
        # Abstract node template (placeholder) to be selected by provider
        mysql_compute:
            type: Compute
