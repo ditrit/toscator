@@ -1,5 +1,5 @@
 import path from 'path';
-
+import { fileURLToPath } from 'url';
 import { ToscaImport } from '#src/model/imports.js';
 import { ToscaServiceTemplate } from '#src/model/service_template.js';
 import { parse as parse_tosca } from '#src/schemas/tosca_1_3.js';
@@ -97,23 +97,55 @@ export class Parser {
       abs_path,
     );
 
+    current_service_template.imports = current_service_template.imports || [];
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const versionPaths = {
+      tosca_simple_yaml_1_0: 'tosca_definitions/tosca_simple_yaml_1_0/types',
+      tosca_simple_yaml_1_2: 'tosca_definitions/tosca_simple_yaml_1_2/types',
+      tosca_simple_yaml_1_3: 'tosca_definitions/tosca_simple_yaml_1_3/types',
+    };
+    const versionPath = versionPaths[current_service_template.tosca_definitions_version];
+
+    if (!versionPath) {
+      throw new Error('tosca_definitions_version not supported.');
+    }
+
+    const basePath = path.join(__dirname, versionPath);
+    const typesCategories = [
+      'artifact',
+      'capability',
+      'data',
+      'group',
+      'interface',
+      'node',
+      'policy',
+      'relationship',
+    ];
+
+    typesCategories.forEach((type) => {
+      current_service_template.imports.push(new ToscaImport({
+        file: path.join(basePath, `${type}.yaml`),
+      }));
+    });
+
     localNames(current_service_template);
 
     current_service_template.imports?.forEach((file_imp) => {
-    // if it hasn't already been imported in this import_branch, then parse it
+      // if it hasn't already been imported in this import_branch, then parse it
       const imp_abs_path = this.fileManager.getAbsolutePath(
         file_imp.repository,
         file_imp.file,
         origin_file,
       );
       if (!import_branch.includes(imp_abs_path)) {
-        const new_import_branch = JSON.parse(JSON.stringify(import_branch));
-        new_import_branch.push(imp_abs_path);
+        import_branch.push(imp_abs_path);
         this.parseWithImports(
           file_imp,
           current_service_template,
           errors,
-          new_import_branch,
+          import_branch,
           origin_file,
         );
       }

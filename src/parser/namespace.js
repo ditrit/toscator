@@ -96,6 +96,25 @@ export function exportToParent(file_import, pst, cst) {
       }
     });
   });
+
+  // Import node_templates, relationship_templates and inputs.
+  if (cst.topology_template) {
+    const templates = ['node_templates', 'relationship_templates', 'inputs'];
+
+    templates.forEach((template) => {
+      if (cst.topology_template[template]) {
+        cst.topology_template[template].forEach((element, name) => {
+          if (!pst.topology_template[template]) {
+            pst.topology_template[template] = new Map();
+          }
+
+          if (!pst.topology_template[template].has(name)) {
+            pst.topology_template[template].set(name, element);
+          }
+        });
+      }
+    });
+  }
 }
 
 /**
