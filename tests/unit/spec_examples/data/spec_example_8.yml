@@ -3,6 +3,11 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 description: Template for deploying a two-tier application on two servers.
 
+imports:
+  - mock_node_type.yml
+  - spec_example_6.yml
+  - spec_example_9.yml
+
 topology_template:
    # inputs:
        # omitted here for brevity

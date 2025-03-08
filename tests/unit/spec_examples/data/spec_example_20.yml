@@ -3,6 +3,9 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 description: Template for a scaling web server.
 
+imports:
+   - mock_node_type.yml
+
 topology_template:
    # inputs:
        # omitted here for brevity

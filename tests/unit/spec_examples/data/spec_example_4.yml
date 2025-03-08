@@ -3,6 +3,10 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 description: Template for deploying a single server with MySQL software on top.
 
+imports:
+  - mock_node_type.yml
+  - spec_example_3.yml
+
 topology_template:
    # inputs:
        # omitted here for brevity

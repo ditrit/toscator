@@ -1,0 +1,69 @@
+tosca_definitions_version: tosca_simple_yaml_1_3
+
+description: >
+  Definition of mock node types for specification examples.
+  Note: These node types do not exist in the standard TOSCA specifications.
+  They are only used for demo/testing purposes.
+
+node_types:
+  tosca.nodes.DBMS.MySQL:
+    derived_from: tosca.nodes.DBMS
+
+  tosca.nodes.Database.MySQL:
+    derived_from: tosca.nodes.Database
+
+  tosca.nodes.WebServer.Apache:
+    derived_from: tosca.nodes.WebServer
+
+  tosca.nodes.WebApplication.WordPress:
+    derived_from: tosca.nodes.WebApplication
+
+  my.types.MyApplication:
+    derived_from: tosca.nodes.Root
+
+  some.nodetype.SomeService:
+    derived_from: tosca.nodes.Root
+
+  my.types.nodes.MyDatabase:
+    derived_from: tosca.nodes.Database
+
+  tosca.nodes.WebApplication.MyWebApp:
+    derived_from: tosca.nodes.WebApplication
+
+  example.QueuingSubsystem:
+    derived_from: tosca.nodes.Root
+
+  example.TransactionSubsystem:
+    derived_from: tosca.nodes.Root
+
+  example.DatabaseSubsystem:
+    derived_from: tosca.nodes.Database
+
+  example.SomeApp:
+    derived_from: tosca.nodes.Root
+
+  VPN:
+    derived_from: tosca.nodes.Root
+
+  VPNSite:
+    derived_from: tosca.nodes.Root
+
+policy_types:
+  my.policies.anticolocation:
+    derived_from: tosca.policies.Placement
+
+data_types:
+  Location:
+    derived_from: tosca.datatypes.Root
+
+topology_template:
+  inputs:
+    admin_username:
+      type: string
+      description: Administrator username for the application.
+      required: true
+
+    admin_password:
+      type: string
+      description: Administrator password for the application.
+      required: true

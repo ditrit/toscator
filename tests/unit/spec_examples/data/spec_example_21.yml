@@ -3,6 +3,9 @@ tosca_definitions_version: tosca_simple_yaml_1_3
 
 description: Template hosting requirements and placement policy.
 
+imports:
+  - mock_node_type.yml
+
 topology_template:
    # inputs:
        # omitted here for brevity
@@ -50,7 +53,7 @@ topology_template:
 
    policies:
        - my_anti_collocation_policy:
-               type: my.policies.anticolocateion
+               type: my.policies.anticolocation
                targets: [ my_co_location_group ]
                # For this example, specific policy definitions are considered
                # domain specific and are not included here

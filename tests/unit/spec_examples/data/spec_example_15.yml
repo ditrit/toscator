@@ -1,6 +1,9 @@
 # Example 15 - Referencing an abstract database node template
 tosca_definitions_version: tosca_simple_yaml_1_3
 
+imports:
+    - mock_node_type.yml
+
 topology_template:
    description: Template of an application connecting to a database.
 

@@ -1,6 +1,9 @@
 # Example 19 - Implementation of a TransactionSubsytem node type using substitution mappings
 tosca_definitions_version: tosca_simple_yaml_1_3
 
+imports:
+   - mock_node_type.yml
+
 topology_template:
    description: Template of a database including its hosting stack.
 

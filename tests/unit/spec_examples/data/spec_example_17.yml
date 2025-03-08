@@ -1,6 +1,9 @@
 # Example 17 - Declaring a transaction subsystem as a chain of substitutable node templates
 tosca_definitions_version: tosca_simple_yaml_1_3
 
+imports:
+    - mock_node_type.yml
+
 topology_template:
    description: Template of online transaction processing service.
 
