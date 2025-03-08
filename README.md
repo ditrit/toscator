@@ -86,10 +86,11 @@ May work with other versions.
 ## Built With
 
 * [Tosca 1.0](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.3/TOSCA-Simple-Profile-YAML-v1.0.pdf) - OASIS Tosca 1.0 documentation
-* [Tosca 1.3](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.3.pdf) - OASIS Tosca 1.3 documentation 
+* [Tosca 1.3](http://docs.oasis-open.org/tosca/TOSCA-Simple-Profile-YAML/v1.0/TOSCA-Simple-Profile-YAML-v1.3.pdf) - OASIS Tosca 1.3 documentation
 
 # To-Do
 
+- Fix misparsed TOSCA types for version 1.0 and 1.2.
 - Check "TODO" in each file, in comments.
 - Write tests for what is not tested yet.
 - Parsing
