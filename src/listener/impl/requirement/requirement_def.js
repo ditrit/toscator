@@ -10,7 +10,8 @@ export default {
         [requirement_name]: parsed_rule.value[key].tosca,
       });
     }
-    requirements.source = parsed_rule;
+    // TODO: Check if this is correct.
+    // requirements.source = parsed_rule;
     parsed_rule.tosca = requirements;
   },
 
@@ -28,8 +29,7 @@ export default {
           {
             capability: parsed_rule.value[key].value.capability?.value,
             node: parsed_rule.value[key].value.node?.value,
-            relationship:
-            parsed_rule.value[key].value.relationship?.tosca,
+            relationship: parsed_rule.value[key].value.relationship?.value,
             occurences: parsed_rule.value[key].value.occurrences?.value,
             name: key,
           },
