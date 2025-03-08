@@ -7,10 +7,7 @@ export default {
     if (parsed_rule.type === 'map') {
       validateCreateAndRegister(ToscaParameterAssignment, {
         description: parsed_rule.value.description?.value,
-        value:
-          (parsed_rule.value.value?.tosca)
-            ? parsed_rule.value.value?.tosca
-            : parsed_rule.value.value?.value,
+        value: parsed_rule.value,
       }, parsed_rule);
     } else {
       validateCreateAndRegister(
