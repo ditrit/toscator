@@ -1,14 +1,19 @@
-import { ToscaServiceTemplate } from 'src/model/service_template';
-import { ToscaTopologyTemplate } from 'src/model/topology_template';
-import { ToscaNodeTemplate } from 'src/model/node_template';
-import { ToscaCapabilityAssignment } from 'src/model/capability/capability_assignment';
-import { ToscaParameterAssignment } from 'src/model/parameter/parameter_assignment';
-import { ToscaSize } from 'src/model/tosca_size';
-import { ToscaVersion } from 'src/model/version';
-import { ToscaParameter } from 'src/model/parameter/parameter';
-import { ToscaInterfaceDef } from 'src/model/interface/interface_def';
 import { MapNode } from 'lidy-js/nodes/collections/mapnode';
-import { compile } from '#src/compilation';
+import { ToscaAttributeDef } from 'src/model/attribute/attribute_def.js';
+import { ToscaCapabilityAssignment } from 'src/model/capability/capability_assignment';
+import { ToscaCapabilityDef } from 'src/model/capability/capability_def.js';
+import { ToscaInterfaceDef } from 'src/model/interface/interface_def';
+import { ToscaNodeTemplate } from 'src/model/node_template';
+import { ToscaNodeType } from 'src/model/node_type.js';
+import { ToscaParameter } from 'src/model/parameter/parameter';
+import { ToscaParameterAssignment } from 'src/model/parameter/parameter_assignment';
+import { ToscaPropertyDef } from 'src/model/property/property_def.js';
+import { ToscaRequirementDef } from 'src/model/requirement/requirement_def.js';
+import { ToscaServiceTemplate } from 'src/model/service_template';
+import { ToscaSize } from 'src/model/tosca_size';
+import { ToscaTopologyTemplate } from 'src/model/topology_template';
+import { ToscaVersion } from 'src/model/version';
+import { compile } from 'src/compilation';
 
 describe('Full test on examples from official specification', () => {
   const testedFiles = [
@@ -35,15 +40,14 @@ describe('Full test on examples from official specification', () => {
     'spec_example_20.yml',
     'spec_example_21.yml',
     // 'spec_example_22.yml',
-    // 'spec_example_23.yml',
+    'spec_example_23.yml',
     'spec_example_24.yml',
     'spec_example_25.yml',
     'spec_example_26.yml',
   ];
 
-  // TODO: Do not just check whether it crashes but compare with expected output.
+  // TODO: Continue testing the rest of the examples.
   // TODO: (this will be a lot of work)
-  // NOTE: spec_example_1 and spec_example_5 are already implemented.
   for (const file of testedFiles) {
     const result = compile(`tests/unit/spec_examples/data/${file}`);
 
@@ -308,19 +312,19 @@ describe('Full test on examples from official specification', () => {
             expect(interfaceDef.operations.create.value.inputs).toBeInstanceOf(MapNode);
           });
 
-          describe('Test attribute: db_data', () => {
-            const attribute = interfaceDef.operations.create.value.inputs;
+          describe('Test property: db_data', () => {
+            const property = interfaceDef.operations.create.value.inputs;
 
             it('should be a MapNode object', () => {
-              expect(attribute).toBeInstanceOf(MapNode);
+              expect(property).toBeInstanceOf(MapNode);
             });
 
             it('should have a MapNode object', () => {
-              expect(attribute.value.db_data).toBeInstanceOf(MapNode);
+              expect(property.value.db_data).toBeInstanceOf(MapNode);
             });
 
             describe('Test value expression: get_artifact', () => {
-              const valueExpression = attribute.value.db_data.value.get_artifact.value;
+              const valueExpression = property.value.db_data.value.get_artifact.value;
 
               it('should be an Array', () => {
                 expect(valueExpression).toBeInstanceOf(Array);
@@ -331,6 +335,103 @@ describe('Full test on examples from official specification', () => {
                 expect(valueExpression[1].value).toBe('db_content');
               });
             });
+          });
+        });
+      });
+    });
+  });
+
+  describe('Test template: spec_example_18', () => {
+    const result = compile('tests/unit/spec_examples/data/spec_example_18.yml');
+
+    describe('Test parsing', () => {
+      it('should have a node_types map', () => {
+        expect(result.node_types).toBeInstanceOf(Map);
+      });
+
+      describe('Test node type: TransactionSubsystem', () => {
+        const nodeType = result.node_types.get('TransactionSubsystem');
+
+        it('should be a ToscaNodeType object', () => {
+          expect(nodeType).toBeInstanceOf(ToscaNodeType);
+        });
+
+        it('should have the correct keynames', () => {
+          expect(nodeType.properties).toBeInstanceOf(Map);
+          expect(nodeType.attributes).toBeInstanceOf(Map);
+          expect(nodeType.capabilities).toBeInstanceOf(Map);
+          expect(nodeType.requirements).toBeInstanceOf(Array);
+        });
+
+        describe('Test property: mq_service_ip', () => {
+          const property = nodeType.properties.get('mq_service_ip');
+
+          it('should be a ToscaPropertyDef object', () => {
+            expect(property).toBeInstanceOf(ToscaPropertyDef);
+          });
+
+          it('should have the correct value', () => {
+            expect(property.type).toBe('string');
+          });
+        });
+
+        describe('Test property: receiver_port', () => {
+          const property = nodeType.properties.get('receiver_port');
+
+          it('should be a ToscaPropertyDef object', () => {
+            expect(property).toBeInstanceOf(ToscaPropertyDef);
+          });
+
+          it('should have the correct value', () => {
+            expect(property.type).toBe('integer');
+          });
+        });
+
+        describe('Test attribute: receiver_ip', () => {
+          const attribute = nodeType.attributes.get('receiver_ip');
+
+          it('should be a ToscaAttributeDef object', () => {
+            expect(attribute).toBeInstanceOf(ToscaAttributeDef);
+          });
+
+          it('should have the correct value', () => {
+            expect(attribute.type).toBe('string');
+          });
+        });
+
+        describe('Test attribute: receiver_port', () => {
+          const attribute = nodeType.attributes.get('receiver_port');
+
+          it('should be a ToscaAttributeDef object', () => {
+            expect(attribute).toBeInstanceOf(ToscaAttributeDef);
+          });
+
+          it('should have the correct value', () => {
+            expect(attribute.type).toBe('integer');
+          });
+        });
+
+        describe('Test capability: message_receiver', () => {
+          const capability = nodeType.capabilities.get('message_receiver');
+
+          it('should be a ToscaCapabilityDef object', () => {
+            expect(capability).toBeInstanceOf(ToscaCapabilityDef);
+          });
+
+          it('should have the correct value', () => {
+            expect(capability.type).toBe('tosca.capabilities.Endpoint');
+          });
+        });
+
+        describe('Test requirement: database_endpoint', () => {
+          const requirement = nodeType.requirements[0].database_endpoint;
+
+          it('should be a ToscaRequirementDef object', () => {
+            expect(requirement).toBeInstanceOf(ToscaRequirementDef);
+          });
+
+          it('should have the correct value', () => {
+            expect(requirement.capability).toBe('tosca.capabilities.Endpoint.Database');
           });
         });
       });
