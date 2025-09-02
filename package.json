@@ -15,9 +15,9 @@
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 jest"
   },
   "dependencies": {
-    "ajv": "^8.11.0",
+    "ajv": "^8.17.1",
     "lidy-js": "git+https://github.com/ditrit/lidy-js.git#dev",
-    "regex": "^0.1.1",
+    "regex": "^6.0.1",
     "sync-request": "^6.1.0"
   },
   "repository": {
@@ -39,13 +39,13 @@
   },
   "homepage": "https://github.com/ditrit/toscator#readme",
   "devDependencies": {
-    "@jest/globals": "^29.6.3",
+    "@jest/globals": "^30.0.3",
     "cross-env": "^7.0.3",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-jsdoc": "^46.5.0",
-    "jest": "^29.6.3"
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsdoc": "^51.3.1",
+    "jest": "^30.0.3"
   },
   "engines": {
     "node": ">= 18.17.1",
