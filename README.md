@@ -35,6 +35,8 @@ If the tests do not pass after a `git pull`, either your environment is broken o
 
 If your tests passed after the previous `git pull` but do not pass anymore after your changes, and you want to `git commit`, please fix the tests before doing so.
 
+If you want to run a single test file, you must run the command `NODE_OPTIONS=--experimental-vm-modules npx jest -i <test_file>.spec.js`
+
 ### Parsing
 
 If you simply want to parse a TOSCA file, then follow this instructions:
@@ -61,7 +63,10 @@ To update the grammar, there are 2 methods:
 * modify tosca_1_3.yaml
 * create a new tosca_x.yaml file
 
-In both cases, you should preprocess the file to generate a new tosca_x.js file that will be used to parse. Otherwise it will preprocess it at every run.
+In both cases, you should preprocess the file (convert a YAML grammar to JSON) to generate a new tosca_x.js file that will be used to parse. Otherwise it will preprocess it at every run.
+
+If you want to use the default current (TOSCA 1.3) grammar, simply uncomment the preprocess line in `compilation.js`, run the compilation once, modify the first line of `tosca_1_3.js` back to `import { parse as parse_input } from 'lidy-js'`, and comment the preprocess line again.
+
 
 To preprocess, you have to follow these steps:
 * Run this
@@ -78,8 +83,8 @@ import { parse as parse_input } from "lidy-js"
 ### Prerequisites
 
 Tested with:
-- **node** v18.13.0
-- **npm** 9.2.0
+- **node** v22.17.0
+- **npm** v11.4.2
 
 May work with other versions.
 
@@ -93,10 +98,12 @@ May work with other versions.
 - Fix misparsed TOSCA types for version 1.0 and 1.2.
 - Check "TODO" in each file, in comments.
 - Write tests for what is not tested yet.
-- Parsing
-  - (unknown state) ??
+
+- Parsing: Done
 - Types
-  - Work in progress, see below.
+  - Import, validation, resolution, inheritance: Done, but some tests need to be written in `compilation.spec.js`.
+- Instanciation
+  - Done only for `spec_example_1.yml`, implement mechanisms for the left specification examples.
 - Substitution
   - (unknown state) ??
 - Orchestration
@@ -113,30 +120,3 @@ May work with other versions.
   - Implement until they pass.
   - Write for each example a unit test to verify that the result is exact (and not just that it does not crash)
   - Repeat until everything is implemented.
-
-
-- Types inheritance
-  - What about TOSCA types defined by the specification? (ie. tosca.nodes.*)
-
-| Type         | Feature | Unit test | Integration test (YAML) | Comment         |
-|--------------|---------|-----------|-------------------------|-----------------|
-| Data         |         |           |                         |                 |
-| Artifact     |         |           |                         |                 |
-| Capabilities |         |           |                         |                 |
-| Requirement  |         |           |                         |                 |
-| Relationship |         |           |                         |                 |
-| Interface    |         |           |                         |                 |
-| Group        |         |           |                         |                 |
-| Policy       |         |           |                         |                 |
-| Node         | wip     | x         | wip                     | see table below |
-
- **Node Type** Inheritance
-
-  | Field        | Feature | Unit test | Integration test (YAML) | Comment                           |
-  |--------------|---------|-----------|-------------------------|-----------------------------------|
-  | properties   | x       | x         | x                       |                                   |
-  | capabilities | x       | x         | x                       |                                   |
-  | attributes   | x       | x         | x                       |                                   |
-  | interfaces   | x       | x         | x                       |                                   |
-  | requirements | ?       | x         |                         | what is the expected behavior ?   |
-  | artifacts    | ?       | x         |                         | what is the expected behavior ?   |
